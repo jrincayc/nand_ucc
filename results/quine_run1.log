@@ -1,0 +1,12 @@
+saved world_out/quine_final.txt
+ticks            8036652
+NAND             5100
+DFF              616
+ROM parts        2  (65536 bits capacity, 7104 bytes programmed by arms)
+robots (ARM)     3
+sources          13
+wires            10484  (total Manhattan length 3046145)
+faults           0
+settle events    7027634044
+ 
+wall 137s, script regwrites 36652, ROM image 3962 B

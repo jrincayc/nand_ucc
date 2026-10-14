@@ -1,0 +1,13 @@
+ROM image 7303 B; script register writes 105196 ; running 36000000 ticks after the script
+saved /tmp/claude-0/w2/final.txt
+ticks            36105196
+NAND             23251
+DFF              2778
+ROM parts        2  (131072 bits capacity, 11890 bytes programmed by arms)
+robots (ARM)     3
+sources          13
+wires            37165  (total Manhattan length 12356062)
+faults           0
+settle events    118396673740
+ 
+wall 1896s

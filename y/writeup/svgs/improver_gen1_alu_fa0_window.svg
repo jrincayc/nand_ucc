@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="1582 143 52 17" width="936" height="306">
+<!-- rndw tick=110196267 parts=50925 wires=66741 faults=0 mode=detail window=(1582,143,1634,160) shown_parts=26 shown_wires=58 -->
+<style>.n{fill:#8ab4f8}.d{fill:#81c995}.r{fill:#fdd663}.a{fill:#f28b82}.s{fill:#bdc1c6}.p{fill:#202124}.h{fill:#d93025}.w{stroke:#80868b;stroke-width:.08;fill:none}.wh{stroke:#d93025;stroke-width:.12;fill:none}</style>
+<rect x="1582" y="143" width="52" height="17" fill="#fff"/>
+<rect class="n" x="1582" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1584" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1586" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1588" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1590" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1592" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1594" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1596" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1598" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1600" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1602" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1604" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1606" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1608" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1610" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1612" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1614" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1616" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1618" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1620" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1622" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1624" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1626" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1628" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1630" y="149" width="2" height="2" rx=".15"/>
+<rect class="n" x="1632" y="149" width="2" height="2" rx=".15"/>
+<path class="w" d="M1469.5 149.5L1582.5 149.5M1469.5 149.5L1582.5 150.5M1197.5 149.5L1584.5 149.5M1197.5 149.5L1588.5 149.5M1197.5 149.5L1588.5 150.5M1469.5 149.5L1590.5 150.5M1587.5 149.5L1594.5 149.5M1587.5 149.5L1594.5 150.5M1593.5 149.5L1596.5 149.5M1593.5 149.5L1596.5 150.5M1197.5 149.5L1600.5 149.5M1469.5 149.5L1600.5 150.5M123.5 149.5L1604.5 149.5M123.5 149.5L1604.5 150.5M1599.5 149.5L1606.5 149.5M1599.5 149.5L1610.5 149.5M1599.5 149.5L1610.5 150.5M123.5 149.5L1612.5 150.5M1609.5 149.5L1616.5 149.5M1609.5 149.5L1616.5 150.5M1615.5 149.5L1618.5 149.5M1615.5 149.5L1618.5 150.5M1599.5 149.5L1622.5 149.5M123.5 149.5L1622.5 150.5M1603.5 149.5L1626.5 149.5M1603.5 149.5L1626.5 150.5M1625.5 149.5L1628.5 149.5M1625.5 149.5L1628.5 150.5M1485.5 149.5L1632.5 149.5M1485.5 149.5L1632.5 150.5M1631.5 149.5L1654.5 149.5M1631.5 149.5L1654.5 150.5M1631.5 149.5L1662.5 150.5M1631.5 149.5L1672.5 150.5M1621.5 149.5L2020.5 149.5"/>
+<path class="wh" d="M1583.5 149.5L1584.5 150.5M1585.5 149.5L1586.5 149.5M1585.5 149.5L1586.5 150.5M1589.5 149.5L1590.5 149.5M1591.5 149.5L1592.5 149.5M1591.5 149.5L1592.5 150.5M1595.5 149.5L1598.5 149.5M1597.5 149.5L1598.5 150.5M1601.5 149.5L1602.5 149.5M1601.5 149.5L1602.5 150.5M1605.5 149.5L1606.5 150.5M1607.5 149.5L1608.5 149.5M1607.5 149.5L1608.5 150.5M1611.5 149.5L1612.5 149.5M1613.5 149.5L1614.5 149.5M1613.5 149.5L1614.5 150.5M1617.5 149.5L1620.5 149.5M1619.5 149.5L1620.5 150.5M1623.5 149.5L1624.5 149.5M1623.5 149.5L1624.5 150.5M1627.5 149.5L1630.5 149.5M1629.5 149.5L1630.5 150.5M1633.5 149.5L1634.5 150.5"/>
+<circle class="p" cx="1582.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1582.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1583.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1584.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1584.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1585.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1586.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1586.5" cy="150.5" r=".14"/>
+<circle class="p" cx="1587.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1588.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1588.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1589.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1590.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1590.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1591.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1592.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1592.5" cy="150.5" r=".14"/>
+<circle class="p" cx="1593.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1594.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1594.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1595.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1596.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1596.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1597.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1598.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1598.5" cy="150.5" r=".14"/>
+<circle class="p" cx="1599.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1600.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1600.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1601.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1602.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1602.5" cy="150.5" r=".14"/>
+<circle class="p" cx="1603.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1604.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1604.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1605.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1606.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1606.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1607.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1608.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1608.5" cy="150.5" r=".14"/>
+<circle class="p" cx="1609.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1610.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1610.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1611.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1612.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1612.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1613.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1614.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1614.5" cy="150.5" r=".14"/>
+<circle class="p" cx="1615.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1616.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1616.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1617.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1618.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1618.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1619.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1620.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1620.5" cy="150.5" r=".14"/>
+<circle class="p" cx="1621.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1622.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1622.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1623.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1624.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1624.5" cy="150.5" r=".14"/>
+<circle class="p" cx="1625.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1626.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1626.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1627.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1628.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1628.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1629.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1630.5" cy="149.5" r=".14"/>
+<circle class="h" cx="1630.5" cy="150.5" r=".14"/>
+<circle class="p" cx="1631.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1632.5" cy="149.5" r=".14"/>
+<circle class="p" cx="1632.5" cy="150.5" r=".14"/>
+<circle class="h" cx="1633.5" cy="149.5" r=".14"/>
+</svg>

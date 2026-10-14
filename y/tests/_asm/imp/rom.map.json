@@ -1,0 +1,5240 @@
+[
+{
+"addr": 10240,
+"hex": "0e",
+"file": "hd/core_improved_data.asm",
+"line": 6,
+"text": ".byte 0x0E                                  // param ab = 14 (address width; ROM has 13 address bits)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10272,
+"hex": "4028",
+"file": "hd/core_improved_data.asm",
+"line": 9,
+"text": ".word mod_not                               // slot 0 (type 2): module not",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10274,
+"hex": "4728",
+"file": "hd/core_improved_data.asm",
+"line": 10,
+"text": ".word mod_and                               // slot 1 (type 3): module and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10276,
+"hex": "5028",
+"file": "hd/core_improved_data.asm",
+"line": 11,
+"text": ".word mod_or                                // slot 2 (type 4): module or",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10278,
+"hex": "5b28",
+"file": "hd/core_improved_data.asm",
+"line": 12,
+"text": ".word mod_xor                               // slot 3 (type 5): module xor",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10280,
+"hex": "6828",
+"file": "hd/core_improved_data.asm",
+"line": 13,
+"text": ".word mod_mux                               // slot 4 (type 6): module mux",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10282,
+"hex": "7528",
+"file": "hd/core_improved_data.asm",
+"line": 14,
+"text": ".word mod_ha                                // slot 5 (type 7): module ha",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10284,
+"hex": "8528",
+"file": "hd/core_improved_data.asm",
+"line": 15,
+"text": ".word mod_fa                                // slot 6 (type 8): module fa",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10286,
+"hex": "9d28",
+"file": "hd/core_improved_data.asm",
+"line": 16,
+"text": ".word mod_ram_word                          // slot 7 (type 9): module ram_word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10288,
+"hex": "0000",
+"file": "hd/core_improved_data.asm",
+"line": 17,
+"text": ".word 0                                     // slot 8: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10290,
+"hex": "0000",
+"file": "hd/core_improved_data.asm",
+"line": 18,
+"text": ".word 0                                     // slot 9: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10292,
+"hex": "0000",
+"file": "hd/core_improved_data.asm",
+"line": 19,
+"text": ".word 0                                     // slot 10: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10294,
+"hex": "0000",
+"file": "hd/core_improved_data.asm",
+"line": 20,
+"text": ".word 0                                     // slot 11: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10296,
+"hex": "0000",
+"file": "hd/core_improved_data.asm",
+"line": 21,
+"text": ".word 0                                     // slot 12: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10298,
+"hex": "0000",
+"file": "hd/core_improved_data.asm",
+"line": 22,
+"text": ".word 0                                     // slot 13: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10300,
+"hex": "0000",
+"file": "hd/core_improved_data.asm",
+"line": 23,
+"text": ".word 0                                     // slot 14: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10302,
+"hex": "0000",
+"file": "hd/core_improved_data.asm",
+"line": 24,
+"text": ".word 0                                     // slot 15: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10304,
+"hex": "01010101",
+"file": "hd/core_improved_data.asm",
+"line": 27,
+"text": ".byte 0x01, 0x01, 0x01, 0x01                // module not: flags=comb/improvable, n_in=1, n_out=1, n_gates=1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10308,
+"hex": "0000",
+"file": "hd/core_improved_data.asm",
+"line": 28,
+"text": ".byte 0x00, 0x00                            // g0 = nand i0 i0   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10310,
+"hex": "01",
+"file": "hd/core_improved_data.asm",
+"line": 29,
+"text": ".byte 0x01                                  // outputs: g0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10311,
+"hex": "01020102",
+"file": "hd/core_improved_data.asm",
+"line": 31,
+"text": ".byte 0x01, 0x02, 0x01, 0x02                // module and: flags=comb/improvable, n_in=2, n_out=1, n_gates=2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10315,
+"hex": "0001",
+"file": "hd/core_improved_data.asm",
+"line": 32,
+"text": ".byte 0x00, 0x01                            // g0 = nand i0 i1   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10317,
+"hex": "0202",
+"file": "hd/core_improved_data.asm",
+"line": 33,
+"text": ".byte 0x02, 0x02                            // g1 = nand g0 g0   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10319,
+"hex": "03",
+"file": "hd/core_improved_data.asm",
+"line": 34,
+"text": ".byte 0x03                                  // outputs: g1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10320,
+"hex": "01020103",
+"file": "hd/core_improved_data.asm",
+"line": 36,
+"text": ".byte 0x01, 0x02, 0x01, 0x03                // module or: flags=comb/improvable, n_in=2, n_out=1, n_gates=3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10324,
+"hex": "0000",
+"file": "hd/core_improved_data.asm",
+"line": 37,
+"text": ".byte 0x00, 0x00                            // g0 = nand i0 i0   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10326,
+"hex": "0101",
+"file": "hd/core_improved_data.asm",
+"line": 38,
+"text": ".byte 0x01, 0x01                            // g1 = nand i1 i1   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10328,
+"hex": "0203",
+"file": "hd/core_improved_data.asm",
+"line": 39,
+"text": ".byte 0x02, 0x03                            // g2 = nand g0 g1   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10330,
+"hex": "04",
+"file": "hd/core_improved_data.asm",
+"line": 40,
+"text": ".byte 0x04                                  // outputs: g2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10331,
+"hex": "01020104",
+"file": "hd/core_improved_data.asm",
+"line": 42,
+"text": ".byte 0x01, 0x02, 0x01, 0x04                // module xor: flags=comb/improvable, n_in=2, n_out=1, n_gates=4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10335,
+"hex": "0001",
+"file": "hd/core_improved_data.asm",
+"line": 43,
+"text": ".byte 0x00, 0x01                            // g0 = nand i0 i1   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10337,
+"hex": "0002",
+"file": "hd/core_improved_data.asm",
+"line": 44,
+"text": ".byte 0x00, 0x02                            // g1 = nand i0 g0   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10339,
+"hex": "0102",
+"file": "hd/core_improved_data.asm",
+"line": 45,
+"text": ".byte 0x01, 0x02                            // g2 = nand i1 g0   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10341,
+"hex": "0304",
+"file": "hd/core_improved_data.asm",
+"line": 46,
+"text": ".byte 0x03, 0x04                            // g3 = nand g1 g2   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10343,
+"hex": "05",
+"file": "hd/core_improved_data.asm",
+"line": 47,
+"text": ".byte 0x05                                  // outputs: g3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10344,
+"hex": "01030104",
+"file": "hd/core_improved_data.asm",
+"line": 49,
+"text": ".byte 0x01, 0x03, 0x01, 0x04                // module mux: flags=comb/improvable, n_in=3, n_out=1, n_gates=4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10348,
+"hex": "0202",
+"file": "hd/core_improved_data.asm",
+"line": 50,
+"text": ".byte 0x02, 0x02                            // g0 = nand i2 i2   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10350,
+"hex": "0003",
+"file": "hd/core_improved_data.asm",
+"line": 51,
+"text": ".byte 0x00, 0x03                            // g1 = nand i0 g0   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10352,
+"hex": "0102",
+"file": "hd/core_improved_data.asm",
+"line": 52,
+"text": ".byte 0x01, 0x02                            // g2 = nand i1 i2   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10354,
+"hex": "0405",
+"file": "hd/core_improved_data.asm",
+"line": 53,
+"text": ".byte 0x04, 0x05                            // g3 = nand g1 g2   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10356,
+"hex": "06",
+"file": "hd/core_improved_data.asm",
+"line": 54,
+"text": ".byte 0x06                                  // outputs: g3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10357,
+"hex": "01020205",
+"file": "hd/core_improved_data.asm",
+"line": 56,
+"text": ".byte 0x01, 0x02, 0x02, 0x05                // module ha: flags=comb/improvable, n_in=2, n_out=2, n_gates=5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10361,
+"hex": "0001",
+"file": "hd/core_improved_data.asm",
+"line": 57,
+"text": ".byte 0x00, 0x01                            // g0 = nand i0 i1   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10363,
+"hex": "0002",
+"file": "hd/core_improved_data.asm",
+"line": 58,
+"text": ".byte 0x00, 0x02                            // g1 = nand i0 g0   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10365,
+"hex": "0102",
+"file": "hd/core_improved_data.asm",
+"line": 59,
+"text": ".byte 0x01, 0x02                            // g2 = nand i1 g0   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10367,
+"hex": "0304",
+"file": "hd/core_improved_data.asm",
+"line": 60,
+"text": ".byte 0x03, 0x04                            // g3 = nand g1 g2   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10369,
+"hex": "0202",
+"file": "hd/core_improved_data.asm",
+"line": 61,
+"text": ".byte 0x02, 0x02                            // g4 = nand g0 g0   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10371,
+"hex": "0506",
+"file": "hd/core_improved_data.asm",
+"line": 62,
+"text": ".byte 0x05, 0x06                            // outputs: g3 g4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10373,
+"hex": "01030209",
+"file": "hd/core_improved_data.asm",
+"line": 64,
+"text": ".byte 0x01, 0x03, 0x02, 0x09                // module fa: flags=comb/improvable, n_in=3, n_out=2, n_gates=9",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10377,
+"hex": "0001",
+"file": "hd/core_improved_data.asm",
+"line": 65,
+"text": ".byte 0x00, 0x01                            // g0 = nand i0 i1   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10379,
+"hex": "0003",
+"file": "hd/core_improved_data.asm",
+"line": 66,
+"text": ".byte 0x00, 0x03                            // g1 = nand i0 g0   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10381,
+"hex": "0103",
+"file": "hd/core_improved_data.asm",
+"line": 67,
+"text": ".byte 0x01, 0x03                            // g2 = nand i1 g0   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10383,
+"hex": "0405",
+"file": "hd/core_improved_data.asm",
+"line": 68,
+"text": ".byte 0x04, 0x05                            // g3 = nand g1 g2   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10385,
+"hex": "0602",
+"file": "hd/core_improved_data.asm",
+"line": 69,
+"text": ".byte 0x06, 0x02                            // g4 = nand g3 i2   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10387,
+"hex": "0207",
+"file": "hd/core_improved_data.asm",
+"line": 70,
+"text": ".byte 0x02, 0x07                            // g5 = nand i2 g4   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10389,
+"hex": "0607",
+"file": "hd/core_improved_data.asm",
+"line": 71,
+"text": ".byte 0x06, 0x07                            // g6 = nand g3 g4   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10391,
+"hex": "0809",
+"file": "hd/core_improved_data.asm",
+"line": 72,
+"text": ".byte 0x08, 0x09                            // g7 = nand g5 g6   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10393,
+"hex": "0307",
+"file": "hd/core_improved_data.asm",
+"line": 73,
+"text": ".byte 0x03, 0x07                            // g8 = nand g0 g4   improved",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10395,
+"hex": "0a0b",
+"file": "hd/core_improved_data.asm",
+"line": 74,
+"text": ".byte 0x0A, 0x0B                            // outputs: g7 g8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10397,
+"hex": "0213103c",
+"file": "hd/core_improved_data.asm",
+"line": 76,
+"text": ".byte 0x02, 0x13, 0x10, 0x3C                // module ram_word: flags=tile, n_in=19, n_out=16, n_gates=60",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10401,
+"hex": "000002",
+"file": "hd/core_improved_data.asm",
+"line": 77,
+"text": ".byte 0x00, 0x00, 0x02                      // g0 = nand i0 i2   write enable, active low = nand(hiW, lo)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10404,
+"hex": "001313",
+"file": "hd/core_improved_data.asm",
+"line": 78,
+"text": ".byte 0x00, 0x13, 0x13                      // g1 = nand g0 g0   write enable",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10407,
+"hex": "000102",
+"file": "hd/core_improved_data.asm",
+"line": 79,
+"text": ".byte 0x00, 0x01, 0x02                      // g2 = nand i1 i2   read select, active low = nand(hiR, lo)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10410,
+"hex": "001515",
+"file": "hd/core_improved_data.asm",
+"line": 80,
+"text": ".byte 0x00, 0x15, 0x15                      // g3 = nand g2 g2   read select",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10413,
+"hex": "011a1a",
+"file": "hd/core_improved_data.asm",
+"line": 81,
+"text": ".byte 0x01, 0x1A, 0x1A                      // g4 = dff g7   bit 0 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10416,
+"hex": "001713",
+"file": "hd/core_improved_data.asm",
+"line": 82,
+"text": ".byte 0x00, 0x17, 0x13                      // g5 = nand g4 g0   bit 0: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10419,
+"hex": "000314",
+"file": "hd/core_improved_data.asm",
+"line": 83,
+"text": ".byte 0x00, 0x03, 0x14                      // g6 = nand i3 g1   bit 0: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10422,
+"hex": "001819",
+"file": "hd/core_improved_data.asm",
+"line": 84,
+"text": ".byte 0x00, 0x18, 0x19                      // g7 = nand g5 g6   bit 0: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10425,
+"hex": "001617",
+"file": "hd/core_improved_data.asm",
+"line": 85,
+"text": ".byte 0x00, 0x16, 0x17                      // g8 = nand g3 g4   bit 0: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10428,
+"hex": "000b1b",
+"file": "hd/core_improved_data.asm",
+"line": 86,
+"text": ".byte 0x00, 0x0B, 0x1B                      // g9 = nand i11 g8   bit 0: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10431,
+"hex": "001c1c",
+"file": "hd/core_improved_data.asm",
+"line": 87,
+"text": ".byte 0x00, 0x1C, 0x1C                      // g10 = nand g9 g9   bit 0: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10434,
+"hex": "012121",
+"file": "hd/core_improved_data.asm",
+"line": 88,
+"text": ".byte 0x01, 0x21, 0x21                      // g11 = dff g14   bit 1 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10437,
+"hex": "001e13",
+"file": "hd/core_improved_data.asm",
+"line": 89,
+"text": ".byte 0x00, 0x1E, 0x13                      // g12 = nand g11 g0   bit 1: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10440,
+"hex": "000414",
+"file": "hd/core_improved_data.asm",
+"line": 90,
+"text": ".byte 0x00, 0x04, 0x14                      // g13 = nand i4 g1   bit 1: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10443,
+"hex": "001f20",
+"file": "hd/core_improved_data.asm",
+"line": 91,
+"text": ".byte 0x00, 0x1F, 0x20                      // g14 = nand g12 g13   bit 1: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10446,
+"hex": "00161e",
+"file": "hd/core_improved_data.asm",
+"line": 92,
+"text": ".byte 0x00, 0x16, 0x1E                      // g15 = nand g3 g11   bit 1: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10449,
+"hex": "000c22",
+"file": "hd/core_improved_data.asm",
+"line": 93,
+"text": ".byte 0x00, 0x0C, 0x22                      // g16 = nand i12 g15   bit 1: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10452,
+"hex": "002323",
+"file": "hd/core_improved_data.asm",
+"line": 94,
+"text": ".byte 0x00, 0x23, 0x23                      // g17 = nand g16 g16   bit 1: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10455,
+"hex": "012828",
+"file": "hd/core_improved_data.asm",
+"line": 95,
+"text": ".byte 0x01, 0x28, 0x28                      // g18 = dff g21   bit 2 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10458,
+"hex": "002513",
+"file": "hd/core_improved_data.asm",
+"line": 96,
+"text": ".byte 0x00, 0x25, 0x13                      // g19 = nand g18 g0   bit 2: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10461,
+"hex": "000514",
+"file": "hd/core_improved_data.asm",
+"line": 97,
+"text": ".byte 0x00, 0x05, 0x14                      // g20 = nand i5 g1   bit 2: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10464,
+"hex": "002627",
+"file": "hd/core_improved_data.asm",
+"line": 98,
+"text": ".byte 0x00, 0x26, 0x27                      // g21 = nand g19 g20   bit 2: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10467,
+"hex": "001625",
+"file": "hd/core_improved_data.asm",
+"line": 99,
+"text": ".byte 0x00, 0x16, 0x25                      // g22 = nand g3 g18   bit 2: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10470,
+"hex": "000d29",
+"file": "hd/core_improved_data.asm",
+"line": 100,
+"text": ".byte 0x00, 0x0D, 0x29                      // g23 = nand i13 g22   bit 2: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10473,
+"hex": "002a2a",
+"file": "hd/core_improved_data.asm",
+"line": 101,
+"text": ".byte 0x00, 0x2A, 0x2A                      // g24 = nand g23 g23   bit 2: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10476,
+"hex": "012f2f",
+"file": "hd/core_improved_data.asm",
+"line": 102,
+"text": ".byte 0x01, 0x2F, 0x2F                      // g25 = dff g28   bit 3 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10479,
+"hex": "002c13",
+"file": "hd/core_improved_data.asm",
+"line": 103,
+"text": ".byte 0x00, 0x2C, 0x13                      // g26 = nand g25 g0   bit 3: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10482,
+"hex": "000614",
+"file": "hd/core_improved_data.asm",
+"line": 104,
+"text": ".byte 0x00, 0x06, 0x14                      // g27 = nand i6 g1   bit 3: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10485,
+"hex": "002d2e",
+"file": "hd/core_improved_data.asm",
+"line": 105,
+"text": ".byte 0x00, 0x2D, 0x2E                      // g28 = nand g26 g27   bit 3: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10488,
+"hex": "00162c",
+"file": "hd/core_improved_data.asm",
+"line": 106,
+"text": ".byte 0x00, 0x16, 0x2C                      // g29 = nand g3 g25   bit 3: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10491,
+"hex": "000e30",
+"file": "hd/core_improved_data.asm",
+"line": 107,
+"text": ".byte 0x00, 0x0E, 0x30                      // g30 = nand i14 g29   bit 3: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10494,
+"hex": "003131",
+"file": "hd/core_improved_data.asm",
+"line": 108,
+"text": ".byte 0x00, 0x31, 0x31                      // g31 = nand g30 g30   bit 3: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10497,
+"hex": "013636",
+"file": "hd/core_improved_data.asm",
+"line": 109,
+"text": ".byte 0x01, 0x36, 0x36                      // g32 = dff g35   bit 4 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10500,
+"hex": "003313",
+"file": "hd/core_improved_data.asm",
+"line": 110,
+"text": ".byte 0x00, 0x33, 0x13                      // g33 = nand g32 g0   bit 4: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10503,
+"hex": "000714",
+"file": "hd/core_improved_data.asm",
+"line": 111,
+"text": ".byte 0x00, 0x07, 0x14                      // g34 = nand i7 g1   bit 4: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10506,
+"hex": "003435",
+"file": "hd/core_improved_data.asm",
+"line": 112,
+"text": ".byte 0x00, 0x34, 0x35                      // g35 = nand g33 g34   bit 4: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10509,
+"hex": "001633",
+"file": "hd/core_improved_data.asm",
+"line": 113,
+"text": ".byte 0x00, 0x16, 0x33                      // g36 = nand g3 g32   bit 4: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10512,
+"hex": "000f37",
+"file": "hd/core_improved_data.asm",
+"line": 114,
+"text": ".byte 0x00, 0x0F, 0x37                      // g37 = nand i15 g36   bit 4: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10515,
+"hex": "003838",
+"file": "hd/core_improved_data.asm",
+"line": 115,
+"text": ".byte 0x00, 0x38, 0x38                      // g38 = nand g37 g37   bit 4: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10518,
+"hex": "013d3d",
+"file": "hd/core_improved_data.asm",
+"line": 116,
+"text": ".byte 0x01, 0x3D, 0x3D                      // g39 = dff g42   bit 5 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10521,
+"hex": "003a13",
+"file": "hd/core_improved_data.asm",
+"line": 117,
+"text": ".byte 0x00, 0x3A, 0x13                      // g40 = nand g39 g0   bit 5: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10524,
+"hex": "000814",
+"file": "hd/core_improved_data.asm",
+"line": 118,
+"text": ".byte 0x00, 0x08, 0x14                      // g41 = nand i8 g1   bit 5: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10527,
+"hex": "003b3c",
+"file": "hd/core_improved_data.asm",
+"line": 119,
+"text": ".byte 0x00, 0x3B, 0x3C                      // g42 = nand g40 g41   bit 5: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10530,
+"hex": "00163a",
+"file": "hd/core_improved_data.asm",
+"line": 120,
+"text": ".byte 0x00, 0x16, 0x3A                      // g43 = nand g3 g39   bit 5: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10533,
+"hex": "00103e",
+"file": "hd/core_improved_data.asm",
+"line": 121,
+"text": ".byte 0x00, 0x10, 0x3E                      // g44 = nand i16 g43   bit 5: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10536,
+"hex": "003f3f",
+"file": "hd/core_improved_data.asm",
+"line": 122,
+"text": ".byte 0x00, 0x3F, 0x3F                      // g45 = nand g44 g44   bit 5: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10539,
+"hex": "014444",
+"file": "hd/core_improved_data.asm",
+"line": 123,
+"text": ".byte 0x01, 0x44, 0x44                      // g46 = dff g49   bit 6 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10542,
+"hex": "004113",
+"file": "hd/core_improved_data.asm",
+"line": 124,
+"text": ".byte 0x00, 0x41, 0x13                      // g47 = nand g46 g0   bit 6: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10545,
+"hex": "000914",
+"file": "hd/core_improved_data.asm",
+"line": 125,
+"text": ".byte 0x00, 0x09, 0x14                      // g48 = nand i9 g1   bit 6: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10548,
+"hex": "004243",
+"file": "hd/core_improved_data.asm",
+"line": 126,
+"text": ".byte 0x00, 0x42, 0x43                      // g49 = nand g47 g48   bit 6: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10551,
+"hex": "001641",
+"file": "hd/core_improved_data.asm",
+"line": 127,
+"text": ".byte 0x00, 0x16, 0x41                      // g50 = nand g3 g46   bit 6: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10554,
+"hex": "001145",
+"file": "hd/core_improved_data.asm",
+"line": 128,
+"text": ".byte 0x00, 0x11, 0x45                      // g51 = nand i17 g50   bit 6: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10557,
+"hex": "004646",
+"file": "hd/core_improved_data.asm",
+"line": 129,
+"text": ".byte 0x00, 0x46, 0x46                      // g52 = nand g51 g51   bit 6: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10560,
+"hex": "014b4b",
+"file": "hd/core_improved_data.asm",
+"line": 130,
+"text": ".byte 0x01, 0x4B, 0x4B                      // g53 = dff g56   bit 7 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10563,
+"hex": "004813",
+"file": "hd/core_improved_data.asm",
+"line": 131,
+"text": ".byte 0x00, 0x48, 0x13                      // g54 = nand g53 g0   bit 7: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10566,
+"hex": "000a14",
+"file": "hd/core_improved_data.asm",
+"line": 132,
+"text": ".byte 0x00, 0x0A, 0x14                      // g55 = nand i10 g1   bit 7: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10569,
+"hex": "00494a",
+"file": "hd/core_improved_data.asm",
+"line": 133,
+"text": ".byte 0x00, 0x49, 0x4A                      // g56 = nand g54 g55   bit 7: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10572,
+"hex": "001648",
+"file": "hd/core_improved_data.asm",
+"line": 134,
+"text": ".byte 0x00, 0x16, 0x48                      // g57 = nand g3 g53   bit 7: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10575,
+"hex": "00124c",
+"file": "hd/core_improved_data.asm",
+"line": 135,
+"text": ".byte 0x00, 0x12, 0x4C                      // g58 = nand i18 g57   bit 7: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10578,
+"hex": "004d4d",
+"file": "hd/core_improved_data.asm",
+"line": 136,
+"text": ".byte 0x00, 0x4D, 0x4D                      // g59 = nand g58 g58   bit 7: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10581,
+"hex": "1d242b323940474e1c232a31383f464d",
+"file": "hd/core_improved_data.asm",
+"line": 137,
+"text": ".byte 0x1D, 0x24, 0x2B, 0x32, 0x39, 0x40, 0x47, 0x4E, 0x1C, 0x23, 0x2A, 0x31, 0x38, 0x3F, 0x46, 0x4D// outputs: g10 g17 g24 g31 g38 g45 g52 g59 g9 g16 g23 g30 g37 g44 g51 g58",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10816,
+"hex": "01fe1203",
+"file": "hd/core_improved_data.asm",
+"line": 140,
+"text": ".byte 0x01, 0xFE, 0x12, 0x03                // node 0: pc.0 = dff pc.mux28   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10820,
+"hex": "01fe1503",
+"file": "hd/core_improved_data.asm",
+"line": 141,
+"text": ".byte 0x01, 0xFE, 0x15, 0x03                // node 1: pc.1 = dff pc.mux29   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10824,
+"hex": "01fe1803",
+"file": "hd/core_improved_data.asm",
+"line": 142,
+"text": ".byte 0x01, 0xFE, 0x18, 0x03                // node 2: pc.2 = dff pc.mux30   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10828,
+"hex": "01fe1b03",
+"file": "hd/core_improved_data.asm",
+"line": 143,
+"text": ".byte 0x01, 0xFE, 0x1B, 0x03                // node 3: pc.3 = dff pc.mux31   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10832,
+"hex": "01fe1e03",
+"file": "hd/core_improved_data.asm",
+"line": 144,
+"text": ".byte 0x01, 0xFE, 0x1E, 0x03                // node 4: pc.4 = dff pc.mux32   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10836,
+"hex": "01fe2103",
+"file": "hd/core_improved_data.asm",
+"line": 145,
+"text": ".byte 0x01, 0xFE, 0x21, 0x03                // node 5: pc.5 = dff pc.mux33   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10840,
+"hex": "01fe2403",
+"file": "hd/core_improved_data.asm",
+"line": 146,
+"text": ".byte 0x01, 0xFE, 0x24, 0x03                // node 6: pc.6 = dff pc.mux34   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10844,
+"hex": "01fe2703",
+"file": "hd/core_improved_data.asm",
+"line": 147,
+"text": ".byte 0x01, 0xFE, 0x27, 0x03                // node 7: pc.7 = dff pc.mux35   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10848,
+"hex": "01fe2a03",
+"file": "hd/core_improved_data.asm",
+"line": 148,
+"text": ".byte 0x01, 0xFE, 0x2A, 0x03                // node 8: pc.8 = dff pc.mux36   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10852,
+"hex": "01fe2d03",
+"file": "hd/core_improved_data.asm",
+"line": 149,
+"text": ".byte 0x01, 0xFE, 0x2D, 0x03                // node 9: pc.9 = dff pc.mux37   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10856,
+"hex": "01fe3003",
+"file": "hd/core_improved_data.asm",
+"line": 150,
+"text": ".byte 0x01, 0xFE, 0x30, 0x03                // node 10: pc.10 = dff pc.mux38   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10860,
+"hex": "01fe3303",
+"file": "hd/core_improved_data.asm",
+"line": 151,
+"text": ".byte 0x01, 0xFE, 0x33, 0x03                // node 11: pc.11 = dff pc.mux39   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10864,
+"hex": "01fe3603",
+"file": "hd/core_improved_data.asm",
+"line": 152,
+"text": ".byte 0x01, 0xFE, 0x36, 0x03                // node 12: pc.12 = dff pc.mux40   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10868,
+"hex": "01fe3903",
+"file": "hd/core_improved_data.asm",
+"line": 153,
+"text": ".byte 0x01, 0xFE, 0x39, 0x03                // node 13: pc.13 = dff pc.mux41   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10872,
+"hex": "01fe4b03",
+"file": "hd/core_improved_data.asm",
+"line": 154,
+"text": ".byte 0x01, 0xFE, 0x4B, 0x03                // node 14: a.0 = dff areg.mux2   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10876,
+"hex": "01fe5603",
+"file": "hd/core_improved_data.asm",
+"line": 155,
+"text": ".byte 0x01, 0xFE, 0x56, 0x03                // node 15: a.1 = dff areg.mux5   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10880,
+"hex": "01fe6103",
+"file": "hd/core_improved_data.asm",
+"line": 156,
+"text": ".byte 0x01, 0xFE, 0x61, 0x03                // node 16: a.2 = dff areg.mux8   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10884,
+"hex": "01fe6c03",
+"file": "hd/core_improved_data.asm",
+"line": 157,
+"text": ".byte 0x01, 0xFE, 0x6C, 0x03                // node 17: a.3 = dff areg.mux11   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10888,
+"hex": "01fe7703",
+"file": "hd/core_improved_data.asm",
+"line": 158,
+"text": ".byte 0x01, 0xFE, 0x77, 0x03                // node 18: a.4 = dff areg.mux14   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10892,
+"hex": "01fe8203",
+"file": "hd/core_improved_data.asm",
+"line": 159,
+"text": ".byte 0x01, 0xFE, 0x82, 0x03                // node 19: a.5 = dff areg.mux17   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10896,
+"hex": "01fe8d03",
+"file": "hd/core_improved_data.asm",
+"line": 160,
+"text": ".byte 0x01, 0xFE, 0x8D, 0x03                // node 20: a.6 = dff areg.mux20   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10900,
+"hex": "01fe9803",
+"file": "hd/core_improved_data.asm",
+"line": 161,
+"text": ".byte 0x01, 0xFE, 0x98, 0x03                // node 21: a.7 = dff areg.mux23   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10904,
+"hex": "01fea303",
+"file": "hd/core_improved_data.asm",
+"line": 162,
+"text": ".byte 0x01, 0xFE, 0xA3, 0x03                // node 22: a.8 = dff areg.mux26   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10908,
+"hex": "01feae03",
+"file": "hd/core_improved_data.asm",
+"line": 163,
+"text": ".byte 0x01, 0xFE, 0xAE, 0x03                // node 23: a.9 = dff areg.mux29   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10912,
+"hex": "01feb903",
+"file": "hd/core_improved_data.asm",
+"line": 164,
+"text": ".byte 0x01, 0xFE, 0xB9, 0x03                // node 24: a.10 = dff areg.mux32   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10916,
+"hex": "01fec403",
+"file": "hd/core_improved_data.asm",
+"line": 165,
+"text": ".byte 0x01, 0xFE, 0xC4, 0x03                // node 25: a.11 = dff areg.mux35   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10920,
+"hex": "01fecf03",
+"file": "hd/core_improved_data.asm",
+"line": 166,
+"text": ".byte 0x01, 0xFE, 0xCF, 0x03                // node 26: a.12 = dff areg.mux38   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10924,
+"hex": "01feda03",
+"file": "hd/core_improved_data.asm",
+"line": 167,
+"text": ".byte 0x01, 0xFE, 0xDA, 0x03                // node 27: a.13 = dff areg.mux41   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10928,
+"hex": "01fedf03",
+"file": "hd/core_improved_data.asm",
+"line": 168,
+"text": ".byte 0x01, 0xFE, 0xDF, 0x03                // node 28: d.0 = dff dreg.mux0   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10932,
+"hex": "01fee203",
+"file": "hd/core_improved_data.asm",
+"line": 169,
+"text": ".byte 0x01, 0xFE, 0xE2, 0x03                // node 29: d.1 = dff dreg.mux1   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10936,
+"hex": "01fee503",
+"file": "hd/core_improved_data.asm",
+"line": 170,
+"text": ".byte 0x01, 0xFE, 0xE5, 0x03                // node 30: d.2 = dff dreg.mux2   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10940,
+"hex": "01fee803",
+"file": "hd/core_improved_data.asm",
+"line": 171,
+"text": ".byte 0x01, 0xFE, 0xE8, 0x03                // node 31: d.3 = dff dreg.mux3   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10944,
+"hex": "01feeb03",
+"file": "hd/core_improved_data.asm",
+"line": 172,
+"text": ".byte 0x01, 0xFE, 0xEB, 0x03                // node 32: d.4 = dff dreg.mux4   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10948,
+"hex": "01feee03",
+"file": "hd/core_improved_data.asm",
+"line": 173,
+"text": ".byte 0x01, 0xFE, 0xEE, 0x03                // node 33: d.5 = dff dreg.mux5   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10952,
+"hex": "01fef103",
+"file": "hd/core_improved_data.asm",
+"line": 174,
+"text": ".byte 0x01, 0xFE, 0xF1, 0x03                // node 34: d.6 = dff dreg.mux6   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10956,
+"hex": "01fef403",
+"file": "hd/core_improved_data.asm",
+"line": 175,
+"text": ".byte 0x01, 0xFE, 0xF4, 0x03                // node 35: d.7 = dff dreg.mux7   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10960,
+"hex": "01fefa03",
+"file": "hd/core_improved_data.asm",
+"line": 176,
+"text": ".byte 0x01, 0xFE, 0xFA, 0x03                // node 36: irlo.0 = dff ir.mux0   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10964,
+"hex": "01fefd03",
+"file": "hd/core_improved_data.asm",
+"line": 177,
+"text": ".byte 0x01, 0xFE, 0xFD, 0x03                // node 37: irlo.1 = dff ir.mux1   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10968,
+"hex": "01fe0004",
+"file": "hd/core_improved_data.asm",
+"line": 178,
+"text": ".byte 0x01, 0xFE, 0x00, 0x04                // node 38: irlo.2 = dff ir.mux2   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10972,
+"hex": "01fe0304",
+"file": "hd/core_improved_data.asm",
+"line": 179,
+"text": ".byte 0x01, 0xFE, 0x03, 0x04                // node 39: irlo.3 = dff ir.mux3   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10976,
+"hex": "01fe0604",
+"file": "hd/core_improved_data.asm",
+"line": 180,
+"text": ".byte 0x01, 0xFE, 0x06, 0x04                // node 40: irlo.4 = dff ir.mux4   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10980,
+"hex": "01fe0904",
+"file": "hd/core_improved_data.asm",
+"line": 181,
+"text": ".byte 0x01, 0xFE, 0x09, 0x04                // node 41: irlo.5 = dff ir.mux5   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10984,
+"hex": "01fe0c04",
+"file": "hd/core_improved_data.asm",
+"line": 182,
+"text": ".byte 0x01, 0xFE, 0x0C, 0x04                // node 42: irlo.6 = dff ir.mux6   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10988,
+"hex": "01fe0f04",
+"file": "hd/core_improved_data.asm",
+"line": 183,
+"text": ".byte 0x01, 0xFE, 0x0F, 0x04                // node 43: irlo.7 = dff ir.mux7   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10992,
+"hex": "01fe1204",
+"file": "hd/core_improved_data.asm",
+"line": 184,
+"text": ".byte 0x01, 0xFE, 0x12, 0x04                // node 44: irhi.0 = dff ir.mux8   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 10996,
+"hex": "01fe1504",
+"file": "hd/core_improved_data.asm",
+"line": 185,
+"text": ".byte 0x01, 0xFE, 0x15, 0x04                // node 45: irhi.1 = dff ir.mux9   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11000,
+"hex": "01fe1804",
+"file": "hd/core_improved_data.asm",
+"line": 186,
+"text": ".byte 0x01, 0xFE, 0x18, 0x04                // node 46: irhi.2 = dff ir.mux10   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11004,
+"hex": "01fe1b04",
+"file": "hd/core_improved_data.asm",
+"line": 187,
+"text": ".byte 0x01, 0xFE, 0x1B, 0x04                // node 47: irhi.3 = dff ir.mux11   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11008,
+"hex": "01fe1e04",
+"file": "hd/core_improved_data.asm",
+"line": 188,
+"text": ".byte 0x01, 0xFE, 0x1E, 0x04                // node 48: irhi.4 = dff ir.mux12   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11012,
+"hex": "01fee900",
+"file": "hd/core_improved_data.asm",
+"line": 189,
+"text": ".byte 0x01, 0xFE, 0xE9, 0x00                // node 49: st.0 = dff control.or3   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11016,
+"hex": "01feea00",
+"file": "hd/core_improved_data.asm",
+"line": 190,
+"text": ".byte 0x01, 0xFE, 0xEA, 0x00                // node 50: st.1 = dff control.and5   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11020,
+"hex": "01feed00",
+"file": "hd/core_improved_data.asm",
+"line": 191,
+"text": ".byte 0x01, 0xFE, 0xED, 0x00                // node 51: st.2 = dff control.and7   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11024,
+"hex": "01fef000",
+"file": "hd/core_improved_data.asm",
+"line": 192,
+"text": ".byte 0x01, 0xFE, 0xF0, 0x00                // node 52: st.3 = dff control.and9   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11028,
+"hex": "01fef100",
+"file": "hd/core_improved_data.asm",
+"line": 193,
+"text": ".byte 0x01, 0xFE, 0xF1, 0x00                // node 53: st.4 = dff control.and10   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11032,
+"hex": "008080",
+"file": "hd/core_improved_data.asm",
+"line": 194,
+"text": ".byte 0x00, 0x80, 0x80                      // node 54: c.n = nand rom0 rom0   # constant helper",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11035,
+"hex": "008001",
+"file": "hd/core_improved_data.asm",
+"line": 195,
+"text": ".byte 0x00, 0x80, 0x01                      // node 55: one = nand rom0 c.n   # constant 1 = nand(x, not x)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11038,
+"hex": "000101",
+"file": "hd/core_improved_data.asm",
+"line": 196,
+"text": ".byte 0x00, 0x01, 0x01                      // node 56: zero = nand one one   # constant 0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11041,
+"hex": "008989",
+"file": "hd/core_improved_data.asm",
+"line": 197,
+"text": ".byte 0x00, 0x89, 0x89                      // node 57: reset = nand run run",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11044,
+"hex": "040908",
+"file": "hd/core_improved_data.asm",
+"line": 198,
+"text": ".byte 0x04, 0x09, 0x08                      // node 58: top.or0 = or st.0 st.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11047,
+"hex": "062f3d01",
+"file": "hd/core_improved_data.asm",
+"line": 199,
+"text": ".byte 0x06, 0x2F, 0x3D, 0x01                // node 61: addr.mux0 = mux a.0 pc.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11051,
+"hex": "06324005",
+"file": "hd/core_improved_data.asm",
+"line": 200,
+"text": ".byte 0x06, 0x32, 0x40, 0x05                // node 65: addr.mux1 = mux a.1 pc.1 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11055,
+"hex": "06354309",
+"file": "hd/core_improved_data.asm",
+"line": 201,
+"text": ".byte 0x06, 0x35, 0x43, 0x09                // node 69: addr.mux2 = mux a.2 pc.2 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11059,
+"hex": "0638460d",
+"file": "hd/core_improved_data.asm",
+"line": 202,
+"text": ".byte 0x06, 0x38, 0x46, 0x0D                // node 73: addr.mux3 = mux a.3 pc.3 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11063,
+"hex": "063b4911",
+"file": "hd/core_improved_data.asm",
+"line": 203,
+"text": ".byte 0x06, 0x3B, 0x49, 0x11                // node 77: addr.mux4 = mux a.4 pc.4 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11067,
+"hex": "063e4c15",
+"file": "hd/core_improved_data.asm",
+"line": 204,
+"text": ".byte 0x06, 0x3E, 0x4C, 0x15                // node 81: addr.mux5 = mux a.5 pc.5 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11071,
+"hex": "06414f19",
+"file": "hd/core_improved_data.asm",
+"line": 205,
+"text": ".byte 0x06, 0x41, 0x4F, 0x19                // node 85: addr.mux6 = mux a.6 pc.6 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11075,
+"hex": "0644521d",
+"file": "hd/core_improved_data.asm",
+"line": 206,
+"text": ".byte 0x06, 0x44, 0x52, 0x1D                // node 89: addr.mux7 = mux a.7 pc.7 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11079,
+"hex": "06475521",
+"file": "hd/core_improved_data.asm",
+"line": 207,
+"text": ".byte 0x06, 0x47, 0x55, 0x21                // node 93: addr.mux8 = mux a.8 pc.8 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11083,
+"hex": "064a5825",
+"file": "hd/core_improved_data.asm",
+"line": 208,
+"text": ".byte 0x06, 0x4A, 0x58, 0x25                // node 97: addr.mux9 = mux a.9 pc.9 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11087,
+"hex": "064d5b29",
+"file": "hd/core_improved_data.asm",
+"line": 209,
+"text": ".byte 0x06, 0x4D, 0x5B, 0x29                // node 101: addr.mux10 = mux a.10 pc.10 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11091,
+"hex": "06505e2d",
+"file": "hd/core_improved_data.asm",
+"line": 210,
+"text": ".byte 0x06, 0x50, 0x5E, 0x2D                // node 105: addr.mux11 = mux a.11 pc.11 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11095,
+"hex": "06536131",
+"file": "hd/core_improved_data.asm",
+"line": 211,
+"text": ".byte 0x06, 0x53, 0x61, 0x31                // node 109: addr.mux12 = mux a.12 pc.12 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11099,
+"hex": "06566435",
+"file": "hd/core_improved_data.asm",
+"line": 212,
+"text": ".byte 0x06, 0x56, 0x64, 0x35                // node 113: addr.mux13 = mux a.13 pc.13 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11103,
+"hex": "07353e",
+"file": "hd/core_improved_data.asm",
+"line": 213,
+"text": ".byte 0x07, 0x35, 0x3E                      // node 117: addr.ha0 = ha addr.mux0 one",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11106,
+"hex": "073601",
+"file": "hd/core_improved_data.asm",
+"line": 214,
+"text": ".byte 0x07, 0x36, 0x01                      // node 122: addr.ha1 = ha addr.mux1 addr.ha0.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11109,
+"hex": "073701",
+"file": "hd/core_improved_data.asm",
+"line": 215,
+"text": ".byte 0x07, 0x37, 0x01                      // node 127: addr.ha2 = ha addr.mux2 addr.ha1.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11112,
+"hex": "073801",
+"file": "hd/core_improved_data.asm",
+"line": 216,
+"text": ".byte 0x07, 0x38, 0x01                      // node 132: addr.ha3 = ha addr.mux3 addr.ha2.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11115,
+"hex": "073901",
+"file": "hd/core_improved_data.asm",
+"line": 217,
+"text": ".byte 0x07, 0x39, 0x01                      // node 137: addr.ha4 = ha addr.mux4 addr.ha3.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11118,
+"hex": "073a01",
+"file": "hd/core_improved_data.asm",
+"line": 218,
+"text": ".byte 0x07, 0x3A, 0x01                      // node 142: addr.ha5 = ha addr.mux5 addr.ha4.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11121,
+"hex": "073b01",
+"file": "hd/core_improved_data.asm",
+"line": 219,
+"text": ".byte 0x07, 0x3B, 0x01                      // node 147: addr.ha6 = ha addr.mux6 addr.ha5.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11124,
+"hex": "073c01",
+"file": "hd/core_improved_data.asm",
+"line": 220,
+"text": ".byte 0x07, 0x3C, 0x01                      // node 152: addr.ha7 = ha addr.mux7 addr.ha6.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11127,
+"hex": "073d01",
+"file": "hd/core_improved_data.asm",
+"line": 221,
+"text": ".byte 0x07, 0x3D, 0x01                      // node 157: addr.ha8 = ha addr.mux8 addr.ha7.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11130,
+"hex": "073e01",
+"file": "hd/core_improved_data.asm",
+"line": 222,
+"text": ".byte 0x07, 0x3E, 0x01                      // node 162: addr.ha9 = ha addr.mux9 addr.ha8.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11133,
+"hex": "073f01",
+"file": "hd/core_improved_data.asm",
+"line": 223,
+"text": ".byte 0x07, 0x3F, 0x01                      // node 167: addr.ha10 = ha addr.mux10 addr.ha9.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11136,
+"hex": "074001",
+"file": "hd/core_improved_data.asm",
+"line": 224,
+"text": ".byte 0x07, 0x40, 0x01                      // node 172: addr.ha11 = ha addr.mux11 addr.ha10.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11139,
+"hex": "074101",
+"file": "hd/core_improved_data.asm",
+"line": 225,
+"text": ".byte 0x07, 0x41, 0x01                      // node 177: addr.ha12 = ha addr.mux12 addr.ha11.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11142,
+"hex": "074201",
+"file": "hd/core_improved_data.asm",
+"line": 226,
+"text": ".byte 0x07, 0x42, 0x01                      // node 182: addr.ha13 = ha addr.mux13 addr.ha12.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11145,
+"hex": "0267",
+"file": "hd/core_improved_data.asm",
+"line": 227,
+"text": ".byte 0x02, 0x67                            // node 187: decode.not0 = not addr.mux5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11147,
+"hex": "03fd850001",
+"file": "hd/core_improved_data.asm",
+"line": 228,
+"text": ".byte 0x03, 0xFD, 0x85, 0x00, 0x01          // node 188: decode.and0 = and one decode.not0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11152,
+"hex": "0266",
+"file": "hd/core_improved_data.asm",
+"line": 229,
+"text": ".byte 0x02, 0x66                            // node 190: decode.not1 = not addr.mux6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11154,
+"hex": "030201",
+"file": "hd/core_improved_data.asm",
+"line": 230,
+"text": ".byte 0x03, 0x02, 0x01                      // node 191: decode.and1 = and decode.and0 decode.not1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11157,
+"hex": "0265",
+"file": "hd/core_improved_data.asm",
+"line": 231,
+"text": ".byte 0x02, 0x65                            // node 193: decode.not2 = not addr.mux7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11159,
+"hex": "030201",
+"file": "hd/core_improved_data.asm",
+"line": 232,
+"text": ".byte 0x03, 0x02, 0x01                      // node 194: decode.and2 = and decode.and1 decode.not2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11162,
+"hex": "0264",
+"file": "hd/core_improved_data.asm",
+"line": 233,
+"text": ".byte 0x02, 0x64                            // node 196: decode.not3 = not addr.mux8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11164,
+"hex": "030201",
+"file": "hd/core_improved_data.asm",
+"line": 234,
+"text": ".byte 0x03, 0x02, 0x01                      // node 197: decode.and3 = and decode.and2 decode.not3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11167,
+"hex": "0263",
+"file": "hd/core_improved_data.asm",
+"line": 235,
+"text": ".byte 0x02, 0x63                            // node 199: decode.not4 = not addr.mux9",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11169,
+"hex": "030201",
+"file": "hd/core_improved_data.asm",
+"line": 236,
+"text": ".byte 0x03, 0x02, 0x01                      // node 200: decode.and4 = and decode.and3 decode.not4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11172,
+"hex": "0262",
+"file": "hd/core_improved_data.asm",
+"line": 237,
+"text": ".byte 0x02, 0x62                            // node 202: decode.not5 = not addr.mux10",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11174,
+"hex": "030201",
+"file": "hd/core_improved_data.asm",
+"line": 238,
+"text": ".byte 0x03, 0x02, 0x01                      // node 203: decode.and5 = and decode.and4 decode.not5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11177,
+"hex": "0261",
+"file": "hd/core_improved_data.asm",
+"line": 239,
+"text": ".byte 0x02, 0x61                            // node 205: decode.not6 = not addr.mux11",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11179,
+"hex": "030201",
+"file": "hd/core_improved_data.asm",
+"line": 240,
+"text": ".byte 0x03, 0x02, 0x01                      // node 206: decode.and6 = and decode.and5 decode.not6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11182,
+"hex": "0260",
+"file": "hd/core_improved_data.asm",
+"line": 241,
+"text": ".byte 0x02, 0x60                            // node 208: decode.not7 = not addr.mux12",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11184,
+"hex": "030201",
+"file": "hd/core_improved_data.asm",
+"line": 242,
+"text": ".byte 0x03, 0x02, 0x01                      // node 209: decode.and7 = and decode.and6 decode.not7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11187,
+"hex": "025f",
+"file": "hd/core_improved_data.asm",
+"line": 243,
+"text": ".byte 0x02, 0x5F                            // node 211: decode.not8 = not addr.mux13",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11189,
+"hex": "030201",
+"file": "hd/core_improved_data.asm",
+"line": 244,
+"text": ".byte 0x03, 0x02, 0x01                      // node 212: decode.and8 = and decode.and7 decode.not8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11192,
+"hex": "0262",
+"file": "hd/core_improved_data.asm",
+"line": 245,
+"text": ".byte 0x02, 0x62                            // node 214: decode.not9 = not addr.mux13",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11194,
+"hex": "0301fd8700",
+"file": "hd/core_improved_data.asm",
+"line": 246,
+"text": ".byte 0x03, 0x01, 0xFD, 0x87, 0x00          // node 215: decode.and9 = and decode.not9 addr.mux4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11199,
+"hex": "0301fd8500",
+"file": "hd/core_improved_data.asm",
+"line": 247,
+"text": ".byte 0x03, 0x01, 0xFD, 0x85, 0x00          // node 217: decode.and10 = and decode.and9 addr.mux5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11204,
+"hex": "0301fd8300",
+"file": "hd/core_improved_data.asm",
+"line": 248,
+"text": ".byte 0x03, 0x01, 0xFD, 0x83, 0x00          // node 219: decode.and11 = and decode.and10 addr.mux6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11209,
+"hex": "0301fd8100",
+"file": "hd/core_improved_data.asm",
+"line": 249,
+"text": ".byte 0x03, 0x01, 0xFD, 0x81, 0x00          // node 221: decode.and12 = and decode.and11 addr.mux7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11214,
+"hex": "03017f",
+"file": "hd/core_improved_data.asm",
+"line": 250,
+"text": ".byte 0x03, 0x01, 0x7F                      // node 223: decode.and13 = and decode.and12 addr.mux8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11217,
+"hex": "03017d",
+"file": "hd/core_improved_data.asm",
+"line": 251,
+"text": ".byte 0x03, 0x01, 0x7D                      // node 225: decode.and14 = and decode.and13 addr.mux9",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11220,
+"hex": "03017b",
+"file": "hd/core_improved_data.asm",
+"line": 252,
+"text": ".byte 0x03, 0x01, 0x7B                      // node 227: decode.and15 = and decode.and14 addr.mux10",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11223,
+"hex": "030179",
+"file": "hd/core_improved_data.asm",
+"line": 253,
+"text": ".byte 0x03, 0x01, 0x79                      // node 229: decode.and16 = and decode.and15 addr.mux11",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11226,
+"hex": "030177",
+"file": "hd/core_improved_data.asm",
+"line": 254,
+"text": ".byte 0x03, 0x01, 0x77                      // node 231: decode.and17 = and decode.and16 addr.mux12",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11229,
+"hex": "00148a",
+"file": "hd/core_improved_data.asm",
+"line": 255,
+"text": ".byte 0x00, 0x14, 0x8A                      // node 233: decode.nand0 = nand decode.and8 ramrd0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11232,
+"hex": "007680",
+"file": "hd/core_improved_data.asm",
+"line": 256,
+"text": ".byte 0x00, 0x76, 0x80                      // node 234: decode.nand1 = nand addr.mux13 rom0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11235,
+"hex": "000201",
+"file": "hd/core_improved_data.asm",
+"line": 257,
+"text": ".byte 0x00, 0x02, 0x01                      // node 235: decode.nand2 = nand decode.nand0 decode.nand1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11238,
+"hex": "00178b",
+"file": "hd/core_improved_data.asm",
+"line": 258,
+"text": ".byte 0x00, 0x17, 0x8B                      // node 236: decode.nand3 = nand decode.and8 ramrd1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11241,
+"hex": "007981",
+"file": "hd/core_improved_data.asm",
+"line": 259,
+"text": ".byte 0x00, 0x79, 0x81                      // node 237: decode.nand4 = nand addr.mux13 rom1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11244,
+"hex": "000201",
+"file": "hd/core_improved_data.asm",
+"line": 260,
+"text": ".byte 0x00, 0x02, 0x01                      // node 238: decode.nand5 = nand decode.nand3 decode.nand4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11247,
+"hex": "001a8c",
+"file": "hd/core_improved_data.asm",
+"line": 261,
+"text": ".byte 0x00, 0x1A, 0x8C                      // node 239: decode.nand6 = nand decode.and8 ramrd2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11250,
+"hex": "007c82",
+"file": "hd/core_improved_data.asm",
+"line": 262,
+"text": ".byte 0x00, 0x7C, 0x82                      // node 240: decode.nand7 = nand addr.mux13 rom2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11253,
+"hex": "000201",
+"file": "hd/core_improved_data.asm",
+"line": 263,
+"text": ".byte 0x00, 0x02, 0x01                      // node 241: decode.nand8 = nand decode.nand6 decode.nand7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11256,
+"hex": "001d8d",
+"file": "hd/core_improved_data.asm",
+"line": 264,
+"text": ".byte 0x00, 0x1D, 0x8D                      // node 242: decode.nand9 = nand decode.and8 ramrd3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11259,
+"hex": "007f83",
+"file": "hd/core_improved_data.asm",
+"line": 265,
+"text": ".byte 0x00, 0x7F, 0x83                      // node 243: decode.nand10 = nand addr.mux13 rom3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11262,
+"hex": "000201",
+"file": "hd/core_improved_data.asm",
+"line": 266,
+"text": ".byte 0x00, 0x02, 0x01                      // node 244: decode.nand11 = nand decode.nand9 decode.nand10",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11265,
+"hex": "00208e",
+"file": "hd/core_improved_data.asm",
+"line": 267,
+"text": ".byte 0x00, 0x20, 0x8E                      // node 245: decode.nand12 = nand decode.and8 ramrd4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11268,
+"hex": "00fd820084",
+"file": "hd/core_improved_data.asm",
+"line": 268,
+"text": ".byte 0x00, 0xFD, 0x82, 0x00, 0x84          // node 246: decode.nand13 = nand addr.mux13 rom4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11273,
+"hex": "000201",
+"file": "hd/core_improved_data.asm",
+"line": 269,
+"text": ".byte 0x00, 0x02, 0x01                      // node 247: decode.nand14 = nand decode.nand12 decode.nand13",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11276,
+"hex": "00238f",
+"file": "hd/core_improved_data.asm",
+"line": 270,
+"text": ".byte 0x00, 0x23, 0x8F                      // node 248: decode.nand15 = nand decode.and8 ramrd5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11279,
+"hex": "00fd850085",
+"file": "hd/core_improved_data.asm",
+"line": 271,
+"text": ".byte 0x00, 0xFD, 0x85, 0x00, 0x85          // node 249: decode.nand16 = nand addr.mux13 rom5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11284,
+"hex": "000201",
+"file": "hd/core_improved_data.asm",
+"line": 272,
+"text": ".byte 0x00, 0x02, 0x01                      // node 250: decode.nand17 = nand decode.nand15 decode.nand16",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11287,
+"hex": "002690",
+"file": "hd/core_improved_data.asm",
+"line": 273,
+"text": ".byte 0x00, 0x26, 0x90                      // node 251: decode.nand18 = nand decode.and8 ramrd6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11290,
+"hex": "00fd880086",
+"file": "hd/core_improved_data.asm",
+"line": 274,
+"text": ".byte 0x00, 0xFD, 0x88, 0x00, 0x86          // node 252: decode.nand19 = nand addr.mux13 rom6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11295,
+"hex": "000201",
+"file": "hd/core_improved_data.asm",
+"line": 275,
+"text": ".byte 0x00, 0x02, 0x01                      // node 253: decode.nand20 = nand decode.nand18 decode.nand19",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11298,
+"hex": "002991",
+"file": "hd/core_improved_data.asm",
+"line": 276,
+"text": ".byte 0x00, 0x29, 0x91                      // node 254: decode.nand21 = nand decode.and8 ramrd7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11301,
+"hex": "00fd8b0087",
+"file": "hd/core_improved_data.asm",
+"line": 277,
+"text": ".byte 0x00, 0xFD, 0x8B, 0x00, 0x87          // node 255: decode.nand22 = nand addr.mux13 rom7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11306,
+"hex": "000201",
+"file": "hd/core_improved_data.asm",
+"line": 278,
+"text": ".byte 0x00, 0x02, 0x01                      // node 256: decode.nand23 = nand decode.nand21 decode.nand22",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11309,
+"hex": "030407",
+"file": "hd/core_improved_data.asm",
+"line": 279,
+"text": ".byte 0x03, 0x04, 0x07                      // node 257: control.and0 = and decode.nand20 decode.nand17",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11312,
+"hex": "030301",
+"file": "hd/core_improved_data.asm",
+"line": 280,
+"text": ".byte 0x03, 0x03, 0x01                      // node 259: control.and1 = and decode.nand23 control.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11315,
+"hex": "020b",
+"file": "hd/core_improved_data.asm",
+"line": 281,
+"text": ".byte 0x02, 0x0B                            // node 261: control.not0 = not decode.nand17",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11317,
+"hex": "030901",
+"file": "hd/core_improved_data.asm",
+"line": 282,
+"text": ".byte 0x03, 0x09, 0x01                      // node 262: control.and2 = and decode.nand20 control.not0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11320,
+"hex": "030801",
+"file": "hd/core_improved_data.asm",
+"line": 283,
+"text": ".byte 0x03, 0x08, 0x01                      // node 264: control.and3 = and decode.nand23 control.and2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11323,
+"hex": "020a",
+"file": "hd/core_improved_data.asm",
+"line": 284,
+"text": ".byte 0x02, 0x0A                            // node 266: control.not1 = not decode.nand23",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11325,
+"hex": "02fdd200",
+"file": "hd/core_improved_data.asm",
+"line": 285,
+"text": ".byte 0x02, 0xFD, 0xD2, 0x00                // node 267: control.not2 = not reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11329,
+"hex": "040803",
+"file": "hd/core_improved_data.asm",
+"line": 286,
+"text": ".byte 0x04, 0x08, 0x03                      // node 268: control.or0 = or control.and1 control.and3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11332,
+"hex": "0201",
+"file": "hd/core_improved_data.asm",
+"line": 287,
+"text": ".byte 0x02, 0x01                            // node 271: control.not3 = not control.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11334,
+"hex": "03fdde0001",
+"file": "hd/core_improved_data.asm",
+"line": 288,
+"text": ".byte 0x03, 0xFD, 0xDE, 0x00, 0x01          // node 272: control.and4 = and st.1 control.not3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11339,
+"hex": "04fddd0001",
+"file": "hd/core_improved_data.asm",
+"line": 289,
+"text": ".byte 0x04, 0xFD, 0xDD, 0x00, 0x01          // node 274: control.or1 = or st.4 control.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11344,
+"hex": "04fde20001",
+"file": "hd/core_improved_data.asm",
+"line": 290,
+"text": ".byte 0x04, 0xFD, 0xE2, 0x00, 0x01          // node 277: control.or2 = or st.2 control.or1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11349,
+"hex": "04fddf0001",
+"file": "hd/core_improved_data.asm",
+"line": 291,
+"text": ".byte 0x04, 0xFD, 0xDF, 0x00, 0x01          // node 280: control.or3 = or reset control.or2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11354,
+"hex": "0310fdea00",
+"file": "hd/core_improved_data.asm",
+"line": 292,
+"text": ".byte 0x03, 0x10, 0xFD, 0xEA, 0x00          // node 283: control.and5 = and control.not2 st.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11359,
+"hex": "03fdeb0019",
+"file": "hd/core_improved_data.asm",
+"line": 293,
+"text": ".byte 0x03, 0xFD, 0xEB, 0x00, 0x19          // node 285: control.and6 = and st.1 control.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11364,
+"hex": "031401",
+"file": "hd/core_improved_data.asm",
+"line": 294,
+"text": ".byte 0x03, 0x14, 0x01                      // node 287: control.and7 = and control.not2 control.and6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11367,
+"hex": "03fdef0018",
+"file": "hd/core_improved_data.asm",
+"line": 295,
+"text": ".byte 0x03, 0xFD, 0xEF, 0x00, 0x18          // node 289: control.and8 = and st.1 control.and3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11372,
+"hex": "031801",
+"file": "hd/core_improved_data.asm",
+"line": 296,
+"text": ".byte 0x03, 0x18, 0x01                      // node 291: control.and9 = and control.not2 control.and8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11375,
+"hex": "031afdf100",
+"file": "hd/core_improved_data.asm",
+"line": 297,
+"text": ".byte 0x03, 0x1A, 0xFD, 0xF1, 0x00          // node 293: control.and10 = and control.not2 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11380,
+"hex": "06fd19013cfdf700",
+"file": "hd/core_improved_data.asm",
+"line": 298,
+"text": ".byte 0x06, 0xFD, 0x19, 0x01, 0x3C, 0xFD, 0xF7, 0x00// node 295: alu.mux0 = mux a.0 decode.nand2 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11388,
+"hex": "06fd1c013dfdfb00",
+"file": "hd/core_improved_data.asm",
+"line": 299,
+"text": ".byte 0x06, 0xFD, 0x1C, 0x01, 0x3D, 0xFD, 0xFB, 0x00// node 299: alu.mux1 = mux a.1 decode.nand5 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11396,
+"hex": "06fd1f013efdff00",
+"file": "hd/core_improved_data.asm",
+"line": 300,
+"text": ".byte 0x06, 0xFD, 0x1F, 0x01, 0x3E, 0xFD, 0xFF, 0x00// node 303: alu.mux2 = mux a.2 decode.nand8 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11404,
+"hex": "06fd22013ffd0301",
+"file": "hd/core_improved_data.asm",
+"line": 301,
+"text": ".byte 0x06, 0xFD, 0x22, 0x01, 0x3F, 0xFD, 0x03, 0x01// node 307: alu.mux3 = mux a.3 decode.nand11 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11412,
+"hex": "06fd250140fd0701",
+"file": "hd/core_improved_data.asm",
+"line": 302,
+"text": ".byte 0x06, 0xFD, 0x25, 0x01, 0x40, 0xFD, 0x07, 0x01// node 311: alu.mux4 = mux a.4 decode.nand14 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11420,
+"hex": "06fd280141fd0b01",
+"file": "hd/core_improved_data.asm",
+"line": 303,
+"text": ".byte 0x06, 0xFD, 0x28, 0x01, 0x41, 0xFD, 0x0B, 0x01// node 315: alu.mux5 = mux a.5 decode.nand17 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11428,
+"hex": "06fd2b0142fd0f01",
+"file": "hd/core_improved_data.asm",
+"line": 304,
+"text": ".byte 0x06, 0xFD, 0x2B, 0x01, 0x42, 0xFD, 0x0F, 0x01// node 319: alu.mux6 = mux a.6 decode.nand20 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11436,
+"hex": "06fd2e0143fd1301",
+"file": "hd/core_improved_data.asm",
+"line": 305,
+"text": ".byte 0x06, 0xFD, 0x2E, 0x01, 0x43, 0xFD, 0x13, 0x01// node 323: alu.mux7 = mux a.7 decode.nand23 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11444,
+"hex": "06fd2b01fd0f01fd1801",
+"file": "hd/core_improved_data.asm",
+"line": 306,
+"text": ".byte 0x06, 0xFD, 0x2B, 0x01, 0xFD, 0x0F, 0x01, 0xFD, 0x18, 0x01// node 327: alu.mux8 = mux d.0 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11454,
+"hex": "06fd2e01fd1301fd1c01",
+"file": "hd/core_improved_data.asm",
+"line": 307,
+"text": ".byte 0x06, 0xFD, 0x2E, 0x01, 0xFD, 0x13, 0x01, 0xFD, 0x1C, 0x01// node 331: alu.mux9 = mux d.1 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11464,
+"hex": "06fd3101fd1701fd2001",
+"file": "hd/core_improved_data.asm",
+"line": 308,
+"text": ".byte 0x06, 0xFD, 0x31, 0x01, 0xFD, 0x17, 0x01, 0xFD, 0x20, 0x01// node 335: alu.mux10 = mux d.2 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11474,
+"hex": "06fd3401fd1b01fd2401",
+"file": "hd/core_improved_data.asm",
+"line": 309,
+"text": ".byte 0x06, 0xFD, 0x34, 0x01, 0xFD, 0x1B, 0x01, 0xFD, 0x24, 0x01// node 339: alu.mux11 = mux d.3 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11484,
+"hex": "06fd3701fd1f01fd2801",
+"file": "hd/core_improved_data.asm",
+"line": 310,
+"text": ".byte 0x06, 0xFD, 0x37, 0x01, 0xFD, 0x1F, 0x01, 0xFD, 0x28, 0x01// node 343: alu.mux12 = mux d.4 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11494,
+"hex": "06fd3a01fd2301fd2c01",
+"file": "hd/core_improved_data.asm",
+"line": 311,
+"text": ".byte 0x06, 0xFD, 0x3A, 0x01, 0xFD, 0x23, 0x01, 0xFD, 0x2C, 0x01// node 347: alu.mux13 = mux d.5 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11504,
+"hex": "06fd3d01fd2701fd3001",
+"file": "hd/core_improved_data.asm",
+"line": 312,
+"text": ".byte 0x06, 0xFD, 0x3D, 0x01, 0xFD, 0x27, 0x01, 0xFD, 0x30, 0x01// node 351: alu.mux14 = mux d.6 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11514,
+"hex": "06fd4001fd2b01fd3401",
+"file": "hd/core_improved_data.asm",
+"line": 313,
+"text": ".byte 0x06, 0xFD, 0x40, 0x01, 0xFD, 0x2B, 0x01, 0xFD, 0x34, 0x01// node 355: alu.mux15 = mux d.7 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11524,
+"hex": "021d",
+"file": "hd/core_improved_data.asm",
+"line": 314,
+"text": ".byte 0x02, 0x1D                            // node 359: alu.not0 = not alu.mux8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11526,
+"hex": "021a",
+"file": "hd/core_improved_data.asm",
+"line": 315,
+"text": ".byte 0x02, 0x1A                            // node 360: alu.not1 = not alu.mux9",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11528,
+"hex": "0217",
+"file": "hd/core_improved_data.asm",
+"line": 316,
+"text": ".byte 0x02, 0x17                            // node 361: alu.not2 = not alu.mux10",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11530,
+"hex": "0214",
+"file": "hd/core_improved_data.asm",
+"line": 317,
+"text": ".byte 0x02, 0x14                            // node 362: alu.not3 = not alu.mux11",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11532,
+"hex": "0211",
+"file": "hd/core_improved_data.asm",
+"line": 318,
+"text": ".byte 0x02, 0x11                            // node 363: alu.not4 = not alu.mux12",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11534,
+"hex": "020e",
+"file": "hd/core_improved_data.asm",
+"line": 319,
+"text": ".byte 0x02, 0x0E                            // node 364: alu.not5 = not alu.mux13",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11536,
+"hex": "020b",
+"file": "hd/core_improved_data.asm",
+"line": 320,
+"text": ".byte 0x02, 0x0B                            // node 365: alu.not6 = not alu.mux14",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11538,
+"hex": "0208",
+"file": "hd/core_improved_data.asm",
+"line": 321,
+"text": ".byte 0x02, 0x08                            // node 366: alu.not7 = not alu.mux15",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11540,
+"hex": "062508fd4101",
+"file": "hd/core_improved_data.asm",
+"line": 322,
+"text": ".byte 0x06, 0x25, 0x08, 0xFD, 0x41, 0x01    // node 367: alu.mux16 = mux alu.mux8 alu.not0 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11546,
+"hex": "06250bfd4501",
+"file": "hd/core_improved_data.asm",
+"line": 323,
+"text": ".byte 0x06, 0x25, 0x0B, 0xFD, 0x45, 0x01    // node 371: alu.mux17 = mux alu.mux9 alu.not1 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11552,
+"hex": "06250efd4901",
+"file": "hd/core_improved_data.asm",
+"line": 324,
+"text": ".byte 0x06, 0x25, 0x0E, 0xFD, 0x49, 0x01    // node 375: alu.mux18 = mux alu.mux10 alu.not2 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11558,
+"hex": "062511fd4d01",
+"file": "hd/core_improved_data.asm",
+"line": 325,
+"text": ".byte 0x06, 0x25, 0x11, 0xFD, 0x4D, 0x01    // node 379: alu.mux19 = mux alu.mux11 alu.not3 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11564,
+"hex": "062514fd5101",
+"file": "hd/core_improved_data.asm",
+"line": 326,
+"text": ".byte 0x06, 0x25, 0x14, 0xFD, 0x51, 0x01    // node 383: alu.mux20 = mux alu.mux12 alu.not4 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11570,
+"hex": "062517fd5501",
+"file": "hd/core_improved_data.asm",
+"line": 327,
+"text": ".byte 0x06, 0x25, 0x17, 0xFD, 0x55, 0x01    // node 387: alu.mux21 = mux alu.mux13 alu.not5 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11576,
+"hex": "06251afd5901",
+"file": "hd/core_improved_data.asm",
+"line": 328,
+"text": ".byte 0x06, 0x25, 0x1A, 0xFD, 0x59, 0x01    // node 391: alu.mux22 = mux alu.mux14 alu.not6 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11582,
+"hex": "06251dfd5d01",
+"file": "hd/core_improved_data.asm",
+"line": 329,
+"text": ".byte 0x06, 0x25, 0x1D, 0xFD, 0x5D, 0x01    // node 395: alu.mux23 = mux alu.mux15 alu.not7 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11588,
+"hex": "0665fd5701fd6201",
+"file": "hd/core_improved_data.asm",
+"line": 330,
+"text": ".byte 0x06, 0x65, 0xFD, 0x57, 0x01, 0xFD, 0x62, 0x01// node 399: alu.mux24 = mux alu.mux0 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11596,
+"hex": "0665fd5b01fd6601",
+"file": "hd/core_improved_data.asm",
+"line": 331,
+"text": ".byte 0x06, 0x65, 0xFD, 0x5B, 0x01, 0xFD, 0x66, 0x01// node 403: alu.mux25 = mux alu.mux1 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11604,
+"hex": "0665fd5f01fd6a01",
+"file": "hd/core_improved_data.asm",
+"line": 332,
+"text": ".byte 0x06, 0x65, 0xFD, 0x5F, 0x01, 0xFD, 0x6A, 0x01// node 407: alu.mux26 = mux alu.mux2 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11612,
+"hex": "0665fd6301fd6e01",
+"file": "hd/core_improved_data.asm",
+"line": 333,
+"text": ".byte 0x06, 0x65, 0xFD, 0x63, 0x01, 0xFD, 0x6E, 0x01// node 411: alu.mux27 = mux alu.mux3 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11620,
+"hex": "0665fd6701fd7201",
+"file": "hd/core_improved_data.asm",
+"line": 334,
+"text": ".byte 0x06, 0x65, 0xFD, 0x67, 0x01, 0xFD, 0x72, 0x01// node 415: alu.mux28 = mux alu.mux4 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11628,
+"hex": "0665fd6b01fd7601",
+"file": "hd/core_improved_data.asm",
+"line": 335,
+"text": ".byte 0x06, 0x65, 0xFD, 0x6B, 0x01, 0xFD, 0x76, 0x01// node 419: alu.mux29 = mux alu.mux5 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11636,
+"hex": "0665fd6f01fd7a01",
+"file": "hd/core_improved_data.asm",
+"line": 336,
+"text": ".byte 0x06, 0x65, 0xFD, 0x6F, 0x01, 0xFD, 0x7A, 0x01// node 423: alu.mux30 = mux alu.mux6 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11644,
+"hex": "0665fd7301fd7e01",
+"file": "hd/core_improved_data.asm",
+"line": 337,
+"text": ".byte 0x06, 0x65, 0xFD, 0x73, 0x01, 0xFD, 0x7E, 0x01// node 427: alu.mux31 = mux alu.mux7 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11652,
+"hex": "021d",
+"file": "hd/core_improved_data.asm",
+"line": 338,
+"text": ".byte 0x02, 0x1D                            // node 431: alu.not8 = not alu.mux24",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11654,
+"hex": "021a",
+"file": "hd/core_improved_data.asm",
+"line": 339,
+"text": ".byte 0x02, 0x1A                            // node 432: alu.not9 = not alu.mux25",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11656,
+"hex": "0217",
+"file": "hd/core_improved_data.asm",
+"line": 340,
+"text": ".byte 0x02, 0x17                            // node 433: alu.not10 = not alu.mux26",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11658,
+"hex": "0214",
+"file": "hd/core_improved_data.asm",
+"line": 341,
+"text": ".byte 0x02, 0x14                            // node 434: alu.not11 = not alu.mux27",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11660,
+"hex": "0211",
+"file": "hd/core_improved_data.asm",
+"line": 342,
+"text": ".byte 0x02, 0x11                            // node 435: alu.not12 = not alu.mux28",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11662,
+"hex": "020e",
+"file": "hd/core_improved_data.asm",
+"line": 343,
+"text": ".byte 0x02, 0x0E                            // node 436: alu.not13 = not alu.mux29",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11664,
+"hex": "020b",
+"file": "hd/core_improved_data.asm",
+"line": 344,
+"text": ".byte 0x02, 0x0B                            // node 437: alu.not14 = not alu.mux30",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11666,
+"hex": "0208",
+"file": "hd/core_improved_data.asm",
+"line": 345,
+"text": ".byte 0x02, 0x08                            // node 438: alu.not15 = not alu.mux31",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11668,
+"hex": "062508fd8b01",
+"file": "hd/core_improved_data.asm",
+"line": 346,
+"text": ".byte 0x06, 0x25, 0x08, 0xFD, 0x8B, 0x01    // node 439: alu.mux32 = mux alu.mux24 alu.not8 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11674,
+"hex": "06250bfd8f01",
+"file": "hd/core_improved_data.asm",
+"line": 347,
+"text": ".byte 0x06, 0x25, 0x0B, 0xFD, 0x8F, 0x01    // node 443: alu.mux33 = mux alu.mux25 alu.not9 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11680,
+"hex": "06250efd9301",
+"file": "hd/core_improved_data.asm",
+"line": 348,
+"text": ".byte 0x06, 0x25, 0x0E, 0xFD, 0x93, 0x01    // node 447: alu.mux34 = mux alu.mux26 alu.not10 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11686,
+"hex": "062511fd9701",
+"file": "hd/core_improved_data.asm",
+"line": 349,
+"text": ".byte 0x06, 0x25, 0x11, 0xFD, 0x97, 0x01    // node 451: alu.mux35 = mux alu.mux27 alu.not11 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11692,
+"hex": "062514fd9b01",
+"file": "hd/core_improved_data.asm",
+"line": 350,
+"text": ".byte 0x06, 0x25, 0x14, 0xFD, 0x9B, 0x01    // node 455: alu.mux36 = mux alu.mux28 alu.not12 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11698,
+"hex": "062517fd9f01",
+"file": "hd/core_improved_data.asm",
+"line": 351,
+"text": ".byte 0x06, 0x25, 0x17, 0xFD, 0x9F, 0x01    // node 459: alu.mux37 = mux alu.mux29 alu.not13 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11704,
+"hex": "06251afda301",
+"file": "hd/core_improved_data.asm",
+"line": 352,
+"text": ".byte 0x06, 0x25, 0x1A, 0xFD, 0xA3, 0x01    // node 463: alu.mux38 = mux alu.mux30 alu.not14 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11710,
+"hex": "06251dfda701",
+"file": "hd/core_improved_data.asm",
+"line": 353,
+"text": ".byte 0x06, 0x25, 0x1D, 0xFD, 0xA7, 0x01    // node 467: alu.mux39 = mux alu.mux31 alu.not15 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11716,
+"hex": "08651dfd9f01",
+"file": "hd/core_improved_data.asm",
+"line": 354,
+"text": ".byte 0x08, 0x65, 0x1D, 0xFD, 0x9F, 0x01    // node 471: alu.fa0 = fa alu.mux16 alu.mux32 zero",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11722,
+"hex": "086a2201",
+"file": "hd/core_improved_data.asm",
+"line": 355,
+"text": ".byte 0x08, 0x6A, 0x22, 0x01                // node 480: alu.fa1 = fa alu.mux17 alu.mux33 alu.fa0.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11726,
+"hex": "086f2701",
+"file": "hd/core_improved_data.asm",
+"line": 356,
+"text": ".byte 0x08, 0x6F, 0x27, 0x01                // node 489: alu.fa2 = fa alu.mux18 alu.mux34 alu.fa1.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11730,
+"hex": "08742c01",
+"file": "hd/core_improved_data.asm",
+"line": 357,
+"text": ".byte 0x08, 0x74, 0x2C, 0x01                // node 498: alu.fa3 = fa alu.mux19 alu.mux35 alu.fa2.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11734,
+"hex": "08793101",
+"file": "hd/core_improved_data.asm",
+"line": 358,
+"text": ".byte 0x08, 0x79, 0x31, 0x01                // node 507: alu.fa4 = fa alu.mux20 alu.mux36 alu.fa3.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11738,
+"hex": "087e3601",
+"file": "hd/core_improved_data.asm",
+"line": 359,
+"text": ".byte 0x08, 0x7E, 0x36, 0x01                // node 516: alu.fa5 = fa alu.mux21 alu.mux37 alu.fa4.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11742,
+"hex": "08fd83003b01",
+"file": "hd/core_improved_data.asm",
+"line": 360,
+"text": ".byte 0x08, 0xFD, 0x83, 0x00, 0x3B, 0x01    // node 525: alu.fa6 = fa alu.mux22 alu.mux38 alu.fa5.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11748,
+"hex": "08fd88004001",
+"file": "hd/core_improved_data.asm",
+"line": 361,
+"text": ".byte 0x08, 0xFD, 0x88, 0x00, 0x40, 0x01    // node 534: alu.fa7 = fa alu.mux23 alu.mux39 alu.fa6.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11754,
+"hex": "03fdad0065",
+"file": "hd/core_improved_data.asm",
+"line": 362,
+"text": ".byte 0x03, 0xFD, 0xAD, 0x00, 0x65          // node 543: alu.and0 = and alu.mux16 alu.mux32",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11759,
+"hex": "03fdab0063",
+"file": "hd/core_improved_data.asm",
+"line": 363,
+"text": ".byte 0x03, 0xFD, 0xAB, 0x00, 0x63          // node 545: alu.and1 = and alu.mux17 alu.mux33",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11764,
+"hex": "03fda90061",
+"file": "hd/core_improved_data.asm",
+"line": 364,
+"text": ".byte 0x03, 0xFD, 0xA9, 0x00, 0x61          // node 547: alu.and2 = and alu.mux18 alu.mux34",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11769,
+"hex": "03fda7005f",
+"file": "hd/core_improved_data.asm",
+"line": 365,
+"text": ".byte 0x03, 0xFD, 0xA7, 0x00, 0x5F          // node 549: alu.and3 = and alu.mux19 alu.mux35",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11774,
+"hex": "03fda5005d",
+"file": "hd/core_improved_data.asm",
+"line": 366,
+"text": ".byte 0x03, 0xFD, 0xA5, 0x00, 0x5D          // node 551: alu.and4 = and alu.mux20 alu.mux36",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11779,
+"hex": "03fda3005b",
+"file": "hd/core_improved_data.asm",
+"line": 367,
+"text": ".byte 0x03, 0xFD, 0xA3, 0x00, 0x5B          // node 553: alu.and5 = and alu.mux21 alu.mux37",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11784,
+"hex": "03fda10059",
+"file": "hd/core_improved_data.asm",
+"line": 368,
+"text": ".byte 0x03, 0xFD, 0xA1, 0x00, 0x59          // node 555: alu.and6 = and alu.mux22 alu.mux38",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11789,
+"hex": "03fd9f0057",
+"file": "hd/core_improved_data.asm",
+"line": 369,
+"text": ".byte 0x03, 0xFD, 0x9F, 0x00, 0x57          // node 557: alu.and7 = and alu.mux23 alu.mux39",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11794,
+"hex": "060f51fd0402",
+"file": "hd/core_improved_data.asm",
+"line": 370,
+"text": ".byte 0x06, 0x0F, 0x51, 0xFD, 0x04, 0x02    // node 559: alu.mux40 = mux alu.and0 alu.fa0.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11800,
+"hex": "06114cfd0802",
+"file": "hd/core_improved_data.asm",
+"line": 371,
+"text": ".byte 0x06, 0x11, 0x4C, 0xFD, 0x08, 0x02    // node 563: alu.mux41 = mux alu.and1 alu.fa1.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11806,
+"hex": "061347fd0c02",
+"file": "hd/core_improved_data.asm",
+"line": 372,
+"text": ".byte 0x06, 0x13, 0x47, 0xFD, 0x0C, 0x02    // node 567: alu.mux42 = mux alu.and2 alu.fa2.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11812,
+"hex": "061542fd1002",
+"file": "hd/core_improved_data.asm",
+"line": 373,
+"text": ".byte 0x06, 0x15, 0x42, 0xFD, 0x10, 0x02    // node 571: alu.mux43 = mux alu.and3 alu.fa3.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11818,
+"hex": "06173dfd1402",
+"file": "hd/core_improved_data.asm",
+"line": 374,
+"text": ".byte 0x06, 0x17, 0x3D, 0xFD, 0x14, 0x02    // node 575: alu.mux44 = mux alu.and4 alu.fa4.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11824,
+"hex": "061938fd1802",
+"file": "hd/core_improved_data.asm",
+"line": 375,
+"text": ".byte 0x06, 0x19, 0x38, 0xFD, 0x18, 0x02    // node 579: alu.mux45 = mux alu.and5 alu.fa5.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11830,
+"hex": "061b33fd1c02",
+"file": "hd/core_improved_data.asm",
+"line": 376,
+"text": ".byte 0x06, 0x1B, 0x33, 0xFD, 0x1C, 0x02    // node 583: alu.mux46 = mux alu.and6 alu.fa6.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11836,
+"hex": "061d2efd2002",
+"file": "hd/core_improved_data.asm",
+"line": 377,
+"text": ".byte 0x06, 0x1D, 0x2E, 0xFD, 0x20, 0x02    // node 587: alu.mux47 = mux alu.and7 alu.fa7.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11842,
+"hex": "021d",
+"file": "hd/core_improved_data.asm",
+"line": 378,
+"text": ".byte 0x02, 0x1D                            // node 591: alu.not16 = not alu.mux40",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11844,
+"hex": "021a",
+"file": "hd/core_improved_data.asm",
+"line": 379,
+"text": ".byte 0x02, 0x1A                            // node 592: alu.not17 = not alu.mux41",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11846,
+"hex": "0217",
+"file": "hd/core_improved_data.asm",
+"line": 380,
+"text": ".byte 0x02, 0x17                            // node 593: alu.not18 = not alu.mux42",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11848,
+"hex": "0214",
+"file": "hd/core_improved_data.asm",
+"line": 381,
+"text": ".byte 0x02, 0x14                            // node 594: alu.not19 = not alu.mux43",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11850,
+"hex": "0211",
+"file": "hd/core_improved_data.asm",
+"line": 382,
+"text": ".byte 0x02, 0x11                            // node 595: alu.not20 = not alu.mux44",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11852,
+"hex": "020e",
+"file": "hd/core_improved_data.asm",
+"line": 383,
+"text": ".byte 0x02, 0x0E                            // node 596: alu.not21 = not alu.mux45",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11854,
+"hex": "020b",
+"file": "hd/core_improved_data.asm",
+"line": 384,
+"text": ".byte 0x02, 0x0B                            // node 597: alu.not22 = not alu.mux46",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11856,
+"hex": "0208",
+"file": "hd/core_improved_data.asm",
+"line": 385,
+"text": ".byte 0x02, 0x08                            // node 598: alu.not23 = not alu.mux47",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11858,
+"hex": "062508fd2d02",
+"file": "hd/core_improved_data.asm",
+"line": 386,
+"text": ".byte 0x06, 0x25, 0x08, 0xFD, 0x2D, 0x02    // node 599: alu.mux48 = mux alu.mux40 alu.not16 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11864,
+"hex": "06250bfd3102",
+"file": "hd/core_improved_data.asm",
+"line": 387,
+"text": ".byte 0x06, 0x25, 0x0B, 0xFD, 0x31, 0x02    // node 603: alu.mux49 = mux alu.mux41 alu.not17 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11870,
+"hex": "06250efd3502",
+"file": "hd/core_improved_data.asm",
+"line": 388,
+"text": ".byte 0x06, 0x25, 0x0E, 0xFD, 0x35, 0x02    // node 607: alu.mux50 = mux alu.mux42 alu.not18 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11876,
+"hex": "062511fd3902",
+"file": "hd/core_improved_data.asm",
+"line": 389,
+"text": ".byte 0x06, 0x25, 0x11, 0xFD, 0x39, 0x02    // node 611: alu.mux51 = mux alu.mux43 alu.not19 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11882,
+"hex": "062514fd3d02",
+"file": "hd/core_improved_data.asm",
+"line": 390,
+"text": ".byte 0x06, 0x25, 0x14, 0xFD, 0x3D, 0x02    // node 615: alu.mux52 = mux alu.mux44 alu.not20 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11888,
+"hex": "062517fd4102",
+"file": "hd/core_improved_data.asm",
+"line": 391,
+"text": ".byte 0x06, 0x25, 0x17, 0xFD, 0x41, 0x02    // node 619: alu.mux53 = mux alu.mux45 alu.not21 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11894,
+"hex": "06251afd4502",
+"file": "hd/core_improved_data.asm",
+"line": 392,
+"text": ".byte 0x06, 0x25, 0x1A, 0xFD, 0x45, 0x02    // node 623: alu.mux54 = mux alu.mux46 alu.not22 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11900,
+"hex": "06251dfd4902",
+"file": "hd/core_improved_data.asm",
+"line": 393,
+"text": ".byte 0x06, 0x25, 0x1D, 0xFD, 0x49, 0x02    // node 627: alu.mux55 = mux alu.mux47 alu.not23 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11906,
+"hex": "041d19",
+"file": "hd/core_improved_data.asm",
+"line": 394,
+"text": ".byte 0x04, 0x1D, 0x19                      // node 631: alu.or0 = or alu.mux48 alu.mux49",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11909,
+"hex": "041814",
+"file": "hd/core_improved_data.asm",
+"line": 395,
+"text": ".byte 0x04, 0x18, 0x14                      // node 634: alu.or1 = or alu.mux50 alu.mux51",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11912,
+"hex": "04130f",
+"file": "hd/core_improved_data.asm",
+"line": 396,
+"text": ".byte 0x04, 0x13, 0x0F                      // node 637: alu.or2 = or alu.mux52 alu.mux53",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11915,
+"hex": "040e0a",
+"file": "hd/core_improved_data.asm",
+"line": 397,
+"text": ".byte 0x04, 0x0E, 0x0A                      // node 640: alu.or3 = or alu.mux54 alu.mux55",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11918,
+"hex": "040a07",
+"file": "hd/core_improved_data.asm",
+"line": 398,
+"text": ".byte 0x04, 0x0A, 0x07                      // node 643: alu.or4 = or alu.or0 alu.or1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11921,
+"hex": "040704",
+"file": "hd/core_improved_data.asm",
+"line": 399,
+"text": ".byte 0x04, 0x07, 0x04                      // node 646: alu.or5 = or alu.or2 alu.or3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11924,
+"hex": "040401",
+"file": "hd/core_improved_data.asm",
+"line": 400,
+"text": ".byte 0x04, 0x04, 0x01                      // node 649: alu.or6 = or alu.or4 alu.or5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11927,
+"hex": "0201",
+"file": "hd/core_improved_data.asm",
+"line": 401,
+"text": ".byte 0x02, 0x01                            // node 652: alu.not24 = not alu.or6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11929,
+"hex": "0217",
+"file": "hd/core_improved_data.asm",
+"line": 402,
+"text": ".byte 0x02, 0x17                            // node 653: pc.not0 = not alu.mux55",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11931,
+"hex": "0202",
+"file": "hd/core_improved_data.asm",
+"line": 403,
+"text": ".byte 0x02, 0x02                            // node 654: pc.not1 = not alu.not24",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11933,
+"hex": "030201",
+"file": "hd/core_improved_data.asm",
+"line": 404,
+"text": ".byte 0x03, 0x02, 0x01                      // node 655: pc.and0 = and pc.not0 pc.not1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11936,
+"hex": "03fd6b021b",
+"file": "hd/core_improved_data.asm",
+"line": 405,
+"text": ".byte 0x03, 0xFD, 0x6B, 0x02, 0x1B          // node 657: pc.and1 = and irlo.2 alu.mux55",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11941,
+"hex": "03fd6e0207",
+"file": "hd/core_improved_data.asm",
+"line": 406,
+"text": ".byte 0x03, 0xFD, 0x6E, 0x02, 0x07          // node 659: pc.and2 = and irlo.1 alu.not24",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11946,
+"hex": "040301",
+"file": "hd/core_improved_data.asm",
+"line": 407,
+"text": ".byte 0x04, 0x03, 0x01                      // node 661: pc.or0 = or pc.and1 pc.and2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11949,
+"hex": "03fd740208",
+"file": "hd/core_improved_data.asm",
+"line": 408,
+"text": ".byte 0x03, 0xFD, 0x74, 0x02, 0x08          // node 664: pc.and3 = and irlo.0 pc.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11954,
+"hex": "040301",
+"file": "hd/core_improved_data.asm",
+"line": 409,
+"text": ".byte 0x04, 0x03, 0x01                      // node 666: pc.or1 = or pc.or0 pc.and3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11957,
+"hex": "03fd6a0201",
+"file": "hd/core_improved_data.asm",
+"line": 410,
+"text": ".byte 0x03, 0xFD, 0x6A, 0x02, 0x01          // node 669: pc.and4 = and st.2 pc.or1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11962,
+"hex": "06fd9f02fd910201",
+"file": "hd/core_improved_data.asm",
+"line": 411,
+"text": ".byte 0x06, 0xFD, 0x9F, 0x02, 0xFD, 0x91, 0x02, 0x01// node 671: pc.mux0 = mux pc.0 a.0 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11970,
+"hex": "06fda202fd940205",
+"file": "hd/core_improved_data.asm",
+"line": 412,
+"text": ".byte 0x06, 0xFD, 0xA2, 0x02, 0xFD, 0x94, 0x02, 0x05// node 675: pc.mux1 = mux pc.1 a.1 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11978,
+"hex": "06fda502fd970209",
+"file": "hd/core_improved_data.asm",
+"line": 413,
+"text": ".byte 0x06, 0xFD, 0xA5, 0x02, 0xFD, 0x97, 0x02, 0x09// node 679: pc.mux2 = mux pc.2 a.2 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11986,
+"hex": "06fda802fd9a020d",
+"file": "hd/core_improved_data.asm",
+"line": 414,
+"text": ".byte 0x06, 0xFD, 0xA8, 0x02, 0xFD, 0x9A, 0x02, 0x0D// node 683: pc.mux3 = mux pc.3 a.3 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 11994,
+"hex": "06fdab02fd9d0211",
+"file": "hd/core_improved_data.asm",
+"line": 415,
+"text": ".byte 0x06, 0xFD, 0xAB, 0x02, 0xFD, 0x9D, 0x02, 0x11// node 687: pc.mux4 = mux pc.4 a.4 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12002,
+"hex": "06fdae02fda00215",
+"file": "hd/core_improved_data.asm",
+"line": 416,
+"text": ".byte 0x06, 0xFD, 0xAE, 0x02, 0xFD, 0xA0, 0x02, 0x15// node 691: pc.mux5 = mux pc.5 a.5 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12010,
+"hex": "06fdb102fda30219",
+"file": "hd/core_improved_data.asm",
+"line": 417,
+"text": ".byte 0x06, 0xFD, 0xB1, 0x02, 0xFD, 0xA3, 0x02, 0x19// node 695: pc.mux6 = mux pc.6 a.6 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12018,
+"hex": "06fdb402fda6021d",
+"file": "hd/core_improved_data.asm",
+"line": 418,
+"text": ".byte 0x06, 0xFD, 0xB4, 0x02, 0xFD, 0xA6, 0x02, 0x1D// node 699: pc.mux7 = mux pc.7 a.7 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12026,
+"hex": "06fdb702fda90221",
+"file": "hd/core_improved_data.asm",
+"line": 419,
+"text": ".byte 0x06, 0xFD, 0xB7, 0x02, 0xFD, 0xA9, 0x02, 0x21// node 703: pc.mux8 = mux pc.8 a.8 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12034,
+"hex": "06fdba02fdac0225",
+"file": "hd/core_improved_data.asm",
+"line": 420,
+"text": ".byte 0x06, 0xFD, 0xBA, 0x02, 0xFD, 0xAC, 0x02, 0x25// node 707: pc.mux9 = mux pc.9 a.9 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12042,
+"hex": "06fdbd02fdaf0229",
+"file": "hd/core_improved_data.asm",
+"line": 421,
+"text": ".byte 0x06, 0xFD, 0xBD, 0x02, 0xFD, 0xAF, 0x02, 0x29// node 711: pc.mux10 = mux pc.10 a.10 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12050,
+"hex": "06fdc002fdb2022d",
+"file": "hd/core_improved_data.asm",
+"line": 422,
+"text": ".byte 0x06, 0xFD, 0xC0, 0x02, 0xFD, 0xB2, 0x02, 0x2D// node 715: pc.mux11 = mux pc.11 a.11 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12058,
+"hex": "06fdc302fdb50231",
+"file": "hd/core_improved_data.asm",
+"line": 423,
+"text": ".byte 0x06, 0xFD, 0xC3, 0x02, 0xFD, 0xB5, 0x02, 0x31// node 719: pc.mux12 = mux pc.12 a.12 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12066,
+"hex": "06fdc602fdb80235",
+"file": "hd/core_improved_data.asm",
+"line": 424,
+"text": ".byte 0x06, 0xFD, 0xC6, 0x02, 0xFD, 0xB8, 0x02, 0x35// node 723: pc.mux13 = mux pc.13 a.13 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12074,
+"hex": "0635fd5f02fd9b02",
+"file": "hd/core_improved_data.asm",
+"line": 425,
+"text": ".byte 0x06, 0x35, 0xFD, 0x5F, 0x02, 0xFD, 0x9B, 0x02// node 727: pc.mux14 = mux pc.mux0 addr.ha0.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12082,
+"hex": "0635fd5e02fd9f02",
+"file": "hd/core_improved_data.asm",
+"line": 426,
+"text": ".byte 0x06, 0x35, 0xFD, 0x5E, 0x02, 0xFD, 0x9F, 0x02// node 731: pc.mux15 = mux pc.mux1 addr.ha1.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12090,
+"hex": "0635fd5d02fda302",
+"file": "hd/core_improved_data.asm",
+"line": 427,
+"text": ".byte 0x06, 0x35, 0xFD, 0x5D, 0x02, 0xFD, 0xA3, 0x02// node 735: pc.mux16 = mux pc.mux2 addr.ha2.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12098,
+"hex": "0635fd5c02fda702",
+"file": "hd/core_improved_data.asm",
+"line": 428,
+"text": ".byte 0x06, 0x35, 0xFD, 0x5C, 0x02, 0xFD, 0xA7, 0x02// node 739: pc.mux17 = mux pc.mux3 addr.ha3.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12106,
+"hex": "0635fd5b02fdab02",
+"file": "hd/core_improved_data.asm",
+"line": 429,
+"text": ".byte 0x06, 0x35, 0xFD, 0x5B, 0x02, 0xFD, 0xAB, 0x02// node 743: pc.mux18 = mux pc.mux4 addr.ha4.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12114,
+"hex": "0635fd5a02fdaf02",
+"file": "hd/core_improved_data.asm",
+"line": 430,
+"text": ".byte 0x06, 0x35, 0xFD, 0x5A, 0x02, 0xFD, 0xAF, 0x02// node 747: pc.mux19 = mux pc.mux5 addr.ha5.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12122,
+"hex": "0635fd5902fdb302",
+"file": "hd/core_improved_data.asm",
+"line": 431,
+"text": ".byte 0x06, 0x35, 0xFD, 0x59, 0x02, 0xFD, 0xB3, 0x02// node 751: pc.mux20 = mux pc.mux6 addr.ha6.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12130,
+"hex": "0635fd5802fdb702",
+"file": "hd/core_improved_data.asm",
+"line": 432,
+"text": ".byte 0x06, 0x35, 0xFD, 0x58, 0x02, 0xFD, 0xB7, 0x02// node 755: pc.mux21 = mux pc.mux7 addr.ha7.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12138,
+"hex": "0635fd5702fdbb02",
+"file": "hd/core_improved_data.asm",
+"line": 433,
+"text": ".byte 0x06, 0x35, 0xFD, 0x57, 0x02, 0xFD, 0xBB, 0x02// node 759: pc.mux22 = mux pc.mux8 addr.ha8.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12146,
+"hex": "0635fd5602fdbf02",
+"file": "hd/core_improved_data.asm",
+"line": 434,
+"text": ".byte 0x06, 0x35, 0xFD, 0x56, 0x02, 0xFD, 0xBF, 0x02// node 763: pc.mux23 = mux pc.mux9 addr.ha9.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12154,
+"hex": "0635fd5502fdc302",
+"file": "hd/core_improved_data.asm",
+"line": 435,
+"text": ".byte 0x06, 0x35, 0xFD, 0x55, 0x02, 0xFD, 0xC3, 0x02// node 767: pc.mux24 = mux pc.mux10 addr.ha10.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12162,
+"hex": "0635fd5402fdc702",
+"file": "hd/core_improved_data.asm",
+"line": 436,
+"text": ".byte 0x06, 0x35, 0xFD, 0x54, 0x02, 0xFD, 0xC7, 0x02// node 771: pc.mux25 = mux pc.mux11 addr.ha11.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12170,
+"hex": "0635fd5302fdcb02",
+"file": "hd/core_improved_data.asm",
+"line": 437,
+"text": ".byte 0x06, 0x35, 0xFD, 0x53, 0x02, 0xFD, 0xCB, 0x02// node 775: pc.mux26 = mux pc.mux12 addr.ha12.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12178,
+"hex": "0635fd5202fdcf02",
+"file": "hd/core_improved_data.asm",
+"line": 438,
+"text": ".byte 0x06, 0x35, 0xFD, 0x52, 0x02, 0xFD, 0xCF, 0x02// node 779: pc.mux27 = mux pc.mux13 addr.ha13.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12186,
+"hex": "0635fdd702fdd602",
+"file": "hd/core_improved_data.asm",
+"line": 439,
+"text": ".byte 0x06, 0x35, 0xFD, 0xD7, 0x02, 0xFD, 0xD6, 0x02// node 783: pc.mux28 = mux pc.mux14 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12194,
+"hex": "0635fddb02fdda02",
+"file": "hd/core_improved_data.asm",
+"line": 440,
+"text": ".byte 0x06, 0x35, 0xFD, 0xDB, 0x02, 0xFD, 0xDA, 0x02// node 787: pc.mux29 = mux pc.mux15 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12202,
+"hex": "0635fddf02fdde02",
+"file": "hd/core_improved_data.asm",
+"line": 441,
+"text": ".byte 0x06, 0x35, 0xFD, 0xDF, 0x02, 0xFD, 0xDE, 0x02// node 791: pc.mux30 = mux pc.mux16 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12210,
+"hex": "0635fde302fde202",
+"file": "hd/core_improved_data.asm",
+"line": 442,
+"text": ".byte 0x06, 0x35, 0xFD, 0xE3, 0x02, 0xFD, 0xE2, 0x02// node 795: pc.mux31 = mux pc.mux17 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12218,
+"hex": "0635fde702fde602",
+"file": "hd/core_improved_data.asm",
+"line": 443,
+"text": ".byte 0x06, 0x35, 0xFD, 0xE7, 0x02, 0xFD, 0xE6, 0x02// node 799: pc.mux32 = mux pc.mux18 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12226,
+"hex": "0635fdeb02fdea02",
+"file": "hd/core_improved_data.asm",
+"line": 444,
+"text": ".byte 0x06, 0x35, 0xFD, 0xEB, 0x02, 0xFD, 0xEA, 0x02// node 803: pc.mux33 = mux pc.mux19 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12234,
+"hex": "0635fdef02fdee02",
+"file": "hd/core_improved_data.asm",
+"line": 445,
+"text": ".byte 0x06, 0x35, 0xFD, 0xEF, 0x02, 0xFD, 0xEE, 0x02// node 807: pc.mux34 = mux pc.mux20 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12242,
+"hex": "0635fdf302fdf202",
+"file": "hd/core_improved_data.asm",
+"line": 446,
+"text": ".byte 0x06, 0x35, 0xFD, 0xF3, 0x02, 0xFD, 0xF2, 0x02// node 811: pc.mux35 = mux pc.mux21 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12250,
+"hex": "0635fdf702fdf602",
+"file": "hd/core_improved_data.asm",
+"line": 447,
+"text": ".byte 0x06, 0x35, 0xFD, 0xF7, 0x02, 0xFD, 0xF6, 0x02// node 815: pc.mux36 = mux pc.mux22 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12258,
+"hex": "0635fdfb02fdfa02",
+"file": "hd/core_improved_data.asm",
+"line": 448,
+"text": ".byte 0x06, 0x35, 0xFD, 0xFB, 0x02, 0xFD, 0xFA, 0x02// node 819: pc.mux37 = mux pc.mux23 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12266,
+"hex": "0635fdff02fdfe02",
+"file": "hd/core_improved_data.asm",
+"line": 449,
+"text": ".byte 0x06, 0x35, 0xFD, 0xFF, 0x02, 0xFD, 0xFE, 0x02// node 823: pc.mux38 = mux pc.mux24 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12274,
+"hex": "0635fd0303fd0203",
+"file": "hd/core_improved_data.asm",
+"line": 450,
+"text": ".byte 0x06, 0x35, 0xFD, 0x03, 0x03, 0xFD, 0x02, 0x03// node 827: pc.mux39 = mux pc.mux25 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12282,
+"hex": "0635fd0703fd0603",
+"file": "hd/core_improved_data.asm",
+"line": 451,
+"text": ".byte 0x06, 0x35, 0xFD, 0x07, 0x03, 0xFD, 0x06, 0x03// node 831: pc.mux40 = mux pc.mux26 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12290,
+"hex": "0635fd0c03fd0a03",
+"file": "hd/core_improved_data.asm",
+"line": 452,
+"text": ".byte 0x06, 0x35, 0xFD, 0x0C, 0x03, 0xFD, 0x0A, 0x03// node 835: pc.mux41 = mux pc.mux27 one reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12298,
+"hex": "03fd1503fd3d02",
+"file": "hd/core_improved_data.asm",
+"line": 453,
+"text": ".byte 0x03, 0xFD, 0x15, 0x03, 0xFD, 0x3D, 0x02// node 839: areg.and0 = and st.1 control.not1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12305,
+"hex": "0401fd1403",
+"file": "hd/core_improved_data.asm",
+"line": 454,
+"text": ".byte 0x04, 0x01, 0xFD, 0x14, 0x03          // node 841: areg.or0 = or areg.and0 st.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12310,
+"hex": "03fd1903fd2303",
+"file": "hd/core_improved_data.asm",
+"line": 455,
+"text": ".byte 0x03, 0xFD, 0x19, 0x03, 0xFD, 0x23, 0x03// node 844: areg.and1 = and st.2 irlo.5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12317,
+"hex": "06fd4003fdf40001",
+"file": "hd/core_improved_data.asm",
+"line": 456,
+"text": ".byte 0x06, 0xFD, 0x40, 0x03, 0xFD, 0xF4, 0x00, 0x01// node 846: areg.mux0 = mux a.0 alu.mux48 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12325,
+"hex": "0601fdda02fd1e03",
+"file": "hd/core_improved_data.asm",
+"line": 457,
+"text": ".byte 0x06, 0x01, 0xFD, 0xDA, 0x02, 0xFD, 0x1E, 0x03// node 850: areg.mux1 = mux areg.mux0 addr.ha0.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12333,
+"hex": "0601fd32030b",
+"file": "hd/core_improved_data.asm",
+"line": 458,
+"text": ".byte 0x06, 0x01, 0xFD, 0x32, 0x03, 0x0B    // node 854: areg.mux2 = mux areg.mux1 irlo.0 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12339,
+"hex": "06fd4b03fdfc000d",
+"file": "hd/core_improved_data.asm",
+"line": 459,
+"text": ".byte 0x06, 0xFD, 0x4B, 0x03, 0xFD, 0xFC, 0x00, 0x0D// node 858: areg.mux3 = mux a.1 alu.mux49 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12347,
+"hex": "0601fde102fd2a03",
+"file": "hd/core_improved_data.asm",
+"line": 460,
+"text": ".byte 0x06, 0x01, 0xFD, 0xE1, 0x02, 0xFD, 0x2A, 0x03// node 862: areg.mux4 = mux areg.mux3 addr.ha1.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12355,
+"hex": "0601fd3d0317",
+"file": "hd/core_improved_data.asm",
+"line": 461,
+"text": ".byte 0x06, 0x01, 0xFD, 0x3D, 0x03, 0x17    // node 866: areg.mux5 = mux areg.mux4 irlo.1 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12361,
+"hex": "06fd5603fd040119",
+"file": "hd/core_improved_data.asm",
+"line": 462,
+"text": ".byte 0x06, 0xFD, 0x56, 0x03, 0xFD, 0x04, 0x01, 0x19// node 870: areg.mux6 = mux a.2 alu.mux50 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12369,
+"hex": "0601fde802fd3603",
+"file": "hd/core_improved_data.asm",
+"line": 463,
+"text": ".byte 0x06, 0x01, 0xFD, 0xE8, 0x02, 0xFD, 0x36, 0x03// node 874: areg.mux7 = mux areg.mux6 addr.ha2.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12377,
+"hex": "0601fd480323",
+"file": "hd/core_improved_data.asm",
+"line": 464,
+"text": ".byte 0x06, 0x01, 0xFD, 0x48, 0x03, 0x23    // node 878: areg.mux8 = mux areg.mux7 irlo.2 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12383,
+"hex": "06fd6103fd0c0125",
+"file": "hd/core_improved_data.asm",
+"line": 465,
+"text": ".byte 0x06, 0xFD, 0x61, 0x03, 0xFD, 0x0C, 0x01, 0x25// node 882: areg.mux9 = mux a.3 alu.mux51 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12391,
+"hex": "0601fdef02fd4203",
+"file": "hd/core_improved_data.asm",
+"line": 466,
+"text": ".byte 0x06, 0x01, 0xFD, 0xEF, 0x02, 0xFD, 0x42, 0x03// node 886: areg.mux10 = mux areg.mux9 addr.ha3.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12399,
+"hex": "0601fd53032f",
+"file": "hd/core_improved_data.asm",
+"line": 467,
+"text": ".byte 0x06, 0x01, 0xFD, 0x53, 0x03, 0x2F    // node 890: areg.mux11 = mux areg.mux10 irlo.3 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12405,
+"hex": "06fd6c03fd140131",
+"file": "hd/core_improved_data.asm",
+"line": 468,
+"text": ".byte 0x06, 0xFD, 0x6C, 0x03, 0xFD, 0x14, 0x01, 0x31// node 894: areg.mux12 = mux a.4 alu.mux52 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12413,
+"hex": "0601fdf602fd4e03",
+"file": "hd/core_improved_data.asm",
+"line": 469,
+"text": ".byte 0x06, 0x01, 0xFD, 0xF6, 0x02, 0xFD, 0x4E, 0x03// node 898: areg.mux13 = mux areg.mux12 addr.ha4.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12421,
+"hex": "0601fd5e033b",
+"file": "hd/core_improved_data.asm",
+"line": 470,
+"text": ".byte 0x06, 0x01, 0xFD, 0x5E, 0x03, 0x3B    // node 902: areg.mux14 = mux areg.mux13 irlo.4 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12427,
+"hex": "06fd7703fd1c013d",
+"file": "hd/core_improved_data.asm",
+"line": 471,
+"text": ".byte 0x06, 0xFD, 0x77, 0x03, 0xFD, 0x1C, 0x01, 0x3D// node 906: areg.mux15 = mux a.5 alu.mux53 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12435,
+"hex": "0601fdfd02fd5a03",
+"file": "hd/core_improved_data.asm",
+"line": 472,
+"text": ".byte 0x06, 0x01, 0xFD, 0xFD, 0x02, 0xFD, 0x5A, 0x03// node 910: areg.mux16 = mux areg.mux15 addr.ha5.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12443,
+"hex": "0601fd690347",
+"file": "hd/core_improved_data.asm",
+"line": 473,
+"text": ".byte 0x06, 0x01, 0xFD, 0x69, 0x03, 0x47    // node 914: areg.mux17 = mux areg.mux16 irlo.5 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12449,
+"hex": "06fd8203fd240149",
+"file": "hd/core_improved_data.asm",
+"line": 474,
+"text": ".byte 0x06, 0xFD, 0x82, 0x03, 0xFD, 0x24, 0x01, 0x49// node 918: areg.mux18 = mux a.6 alu.mux54 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12457,
+"hex": "0601fd0403fd6603",
+"file": "hd/core_improved_data.asm",
+"line": 475,
+"text": ".byte 0x06, 0x01, 0xFD, 0x04, 0x03, 0xFD, 0x66, 0x03// node 922: areg.mux19 = mux areg.mux18 addr.ha6.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12465,
+"hex": "0601fd740353",
+"file": "hd/core_improved_data.asm",
+"line": 476,
+"text": ".byte 0x06, 0x01, 0xFD, 0x74, 0x03, 0x53    // node 926: areg.mux20 = mux areg.mux19 irlo.6 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12471,
+"hex": "06fd8d03fd2c0155",
+"file": "hd/core_improved_data.asm",
+"line": 477,
+"text": ".byte 0x06, 0xFD, 0x8D, 0x03, 0xFD, 0x2C, 0x01, 0x55// node 930: areg.mux21 = mux a.7 alu.mux55 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12479,
+"hex": "0601fd0b03fd7203",
+"file": "hd/core_improved_data.asm",
+"line": 478,
+"text": ".byte 0x06, 0x01, 0xFD, 0x0B, 0x03, 0xFD, 0x72, 0x03// node 934: areg.mux22 = mux areg.mux21 addr.ha7.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12487,
+"hex": "0601fd7f035f",
+"file": "hd/core_improved_data.asm",
+"line": 479,
+"text": ".byte 0x06, 0x01, 0xFD, 0x7F, 0x03, 0x5F    // node 938: areg.mux23 = mux areg.mux22 irlo.7 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12493,
+"hex": "06fd9803fd980361",
+"file": "hd/core_improved_data.asm",
+"line": 480,
+"text": ".byte 0x06, 0xFD, 0x98, 0x03, 0xFD, 0x98, 0x03, 0x61// node 942: areg.mux24 = mux a.8 a.8 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12501,
+"hex": "0601fd1203fd7e03",
+"file": "hd/core_improved_data.asm",
+"line": 481,
+"text": ".byte 0x06, 0x01, 0xFD, 0x12, 0x03, 0xFD, 0x7E, 0x03// node 946: areg.mux25 = mux areg.mux24 addr.ha8.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12509,
+"hex": "0601fdcb026b",
+"file": "hd/core_improved_data.asm",
+"line": 482,
+"text": ".byte 0x06, 0x01, 0xFD, 0xCB, 0x02, 0x6B    // node 950: areg.mux26 = mux areg.mux25 decode.nand2 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12515,
+"hex": "06fda303fda3036d",
+"file": "hd/core_improved_data.asm",
+"line": 483,
+"text": ".byte 0x06, 0xFD, 0xA3, 0x03, 0xFD, 0xA3, 0x03, 0x6D// node 954: areg.mux27 = mux a.9 a.9 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12523,
+"hex": "0601fd1903fd8a03",
+"file": "hd/core_improved_data.asm",
+"line": 484,
+"text": ".byte 0x06, 0x01, 0xFD, 0x19, 0x03, 0xFD, 0x8A, 0x03// node 958: areg.mux28 = mux areg.mux27 addr.ha9.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12531,
+"hex": "0601fdd40277",
+"file": "hd/core_improved_data.asm",
+"line": 485,
+"text": ".byte 0x06, 0x01, 0xFD, 0xD4, 0x02, 0x77    // node 962: areg.mux29 = mux areg.mux28 decode.nand5 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12537,
+"hex": "06fdae03fdae0379",
+"file": "hd/core_improved_data.asm",
+"line": 486,
+"text": ".byte 0x06, 0xFD, 0xAE, 0x03, 0xFD, 0xAE, 0x03, 0x79// node 966: areg.mux30 = mux a.10 a.10 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12545,
+"hex": "0601fd2003fd9603",
+"file": "hd/core_improved_data.asm",
+"line": 487,
+"text": ".byte 0x06, 0x01, 0xFD, 0x20, 0x03, 0xFD, 0x96, 0x03// node 970: areg.mux31 = mux areg.mux30 addr.ha10.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12553,
+"hex": "0601fddd02fd8300",
+"file": "hd/core_improved_data.asm",
+"line": 488,
+"text": ".byte 0x06, 0x01, 0xFD, 0xDD, 0x02, 0xFD, 0x83, 0x00// node 974: areg.mux32 = mux areg.mux31 decode.nand8 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12561,
+"hex": "06fdb903fdb903fd8500",
+"file": "hd/core_improved_data.asm",
+"line": 489,
+"text": ".byte 0x06, 0xFD, 0xB9, 0x03, 0xFD, 0xB9, 0x03, 0xFD, 0x85, 0x00// node 978: areg.mux33 = mux a.11 a.11 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12571,
+"hex": "0601fd2703fda203",
+"file": "hd/core_improved_data.asm",
+"line": 490,
+"text": ".byte 0x06, 0x01, 0xFD, 0x27, 0x03, 0xFD, 0xA2, 0x03// node 982: areg.mux34 = mux areg.mux33 addr.ha11.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12579,
+"hex": "0601fde602fd8f00",
+"file": "hd/core_improved_data.asm",
+"line": 491,
+"text": ".byte 0x06, 0x01, 0xFD, 0xE6, 0x02, 0xFD, 0x8F, 0x00// node 986: areg.mux35 = mux areg.mux34 decode.nand11 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12587,
+"hex": "06fdc403fdc403fd9100",
+"file": "hd/core_improved_data.asm",
+"line": 492,
+"text": ".byte 0x06, 0xFD, 0xC4, 0x03, 0xFD, 0xC4, 0x03, 0xFD, 0x91, 0x00// node 990: areg.mux36 = mux a.12 a.12 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12597,
+"hex": "0601fd2e03fdae03",
+"file": "hd/core_improved_data.asm",
+"line": 493,
+"text": ".byte 0x06, 0x01, 0xFD, 0x2E, 0x03, 0xFD, 0xAE, 0x03// node 994: areg.mux37 = mux areg.mux36 addr.ha12.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12605,
+"hex": "0601fdef02fd9b00",
+"file": "hd/core_improved_data.asm",
+"line": 494,
+"text": ".byte 0x06, 0x01, 0xFD, 0xEF, 0x02, 0xFD, 0x9B, 0x00// node 998: areg.mux38 = mux areg.mux37 decode.nand14 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12613,
+"hex": "06fdcf03fdcf03fd9d00",
+"file": "hd/core_improved_data.asm",
+"line": 495,
+"text": ".byte 0x06, 0xFD, 0xCF, 0x03, 0xFD, 0xCF, 0x03, 0xFD, 0x9D, 0x00// node 1002: areg.mux39 = mux a.13 a.13 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12623,
+"hex": "0601fd3503fdba03",
+"file": "hd/core_improved_data.asm",
+"line": 496,
+"text": ".byte 0x06, 0x01, 0xFD, 0x35, 0x03, 0xFD, 0xBA, 0x03// node 1006: areg.mux40 = mux areg.mux39 addr.ha13.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12631,
+"hex": "0601fdf802fda700",
+"file": "hd/core_improved_data.asm",
+"line": 497,
+"text": ".byte 0x06, 0x01, 0xFD, 0xF8, 0x02, 0xFD, 0xA7, 0x00// node 1010: areg.mux41 = mux areg.mux40 decode.nand17 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12639,
+"hex": "03fdc303fdce03",
+"file": "hd/core_improved_data.asm",
+"line": 498,
+"text": ".byte 0x03, 0xFD, 0xC3, 0x03, 0xFD, 0xCE, 0x03// node 1014: dreg.and0 = and st.2 irlo.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12646,
+"hex": "06fddc03fd9e0101",
+"file": "hd/core_improved_data.asm",
+"line": 499,
+"text": ".byte 0x06, 0xFD, 0xDC, 0x03, 0xFD, 0x9E, 0x01, 0x01// node 1016: dreg.mux0 = mux d.0 alu.mux48 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12654,
+"hex": "06fddf03fd9e0105",
+"file": "hd/core_improved_data.asm",
+"line": 500,
+"text": ".byte 0x06, 0xFD, 0xDF, 0x03, 0xFD, 0x9E, 0x01, 0x05// node 1020: dreg.mux1 = mux d.1 alu.mux49 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12662,
+"hex": "06fde203fd9e0109",
+"file": "hd/core_improved_data.asm",
+"line": 501,
+"text": ".byte 0x06, 0xFD, 0xE2, 0x03, 0xFD, 0x9E, 0x01, 0x09// node 1024: dreg.mux2 = mux d.2 alu.mux50 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12670,
+"hex": "06fde503fd9e010d",
+"file": "hd/core_improved_data.asm",
+"line": 502,
+"text": ".byte 0x06, 0xFD, 0xE5, 0x03, 0xFD, 0x9E, 0x01, 0x0D// node 1028: dreg.mux3 = mux d.3 alu.mux51 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12678,
+"hex": "06fde803fd9e0111",
+"file": "hd/core_improved_data.asm",
+"line": 503,
+"text": ".byte 0x06, 0xFD, 0xE8, 0x03, 0xFD, 0x9E, 0x01, 0x11// node 1032: dreg.mux4 = mux d.4 alu.mux52 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12686,
+"hex": "06fdeb03fd9e0115",
+"file": "hd/core_improved_data.asm",
+"line": 504,
+"text": ".byte 0x06, 0xFD, 0xEB, 0x03, 0xFD, 0x9E, 0x01, 0x15// node 1036: dreg.mux5 = mux d.5 alu.mux53 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12694,
+"hex": "06fdee03fd9e0119",
+"file": "hd/core_improved_data.asm",
+"line": 505,
+"text": ".byte 0x06, 0xFD, 0xEE, 0x03, 0xFD, 0x9E, 0x01, 0x19// node 1040: dreg.mux6 = mux d.6 alu.mux54 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12702,
+"hex": "06fdf103fd9e011d",
+"file": "hd/core_improved_data.asm",
+"line": 506,
+"text": ".byte 0x06, 0xFD, 0xF1, 0x03, 0xFD, 0x9E, 0x01, 0x1D// node 1044: dreg.mux7 = mux d.7 alu.mux55 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12710,
+"hex": "04fde703fde403",
+"file": "hd/core_improved_data.asm",
+"line": 507,
+"text": ".byte 0x04, 0xFD, 0xE7, 0x03, 0xFD, 0xE4, 0x03// node 1048: ir.or0 = or st.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12717,
+"hex": "06fdf703fd300301",
+"file": "hd/core_improved_data.asm",
+"line": 508,
+"text": ".byte 0x06, 0xFD, 0xF7, 0x03, 0xFD, 0x30, 0x03, 0x01// node 1051: ir.mux0 = mux irlo.0 decode.nand2 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12725,
+"hex": "06fdfa03fd310305",
+"file": "hd/core_improved_data.asm",
+"line": 509,
+"text": ".byte 0x06, 0xFD, 0xFA, 0x03, 0xFD, 0x31, 0x03, 0x05// node 1055: ir.mux1 = mux irlo.1 decode.nand5 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12733,
+"hex": "06fdfd03fd320309",
+"file": "hd/core_improved_data.asm",
+"line": 510,
+"text": ".byte 0x06, 0xFD, 0xFD, 0x03, 0xFD, 0x32, 0x03, 0x09// node 1059: ir.mux2 = mux irlo.2 decode.nand8 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12741,
+"hex": "06fd0004fd33030d",
+"file": "hd/core_improved_data.asm",
+"line": 511,
+"text": ".byte 0x06, 0xFD, 0x00, 0x04, 0xFD, 0x33, 0x03, 0x0D// node 1063: ir.mux3 = mux irlo.3 decode.nand11 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12749,
+"hex": "06fd0304fd340311",
+"file": "hd/core_improved_data.asm",
+"line": 512,
+"text": ".byte 0x06, 0xFD, 0x03, 0x04, 0xFD, 0x34, 0x03, 0x11// node 1067: ir.mux4 = mux irlo.4 decode.nand14 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12757,
+"hex": "06fd0604fd350315",
+"file": "hd/core_improved_data.asm",
+"line": 513,
+"text": ".byte 0x06, 0xFD, 0x06, 0x04, 0xFD, 0x35, 0x03, 0x15// node 1071: ir.mux5 = mux irlo.5 decode.nand17 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12765,
+"hex": "06fd0904fd360319",
+"file": "hd/core_improved_data.asm",
+"line": 514,
+"text": ".byte 0x06, 0xFD, 0x09, 0x04, 0xFD, 0x36, 0x03, 0x19// node 1075: ir.mux6 = mux irlo.6 decode.nand20 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12773,
+"hex": "06fd0c04fd37031d",
+"file": "hd/core_improved_data.asm",
+"line": 515,
+"text": ".byte 0x06, 0xFD, 0x0C, 0x04, 0xFD, 0x37, 0x03, 0x1D// node 1079: ir.mux7 = mux irlo.7 decode.nand23 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12781,
+"hex": "06fd0f04fd5003fd0904",
+"file": "hd/core_improved_data.asm",
+"line": 516,
+"text": ".byte 0x06, 0xFD, 0x0F, 0x04, 0xFD, 0x50, 0x03, 0xFD, 0x09, 0x04// node 1083: ir.mux8 = mux irhi.0 decode.nand2 st.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12791,
+"hex": "06fd1204fd5103fd0d04",
+"file": "hd/core_improved_data.asm",
+"line": 517,
+"text": ".byte 0x06, 0xFD, 0x12, 0x04, 0xFD, 0x51, 0x03, 0xFD, 0x0D, 0x04// node 1087: ir.mux9 = mux irhi.1 decode.nand5 st.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12801,
+"hex": "06fd1504fd5203fd1104",
+"file": "hd/core_improved_data.asm",
+"line": 518,
+"text": ".byte 0x06, 0xFD, 0x15, 0x04, 0xFD, 0x52, 0x03, 0xFD, 0x11, 0x04// node 1091: ir.mux10 = mux irhi.2 decode.nand8 st.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12811,
+"hex": "06fd1804fd5303fd1504",
+"file": "hd/core_improved_data.asm",
+"line": 519,
+"text": ".byte 0x06, 0xFD, 0x18, 0x04, 0xFD, 0x53, 0x03, 0xFD, 0x15, 0x04// node 1095: ir.mux11 = mux irhi.3 decode.nand11 st.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12821,
+"hex": "06fd1b04fd5403fd1904",
+"file": "hd/core_improved_data.asm",
+"line": 520,
+"text": ".byte 0x06, 0xFD, 0x1B, 0x04, 0xFD, 0x54, 0x03, 0xFD, 0x19, 0x04// node 1099: ir.mux12 = mux irhi.4 decode.nand14 st.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12831,
+"hex": "03fd1c04fd2804",
+"file": "hd/core_improved_data.asm",
+"line": 521,
+"text": ".byte 0x03, 0xFD, 0x1C, 0x04, 0xFD, 0x28, 0x04// node 1103: top.and0 = and st.2 irlo.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12838,
+"hex": "0301fd7c03",
+"file": "hd/core_improved_data.asm",
+"line": 522,
+"text": ".byte 0x03, 0x01, 0xFD, 0x7C, 0x03          // node 1105: decode.and18 = and top.and0 decode.and8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12843,
+"hex": "0303fd6b03",
+"file": "hd/core_improved_data.asm",
+"line": 523,
+"text": ".byte 0x03, 0x03, 0xFD, 0x6B, 0x03          // node 1107: decode.and19 = and top.and0 decode.and17",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12848,
+"hex": "02fd1504",
+"file": "hd/core_improved_data.asm",
+"line": 524,
+"text": ".byte 0x02, 0xFD, 0x15, 0x04                // node 1109: ram.not0 = not addr.mux0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12852,
+"hex": "02fd1204",
+"file": "hd/core_improved_data.asm",
+"line": 525,
+"text": ".byte 0x02, 0xFD, 0x12, 0x04                // node 1110: ram.not1 = not addr.mux1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12856,
+"hex": "02fd0f04",
+"file": "hd/core_improved_data.asm",
+"line": 526,
+"text": ".byte 0x02, 0xFD, 0x0F, 0x04                // node 1111: ram.not2 = not addr.mux2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12860,
+"hex": "02fd0c04",
+"file": "hd/core_improved_data.asm",
+"line": 527,
+"text": ".byte 0x02, 0xFD, 0x0C, 0x04                // node 1112: ram.not3 = not addr.mux3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12864,
+"hex": "02fd0904",
+"file": "hd/core_improved_data.asm",
+"line": 528,
+"text": ".byte 0x02, 0xFD, 0x09, 0x04                // node 1113: ram.not4 = not addr.mux4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12868,
+"hex": "030504",
+"file": "hd/core_improved_data.asm",
+"line": 529,
+"text": ".byte 0x03, 0x05, 0x04                      // node 1114: ram.and0 = and ram.not0 ram.not1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12871,
+"hex": "03fd1c0406",
+"file": "hd/core_improved_data.asm",
+"line": 530,
+"text": ".byte 0x03, 0xFD, 0x1C, 0x04, 0x06          // node 1116: ram.and1 = and addr.mux0 ram.not1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12876,
+"hex": "0309fd1a04",
+"file": "hd/core_improved_data.asm",
+"line": 531,
+"text": ".byte 0x03, 0x09, 0xFD, 0x1A, 0x04          // node 1118: ram.and2 = and ram.not0 addr.mux1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12881,
+"hex": "03fd2004fd1c04",
+"file": "hd/core_improved_data.asm",
+"line": 532,
+"text": ".byte 0x03, 0xFD, 0x20, 0x04, 0xFD, 0x1C, 0x04// node 1120: ram.and3 = and addr.mux0 addr.mux1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12888,
+"hex": "030b0a",
+"file": "hd/core_improved_data.asm",
+"line": 533,
+"text": ".byte 0x03, 0x0B, 0x0A                      // node 1122: ram.and4 = and ram.not2 ram.not3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12891,
+"hex": "03fd1c040c",
+"file": "hd/core_improved_data.asm",
+"line": 534,
+"text": ".byte 0x03, 0xFD, 0x1C, 0x04, 0x0C          // node 1124: ram.and5 = and addr.mux2 ram.not3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12896,
+"hex": "030ffd1a04",
+"file": "hd/core_improved_data.asm",
+"line": 535,
+"text": ".byte 0x03, 0x0F, 0xFD, 0x1A, 0x04          // node 1126: ram.and6 = and ram.not2 addr.mux3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12901,
+"hex": "03fd2004fd1c04",
+"file": "hd/core_improved_data.asm",
+"line": 536,
+"text": ".byte 0x03, 0xFD, 0x20, 0x04, 0xFD, 0x1C, 0x04// node 1128: ram.and7 = and addr.mux2 addr.mux3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12908,
+"hex": "030711",
+"file": "hd/core_improved_data.asm",
+"line": 537,
+"text": ".byte 0x03, 0x07, 0x11                      // node 1130: ram.and8 = and ram.and4 ram.not4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12911,
+"hex": "030713",
+"file": "hd/core_improved_data.asm",
+"line": 538,
+"text": ".byte 0x03, 0x07, 0x13                      // node 1132: ram.and9 = and ram.and5 ram.not4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12914,
+"hex": "030715",
+"file": "hd/core_improved_data.asm",
+"line": 539,
+"text": ".byte 0x03, 0x07, 0x15                      // node 1134: ram.and10 = and ram.and6 ram.not4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12917,
+"hex": "030717",
+"file": "hd/core_improved_data.asm",
+"line": 540,
+"text": ".byte 0x03, 0x07, 0x17                      // node 1136: ram.and11 = and ram.and7 ram.not4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12920,
+"hex": "030ffd2204",
+"file": "hd/core_improved_data.asm",
+"line": 541,
+"text": ".byte 0x03, 0x0F, 0xFD, 0x22, 0x04          // node 1138: ram.and12 = and ram.and4 addr.mux4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12925,
+"hex": "030ffd2404",
+"file": "hd/core_improved_data.asm",
+"line": 542,
+"text": ".byte 0x03, 0x0F, 0xFD, 0x24, 0x04          // node 1140: ram.and13 = and ram.and5 addr.mux4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12930,
+"hex": "030ffd2604",
+"file": "hd/core_improved_data.asm",
+"line": 543,
+"text": ".byte 0x03, 0x0F, 0xFD, 0x26, 0x04          // node 1142: ram.and14 = and ram.and6 addr.mux4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12935,
+"hex": "030ffd2804",
+"file": "hd/core_improved_data.asm",
+"line": 544,
+"text": ".byte 0x03, 0x0F, 0xFD, 0x28, 0x04          // node 1144: ram.and15 = and ram.and7 addr.mux4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12940,
+"hex": "030f28",
+"file": "hd/core_improved_data.asm",
+"line": 545,
+"text": ".byte 0x03, 0x0F, 0x28                      // node 1146: ram.and16 = and ram.and8 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12943,
+"hex": "030f2a",
+"file": "hd/core_improved_data.asm",
+"line": 546,
+"text": ".byte 0x03, 0x0F, 0x2A                      // node 1148: ram.and17 = and ram.and9 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12946,
+"hex": "030f2c",
+"file": "hd/core_improved_data.asm",
+"line": 547,
+"text": ".byte 0x03, 0x0F, 0x2C                      // node 1150: ram.and18 = and ram.and10 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12949,
+"hex": "030f2e",
+"file": "hd/core_improved_data.asm",
+"line": 548,
+"text": ".byte 0x03, 0x0F, 0x2E                      // node 1152: ram.and19 = and ram.and11 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12952,
+"hex": "030f30",
+"file": "hd/core_improved_data.asm",
+"line": 549,
+"text": ".byte 0x03, 0x0F, 0x30                      // node 1154: ram.and20 = and ram.and12 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12955,
+"hex": "030f32",
+"file": "hd/core_improved_data.asm",
+"line": 550,
+"text": ".byte 0x03, 0x0F, 0x32                      // node 1156: ram.and21 = and ram.and13 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12958,
+"hex": "030f34",
+"file": "hd/core_improved_data.asm",
+"line": 551,
+"text": ".byte 0x03, 0x0F, 0x34                      // node 1158: ram.and22 = and ram.and14 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12961,
+"hex": "030f36",
+"file": "hd/core_improved_data.asm",
+"line": 552,
+"text": ".byte 0x03, 0x0F, 0x36                      // node 1160: ram.and23 = and ram.and15 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12964,
+"hex": "ff",
+"file": "hd/core_improved_data.asm",
+"line": 553,
+"text": ".byte 0xFF                                  // END of body; 1162 core nodes; tie-high node = 1162",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12965,
+"hex": "0920",
+"file": "hd/core_improved_data.asm",
+"line": 555,
+"text": ".byte 0x09, 0x20                            // chain of 32 x ram_word (type 9)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12967,
+"hex": "030f02",
+"file": "hd/core_improved_data.asm",
+"line": 556,
+"text": ".byte 0x03, 0x0F, 0x02                      // tile input i0: PICKHI list hiW starting at ram.and16, stride 2 nodes, shift 2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12970,
+"hex": "031f02",
+"file": "hd/core_improved_data.asm",
+"line": 557,
+"text": ".byte 0x03, 0x1F, 0x02                      // tile input i1: PICKHI list hiR starting at ram.and8, stride 2 nodes, shift 2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12973,
+"hex": "022f03",
+"file": "hd/core_improved_data.asm",
+"line": 558,
+"text": ".byte 0x02, 0x2F, 0x03                      // tile input i2: PICKLO list lo starting at ram.and0, stride 2 nodes, mask 3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12976,
+"hex": "00fd3002",
+"file": "hd/core_improved_data.asm",
+"line": 559,
+"text": ".byte 0x00, 0xFD, 0x30, 0x02                // tile input i3: BCAST alu.mux48",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12980,
+"hex": "00fd2c02",
+"file": "hd/core_improved_data.asm",
+"line": 560,
+"text": ".byte 0x00, 0xFD, 0x2C, 0x02                // tile input i4: BCAST alu.mux49",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12984,
+"hex": "00fd2802",
+"file": "hd/core_improved_data.asm",
+"line": 561,
+"text": ".byte 0x00, 0xFD, 0x28, 0x02                // tile input i5: BCAST alu.mux50",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12988,
+"hex": "00fd2402",
+"file": "hd/core_improved_data.asm",
+"line": 562,
+"text": ".byte 0x00, 0xFD, 0x24, 0x02                // tile input i6: BCAST alu.mux51",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12992,
+"hex": "00fd2002",
+"file": "hd/core_improved_data.asm",
+"line": 563,
+"text": ".byte 0x00, 0xFD, 0x20, 0x02                // tile input i7: BCAST alu.mux52",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12996,
+"hex": "00fd1c02",
+"file": "hd/core_improved_data.asm",
+"line": 564,
+"text": ".byte 0x00, 0xFD, 0x1C, 0x02                // tile input i8: BCAST alu.mux53",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13000,
+"hex": "00fd1802",
+"file": "hd/core_improved_data.asm",
+"line": 565,
+"text": ".byte 0x00, 0xFD, 0x18, 0x02                // tile input i9: BCAST alu.mux54",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13004,
+"hex": "00fd1402",
+"file": "hd/core_improved_data.asm",
+"line": 566,
+"text": ".byte 0x00, 0xFD, 0x14, 0x02                // tile input i10: BCAST alu.mux55",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13008,
+"hex": "0100",
+"file": "hd/core_improved_data.asm",
+"line": 567,
+"text": ".byte 0x01, 0x00                            // tile input i11: PREV output 0 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13010,
+"hex": "0101",
+"file": "hd/core_improved_data.asm",
+"line": 568,
+"text": ".byte 0x01, 0x01                            // tile input i12: PREV output 1 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13012,
+"hex": "0102",
+"file": "hd/core_improved_data.asm",
+"line": 569,
+"text": ".byte 0x01, 0x02                            // tile input i13: PREV output 2 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13014,
+"hex": "0103",
+"file": "hd/core_improved_data.asm",
+"line": 570,
+"text": ".byte 0x01, 0x03                            // tile input i14: PREV output 3 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13016,
+"hex": "0104",
+"file": "hd/core_improved_data.asm",
+"line": 571,
+"text": ".byte 0x01, 0x04                            // tile input i15: PREV output 4 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13018,
+"hex": "0105",
+"file": "hd/core_improved_data.asm",
+"line": 572,
+"text": ".byte 0x01, 0x05                            // tile input i16: PREV output 5 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13020,
+"hex": "0106",
+"file": "hd/core_improved_data.asm",
+"line": 573,
+"text": ".byte 0x01, 0x06                            // tile input i17: PREV output 6 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13022,
+"hex": "0107",
+"file": "hd/core_improved_data.asm",
+"line": 574,
+"text": ".byte 0x01, 0x07                            // tile input i18: PREV output 7 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13024,
+"hex": "1a",
+"file": "hd/core_improved_data.asm",
+"line": 576,
+"text": ".byte 0x1A                                  // 26 ports",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13025,
+"hex": "fd4a04",
+"file": "hd/core_improved_data.asm",
+"line": 577,
+"text": ".byte 0xFD, 0x4A, 0x04                      // port rom_addr0 = addr.mux0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13028,
+"hex": "fd4604",
+"file": "hd/core_improved_data.asm",
+"line": 578,
+"text": ".byte 0xFD, 0x46, 0x04                      // port rom_addr1 = addr.mux1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13031,
+"hex": "fd4204",
+"file": "hd/core_improved_data.asm",
+"line": 579,
+"text": ".byte 0xFD, 0x42, 0x04                      // port rom_addr2 = addr.mux2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13034,
+"hex": "fd3e04",
+"file": "hd/core_improved_data.asm",
+"line": 580,
+"text": ".byte 0xFD, 0x3E, 0x04                      // port rom_addr3 = addr.mux3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13037,
+"hex": "fd3a04",
+"file": "hd/core_improved_data.asm",
+"line": 581,
+"text": ".byte 0xFD, 0x3A, 0x04                      // port rom_addr4 = addr.mux4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13040,
+"hex": "fd3604",
+"file": "hd/core_improved_data.asm",
+"line": 582,
+"text": ".byte 0xFD, 0x36, 0x04                      // port rom_addr5 = addr.mux5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13043,
+"hex": "fd3204",
+"file": "hd/core_improved_data.asm",
+"line": 583,
+"text": ".byte 0xFD, 0x32, 0x04                      // port rom_addr6 = addr.mux6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13046,
+"hex": "fd2e04",
+"file": "hd/core_improved_data.asm",
+"line": 584,
+"text": ".byte 0xFD, 0x2E, 0x04                      // port rom_addr7 = addr.mux7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13049,
+"hex": "fd2a04",
+"file": "hd/core_improved_data.asm",
+"line": 585,
+"text": ".byte 0xFD, 0x2A, 0x04                      // port rom_addr8 = addr.mux8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13052,
+"hex": "fd2604",
+"file": "hd/core_improved_data.asm",
+"line": 586,
+"text": ".byte 0xFD, 0x26, 0x04                      // port rom_addr9 = addr.mux9",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13055,
+"hex": "fd2204",
+"file": "hd/core_improved_data.asm",
+"line": 587,
+"text": ".byte 0xFD, 0x22, 0x04                      // port rom_addr10 = addr.mux10",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13058,
+"hex": "fd1e04",
+"file": "hd/core_improved_data.asm",
+"line": 588,
+"text": ".byte 0xFD, 0x1E, 0x04                      // port rom_addr11 = addr.mux11",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13061,
+"hex": "fd1a04",
+"file": "hd/core_improved_data.asm",
+"line": 589,
+"text": ".byte 0xFD, 0x1A, 0x04                      // port rom_addr12 = addr.mux12",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13064,
+"hex": "fd4a04",
+"file": "hd/core_improved_data.asm",
+"line": 590,
+"text": ".byte 0xFD, 0x4A, 0x04                      // port arm_addr0 = addr.mux0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13067,
+"hex": "fd4604",
+"file": "hd/core_improved_data.asm",
+"line": 591,
+"text": ".byte 0xFD, 0x46, 0x04                      // port arm_addr1 = addr.mux1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13070,
+"hex": "fd4204",
+"file": "hd/core_improved_data.asm",
+"line": 592,
+"text": ".byte 0xFD, 0x42, 0x04                      // port arm_addr2 = addr.mux2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13073,
+"hex": "fd3e04",
+"file": "hd/core_improved_data.asm",
+"line": 593,
+"text": ".byte 0xFD, 0x3E, 0x04                      // port arm_addr3 = addr.mux3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13076,
+"hex": "36",
+"file": "hd/core_improved_data.asm",
+"line": 594,
+"text": ".byte 0x36                                  // port arm_en = decode.and19",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13077,
+"hex": "fd3002",
+"file": "hd/core_improved_data.asm",
+"line": 595,
+"text": ".byte 0xFD, 0x30, 0x02                      // port wdata0 = alu.mux48",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13080,
+"hex": "fd2c02",
+"file": "hd/core_improved_data.asm",
+"line": 596,
+"text": ".byte 0xFD, 0x2C, 0x02                      // port wdata1 = alu.mux49",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13083,
+"hex": "fd2802",
+"file": "hd/core_improved_data.asm",
+"line": 597,
+"text": ".byte 0xFD, 0x28, 0x02                      // port wdata2 = alu.mux50",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13086,
+"hex": "fd2402",
+"file": "hd/core_improved_data.asm",
+"line": 598,
+"text": ".byte 0xFD, 0x24, 0x02                      // port wdata3 = alu.mux51",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13089,
+"hex": "fd2002",
+"file": "hd/core_improved_data.asm",
+"line": 599,
+"text": ".byte 0xFD, 0x20, 0x02                      // port wdata4 = alu.mux52",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13092,
+"hex": "fd1c02",
+"file": "hd/core_improved_data.asm",
+"line": 600,
+"text": ".byte 0xFD, 0x1C, 0x02                      // port wdata5 = alu.mux53",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13095,
+"hex": "fd1802",
+"file": "hd/core_improved_data.asm",
+"line": 601,
+"text": ".byte 0xFD, 0x18, 0x02                      // port wdata6 = alu.mux54",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13098,
+"hex": "fd1402",
+"file": "hd/core_improved_data.asm",
+"line": 602,
+"text": ".byte 0xFD, 0x14, 0x02                      // port wdata7 = alu.mux55",
+"kind": "data",
+"macro": null
+}
+]

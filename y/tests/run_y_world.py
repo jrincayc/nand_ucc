@@ -1,0 +1,46 @@
+"""run_y_world.py -- RNDW end-to-end for Y/M4:  the driver builds generation 1 from the reference commands (real ROM image);
+generation 1 runs the builder and builds generation 2 through its own arm.  usage: run_y_world.py HDFILE STEPS [OUTDIR]     (HDFILE = the seed description; the improved child is computed with ref_improve)
+M6: the ROM carries builder + improver; generation 1 (seed) builds generation 2 (improved), generation 2 builds generation 3 (= generation 2)."""
+import os, sys, subprocess, time, tempfile
+HERE = os.path.dirname(os.path.abspath(__file__))
+for d in ('tools', 'isa', 'tests', '.'):
+    sys.path.insert(0, os.path.join(HERE, '..', d))
+sys.path.insert(0, '/home/claude/pkg/rndw-stage/isa')
+import hd as HDM, ref_flatten as RF, run_builder as RB, hd2asm, ref_improve as RI
+import common as _c
+AB_ = _c.AB
+from script_world import to_script, reg_writes
+RNDW = os.environ.get('RNDW', '/home/claude/pkg/rndw-stage/rndw/target/release/rndw')
+
+
+def seed_commands(f, image):
+    cmds = RF.commands(f, image, 0, RF.STRIDE)
+    # the driver (the harness) waits a few ticks before the EN wire and before the RUN wires, as in X
+    en = max(i for i, c in enumerate(cmds) if c[0] == 'wire' and c[3] == 0 and c[4] == RF.STRIDE + 4)
+    run = len(cmds) - 2
+    return cmds[:en] + [('nop', 3), cmds[en], ('nop', 3)] + cmds[en + 1:]
+
+
+SRC = [os.path.join(HERE, '..', 'src', f) for f in ('macros.asm', 'ram.asm', 'builder.asm', 'improver.asm')]
+
+
+def image_of(hd, out, tag):
+    os.makedirs(out, exist_ok=True); data = os.path.join(out, tag + '_data.asm')
+    open(data, 'w').write(hd2asm.Enc(hd).encode().text())
+    img = RB.assemble(SRC + [data], os.path.join(out, 'asm_' + tag)); open(os.path.join(out, tag + '.bin'), 'wb').write(img)
+    return img
+
+
+if __name__ == '__main__':
+    hdfile, steps = sys.argv[1], int(sys.argv[2])
+    out = sys.argv[3] if len(sys.argv) > 3 else tempfile.mkdtemp(); os.makedirs(out, exist_ok=True)
+    hd0 = HDM.read(open(hdfile).read()); hd1 = RI.improve_hd(hd0)[0]
+    open(os.path.join(out, 'child.hd'), 'w').write(HDM.write(hd1))
+    img0, img1 = image_of(hd0, out, 'seed'), image_of(hd1, out, 'child')
+    cmds = seed_commands(RF.flatten(hd0), img0); nw = reg_writes(cmds)
+    sf = os.path.join(out, 'seed.script'); open(sf, 'w').write(to_script(cmds))
+    final = os.path.join(out, 'final.txt')
+    args = [RNDW, '--width', '65536', '--height', '4096', '--rom-bits', str(AB_ - 1), '--save', final, '--script', sf, '--steps', str(nw + steps)]
+    print('ROM image', len(img0), 'B; script register writes', nw, '; running', steps, 'ticks after the script', flush=True)
+    t = time.time(); r = subprocess.run(args, capture_output=True, text=True)
+    print(r.stdout[-1500:], r.stderr[-500:]); print(f'wall {time.time()-t:.0f}s')

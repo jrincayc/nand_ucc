@@ -1,0 +1,11 @@
+This archive was assembled from the files present in the Claude session's workspace.
+These files exist in the Project "AI limits and other hardware limits" (first working session, 2026-10-12) but were NOT in the workspace,
+so they are not included; download them from the Project:
+ hardware_limits_for_agi.tex, hardware_limits_for_agi.bib
+ nandgen/hackref.py test_nandgen.py mutation_check.py mutation_serial.py measure.py measure_widths.py measure_serial.py
+ nandgen/place.py place_machine.py test_machine.py opt.py opt_calibrate.py
+ nandgen/opt_out.txt place_out.txt place_machine_out.txt test_machine_out.txt
+ nandgen/hack_cpu_w8_aw12_level2.netlist.txt hack_cpu_serial_w8_aw12_k4_level2.netlist.txt
+Also: isa/ is the staged copy from the quine work (X); y/isa is Y's own AB-parameterised copy.  Large run artifacts of the Y runs
+(the 110 M / 200 M tick states) are in y/writeup/states/.  Rust build output (target/) is omitted.  Files are as of 2026-10-14;
+I did not diff the workspace copies against the Project copies except for the y/ files I uploaded.

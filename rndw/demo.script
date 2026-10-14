@@ -1,0 +1,11 @@
+# a ROM, two NANDs and a DFF, then a second arm whose EN gets wired (should trigger the EN SVG)
+place rom 100 100
+rom 100 100 0 171
+place nand 130 100
+place nand 134 100
+wire 131 100 134 100
+place dff 140 100
+wire 135 100 140 100
+place arm 160 100
+place nand 180 100
+wire 181 100 160 104

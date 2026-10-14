@@ -1,0 +1,5573 @@
+[
+{
+"addr": 12288,
+"hex": "0e",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 6,
+"text": ".byte 0x0E                                  // param ab = 14 (address width; ROM has 13 address bits)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12320,
+"hex": "4030",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 9,
+"text": ".word mod_nand                              // slot 0: type 0 = nand",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12322,
+"hex": "4830",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 10,
+"text": ".word mod_dff                               // slot 1: type 1 = dff",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12324,
+"hex": "5030",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 11,
+"text": ".word mod_not                               // slot 2: type 2 = not",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12326,
+"hex": "5830",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 12,
+"text": ".word mod_and                               // slot 3: type 3 = and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12328,
+"hex": "6330",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 13,
+"text": ".word mod_or                                // slot 4: type 4 = or",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12330,
+"hex": "7130",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 14,
+"text": ".word mod_xor                               // slot 5: type 5 = xor",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12332,
+"hex": "9130",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 15,
+"text": ".word mod_mux                               // slot 6: type 6 = mux",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12334,
+"hex": "ae30",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 16,
+"text": ".word mod_ha                                // slot 7: type 7 = ha",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12336,
+"hex": "d530",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 17,
+"text": ".word mod_fa                                // slot 8: type 8 = fa",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12338,
+"hex": "2631",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 18,
+"text": ".word mod_ram_word                          // slot 9: type 9 = ram_word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12340,
+"hex": "0000",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 19,
+"text": ".word 0                                     // slot 10: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12342,
+"hex": "0000",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 20,
+"text": ".word 0                                     // slot 11: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12344,
+"hex": "0000",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 21,
+"text": ".word 0                                     // slot 12: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12346,
+"hex": "0000",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 22,
+"text": ".word 0                                     // slot 13: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12348,
+"hex": "0000",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 23,
+"text": ".word 0                                     // slot 14: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12350,
+"hex": "0000",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 24,
+"text": ".word 0                                     // slot 15: empty",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12352,
+"hex": "00020101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 27,
+"text": ".byte 0x00, 0x02, 0x01, 0x01                // nand: flags=primitive, n_in=2, n_out=1, n_gates=1 slots (a skip entry covers several)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12356,
+"hex": "000001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 28,
+"text": ".byte 0x00, 0x00, 0x01                      // g0 = nand i0 i1   the gate itself",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12359,
+"hex": "02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 29,
+"text": ".byte 0x02                                  // outputs: g0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12360,
+"hex": "00010101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 31,
+"text": ".byte 0x00, 0x01, 0x01, 0x01                // dff: flags=primitive, n_in=1, n_out=1, n_gates=1 slots (a skip entry covers several)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12364,
+"hex": "010000",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 32,
+"text": ".byte 0x01, 0x00, 0x00                      // g0 = dff i0   the gate itself",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12367,
+"hex": "01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 33,
+"text": ".byte 0x01                                  // outputs: g0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12368,
+"hex": "01010101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 35,
+"text": ".byte 0x01, 0x01, 0x01, 0x01                // not: flags=comb/improvable, n_in=1, n_out=1, n_gates=1 slots (a skip entry covers several)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12372,
+"hex": "000000",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 36,
+"text": ".byte 0x00, 0x00, 0x00                      // g0 = nand i0 i0   not",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12375,
+"hex": "01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 37,
+"text": ".byte 0x01                                  // outputs: g0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12376,
+"hex": "01020102",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 39,
+"text": ".byte 0x01, 0x02, 0x01, 0x02                // and: flags=comb/improvable, n_in=2, n_out=1, n_gates=2 slots (a skip entry covers several)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12380,
+"hex": "000001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 40,
+"text": ".byte 0x00, 0x00, 0x01                      // g0 = nand i0 i1   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12383,
+"hex": "000202",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 41,
+"text": ".byte 0x00, 0x02, 0x02                      // g1 = nand g0 g0   and = not(nand)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12386,
+"hex": "03",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 42,
+"text": ".byte 0x03                                  // outputs: g1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12387,
+"hex": "01020103",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 44,
+"text": ".byte 0x01, 0x02, 0x01, 0x03                // or: flags=comb/improvable, n_in=2, n_out=1, n_gates=3 slots (a skip entry covers several)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12391,
+"hex": "000000",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 45,
+"text": ".byte 0x00, 0x00, 0x00                      // g0 = nand i0 i0   not a",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12394,
+"hex": "000101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 46,
+"text": ".byte 0x00, 0x01, 0x01                      // g1 = nand i1 i1   not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12397,
+"hex": "000203",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 47,
+"text": ".byte 0x00, 0x02, 0x03                      // g2 = nand g0 g1   or = nand(not a, not b)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12400,
+"hex": "04",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 48,
+"text": ".byte 0x04                                  // outputs: g2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12401,
+"hex": "01020109",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 50,
+"text": ".byte 0x01, 0x02, 0x01, 0x09                // xor: flags=comb/improvable, n_in=2, n_out=1, n_gates=9 slots (a skip entry covers several)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12405,
+"hex": "000101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 51,
+"text": ".byte 0x00, 0x01, 0x01                      // g0 = nand i1 i1   not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12408,
+"hex": "000002",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 52,
+"text": ".byte 0x00, 0x00, 0x02                      // g1 = nand i0 g0   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12411,
+"hex": "000303",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 53,
+"text": ".byte 0x00, 0x03, 0x03                      // g2 = nand g1 g1   a and not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12414,
+"hex": "000000",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 54,
+"text": ".byte 0x00, 0x00, 0x00                      // g3 = nand i0 i0   not a",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12417,
+"hex": "000501",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 55,
+"text": ".byte 0x00, 0x05, 0x01                      // g4 = nand g3 i1   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12420,
+"hex": "000606",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 56,
+"text": ".byte 0x00, 0x06, 0x06                      // g5 = nand g4 g4   not a and b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12423,
+"hex": "000404",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 57,
+"text": ".byte 0x00, 0x04, 0x04                      // g6 = nand g2 g2   not a",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12426,
+"hex": "000707",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 58,
+"text": ".byte 0x00, 0x07, 0x07                      // g7 = nand g5 g5   not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12429,
+"hex": "000809",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 59,
+"text": ".byte 0x00, 0x08, 0x09                      // g8 = nand g6 g7   xor = (a and not b) or (not a and b)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12432,
+"hex": "0a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 60,
+"text": ".byte 0x0A                                  // outputs: g8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12433,
+"hex": "01030108",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 62,
+"text": ".byte 0x01, 0x03, 0x01, 0x08                // mux: flags=comb/improvable, n_in=3, n_out=1, n_gates=8 slots (a skip entry covers several)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12437,
+"hex": "000202",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 63,
+"text": ".byte 0x00, 0x02, 0x02                      // g0 = nand i2 i2   not sel",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12440,
+"hex": "000003",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 64,
+"text": ".byte 0x00, 0x00, 0x03                      // g1 = nand i0 g0   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12443,
+"hex": "000404",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 65,
+"text": ".byte 0x00, 0x04, 0x04                      // g2 = nand g1 g1   a and not sel",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12446,
+"hex": "000102",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 66,
+"text": ".byte 0x00, 0x01, 0x02                      // g3 = nand i1 i2   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12449,
+"hex": "000606",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 67,
+"text": ".byte 0x00, 0x06, 0x06                      // g4 = nand g3 g3   b and sel",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12452,
+"hex": "000505",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 68,
+"text": ".byte 0x00, 0x05, 0x05                      // g5 = nand g2 g2   not a",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12455,
+"hex": "000707",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 69,
+"text": ".byte 0x00, 0x07, 0x07                      // g6 = nand g4 g4   not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12458,
+"hex": "000809",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 70,
+"text": ".byte 0x00, 0x08, 0x09                      // g7 = nand g5 g6   mux = or(...)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12461,
+"hex": "0a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 71,
+"text": ".byte 0x0A                                  // outputs: g7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12462,
+"hex": "0102020b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 73,
+"text": ".byte 0x01, 0x02, 0x02, 0x0B                // ha: flags=comb/improvable, n_in=2, n_out=2, n_gates=11 slots (a skip entry covers several)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12466,
+"hex": "000101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 74,
+"text": ".byte 0x00, 0x01, 0x01                      // g0 = nand i1 i1   not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12469,
+"hex": "000002",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 75,
+"text": ".byte 0x00, 0x00, 0x02                      // g1 = nand i0 g0   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12472,
+"hex": "000303",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 76,
+"text": ".byte 0x00, 0x03, 0x03                      // g2 = nand g1 g1   a and not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12475,
+"hex": "000000",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 77,
+"text": ".byte 0x00, 0x00, 0x00                      // g3 = nand i0 i0   not a",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12478,
+"hex": "000501",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 78,
+"text": ".byte 0x00, 0x05, 0x01                      // g4 = nand g3 i1   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12481,
+"hex": "000606",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 79,
+"text": ".byte 0x00, 0x06, 0x06                      // g5 = nand g4 g4   not a and b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12484,
+"hex": "000404",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 80,
+"text": ".byte 0x00, 0x04, 0x04                      // g6 = nand g2 g2   not a",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12487,
+"hex": "000707",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 81,
+"text": ".byte 0x00, 0x07, 0x07                      // g7 = nand g5 g5   not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12490,
+"hex": "000809",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 82,
+"text": ".byte 0x00, 0x08, 0x09                      // g8 = nand g6 g7   xor = (a and not b) or (not a and b)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12493,
+"hex": "000001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 83,
+"text": ".byte 0x00, 0x00, 0x01                      // g9 = nand i0 i1   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12496,
+"hex": "000b0b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 84,
+"text": ".byte 0x00, 0x0B, 0x0B                      // g10 = nand g9 g9   carry = a and b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12499,
+"hex": "0a0c",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 85,
+"text": ".byte 0x0A, 0x0C                            // outputs: g8 g10",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12501,
+"hex": "01030219",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 87,
+"text": ".byte 0x01, 0x03, 0x02, 0x19                // fa: flags=comb/improvable, n_in=3, n_out=2, n_gates=25 slots (a skip entry covers several)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12505,
+"hex": "000101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 88,
+"text": ".byte 0x00, 0x01, 0x01                      // g0 = nand i1 i1   not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12508,
+"hex": "000003",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 89,
+"text": ".byte 0x00, 0x00, 0x03                      // g1 = nand i0 g0   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12511,
+"hex": "000404",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 90,
+"text": ".byte 0x00, 0x04, 0x04                      // g2 = nand g1 g1   a and not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12514,
+"hex": "000000",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 91,
+"text": ".byte 0x00, 0x00, 0x00                      // g3 = nand i0 i0   not a",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12517,
+"hex": "000601",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 92,
+"text": ".byte 0x00, 0x06, 0x01                      // g4 = nand g3 i1   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12520,
+"hex": "000707",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 93,
+"text": ".byte 0x00, 0x07, 0x07                      // g5 = nand g4 g4   not a and b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12523,
+"hex": "000505",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 94,
+"text": ".byte 0x00, 0x05, 0x05                      // g6 = nand g2 g2   not a",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12526,
+"hex": "000808",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 95,
+"text": ".byte 0x00, 0x08, 0x08                      // g7 = nand g5 g5   not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12529,
+"hex": "00090a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 96,
+"text": ".byte 0x00, 0x09, 0x0A                      // g8 = nand g6 g7   xor = (a and not b) or (not a and b)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12532,
+"hex": "000001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 97,
+"text": ".byte 0x00, 0x00, 0x01                      // g9 = nand i0 i1   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12535,
+"hex": "000c0c",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 98,
+"text": ".byte 0x00, 0x0C, 0x0C                      // g10 = nand g9 g9   c1 = a and b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12538,
+"hex": "000202",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 99,
+"text": ".byte 0x00, 0x02, 0x02                      // g11 = nand i2 i2   not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12541,
+"hex": "000b0e",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 100,
+"text": ".byte 0x00, 0x0B, 0x0E                      // g12 = nand g8 g11   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12544,
+"hex": "000f0f",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 101,
+"text": ".byte 0x00, 0x0F, 0x0F                      // g13 = nand g12 g12   a and not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12547,
+"hex": "000b0b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 102,
+"text": ".byte 0x00, 0x0B, 0x0B                      // g14 = nand g8 g8   not a",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12550,
+"hex": "001102",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 103,
+"text": ".byte 0x00, 0x11, 0x02                      // g15 = nand g14 i2   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12553,
+"hex": "001212",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 104,
+"text": ".byte 0x00, 0x12, 0x12                      // g16 = nand g15 g15   not a and b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12556,
+"hex": "001010",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 105,
+"text": ".byte 0x00, 0x10, 0x10                      // g17 = nand g13 g13   not a",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12559,
+"hex": "001313",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 106,
+"text": ".byte 0x00, 0x13, 0x13                      // g18 = nand g16 g16   not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12562,
+"hex": "001415",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 107,
+"text": ".byte 0x00, 0x14, 0x15                      // g19 = nand g17 g18   xor = (a and not b) or (not a and b)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12565,
+"hex": "000b02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 108,
+"text": ".byte 0x00, 0x0B, 0x02                      // g20 = nand g8 i2   nand of the and",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12568,
+"hex": "001717",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 109,
+"text": ".byte 0x00, 0x17, 0x17                      // g21 = nand g20 g20   c2 = s1 and cin",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12571,
+"hex": "000d0d",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 110,
+"text": ".byte 0x00, 0x0D, 0x0D                      // g22 = nand g10 g10   not a",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12574,
+"hex": "001818",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 111,
+"text": ".byte 0x00, 0x18, 0x18                      // g23 = nand g21 g21   not b",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12577,
+"hex": "00191a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 112,
+"text": ".byte 0x00, 0x19, 0x1A                      // g24 = nand g22 g23   carry = c1 or c2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12580,
+"hex": "161b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 113,
+"text": ".byte 0x16, 0x1B                            // outputs: g19 g24",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12582,
+"hex": "0213103c",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 115,
+"text": ".byte 0x02, 0x13, 0x10, 0x3C                // ram_word: flags=tile, n_in=19, n_out=16, n_gates=60 slots (a skip entry covers several)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12586,
+"hex": "000002",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 116,
+"text": ".byte 0x00, 0x00, 0x02                      // g0 = nand i0 i2   write enable, active low = nand(hiW, lo)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12589,
+"hex": "001313",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 117,
+"text": ".byte 0x00, 0x13, 0x13                      // g1 = nand g0 g0   write enable",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12592,
+"hex": "000102",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 118,
+"text": ".byte 0x00, 0x01, 0x02                      // g2 = nand i1 i2   read select, active low = nand(hiR, lo)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12595,
+"hex": "001515",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 119,
+"text": ".byte 0x00, 0x15, 0x15                      // g3 = nand g2 g2   read select",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12598,
+"hex": "011a1a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 120,
+"text": ".byte 0x01, 0x1A, 0x1A                      // g4 = dff g7   bit 0 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12601,
+"hex": "001713",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 121,
+"text": ".byte 0x00, 0x17, 0x13                      // g5 = nand g4 g0   bit 0: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12604,
+"hex": "000314",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 122,
+"text": ".byte 0x00, 0x03, 0x14                      // g6 = nand i3 g1   bit 0: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12607,
+"hex": "001819",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 123,
+"text": ".byte 0x00, 0x18, 0x19                      // g7 = nand g5 g6   bit 0: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12610,
+"hex": "001617",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 124,
+"text": ".byte 0x00, 0x16, 0x17                      // g8 = nand g3 g4   bit 0: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12613,
+"hex": "000b1b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 125,
+"text": ".byte 0x00, 0x0B, 0x1B                      // g9 = nand i11 g8   bit 0: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12616,
+"hex": "001c1c",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 126,
+"text": ".byte 0x00, 0x1C, 0x1C                      // g10 = nand g9 g9   bit 0: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12619,
+"hex": "012121",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 127,
+"text": ".byte 0x01, 0x21, 0x21                      // g11 = dff g14   bit 1 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12622,
+"hex": "001e13",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 128,
+"text": ".byte 0x00, 0x1E, 0x13                      // g12 = nand g11 g0   bit 1: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12625,
+"hex": "000414",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 129,
+"text": ".byte 0x00, 0x04, 0x14                      // g13 = nand i4 g1   bit 1: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12628,
+"hex": "001f20",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 130,
+"text": ".byte 0x00, 0x1F, 0x20                      // g14 = nand g12 g13   bit 1: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12631,
+"hex": "00161e",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 131,
+"text": ".byte 0x00, 0x16, 0x1E                      // g15 = nand g3 g11   bit 1: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12634,
+"hex": "000c22",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 132,
+"text": ".byte 0x00, 0x0C, 0x22                      // g16 = nand i12 g15   bit 1: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12637,
+"hex": "002323",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 133,
+"text": ".byte 0x00, 0x23, 0x23                      // g17 = nand g16 g16   bit 1: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12640,
+"hex": "012828",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 134,
+"text": ".byte 0x01, 0x28, 0x28                      // g18 = dff g21   bit 2 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12643,
+"hex": "002513",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 135,
+"text": ".byte 0x00, 0x25, 0x13                      // g19 = nand g18 g0   bit 2: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12646,
+"hex": "000514",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 136,
+"text": ".byte 0x00, 0x05, 0x14                      // g20 = nand i5 g1   bit 2: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12649,
+"hex": "002627",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 137,
+"text": ".byte 0x00, 0x26, 0x27                      // g21 = nand g19 g20   bit 2: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12652,
+"hex": "001625",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 138,
+"text": ".byte 0x00, 0x16, 0x25                      // g22 = nand g3 g18   bit 2: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12655,
+"hex": "000d29",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 139,
+"text": ".byte 0x00, 0x0D, 0x29                      // g23 = nand i13 g22   bit 2: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12658,
+"hex": "002a2a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 140,
+"text": ".byte 0x00, 0x2A, 0x2A                      // g24 = nand g23 g23   bit 2: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12661,
+"hex": "012f2f",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 141,
+"text": ".byte 0x01, 0x2F, 0x2F                      // g25 = dff g28   bit 3 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12664,
+"hex": "002c13",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 142,
+"text": ".byte 0x00, 0x2C, 0x13                      // g26 = nand g25 g0   bit 3: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12667,
+"hex": "000614",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 143,
+"text": ".byte 0x00, 0x06, 0x14                      // g27 = nand i6 g1   bit 3: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12670,
+"hex": "002d2e",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 144,
+"text": ".byte 0x00, 0x2D, 0x2E                      // g28 = nand g26 g27   bit 3: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12673,
+"hex": "00162c",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 145,
+"text": ".byte 0x00, 0x16, 0x2C                      // g29 = nand g3 g25   bit 3: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12676,
+"hex": "000e30",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 146,
+"text": ".byte 0x00, 0x0E, 0x30                      // g30 = nand i14 g29   bit 3: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12679,
+"hex": "003131",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 147,
+"text": ".byte 0x00, 0x31, 0x31                      // g31 = nand g30 g30   bit 3: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12682,
+"hex": "013636",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 148,
+"text": ".byte 0x01, 0x36, 0x36                      // g32 = dff g35   bit 4 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12685,
+"hex": "003313",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 149,
+"text": ".byte 0x00, 0x33, 0x13                      // g33 = nand g32 g0   bit 4: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12688,
+"hex": "000714",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 150,
+"text": ".byte 0x00, 0x07, 0x14                      // g34 = nand i7 g1   bit 4: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12691,
+"hex": "003435",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 151,
+"text": ".byte 0x00, 0x34, 0x35                      // g35 = nand g33 g34   bit 4: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12694,
+"hex": "001633",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 152,
+"text": ".byte 0x00, 0x16, 0x33                      // g36 = nand g3 g32   bit 4: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12697,
+"hex": "000f37",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 153,
+"text": ".byte 0x00, 0x0F, 0x37                      // g37 = nand i15 g36   bit 4: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12700,
+"hex": "003838",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 154,
+"text": ".byte 0x00, 0x38, 0x38                      // g38 = nand g37 g37   bit 4: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12703,
+"hex": "013d3d",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 155,
+"text": ".byte 0x01, 0x3D, 0x3D                      // g39 = dff g42   bit 5 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12706,
+"hex": "003a13",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 156,
+"text": ".byte 0x00, 0x3A, 0x13                      // g40 = nand g39 g0   bit 5: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12709,
+"hex": "000814",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 157,
+"text": ".byte 0x00, 0x08, 0x14                      // g41 = nand i8 g1   bit 5: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12712,
+"hex": "003b3c",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 158,
+"text": ".byte 0x00, 0x3B, 0x3C                      // g42 = nand g40 g41   bit 5: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12715,
+"hex": "00163a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 159,
+"text": ".byte 0x00, 0x16, 0x3A                      // g43 = nand g3 g39   bit 5: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12718,
+"hex": "00103e",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 160,
+"text": ".byte 0x00, 0x10, 0x3E                      // g44 = nand i16 g43   bit 5: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12721,
+"hex": "003f3f",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 161,
+"text": ".byte 0x00, 0x3F, 0x3F                      // g45 = nand g44 g44   bit 5: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12724,
+"hex": "014444",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 162,
+"text": ".byte 0x01, 0x44, 0x44                      // g46 = dff g49   bit 6 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12727,
+"hex": "004113",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 163,
+"text": ".byte 0x00, 0x41, 0x13                      // g47 = nand g46 g0   bit 6: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12730,
+"hex": "000914",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 164,
+"text": ".byte 0x00, 0x09, 0x14                      // g48 = nand i9 g1   bit 6: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12733,
+"hex": "004243",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 165,
+"text": ".byte 0x00, 0x42, 0x43                      // g49 = nand g47 g48   bit 6: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12736,
+"hex": "001641",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 166,
+"text": ".byte 0x00, 0x16, 0x41                      // g50 = nand g3 g46   bit 6: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12739,
+"hex": "001145",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 167,
+"text": ".byte 0x00, 0x11, 0x45                      // g51 = nand i17 g50   bit 6: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12742,
+"hex": "004646",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 168,
+"text": ".byte 0x00, 0x46, 0x46                      // g52 = nand g51 g51   bit 6: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12745,
+"hex": "014b4b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 169,
+"text": ".byte 0x01, 0x4B, 0x4B                      // g53 = dff g56   bit 7 storage",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12748,
+"hex": "004813",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 170,
+"text": ".byte 0x00, 0x48, 0x13                      // g54 = nand g53 g0   bit 7: keep path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12751,
+"hex": "000a14",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 171,
+"text": ".byte 0x00, 0x0A, 0x14                      // g55 = nand i10 g1   bit 7: write path",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12754,
+"hex": "00494a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 172,
+"text": ".byte 0x00, 0x49, 0x4A                      // g56 = nand g54 g55   bit 7: next value",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12757,
+"hex": "001648",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 173,
+"text": ".byte 0x00, 0x16, 0x48                      // g57 = nand g3 g53   bit 7: selected bit, inverted",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12760,
+"hex": "00124c",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 174,
+"text": ".byte 0x00, 0x12, 0x4C                      // g58 = nand i18 g57   bit 7: chain value (or of this bit with the previous words)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12763,
+"hex": "004d4d",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 175,
+"text": ".byte 0x00, 0x4D, 0x4D                      // g59 = nand g58 g58   bit 7: inverted chain value, passed to the next word",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12766,
+"hex": "1d242b323940474e1c232a31383f464d",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 176,
+"text": ".byte 0x1D, 0x24, 0x2B, 0x32, 0x39, 0x40, 0x47, 0x4E, 0x1C, 0x23, 0x2A, 0x31, 0x38, 0x3F, 0x46, 0x4D// outputs: g10 g17 g24 g31 g38 g45 g52 g59 g9 g16 g23 g30 g37 g44 g51 g58",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12864,
+"hex": "01fe7205",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 179,
+"text": ".byte 0x01, 0xFE, 0x72, 0x05                // node 0: pc.0 = dff pc.mux28   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12868,
+"hex": "01fe7905",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 180,
+"text": ".byte 0x01, 0xFE, 0x79, 0x05                // node 1: pc.1 = dff pc.mux29   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12872,
+"hex": "01fe8005",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 181,
+"text": ".byte 0x01, 0xFE, 0x80, 0x05                // node 2: pc.2 = dff pc.mux30   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12876,
+"hex": "01fe8705",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 182,
+"text": ".byte 0x01, 0xFE, 0x87, 0x05                // node 3: pc.3 = dff pc.mux31   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12880,
+"hex": "01fe8e05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 183,
+"text": ".byte 0x01, 0xFE, 0x8E, 0x05                // node 4: pc.4 = dff pc.mux32   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12884,
+"hex": "01fe9505",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 184,
+"text": ".byte 0x01, 0xFE, 0x95, 0x05                // node 5: pc.5 = dff pc.mux33   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12888,
+"hex": "01fe9c05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 185,
+"text": ".byte 0x01, 0xFE, 0x9C, 0x05                // node 6: pc.6 = dff pc.mux34   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12892,
+"hex": "01fea305",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 186,
+"text": ".byte 0x01, 0xFE, 0xA3, 0x05                // node 7: pc.7 = dff pc.mux35   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12896,
+"hex": "01feaa05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 187,
+"text": ".byte 0x01, 0xFE, 0xAA, 0x05                // node 8: pc.8 = dff pc.mux36   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12900,
+"hex": "01feb105",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 188,
+"text": ".byte 0x01, 0xFE, 0xB1, 0x05                // node 9: pc.9 = dff pc.mux37   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12904,
+"hex": "01feb805",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 189,
+"text": ".byte 0x01, 0xFE, 0xB8, 0x05                // node 10: pc.10 = dff pc.mux38   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12908,
+"hex": "01febf05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 190,
+"text": ".byte 0x01, 0xFE, 0xBF, 0x05                // node 11: pc.11 = dff pc.mux39   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12912,
+"hex": "01fec605",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 191,
+"text": ".byte 0x01, 0xFE, 0xC6, 0x05                // node 12: pc.12 = dff pc.mux40   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12916,
+"hex": "01fecd05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 192,
+"text": ".byte 0x01, 0xFE, 0xCD, 0x05                // node 13: pc.13 = dff pc.mux41   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12920,
+"hex": "01feeb05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 193,
+"text": ".byte 0x01, 0xFE, 0xEB, 0x05                // node 14: a.0 = dff areg.mux2   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12924,
+"hex": "01fe0206",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 194,
+"text": ".byte 0x01, 0xFE, 0x02, 0x06                // node 15: a.1 = dff areg.mux5   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12928,
+"hex": "01fe1906",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 195,
+"text": ".byte 0x01, 0xFE, 0x19, 0x06                // node 16: a.2 = dff areg.mux8   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12932,
+"hex": "01fe3006",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 196,
+"text": ".byte 0x01, 0xFE, 0x30, 0x06                // node 17: a.3 = dff areg.mux11   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12936,
+"hex": "01fe4706",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 197,
+"text": ".byte 0x01, 0xFE, 0x47, 0x06                // node 18: a.4 = dff areg.mux14   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12940,
+"hex": "01fe5e06",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 198,
+"text": ".byte 0x01, 0xFE, 0x5E, 0x06                // node 19: a.5 = dff areg.mux17   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12944,
+"hex": "01fe7506",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 199,
+"text": ".byte 0x01, 0xFE, 0x75, 0x06                // node 20: a.6 = dff areg.mux20   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12948,
+"hex": "01fe8c06",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 200,
+"text": ".byte 0x01, 0xFE, 0x8C, 0x06                // node 21: a.7 = dff areg.mux23   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12952,
+"hex": "01fea306",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 201,
+"text": ".byte 0x01, 0xFE, 0xA3, 0x06                // node 22: a.8 = dff areg.mux26   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12956,
+"hex": "01feba06",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 202,
+"text": ".byte 0x01, 0xFE, 0xBA, 0x06                // node 23: a.9 = dff areg.mux29   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12960,
+"hex": "01fed106",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 203,
+"text": ".byte 0x01, 0xFE, 0xD1, 0x06                // node 24: a.10 = dff areg.mux32   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12964,
+"hex": "01fee806",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 204,
+"text": ".byte 0x01, 0xFE, 0xE8, 0x06                // node 25: a.11 = dff areg.mux35   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12968,
+"hex": "01feff06",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 205,
+"text": ".byte 0x01, 0xFE, 0xFF, 0x06                // node 26: a.12 = dff areg.mux38   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12972,
+"hex": "01fe1607",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 206,
+"text": ".byte 0x01, 0xFE, 0x16, 0x07                // node 27: a.13 = dff areg.mux41   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12976,
+"hex": "01fe1f07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 207,
+"text": ".byte 0x01, 0xFE, 0x1F, 0x07                // node 28: d.0 = dff dreg.mux0   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12980,
+"hex": "01fe2607",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 208,
+"text": ".byte 0x01, 0xFE, 0x26, 0x07                // node 29: d.1 = dff dreg.mux1   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12984,
+"hex": "01fe2d07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 209,
+"text": ".byte 0x01, 0xFE, 0x2D, 0x07                // node 30: d.2 = dff dreg.mux2   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12988,
+"hex": "01fe3407",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 210,
+"text": ".byte 0x01, 0xFE, 0x34, 0x07                // node 31: d.3 = dff dreg.mux3   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12992,
+"hex": "01fe3b07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 211,
+"text": ".byte 0x01, 0xFE, 0x3B, 0x07                // node 32: d.4 = dff dreg.mux4   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 12996,
+"hex": "01fe4207",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 212,
+"text": ".byte 0x01, 0xFE, 0x42, 0x07                // node 33: d.5 = dff dreg.mux5   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13000,
+"hex": "01fe4907",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 213,
+"text": ".byte 0x01, 0xFE, 0x49, 0x07                // node 34: d.6 = dff dreg.mux6   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13004,
+"hex": "01fe5007",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 214,
+"text": ".byte 0x01, 0xFE, 0x50, 0x07                // node 35: d.7 = dff dreg.mux7   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13008,
+"hex": "01fe5a07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 215,
+"text": ".byte 0x01, 0xFE, 0x5A, 0x07                // node 36: irlo.0 = dff ir.mux0   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13012,
+"hex": "01fe6107",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 216,
+"text": ".byte 0x01, 0xFE, 0x61, 0x07                // node 37: irlo.1 = dff ir.mux1   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13016,
+"hex": "01fe6807",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 217,
+"text": ".byte 0x01, 0xFE, 0x68, 0x07                // node 38: irlo.2 = dff ir.mux2   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13020,
+"hex": "01fe6f07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 218,
+"text": ".byte 0x01, 0xFE, 0x6F, 0x07                // node 39: irlo.3 = dff ir.mux3   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13024,
+"hex": "01fe7607",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 219,
+"text": ".byte 0x01, 0xFE, 0x76, 0x07                // node 40: irlo.4 = dff ir.mux4   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13028,
+"hex": "01fe7d07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 220,
+"text": ".byte 0x01, 0xFE, 0x7D, 0x07                // node 41: irlo.5 = dff ir.mux5   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13032,
+"hex": "01fe8407",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 221,
+"text": ".byte 0x01, 0xFE, 0x84, 0x07                // node 42: irlo.6 = dff ir.mux6   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13036,
+"hex": "01fe8b07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 222,
+"text": ".byte 0x01, 0xFE, 0x8B, 0x07                // node 43: irlo.7 = dff ir.mux7   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13040,
+"hex": "01fe9207",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 223,
+"text": ".byte 0x01, 0xFE, 0x92, 0x07                // node 44: irhi.0 = dff ir.mux8   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13044,
+"hex": "01fe9907",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 224,
+"text": ".byte 0x01, 0xFE, 0x99, 0x07                // node 45: irhi.1 = dff ir.mux9   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13048,
+"hex": "01fea007",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 225,
+"text": ".byte 0x01, 0xFE, 0xA0, 0x07                // node 46: irhi.2 = dff ir.mux10   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13052,
+"hex": "01fea707",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 226,
+"text": ".byte 0x01, 0xFE, 0xA7, 0x07                // node 47: irhi.3 = dff ir.mux11   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13056,
+"hex": "01feae07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 227,
+"text": ".byte 0x01, 0xFE, 0xAE, 0x07                // node 48: irhi.4 = dff ir.mux12   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13060,
+"hex": "01fe7501",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 228,
+"text": ".byte 0x01, 0xFE, 0x75, 0x01                // node 49: st.0 = dff control.or3   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13064,
+"hex": "01fe7601",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 229,
+"text": ".byte 0x01, 0xFE, 0x76, 0x01                // node 50: st.1 = dff control.and5   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13068,
+"hex": "01fe7901",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 230,
+"text": ".byte 0x01, 0xFE, 0x79, 0x01                // node 51: st.2 = dff control.and7   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13072,
+"hex": "01fe7c01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 231,
+"text": ".byte 0x01, 0xFE, 0x7C, 0x01                // node 52: st.3 = dff control.and9   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13076,
+"hex": "01fe7d01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 232,
+"text": ".byte 0x01, 0xFE, 0x7D, 0x01                // node 53: st.4 = dff control.and10   # register bit",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13080,
+"hex": "008080",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 233,
+"text": ".byte 0x00, 0x80, 0x80                      // node 54: c.n = nand rom0 rom0   # constant helper",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13083,
+"hex": "008001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 234,
+"text": ".byte 0x00, 0x80, 0x01                      // node 55: one = nand rom0 c.n   # constant 1 = nand(x, not x)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13086,
+"hex": "000101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 235,
+"text": ".byte 0x00, 0x01, 0x01                      // node 56: zero = nand one one   # constant 0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13089,
+"hex": "008989",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 236,
+"text": ".byte 0x00, 0x89, 0x89                      // node 57: reset = nand run run",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13092,
+"hex": "040908",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 237,
+"text": ".byte 0x04, 0x09, 0x08                      // node 58: top.or0 = or st.0 st.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13095,
+"hex": "062f3d01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 238,
+"text": ".byte 0x06, 0x2F, 0x3D, 0x01                // node 61: addr.mux0 = mux a.0 pc.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13099,
+"hex": "06364409",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 239,
+"text": ".byte 0x06, 0x36, 0x44, 0x09                // node 69: addr.mux1 = mux a.1 pc.1 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13103,
+"hex": "063d4b11",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 240,
+"text": ".byte 0x06, 0x3D, 0x4B, 0x11                // node 77: addr.mux2 = mux a.2 pc.2 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13107,
+"hex": "06445219",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 241,
+"text": ".byte 0x06, 0x44, 0x52, 0x19                // node 85: addr.mux3 = mux a.3 pc.3 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13111,
+"hex": "064b5921",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 242,
+"text": ".byte 0x06, 0x4B, 0x59, 0x21                // node 93: addr.mux4 = mux a.4 pc.4 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13115,
+"hex": "06526029",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 243,
+"text": ".byte 0x06, 0x52, 0x60, 0x29                // node 101: addr.mux5 = mux a.5 pc.5 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13119,
+"hex": "06596731",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 244,
+"text": ".byte 0x06, 0x59, 0x67, 0x31                // node 109: addr.mux6 = mux a.6 pc.6 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13123,
+"hex": "06606e39",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 245,
+"text": ".byte 0x06, 0x60, 0x6E, 0x39                // node 117: addr.mux7 = mux a.7 pc.7 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13127,
+"hex": "06677541",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 246,
+"text": ".byte 0x06, 0x67, 0x75, 0x41                // node 125: addr.mux8 = mux a.8 pc.8 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13131,
+"hex": "066e7c49",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 247,
+"text": ".byte 0x06, 0x6E, 0x7C, 0x49                // node 133: addr.mux9 = mux a.9 pc.9 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13135,
+"hex": "0675fd830051",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 248,
+"text": ".byte 0x06, 0x75, 0xFD, 0x83, 0x00, 0x51    // node 141: addr.mux10 = mux a.10 pc.10 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13141,
+"hex": "067cfd8a0059",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 249,
+"text": ".byte 0x06, 0x7C, 0xFD, 0x8A, 0x00, 0x59    // node 149: addr.mux11 = mux a.11 pc.11 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13147,
+"hex": "06fd8300fd910061",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 250,
+"text": ".byte 0x06, 0xFD, 0x83, 0x00, 0xFD, 0x91, 0x00, 0x61// node 157: addr.mux12 = mux a.12 pc.12 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13155,
+"hex": "06fd8a00fd980069",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 251,
+"text": ".byte 0x06, 0xFD, 0x8A, 0x00, 0xFD, 0x98, 0x00, 0x69// node 165: addr.mux13 = mux a.13 pc.13 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13163,
+"hex": "076976",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 252,
+"text": ".byte 0x07, 0x69, 0x76                      // node 173: addr.ha0 = ha addr.mux0 one",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13166,
+"hex": "076c01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 253,
+"text": ".byte 0x07, 0x6C, 0x01                      // node 184: addr.ha1 = ha addr.mux1 addr.ha0.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13169,
+"hex": "076f01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 254,
+"text": ".byte 0x07, 0x6F, 0x01                      // node 195: addr.ha2 = ha addr.mux2 addr.ha1.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13172,
+"hex": "077201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 255,
+"text": ".byte 0x07, 0x72, 0x01                      // node 206: addr.ha3 = ha addr.mux3 addr.ha2.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13175,
+"hex": "077501",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 256,
+"text": ".byte 0x07, 0x75, 0x01                      // node 217: addr.ha4 = ha addr.mux4 addr.ha3.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13178,
+"hex": "077801",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 257,
+"text": ".byte 0x07, 0x78, 0x01                      // node 228: addr.ha5 = ha addr.mux5 addr.ha4.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13181,
+"hex": "077b01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 258,
+"text": ".byte 0x07, 0x7B, 0x01                      // node 239: addr.ha6 = ha addr.mux6 addr.ha5.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13184,
+"hex": "077e01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 259,
+"text": ".byte 0x07, 0x7E, 0x01                      // node 250: addr.ha7 = ha addr.mux7 addr.ha6.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13187,
+"hex": "07fd810001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 260,
+"text": ".byte 0x07, 0xFD, 0x81, 0x00, 0x01          // node 261: addr.ha8 = ha addr.mux8 addr.ha7.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13192,
+"hex": "07fd840001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 261,
+"text": ".byte 0x07, 0xFD, 0x84, 0x00, 0x01          // node 272: addr.ha9 = ha addr.mux9 addr.ha8.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13197,
+"hex": "07fd870001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 262,
+"text": ".byte 0x07, 0xFD, 0x87, 0x00, 0x01          // node 283: addr.ha10 = ha addr.mux10 addr.ha9.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13202,
+"hex": "07fd8a0001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 263,
+"text": ".byte 0x07, 0xFD, 0x8A, 0x00, 0x01          // node 294: addr.ha11 = ha addr.mux11 addr.ha10.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13207,
+"hex": "07fd8d0001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 264,
+"text": ".byte 0x07, 0xFD, 0x8D, 0x00, 0x01          // node 305: addr.ha12 = ha addr.mux12 addr.ha11.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13212,
+"hex": "07fd900001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 265,
+"text": ".byte 0x07, 0xFD, 0x90, 0x00, 0x01          // node 316: addr.ha13 = ha addr.mux13 addr.ha12.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13217,
+"hex": "02fddb00",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 266,
+"text": ".byte 0x02, 0xFD, 0xDB, 0x00                // node 327: decode.not0 = not addr.mux5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13221,
+"hex": "03fd110101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 267,
+"text": ".byte 0x03, 0xFD, 0x11, 0x01, 0x01          // node 328: decode.and0 = and one decode.not0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13226,
+"hex": "02fdd600",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 268,
+"text": ".byte 0x02, 0xFD, 0xD6, 0x00                // node 330: decode.not1 = not addr.mux6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13230,
+"hex": "030201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 269,
+"text": ".byte 0x03, 0x02, 0x01                      // node 331: decode.and1 = and decode.and0 decode.not1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13233,
+"hex": "02fdd100",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 270,
+"text": ".byte 0x02, 0xFD, 0xD1, 0x00                // node 333: decode.not2 = not addr.mux7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13237,
+"hex": "030201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 271,
+"text": ".byte 0x03, 0x02, 0x01                      // node 334: decode.and2 = and decode.and1 decode.not2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13240,
+"hex": "02fdcc00",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 272,
+"text": ".byte 0x02, 0xFD, 0xCC, 0x00                // node 336: decode.not3 = not addr.mux8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13244,
+"hex": "030201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 273,
+"text": ".byte 0x03, 0x02, 0x01                      // node 337: decode.and3 = and decode.and2 decode.not3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13247,
+"hex": "02fdc700",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 274,
+"text": ".byte 0x02, 0xFD, 0xC7, 0x00                // node 339: decode.not4 = not addr.mux9",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13251,
+"hex": "030201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 275,
+"text": ".byte 0x03, 0x02, 0x01                      // node 340: decode.and4 = and decode.and3 decode.not4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13254,
+"hex": "02fdc200",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 276,
+"text": ".byte 0x02, 0xFD, 0xC2, 0x00                // node 342: decode.not5 = not addr.mux10",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13258,
+"hex": "030201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 277,
+"text": ".byte 0x03, 0x02, 0x01                      // node 343: decode.and5 = and decode.and4 decode.not5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13261,
+"hex": "02fdbd00",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 278,
+"text": ".byte 0x02, 0xFD, 0xBD, 0x00                // node 345: decode.not6 = not addr.mux11",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13265,
+"hex": "030201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 279,
+"text": ".byte 0x03, 0x02, 0x01                      // node 346: decode.and6 = and decode.and5 decode.not6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13268,
+"hex": "02fdb800",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 280,
+"text": ".byte 0x02, 0xFD, 0xB8, 0x00                // node 348: decode.not7 = not addr.mux12",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13272,
+"hex": "030201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 281,
+"text": ".byte 0x03, 0x02, 0x01                      // node 349: decode.and7 = and decode.and6 decode.not7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13275,
+"hex": "02fdb300",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 282,
+"text": ".byte 0x02, 0xFD, 0xB3, 0x00                // node 351: decode.not8 = not addr.mux13",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13279,
+"hex": "030201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 283,
+"text": ".byte 0x03, 0x02, 0x01                      // node 352: decode.and8 = and decode.and7 decode.not8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13282,
+"hex": "02fdb600",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 284,
+"text": ".byte 0x02, 0xFD, 0xB6, 0x00                // node 354: decode.not9 = not addr.mux13",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13286,
+"hex": "0301fdff00",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 285,
+"text": ".byte 0x03, 0x01, 0xFD, 0xFF, 0x00          // node 355: decode.and9 = and decode.not9 addr.mux4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13291,
+"hex": "0301fdf900",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 286,
+"text": ".byte 0x03, 0x01, 0xFD, 0xF9, 0x00          // node 357: decode.and10 = and decode.and9 addr.mux5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13296,
+"hex": "0301fdf300",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 287,
+"text": ".byte 0x03, 0x01, 0xFD, 0xF3, 0x00          // node 359: decode.and11 = and decode.and10 addr.mux6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13301,
+"hex": "0301fded00",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 288,
+"text": ".byte 0x03, 0x01, 0xFD, 0xED, 0x00          // node 361: decode.and12 = and decode.and11 addr.mux7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13306,
+"hex": "0301fde700",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 289,
+"text": ".byte 0x03, 0x01, 0xFD, 0xE7, 0x00          // node 363: decode.and13 = and decode.and12 addr.mux8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13311,
+"hex": "0301fde100",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 290,
+"text": ".byte 0x03, 0x01, 0xFD, 0xE1, 0x00          // node 365: decode.and14 = and decode.and13 addr.mux9",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13316,
+"hex": "0301fddb00",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 291,
+"text": ".byte 0x03, 0x01, 0xFD, 0xDB, 0x00          // node 367: decode.and15 = and decode.and14 addr.mux10",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13321,
+"hex": "0301fdd500",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 292,
+"text": ".byte 0x03, 0x01, 0xFD, 0xD5, 0x00          // node 369: decode.and16 = and decode.and15 addr.mux11",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13326,
+"hex": "0301fdcf00",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 293,
+"text": ".byte 0x03, 0x01, 0xFD, 0xCF, 0x00          // node 371: decode.and17 = and decode.and16 addr.mux12",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13331,
+"hex": "00148a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 294,
+"text": ".byte 0x00, 0x14, 0x8A                      // node 373: decode.nand0 = nand decode.and8 ramrd0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13334,
+"hex": "00fdca0080",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 295,
+"text": ".byte 0x00, 0xFD, 0xCA, 0x00, 0x80          // node 374: decode.nand1 = nand addr.mux13 rom0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13339,
+"hex": "000201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 296,
+"text": ".byte 0x00, 0x02, 0x01                      // node 375: decode.nand2 = nand decode.nand0 decode.nand1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13342,
+"hex": "00178b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 297,
+"text": ".byte 0x00, 0x17, 0x8B                      // node 376: decode.nand3 = nand decode.and8 ramrd1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13345,
+"hex": "00fdcd0081",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 298,
+"text": ".byte 0x00, 0xFD, 0xCD, 0x00, 0x81          // node 377: decode.nand4 = nand addr.mux13 rom1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13350,
+"hex": "000201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 299,
+"text": ".byte 0x00, 0x02, 0x01                      // node 378: decode.nand5 = nand decode.nand3 decode.nand4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13353,
+"hex": "001a8c",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 300,
+"text": ".byte 0x00, 0x1A, 0x8C                      // node 379: decode.nand6 = nand decode.and8 ramrd2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13356,
+"hex": "00fdd00082",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 301,
+"text": ".byte 0x00, 0xFD, 0xD0, 0x00, 0x82          // node 380: decode.nand7 = nand addr.mux13 rom2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13361,
+"hex": "000201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 302,
+"text": ".byte 0x00, 0x02, 0x01                      // node 381: decode.nand8 = nand decode.nand6 decode.nand7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13364,
+"hex": "001d8d",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 303,
+"text": ".byte 0x00, 0x1D, 0x8D                      // node 382: decode.nand9 = nand decode.and8 ramrd3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13367,
+"hex": "00fdd30083",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 304,
+"text": ".byte 0x00, 0xFD, 0xD3, 0x00, 0x83          // node 383: decode.nand10 = nand addr.mux13 rom3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13372,
+"hex": "000201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 305,
+"text": ".byte 0x00, 0x02, 0x01                      // node 384: decode.nand11 = nand decode.nand9 decode.nand10",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13375,
+"hex": "00208e",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 306,
+"text": ".byte 0x00, 0x20, 0x8E                      // node 385: decode.nand12 = nand decode.and8 ramrd4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13378,
+"hex": "00fdd60084",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 307,
+"text": ".byte 0x00, 0xFD, 0xD6, 0x00, 0x84          // node 386: decode.nand13 = nand addr.mux13 rom4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13383,
+"hex": "000201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 308,
+"text": ".byte 0x00, 0x02, 0x01                      // node 387: decode.nand14 = nand decode.nand12 decode.nand13",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13386,
+"hex": "00238f",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 309,
+"text": ".byte 0x00, 0x23, 0x8F                      // node 388: decode.nand15 = nand decode.and8 ramrd5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13389,
+"hex": "00fdd90085",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 310,
+"text": ".byte 0x00, 0xFD, 0xD9, 0x00, 0x85          // node 389: decode.nand16 = nand addr.mux13 rom5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13394,
+"hex": "000201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 311,
+"text": ".byte 0x00, 0x02, 0x01                      // node 390: decode.nand17 = nand decode.nand15 decode.nand16",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13397,
+"hex": "002690",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 312,
+"text": ".byte 0x00, 0x26, 0x90                      // node 391: decode.nand18 = nand decode.and8 ramrd6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13400,
+"hex": "00fddc0086",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 313,
+"text": ".byte 0x00, 0xFD, 0xDC, 0x00, 0x86          // node 392: decode.nand19 = nand addr.mux13 rom6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13405,
+"hex": "000201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 314,
+"text": ".byte 0x00, 0x02, 0x01                      // node 393: decode.nand20 = nand decode.nand18 decode.nand19",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13408,
+"hex": "002991",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 315,
+"text": ".byte 0x00, 0x29, 0x91                      // node 394: decode.nand21 = nand decode.and8 ramrd7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13411,
+"hex": "00fddf0087",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 316,
+"text": ".byte 0x00, 0xFD, 0xDF, 0x00, 0x87          // node 395: decode.nand22 = nand addr.mux13 rom7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13416,
+"hex": "000201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 317,
+"text": ".byte 0x00, 0x02, 0x01                      // node 396: decode.nand23 = nand decode.nand21 decode.nand22",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13419,
+"hex": "030407",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 318,
+"text": ".byte 0x03, 0x04, 0x07                      // node 397: control.and0 = and decode.nand20 decode.nand17",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13422,
+"hex": "030301",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 319,
+"text": ".byte 0x03, 0x03, 0x01                      // node 399: control.and1 = and decode.nand23 control.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13425,
+"hex": "020b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 320,
+"text": ".byte 0x02, 0x0B                            // node 401: control.not0 = not decode.nand17",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13427,
+"hex": "030901",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 321,
+"text": ".byte 0x03, 0x09, 0x01                      // node 402: control.and2 = and decode.nand20 control.not0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13430,
+"hex": "030801",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 322,
+"text": ".byte 0x03, 0x08, 0x01                      // node 404: control.and3 = and decode.nand23 control.and2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13433,
+"hex": "020a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 323,
+"text": ".byte 0x02, 0x0A                            // node 406: control.not1 = not decode.nand23",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13435,
+"hex": "02fd5e01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 324,
+"text": ".byte 0x02, 0xFD, 0x5E, 0x01                // node 407: control.not2 = not reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13439,
+"hex": "040803",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 325,
+"text": ".byte 0x04, 0x08, 0x03                      // node 408: control.or0 = or control.and1 control.and3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13442,
+"hex": "0201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 326,
+"text": ".byte 0x02, 0x01                            // node 411: control.not3 = not control.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13444,
+"hex": "03fd6a0101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 327,
+"text": ".byte 0x03, 0xFD, 0x6A, 0x01, 0x01          // node 412: control.and4 = and st.1 control.not3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13449,
+"hex": "04fd690101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 328,
+"text": ".byte 0x04, 0xFD, 0x69, 0x01, 0x01          // node 414: control.or1 = or st.4 control.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13454,
+"hex": "04fd6e0101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 329,
+"text": ".byte 0x04, 0xFD, 0x6E, 0x01, 0x01          // node 417: control.or2 = or st.2 control.or1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13459,
+"hex": "04fd6b0101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 330,
+"text": ".byte 0x04, 0xFD, 0x6B, 0x01, 0x01          // node 420: control.or3 = or reset control.or2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13464,
+"hex": "0310fd7601",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 331,
+"text": ".byte 0x03, 0x10, 0xFD, 0x76, 0x01          // node 423: control.and5 = and control.not2 st.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13469,
+"hex": "03fd770119",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 332,
+"text": ".byte 0x03, 0xFD, 0x77, 0x01, 0x19          // node 425: control.and6 = and st.1 control.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13474,
+"hex": "031401",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 333,
+"text": ".byte 0x03, 0x14, 0x01                      // node 427: control.and7 = and control.not2 control.and6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13477,
+"hex": "03fd7b0118",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 334,
+"text": ".byte 0x03, 0xFD, 0x7B, 0x01, 0x18          // node 429: control.and8 = and st.1 control.and3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13482,
+"hex": "031801",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 335,
+"text": ".byte 0x03, 0x18, 0x01                      // node 431: control.and9 = and control.not2 control.and8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13485,
+"hex": "031afd7d01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 336,
+"text": ".byte 0x03, 0x1A, 0xFD, 0x7D, 0x01          // node 433: control.and10 = and control.not2 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13490,
+"hex": "06fda5013cfd8301",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 337,
+"text": ".byte 0x06, 0xFD, 0xA5, 0x01, 0x3C, 0xFD, 0x83, 0x01// node 435: alu.mux0 = mux a.0 decode.nand2 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13498,
+"hex": "06fdac0141fd8b01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 338,
+"text": ".byte 0x06, 0xFD, 0xAC, 0x01, 0x41, 0xFD, 0x8B, 0x01// node 443: alu.mux1 = mux a.1 decode.nand5 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13506,
+"hex": "06fdb30146fd9301",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 339,
+"text": ".byte 0x06, 0xFD, 0xB3, 0x01, 0x46, 0xFD, 0x93, 0x01// node 451: alu.mux2 = mux a.2 decode.nand8 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13514,
+"hex": "06fdba014bfd9b01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 340,
+"text": ".byte 0x06, 0xFD, 0xBA, 0x01, 0x4B, 0xFD, 0x9B, 0x01// node 459: alu.mux3 = mux a.3 decode.nand11 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13522,
+"hex": "06fdc10150fda301",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 341,
+"text": ".byte 0x06, 0xFD, 0xC1, 0x01, 0x50, 0xFD, 0xA3, 0x01// node 467: alu.mux4 = mux a.4 decode.nand14 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13530,
+"hex": "06fdc80155fdab01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 342,
+"text": ".byte 0x06, 0xFD, 0xC8, 0x01, 0x55, 0xFD, 0xAB, 0x01// node 475: alu.mux5 = mux a.5 decode.nand17 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13538,
+"hex": "06fdcf015afdb301",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 343,
+"text": ".byte 0x06, 0xFD, 0xCF, 0x01, 0x5A, 0xFD, 0xB3, 0x01// node 483: alu.mux6 = mux a.6 decode.nand20 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13546,
+"hex": "06fdd6015ffdbb01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 344,
+"text": ".byte 0x06, 0xFD, 0xD6, 0x01, 0x5F, 0xFD, 0xBB, 0x01// node 491: alu.mux7 = mux a.7 decode.nand23 irhi.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13554,
+"hex": "06fdd701fdbb01fdc401",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 345,
+"text": ".byte 0x06, 0xFD, 0xD7, 0x01, 0xFD, 0xBB, 0x01, 0xFD, 0xC4, 0x01// node 499: alu.mux8 = mux d.0 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13564,
+"hex": "06fdde01fdc301fdcc01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 346,
+"text": ".byte 0x06, 0xFD, 0xDE, 0x01, 0xFD, 0xC3, 0x01, 0xFD, 0xCC, 0x01// node 507: alu.mux9 = mux d.1 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13574,
+"hex": "06fde501fdcb01fdd401",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 347,
+"text": ".byte 0x06, 0xFD, 0xE5, 0x01, 0xFD, 0xCB, 0x01, 0xFD, 0xD4, 0x01// node 515: alu.mux10 = mux d.2 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13584,
+"hex": "06fdec01fdd301fddc01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 348,
+"text": ".byte 0x06, 0xFD, 0xEC, 0x01, 0xFD, 0xD3, 0x01, 0xFD, 0xDC, 0x01// node 523: alu.mux11 = mux d.3 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13594,
+"hex": "06fdf301fddb01fde401",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 349,
+"text": ".byte 0x06, 0xFD, 0xF3, 0x01, 0xFD, 0xDB, 0x01, 0xFD, 0xE4, 0x01// node 531: alu.mux12 = mux d.4 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13604,
+"hex": "06fdfa01fde301fdec01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 350,
+"text": ".byte 0x06, 0xFD, 0xFA, 0x01, 0xFD, 0xE3, 0x01, 0xFD, 0xEC, 0x01// node 539: alu.mux13 = mux d.5 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13614,
+"hex": "06fd0102fdeb01fdf401",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 351,
+"text": ".byte 0x06, 0xFD, 0x01, 0x02, 0xFD, 0xEB, 0x01, 0xFD, 0xF4, 0x01// node 547: alu.mux14 = mux d.6 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13624,
+"hex": "06fd0802fdf301fdfc01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 352,
+"text": ".byte 0x06, 0xFD, 0x08, 0x02, 0xFD, 0xF3, 0x01, 0xFD, 0xFC, 0x01// node 555: alu.mux15 = mux d.7 zero irhi.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13634,
+"hex": "0239",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 353,
+"text": ".byte 0x02, 0x39                            // node 563: alu.not0 = not alu.mux8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13636,
+"hex": "0232",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 354,
+"text": ".byte 0x02, 0x32                            // node 564: alu.not1 = not alu.mux9",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13638,
+"hex": "022b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 355,
+"text": ".byte 0x02, 0x2B                            // node 565: alu.not2 = not alu.mux10",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13640,
+"hex": "0224",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 356,
+"text": ".byte 0x02, 0x24                            // node 566: alu.not3 = not alu.mux11",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13642,
+"hex": "021d",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 357,
+"text": ".byte 0x02, 0x1D                            // node 567: alu.not4 = not alu.mux12",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13644,
+"hex": "0216",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 358,
+"text": ".byte 0x02, 0x16                            // node 568: alu.not5 = not alu.mux13",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13646,
+"hex": "020f",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 359,
+"text": ".byte 0x02, 0x0F                            // node 569: alu.not6 = not alu.mux14",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13648,
+"hex": "0208",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 360,
+"text": ".byte 0x02, 0x08                            // node 570: alu.not7 = not alu.mux15",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13650,
+"hex": "064108fd0d02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 361,
+"text": ".byte 0x06, 0x41, 0x08, 0xFD, 0x0D, 0x02    // node 571: alu.mux16 = mux alu.mux8 alu.not0 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13656,
+"hex": "06410ffd1502",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 362,
+"text": ".byte 0x06, 0x41, 0x0F, 0xFD, 0x15, 0x02    // node 579: alu.mux17 = mux alu.mux9 alu.not1 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13662,
+"hex": "064116fd1d02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 363,
+"text": ".byte 0x06, 0x41, 0x16, 0xFD, 0x1D, 0x02    // node 587: alu.mux18 = mux alu.mux10 alu.not2 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13668,
+"hex": "06411dfd2502",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 364,
+"text": ".byte 0x06, 0x41, 0x1D, 0xFD, 0x25, 0x02    // node 595: alu.mux19 = mux alu.mux11 alu.not3 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13674,
+"hex": "064124fd2d02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 365,
+"text": ".byte 0x06, 0x41, 0x24, 0xFD, 0x2D, 0x02    // node 603: alu.mux20 = mux alu.mux12 alu.not4 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13680,
+"hex": "06412bfd3502",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 366,
+"text": ".byte 0x06, 0x41, 0x2B, 0xFD, 0x35, 0x02    // node 611: alu.mux21 = mux alu.mux13 alu.not5 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13686,
+"hex": "064132fd3d02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 367,
+"text": ".byte 0x06, 0x41, 0x32, 0xFD, 0x3D, 0x02    // node 619: alu.mux22 = mux alu.mux14 alu.not6 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13692,
+"hex": "064139fd4502",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 368,
+"text": ".byte 0x06, 0x41, 0x39, 0xFD, 0x45, 0x02    // node 627: alu.mux23 = mux alu.mux15 alu.not7 irhi.2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13698,
+"hex": "06fdc100fd4302fd4e02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 369,
+"text": ".byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x43, 0x02, 0xFD, 0x4E, 0x02// node 635: alu.mux24 = mux alu.mux0 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13708,
+"hex": "06fdc100fd4b02fd5602",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 370,
+"text": ".byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x4B, 0x02, 0xFD, 0x56, 0x02// node 643: alu.mux25 = mux alu.mux1 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13718,
+"hex": "06fdc100fd5302fd5e02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 371,
+"text": ".byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x53, 0x02, 0xFD, 0x5E, 0x02// node 651: alu.mux26 = mux alu.mux2 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13728,
+"hex": "06fdc100fd5b02fd6602",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 372,
+"text": ".byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x5B, 0x02, 0xFD, 0x66, 0x02// node 659: alu.mux27 = mux alu.mux3 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13738,
+"hex": "06fdc100fd6302fd6e02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 373,
+"text": ".byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x63, 0x02, 0xFD, 0x6E, 0x02// node 667: alu.mux28 = mux alu.mux4 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13748,
+"hex": "06fdc100fd6b02fd7602",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 374,
+"text": ".byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x6B, 0x02, 0xFD, 0x76, 0x02// node 675: alu.mux29 = mux alu.mux5 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13758,
+"hex": "06fdc100fd7302fd7e02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 375,
+"text": ".byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x73, 0x02, 0xFD, 0x7E, 0x02// node 683: alu.mux30 = mux alu.mux6 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13768,
+"hex": "06fdc100fd7b02fd8602",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 376,
+"text": ".byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x7B, 0x02, 0xFD, 0x86, 0x02// node 691: alu.mux31 = mux alu.mux7 zero irhi.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13778,
+"hex": "0239",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 377,
+"text": ".byte 0x02, 0x39                            // node 699: alu.not8 = not alu.mux24",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13780,
+"hex": "0232",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 378,
+"text": ".byte 0x02, 0x32                            // node 700: alu.not9 = not alu.mux25",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13782,
+"hex": "022b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 379,
+"text": ".byte 0x02, 0x2B                            // node 701: alu.not10 = not alu.mux26",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13784,
+"hex": "0224",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 380,
+"text": ".byte 0x02, 0x24                            // node 702: alu.not11 = not alu.mux27",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13786,
+"hex": "021d",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 381,
+"text": ".byte 0x02, 0x1D                            // node 703: alu.not12 = not alu.mux28",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13788,
+"hex": "0216",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 382,
+"text": ".byte 0x02, 0x16                            // node 704: alu.not13 = not alu.mux29",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13790,
+"hex": "020f",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 383,
+"text": ".byte 0x02, 0x0F                            // node 705: alu.not14 = not alu.mux30",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13792,
+"hex": "0208",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 384,
+"text": ".byte 0x02, 0x08                            // node 706: alu.not15 = not alu.mux31",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13794,
+"hex": "064108fd9702",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 385,
+"text": ".byte 0x06, 0x41, 0x08, 0xFD, 0x97, 0x02    // node 707: alu.mux32 = mux alu.mux24 alu.not8 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13800,
+"hex": "06410ffd9f02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 386,
+"text": ".byte 0x06, 0x41, 0x0F, 0xFD, 0x9F, 0x02    // node 715: alu.mux33 = mux alu.mux25 alu.not9 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13806,
+"hex": "064116fda702",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 387,
+"text": ".byte 0x06, 0x41, 0x16, 0xFD, 0xA7, 0x02    // node 723: alu.mux34 = mux alu.mux26 alu.not10 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13812,
+"hex": "06411dfdaf02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 388,
+"text": ".byte 0x06, 0x41, 0x1D, 0xFD, 0xAF, 0x02    // node 731: alu.mux35 = mux alu.mux27 alu.not11 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13818,
+"hex": "064124fdb702",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 389,
+"text": ".byte 0x06, 0x41, 0x24, 0xFD, 0xB7, 0x02    // node 739: alu.mux36 = mux alu.mux28 alu.not12 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13824,
+"hex": "06412bfdbf02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 390,
+"text": ".byte 0x06, 0x41, 0x2B, 0xFD, 0xBF, 0x02    // node 747: alu.mux37 = mux alu.mux29 alu.not13 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13830,
+"hex": "064132fdc702",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 391,
+"text": ".byte 0x06, 0x41, 0x32, 0xFD, 0xC7, 0x02    // node 755: alu.mux38 = mux alu.mux30 alu.not14 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13836,
+"hex": "064139fdcf02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 392,
+"text": ".byte 0x06, 0x41, 0x39, 0xFD, 0xCF, 0x02    // node 763: alu.mux39 = mux alu.mux31 alu.not15 irhi.0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13842,
+"hex": "08fdc10039fdcb02",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 393,
+"text": ".byte 0x08, 0xFD, 0xC1, 0x00, 0x39, 0xFD, 0xCB, 0x02// node 771: alu.fa0 = fa alu.mux16 alu.mux32 zero",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13850,
+"hex": "08fdd2004a01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 394,
+"text": ".byte 0x08, 0xFD, 0xD2, 0x00, 0x4A, 0x01    // node 796: alu.fa1 = fa alu.mux17 alu.mux33 alu.fa0.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13856,
+"hex": "08fde3005b01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 395,
+"text": ".byte 0x08, 0xFD, 0xE3, 0x00, 0x5B, 0x01    // node 821: alu.fa2 = fa alu.mux18 alu.mux34 alu.fa1.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13862,
+"hex": "08fdf4006c01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 396,
+"text": ".byte 0x08, 0xFD, 0xF4, 0x00, 0x6C, 0x01    // node 846: alu.fa3 = fa alu.mux19 alu.mux35 alu.fa2.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13868,
+"hex": "08fd05017d01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 397,
+"text": ".byte 0x08, 0xFD, 0x05, 0x01, 0x7D, 0x01    // node 871: alu.fa4 = fa alu.mux20 alu.mux36 alu.fa3.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13874,
+"hex": "08fd1601fd8e0001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 398,
+"text": ".byte 0x08, 0xFD, 0x16, 0x01, 0xFD, 0x8E, 0x00, 0x01// node 896: alu.fa5 = fa alu.mux21 alu.mux37 alu.fa4.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13882,
+"hex": "08fd2701fd9f0001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 399,
+"text": ".byte 0x08, 0xFD, 0x27, 0x01, 0xFD, 0x9F, 0x00, 0x01// node 921: alu.fa6 = fa alu.mux22 alu.mux38 alu.fa5.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13890,
+"hex": "08fd3801fdb00001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 400,
+"text": ".byte 0x08, 0xFD, 0x38, 0x01, 0xFD, 0xB0, 0x00, 0x01// node 946: alu.fa7 = fa alu.mux23 alu.mux39 alu.fa6.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13898,
+"hex": "03fd8901fd0101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 401,
+"text": ".byte 0x03, 0xFD, 0x89, 0x01, 0xFD, 0x01, 0x01// node 971: alu.and0 = and alu.mux16 alu.mux32",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13905,
+"hex": "03fd8301fdfb00",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 402,
+"text": ".byte 0x03, 0xFD, 0x83, 0x01, 0xFD, 0xFB, 0x00// node 973: alu.and1 = and alu.mux17 alu.mux33",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13912,
+"hex": "03fd7d01fdf500",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 403,
+"text": ".byte 0x03, 0xFD, 0x7D, 0x01, 0xFD, 0xF5, 0x00// node 975: alu.and2 = and alu.mux18 alu.mux34",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13919,
+"hex": "03fd7701fdef00",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 404,
+"text": ".byte 0x03, 0xFD, 0x77, 0x01, 0xFD, 0xEF, 0x00// node 977: alu.and3 = and alu.mux19 alu.mux35",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13926,
+"hex": "03fd7101fde900",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 405,
+"text": ".byte 0x03, 0xFD, 0x71, 0x01, 0xFD, 0xE9, 0x00// node 979: alu.and4 = and alu.mux20 alu.mux36",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13933,
+"hex": "03fd6b01fde300",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 406,
+"text": ".byte 0x03, 0xFD, 0x6B, 0x01, 0xFD, 0xE3, 0x00// node 981: alu.and5 = and alu.mux21 alu.mux37",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13940,
+"hex": "03fd6501fddd00",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 407,
+"text": ".byte 0x03, 0xFD, 0x65, 0x01, 0xFD, 0xDD, 0x00// node 983: alu.and6 = and alu.mux22 alu.mux38",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13947,
+"hex": "03fd5f01fdd700",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 408,
+"text": ".byte 0x03, 0xFD, 0x5F, 0x01, 0xFD, 0xD7, 0x00// node 985: alu.and7 = and alu.mux23 alu.mux39",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13954,
+"hex": "060ffdc500fdb003",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 409,
+"text": ".byte 0x06, 0x0F, 0xFD, 0xC5, 0x00, 0xFD, 0xB0, 0x03// node 987: alu.mux40 = mux alu.and0 alu.fa0.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13962,
+"hex": "0615fdb400fdb803",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 410,
+"text": ".byte 0x06, 0x15, 0xFD, 0xB4, 0x00, 0xFD, 0xB8, 0x03// node 995: alu.mux41 = mux alu.and1 alu.fa1.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13970,
+"hex": "061bfda300fdc003",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 411,
+"text": ".byte 0x06, 0x1B, 0xFD, 0xA3, 0x00, 0xFD, 0xC0, 0x03// node 1003: alu.mux42 = mux alu.and2 alu.fa2.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13978,
+"hex": "0621fd9200fdc803",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 412,
+"text": ".byte 0x06, 0x21, 0xFD, 0x92, 0x00, 0xFD, 0xC8, 0x03// node 1011: alu.mux43 = mux alu.and3 alu.fa3.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13986,
+"hex": "0627fd8100fdd003",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 413,
+"text": ".byte 0x06, 0x27, 0xFD, 0x81, 0x00, 0xFD, 0xD0, 0x03// node 1019: alu.mux44 = mux alu.and4 alu.fa4.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 13994,
+"hex": "062d70fdd803",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 414,
+"text": ".byte 0x06, 0x2D, 0x70, 0xFD, 0xD8, 0x03    // node 1027: alu.mux45 = mux alu.and5 alu.fa5.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14000,
+"hex": "06335ffde003",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 415,
+"text": ".byte 0x06, 0x33, 0x5F, 0xFD, 0xE0, 0x03    // node 1035: alu.mux46 = mux alu.and6 alu.fa6.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14006,
+"hex": "06394efde803",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 416,
+"text": ".byte 0x06, 0x39, 0x4E, 0xFD, 0xE8, 0x03    // node 1043: alu.mux47 = mux alu.and7 alu.fa7.0 irlo.7",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14012,
+"hex": "0239",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 417,
+"text": ".byte 0x02, 0x39                            // node 1051: alu.not16 = not alu.mux40",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14014,
+"hex": "0232",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 418,
+"text": ".byte 0x02, 0x32                            // node 1052: alu.not17 = not alu.mux41",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14016,
+"hex": "022b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 419,
+"text": ".byte 0x02, 0x2B                            // node 1053: alu.not18 = not alu.mux42",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14018,
+"hex": "0224",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 420,
+"text": ".byte 0x02, 0x24                            // node 1054: alu.not19 = not alu.mux43",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14020,
+"hex": "021d",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 421,
+"text": ".byte 0x02, 0x1D                            // node 1055: alu.not20 = not alu.mux44",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14022,
+"hex": "0216",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 422,
+"text": ".byte 0x02, 0x16                            // node 1056: alu.not21 = not alu.mux45",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14024,
+"hex": "020f",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 423,
+"text": ".byte 0x02, 0x0F                            // node 1057: alu.not22 = not alu.mux46",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14026,
+"hex": "0208",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 424,
+"text": ".byte 0x02, 0x08                            // node 1058: alu.not23 = not alu.mux47",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14028,
+"hex": "064108fdf903",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 425,
+"text": ".byte 0x06, 0x41, 0x08, 0xFD, 0xF9, 0x03    // node 1059: alu.mux48 = mux alu.mux40 alu.not16 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14034,
+"hex": "06410ffd0104",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 426,
+"text": ".byte 0x06, 0x41, 0x0F, 0xFD, 0x01, 0x04    // node 1067: alu.mux49 = mux alu.mux41 alu.not17 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14040,
+"hex": "064116fd0904",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 427,
+"text": ".byte 0x06, 0x41, 0x16, 0xFD, 0x09, 0x04    // node 1075: alu.mux50 = mux alu.mux42 alu.not18 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14046,
+"hex": "06411dfd1104",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 428,
+"text": ".byte 0x06, 0x41, 0x1D, 0xFD, 0x11, 0x04    // node 1083: alu.mux51 = mux alu.mux43 alu.not19 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14052,
+"hex": "064124fd1904",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 429,
+"text": ".byte 0x06, 0x41, 0x24, 0xFD, 0x19, 0x04    // node 1091: alu.mux52 = mux alu.mux44 alu.not20 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14058,
+"hex": "06412bfd2104",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 430,
+"text": ".byte 0x06, 0x41, 0x2B, 0xFD, 0x21, 0x04    // node 1099: alu.mux53 = mux alu.mux45 alu.not21 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14064,
+"hex": "064132fd2904",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 431,
+"text": ".byte 0x06, 0x41, 0x32, 0xFD, 0x29, 0x04    // node 1107: alu.mux54 = mux alu.mux46 alu.not22 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14070,
+"hex": "064139fd3104",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 432,
+"text": ".byte 0x06, 0x41, 0x39, 0xFD, 0x31, 0x04    // node 1115: alu.mux55 = mux alu.mux47 alu.not23 irlo.6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14076,
+"hex": "043931",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 433,
+"text": ".byte 0x04, 0x39, 0x31                      // node 1123: alu.or0 = or alu.mux48 alu.mux49",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14079,
+"hex": "042c24",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 434,
+"text": ".byte 0x04, 0x2C, 0x24                      // node 1126: alu.or1 = or alu.mux50 alu.mux51",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14082,
+"hex": "041f17",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 435,
+"text": ".byte 0x04, 0x1F, 0x17                      // node 1129: alu.or2 = or alu.mux52 alu.mux53",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14085,
+"hex": "04120a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 436,
+"text": ".byte 0x04, 0x12, 0x0A                      // node 1132: alu.or3 = or alu.mux54 alu.mux55",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14088,
+"hex": "040a07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 437,
+"text": ".byte 0x04, 0x0A, 0x07                      // node 1135: alu.or4 = or alu.or0 alu.or1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14091,
+"hex": "040704",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 438,
+"text": ".byte 0x04, 0x07, 0x04                      // node 1138: alu.or5 = or alu.or2 alu.or3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14094,
+"hex": "040401",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 439,
+"text": ".byte 0x04, 0x04, 0x01                      // node 1141: alu.or6 = or alu.or4 alu.or5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14097,
+"hex": "0201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 440,
+"text": ".byte 0x02, 0x01                            // node 1144: alu.not24 = not alu.or6",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14099,
+"hex": "0217",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 441,
+"text": ".byte 0x02, 0x17                            // node 1145: pc.not0 = not alu.mux55",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14101,
+"hex": "0202",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 442,
+"text": ".byte 0x02, 0x02                            // node 1146: pc.not1 = not alu.not24",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14103,
+"hex": "030201",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 443,
+"text": ".byte 0x03, 0x02, 0x01                      // node 1147: pc.and0 = and pc.not0 pc.not1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14106,
+"hex": "03fd57041b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 444,
+"text": ".byte 0x03, 0xFD, 0x57, 0x04, 0x1B          // node 1149: pc.and1 = and irlo.2 alu.mux55",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14111,
+"hex": "03fd5a0407",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 445,
+"text": ".byte 0x03, 0xFD, 0x5A, 0x04, 0x07          // node 1151: pc.and2 = and irlo.1 alu.not24",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14116,
+"hex": "040301",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 446,
+"text": ".byte 0x04, 0x03, 0x01                      // node 1153: pc.or0 = or pc.and1 pc.and2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14119,
+"hex": "03fd600408",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 447,
+"text": ".byte 0x03, 0xFD, 0x60, 0x04, 0x08          // node 1156: pc.and3 = and irlo.0 pc.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14124,
+"hex": "040301",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 448,
+"text": ".byte 0x04, 0x03, 0x01                      // node 1158: pc.or1 = or pc.or0 pc.and3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14127,
+"hex": "03fd560401",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 449,
+"text": ".byte 0x03, 0xFD, 0x56, 0x04, 0x01          // node 1161: pc.and4 = and st.2 pc.or1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14132,
+"hex": "06fd8b04fd7d0401",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 450,
+"text": ".byte 0x06, 0xFD, 0x8B, 0x04, 0xFD, 0x7D, 0x04, 0x01// node 1163: pc.mux0 = mux pc.0 a.0 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14140,
+"hex": "06fd9204fd840409",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 451,
+"text": ".byte 0x06, 0xFD, 0x92, 0x04, 0xFD, 0x84, 0x04, 0x09// node 1171: pc.mux1 = mux pc.1 a.1 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14148,
+"hex": "06fd9904fd8b0411",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 452,
+"text": ".byte 0x06, 0xFD, 0x99, 0x04, 0xFD, 0x8B, 0x04, 0x11// node 1179: pc.mux2 = mux pc.2 a.2 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14156,
+"hex": "06fda004fd920419",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 453,
+"text": ".byte 0x06, 0xFD, 0xA0, 0x04, 0xFD, 0x92, 0x04, 0x19// node 1187: pc.mux3 = mux pc.3 a.3 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14164,
+"hex": "06fda704fd990421",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 454,
+"text": ".byte 0x06, 0xFD, 0xA7, 0x04, 0xFD, 0x99, 0x04, 0x21// node 1195: pc.mux4 = mux pc.4 a.4 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14172,
+"hex": "06fdae04fda00429",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 455,
+"text": ".byte 0x06, 0xFD, 0xAE, 0x04, 0xFD, 0xA0, 0x04, 0x29// node 1203: pc.mux5 = mux pc.5 a.5 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14180,
+"hex": "06fdb504fda70431",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 456,
+"text": ".byte 0x06, 0xFD, 0xB5, 0x04, 0xFD, 0xA7, 0x04, 0x31// node 1211: pc.mux6 = mux pc.6 a.6 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14188,
+"hex": "06fdbc04fdae0439",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 457,
+"text": ".byte 0x06, 0xFD, 0xBC, 0x04, 0xFD, 0xAE, 0x04, 0x39// node 1219: pc.mux7 = mux pc.7 a.7 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14196,
+"hex": "06fdc304fdb50441",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 458,
+"text": ".byte 0x06, 0xFD, 0xC3, 0x04, 0xFD, 0xB5, 0x04, 0x41// node 1227: pc.mux8 = mux pc.8 a.8 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14204,
+"hex": "06fdca04fdbc0449",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 459,
+"text": ".byte 0x06, 0xFD, 0xCA, 0x04, 0xFD, 0xBC, 0x04, 0x49// node 1235: pc.mux9 = mux pc.9 a.9 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14212,
+"hex": "06fdd104fdc30451",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 460,
+"text": ".byte 0x06, 0xFD, 0xD1, 0x04, 0xFD, 0xC3, 0x04, 0x51// node 1243: pc.mux10 = mux pc.10 a.10 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14220,
+"hex": "06fdd804fdca0459",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 461,
+"text": ".byte 0x06, 0xFD, 0xD8, 0x04, 0xFD, 0xCA, 0x04, 0x59// node 1251: pc.mux11 = mux pc.11 a.11 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14228,
+"hex": "06fddf04fdd10461",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 462,
+"text": ".byte 0x06, 0xFD, 0xDF, 0x04, 0xFD, 0xD1, 0x04, 0x61// node 1259: pc.mux12 = mux pc.12 a.12 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14236,
+"hex": "06fde604fdd80469",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 463,
+"text": ".byte 0x06, 0xFD, 0xE6, 0x04, 0xFD, 0xD8, 0x04, 0x69// node 1267: pc.mux13 = mux pc.13 a.13 pc.and4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14244,
+"hex": "0669fd4604fdbf04",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 464,
+"text": ".byte 0x06, 0x69, 0xFD, 0x46, 0x04, 0xFD, 0xBF, 0x04// node 1275: pc.mux14 = mux pc.mux0 addr.ha0.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14252,
+"hex": "0669fd4304fdc704",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 465,
+"text": ".byte 0x06, 0x69, 0xFD, 0x43, 0x04, 0xFD, 0xC7, 0x04// node 1283: pc.mux15 = mux pc.mux1 addr.ha1.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14260,
+"hex": "0669fd4004fdcf04",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 466,
+"text": ".byte 0x06, 0x69, 0xFD, 0x40, 0x04, 0xFD, 0xCF, 0x04// node 1291: pc.mux16 = mux pc.mux2 addr.ha2.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14268,
+"hex": "0669fd3d04fdd704",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 467,
+"text": ".byte 0x06, 0x69, 0xFD, 0x3D, 0x04, 0xFD, 0xD7, 0x04// node 1299: pc.mux17 = mux pc.mux3 addr.ha3.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14276,
+"hex": "0669fd3a04fddf04",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 468,
+"text": ".byte 0x06, 0x69, 0xFD, 0x3A, 0x04, 0xFD, 0xDF, 0x04// node 1307: pc.mux18 = mux pc.mux4 addr.ha4.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14284,
+"hex": "0669fd3704fde704",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 469,
+"text": ".byte 0x06, 0x69, 0xFD, 0x37, 0x04, 0xFD, 0xE7, 0x04// node 1315: pc.mux19 = mux pc.mux5 addr.ha5.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14292,
+"hex": "0669fd3404fdef04",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 470,
+"text": ".byte 0x06, 0x69, 0xFD, 0x34, 0x04, 0xFD, 0xEF, 0x04// node 1323: pc.mux20 = mux pc.mux6 addr.ha6.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14300,
+"hex": "0669fd3104fdf704",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 471,
+"text": ".byte 0x06, 0x69, 0xFD, 0x31, 0x04, 0xFD, 0xF7, 0x04// node 1331: pc.mux21 = mux pc.mux7 addr.ha7.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14308,
+"hex": "0669fd2e04fdff04",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 472,
+"text": ".byte 0x06, 0x69, 0xFD, 0x2E, 0x04, 0xFD, 0xFF, 0x04// node 1339: pc.mux22 = mux pc.mux8 addr.ha8.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14316,
+"hex": "0669fd2b04fd0705",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 473,
+"text": ".byte 0x06, 0x69, 0xFD, 0x2B, 0x04, 0xFD, 0x07, 0x05// node 1347: pc.mux23 = mux pc.mux9 addr.ha9.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14324,
+"hex": "0669fd2804fd0f05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 474,
+"text": ".byte 0x06, 0x69, 0xFD, 0x28, 0x04, 0xFD, 0x0F, 0x05// node 1355: pc.mux24 = mux pc.mux10 addr.ha10.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14332,
+"hex": "0669fd2504fd1705",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 475,
+"text": ".byte 0x06, 0x69, 0xFD, 0x25, 0x04, 0xFD, 0x17, 0x05// node 1363: pc.mux25 = mux pc.mux11 addr.ha11.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14340,
+"hex": "0669fd2204fd1f05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 476,
+"text": ".byte 0x06, 0x69, 0xFD, 0x22, 0x04, 0xFD, 0x1F, 0x05// node 1371: pc.mux26 = mux pc.mux12 addr.ha12.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14348,
+"hex": "0669fd1f04fd2705",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 477,
+"text": ".byte 0x06, 0x69, 0xFD, 0x1F, 0x04, 0xFD, 0x27, 0x05// node 1379: pc.mux27 = mux pc.mux13 addr.ha13.0 top.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14356,
+"hex": "0669fd3305fd3205",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 478,
+"text": ".byte 0x06, 0x69, 0xFD, 0x33, 0x05, 0xFD, 0x32, 0x05// node 1387: pc.mux28 = mux pc.mux14 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14364,
+"hex": "0669fd3b05fd3a05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 479,
+"text": ".byte 0x06, 0x69, 0xFD, 0x3B, 0x05, 0xFD, 0x3A, 0x05// node 1395: pc.mux29 = mux pc.mux15 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14372,
+"hex": "0669fd4305fd4205",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 480,
+"text": ".byte 0x06, 0x69, 0xFD, 0x43, 0x05, 0xFD, 0x42, 0x05// node 1403: pc.mux30 = mux pc.mux16 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14380,
+"hex": "0669fd4b05fd4a05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 481,
+"text": ".byte 0x06, 0x69, 0xFD, 0x4B, 0x05, 0xFD, 0x4A, 0x05// node 1411: pc.mux31 = mux pc.mux17 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14388,
+"hex": "0669fd5305fd5205",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 482,
+"text": ".byte 0x06, 0x69, 0xFD, 0x53, 0x05, 0xFD, 0x52, 0x05// node 1419: pc.mux32 = mux pc.mux18 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14396,
+"hex": "0669fd5b05fd5a05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 483,
+"text": ".byte 0x06, 0x69, 0xFD, 0x5B, 0x05, 0xFD, 0x5A, 0x05// node 1427: pc.mux33 = mux pc.mux19 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14404,
+"hex": "0669fd6305fd6205",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 484,
+"text": ".byte 0x06, 0x69, 0xFD, 0x63, 0x05, 0xFD, 0x62, 0x05// node 1435: pc.mux34 = mux pc.mux20 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14412,
+"hex": "0669fd6b05fd6a05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 485,
+"text": ".byte 0x06, 0x69, 0xFD, 0x6B, 0x05, 0xFD, 0x6A, 0x05// node 1443: pc.mux35 = mux pc.mux21 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14420,
+"hex": "0669fd7305fd7205",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 486,
+"text": ".byte 0x06, 0x69, 0xFD, 0x73, 0x05, 0xFD, 0x72, 0x05// node 1451: pc.mux36 = mux pc.mux22 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14428,
+"hex": "0669fd7b05fd7a05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 487,
+"text": ".byte 0x06, 0x69, 0xFD, 0x7B, 0x05, 0xFD, 0x7A, 0x05// node 1459: pc.mux37 = mux pc.mux23 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14436,
+"hex": "0669fd8305fd8205",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 488,
+"text": ".byte 0x06, 0x69, 0xFD, 0x83, 0x05, 0xFD, 0x82, 0x05// node 1467: pc.mux38 = mux pc.mux24 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14444,
+"hex": "0669fd8b05fd8a05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 489,
+"text": ".byte 0x06, 0x69, 0xFD, 0x8B, 0x05, 0xFD, 0x8A, 0x05// node 1475: pc.mux39 = mux pc.mux25 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14452,
+"hex": "0669fd9305fd9205",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 490,
+"text": ".byte 0x06, 0x69, 0xFD, 0x93, 0x05, 0xFD, 0x92, 0x05// node 1483: pc.mux40 = mux pc.mux26 zero reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14460,
+"hex": "0669fd9c05fd9a05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 491,
+"text": ".byte 0x06, 0x69, 0xFD, 0x9C, 0x05, 0xFD, 0x9A, 0x05// node 1491: pc.mux41 = mux pc.mux27 one reset",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14468,
+"hex": "03fda905fd4504",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 492,
+"text": ".byte 0x03, 0xFD, 0xA9, 0x05, 0xFD, 0x45, 0x04// node 1499: areg.and0 = and st.1 control.not1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14475,
+"hex": "0401fda805",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 493,
+"text": ".byte 0x04, 0x01, 0xFD, 0xA8, 0x05          // node 1501: areg.or0 = or areg.and0 st.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14480,
+"hex": "03fdad05fdb705",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 494,
+"text": ".byte 0x03, 0xFD, 0xAD, 0x05, 0xFD, 0xB7, 0x05// node 1504: areg.and1 = and st.2 irlo.5",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14487,
+"hex": "06fdd405fdb80101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 495,
+"text": ".byte 0x06, 0xFD, 0xD4, 0x05, 0xFD, 0xB8, 0x01, 0x01// node 1506: areg.mux0 = mux a.0 alu.mux48 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14495,
+"hex": "0601fd3505fdb605",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 496,
+"text": ".byte 0x06, 0x01, 0xFD, 0x35, 0x05, 0xFD, 0xB6, 0x05// node 1514: areg.mux1 = mux areg.mux0 addr.ha0.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14503,
+"hex": "0601fdce0513",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 497,
+"text": ".byte 0x06, 0x01, 0xFD, 0xCE, 0x05, 0x13    // node 1522: areg.mux2 = mux areg.mux1 irlo.0 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14509,
+"hex": "06fdeb05fdc80119",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 498,
+"text": ".byte 0x06, 0xFD, 0xEB, 0x05, 0xFD, 0xC8, 0x01, 0x19// node 1530: areg.mux3 = mux a.1 alu.mux49 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14517,
+"hex": "0601fd4205fdce05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 499,
+"text": ".byte 0x06, 0x01, 0xFD, 0x42, 0x05, 0xFD, 0xCE, 0x05// node 1538: areg.mux4 = mux areg.mux3 addr.ha1.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14525,
+"hex": "0601fde5052b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 500,
+"text": ".byte 0x06, 0x01, 0xFD, 0xE5, 0x05, 0x2B    // node 1546: areg.mux5 = mux areg.mux4 irlo.1 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14531,
+"hex": "06fd0206fdd80131",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 501,
+"text": ".byte 0x06, 0xFD, 0x02, 0x06, 0xFD, 0xD8, 0x01, 0x31// node 1554: areg.mux6 = mux a.2 alu.mux50 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14539,
+"hex": "0601fd4f05fde605",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 502,
+"text": ".byte 0x06, 0x01, 0xFD, 0x4F, 0x05, 0xFD, 0xE6, 0x05// node 1562: areg.mux7 = mux areg.mux6 addr.ha2.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14547,
+"hex": "0601fdfc0543",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 503,
+"text": ".byte 0x06, 0x01, 0xFD, 0xFC, 0x05, 0x43    // node 1570: areg.mux8 = mux areg.mux7 irlo.2 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14553,
+"hex": "06fd1906fde80149",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 504,
+"text": ".byte 0x06, 0xFD, 0x19, 0x06, 0xFD, 0xE8, 0x01, 0x49// node 1578: areg.mux9 = mux a.3 alu.mux51 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14561,
+"hex": "0601fd5c05fdfe05",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 505,
+"text": ".byte 0x06, 0x01, 0xFD, 0x5C, 0x05, 0xFD, 0xFE, 0x05// node 1586: areg.mux10 = mux areg.mux9 addr.ha3.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14569,
+"hex": "0601fd13065b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 506,
+"text": ".byte 0x06, 0x01, 0xFD, 0x13, 0x06, 0x5B    // node 1594: areg.mux11 = mux areg.mux10 irlo.3 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14575,
+"hex": "06fd3006fdf80161",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 507,
+"text": ".byte 0x06, 0xFD, 0x30, 0x06, 0xFD, 0xF8, 0x01, 0x61// node 1602: areg.mux12 = mux a.4 alu.mux52 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14583,
+"hex": "0601fd6905fd1606",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 508,
+"text": ".byte 0x06, 0x01, 0xFD, 0x69, 0x05, 0xFD, 0x16, 0x06// node 1610: areg.mux13 = mux areg.mux12 addr.ha4.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14591,
+"hex": "0601fd2a0673",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 509,
+"text": ".byte 0x06, 0x01, 0xFD, 0x2A, 0x06, 0x73    // node 1618: areg.mux14 = mux areg.mux13 irlo.4 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14597,
+"hex": "06fd4706fd080279",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 510,
+"text": ".byte 0x06, 0xFD, 0x47, 0x06, 0xFD, 0x08, 0x02, 0x79// node 1626: areg.mux15 = mux a.5 alu.mux53 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14605,
+"hex": "0601fd7605fd2e06",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 511,
+"text": ".byte 0x06, 0x01, 0xFD, 0x76, 0x05, 0xFD, 0x2E, 0x06// node 1634: areg.mux16 = mux areg.mux15 addr.ha5.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14613,
+"hex": "0601fd4106fd8b00",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 512,
+"text": ".byte 0x06, 0x01, 0xFD, 0x41, 0x06, 0xFD, 0x8B, 0x00// node 1642: areg.mux17 = mux areg.mux16 irlo.5 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14621,
+"hex": "06fd5e06fd1802fd9100",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 513,
+"text": ".byte 0x06, 0xFD, 0x5E, 0x06, 0xFD, 0x18, 0x02, 0xFD, 0x91, 0x00// node 1650: areg.mux18 = mux a.6 alu.mux54 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14631,
+"hex": "0601fd8305fd4606",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 514,
+"text": ".byte 0x06, 0x01, 0xFD, 0x83, 0x05, 0xFD, 0x46, 0x06// node 1658: areg.mux19 = mux areg.mux18 addr.ha6.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14639,
+"hex": "0601fd5806fda300",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 515,
+"text": ".byte 0x06, 0x01, 0xFD, 0x58, 0x06, 0xFD, 0xA3, 0x00// node 1666: areg.mux20 = mux areg.mux19 irlo.6 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14647,
+"hex": "06fd7506fd2802fda900",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 516,
+"text": ".byte 0x06, 0xFD, 0x75, 0x06, 0xFD, 0x28, 0x02, 0xFD, 0xA9, 0x00// node 1674: areg.mux21 = mux a.7 alu.mux55 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14657,
+"hex": "0601fd9005fd5e06",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 517,
+"text": ".byte 0x06, 0x01, 0xFD, 0x90, 0x05, 0xFD, 0x5E, 0x06// node 1682: areg.mux22 = mux areg.mux21 addr.ha7.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14665,
+"hex": "0601fd6f06fdbb00",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 518,
+"text": ".byte 0x06, 0x01, 0xFD, 0x6F, 0x06, 0xFD, 0xBB, 0x00// node 1690: areg.mux23 = mux areg.mux22 irlo.7 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14673,
+"hex": "06fd8c06fd8c06fdc100",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 519,
+"text": ".byte 0x06, 0xFD, 0x8C, 0x06, 0xFD, 0x8C, 0x06, 0xFD, 0xC1, 0x00// node 1698: areg.mux24 = mux a.8 a.8 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14683,
+"hex": "0601fd9d05fd7606",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 520,
+"text": ".byte 0x06, 0x01, 0xFD, 0x9D, 0x05, 0xFD, 0x76, 0x06// node 1706: areg.mux25 = mux areg.mux24 addr.ha8.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14691,
+"hex": "0601fd3b05fdd300",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 521,
+"text": ".byte 0x06, 0x01, 0xFD, 0x3B, 0x05, 0xFD, 0xD3, 0x00// node 1714: areg.mux26 = mux areg.mux25 decode.nand2 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14699,
+"hex": "06fda306fda306fdd900",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 522,
+"text": ".byte 0x06, 0xFD, 0xA3, 0x06, 0xFD, 0xA3, 0x06, 0xFD, 0xD9, 0x00// node 1722: areg.mux27 = mux a.9 a.9 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14709,
+"hex": "0601fdaa05fd8e06",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 523,
+"text": ".byte 0x06, 0x01, 0xFD, 0xAA, 0x05, 0xFD, 0x8E, 0x06// node 1730: areg.mux28 = mux areg.mux27 addr.ha9.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14717,
+"hex": "0601fd5005fdeb00",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 524,
+"text": ".byte 0x06, 0x01, 0xFD, 0x50, 0x05, 0xFD, 0xEB, 0x00// node 1738: areg.mux29 = mux areg.mux28 decode.nand5 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14725,
+"hex": "06fdba06fdba06fdf100",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 525,
+"text": ".byte 0x06, 0xFD, 0xBA, 0x06, 0xFD, 0xBA, 0x06, 0xFD, 0xF1, 0x00// node 1746: areg.mux30 = mux a.10 a.10 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14735,
+"hex": "0601fdb705fda606",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 526,
+"text": ".byte 0x06, 0x01, 0xFD, 0xB7, 0x05, 0xFD, 0xA6, 0x06// node 1754: areg.mux31 = mux areg.mux30 addr.ha10.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14743,
+"hex": "0601fd6505fd0301",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 527,
+"text": ".byte 0x06, 0x01, 0xFD, 0x65, 0x05, 0xFD, 0x03, 0x01// node 1762: areg.mux32 = mux areg.mux31 decode.nand8 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14751,
+"hex": "06fdd106fdd106fd0901",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 528,
+"text": ".byte 0x06, 0xFD, 0xD1, 0x06, 0xFD, 0xD1, 0x06, 0xFD, 0x09, 0x01// node 1770: areg.mux33 = mux a.11 a.11 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14761,
+"hex": "0601fdc405fdbe06",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 529,
+"text": ".byte 0x06, 0x01, 0xFD, 0xC4, 0x05, 0xFD, 0xBE, 0x06// node 1778: areg.mux34 = mux areg.mux33 addr.ha11.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14769,
+"hex": "0601fd7a05fd1b01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 530,
+"text": ".byte 0x06, 0x01, 0xFD, 0x7A, 0x05, 0xFD, 0x1B, 0x01// node 1786: areg.mux35 = mux areg.mux34 decode.nand11 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14777,
+"hex": "06fde806fde806fd2101",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 531,
+"text": ".byte 0x06, 0xFD, 0xE8, 0x06, 0xFD, 0xE8, 0x06, 0xFD, 0x21, 0x01// node 1794: areg.mux36 = mux a.12 a.12 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14787,
+"hex": "0601fdd105fdd606",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 532,
+"text": ".byte 0x06, 0x01, 0xFD, 0xD1, 0x05, 0xFD, 0xD6, 0x06// node 1802: areg.mux37 = mux areg.mux36 addr.ha12.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14795,
+"hex": "0601fd8f05fd3301",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 533,
+"text": ".byte 0x06, 0x01, 0xFD, 0x8F, 0x05, 0xFD, 0x33, 0x01// node 1810: areg.mux38 = mux areg.mux37 decode.nand14 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14803,
+"hex": "06fdff06fdff06fd3901",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 534,
+"text": ".byte 0x06, 0xFD, 0xFF, 0x06, 0xFD, 0xFF, 0x06, 0xFD, 0x39, 0x01// node 1818: areg.mux39 = mux a.13 a.13 areg.and1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14813,
+"hex": "0601fdde05fdee06",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 535,
+"text": ".byte 0x06, 0x01, 0xFD, 0xDE, 0x05, 0xFD, 0xEE, 0x06// node 1826: areg.mux40 = mux areg.mux39 addr.ha13.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14821,
+"hex": "0601fda405fd4b01",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 536,
+"text": ".byte 0x06, 0x01, 0xFD, 0xA4, 0x05, 0xFD, 0x4B, 0x01// node 1834: areg.mux41 = mux areg.mux40 decode.nand17 areg.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14829,
+"hex": "03fdff06fd0a07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 537,
+"text": ".byte 0x03, 0xFD, 0xFF, 0x06, 0xFD, 0x0A, 0x07// node 1842: dreg.and0 = and st.2 irlo.4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14836,
+"hex": "06fd1807fd0a0301",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 538,
+"text": ".byte 0x06, 0xFD, 0x18, 0x07, 0xFD, 0x0A, 0x03, 0x01// node 1844: dreg.mux0 = mux d.0 alu.mux48 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14844,
+"hex": "06fd1f07fd0a0309",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 539,
+"text": ".byte 0x06, 0xFD, 0x1F, 0x07, 0xFD, 0x0A, 0x03, 0x09// node 1852: dreg.mux1 = mux d.1 alu.mux49 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14852,
+"hex": "06fd2607fd0a0311",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 540,
+"text": ".byte 0x06, 0xFD, 0x26, 0x07, 0xFD, 0x0A, 0x03, 0x11// node 1860: dreg.mux2 = mux d.2 alu.mux50 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14860,
+"hex": "06fd2d07fd0a0319",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 541,
+"text": ".byte 0x06, 0xFD, 0x2D, 0x07, 0xFD, 0x0A, 0x03, 0x19// node 1868: dreg.mux3 = mux d.3 alu.mux51 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14868,
+"hex": "06fd3407fd0a0321",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 542,
+"text": ".byte 0x06, 0xFD, 0x34, 0x07, 0xFD, 0x0A, 0x03, 0x21// node 1876: dreg.mux4 = mux d.4 alu.mux52 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14876,
+"hex": "06fd3b07fd0a0329",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 543,
+"text": ".byte 0x06, 0xFD, 0x3B, 0x07, 0xFD, 0x0A, 0x03, 0x29// node 1884: dreg.mux5 = mux d.5 alu.mux53 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14884,
+"hex": "06fd4207fd0a0331",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 544,
+"text": ".byte 0x06, 0xFD, 0x42, 0x07, 0xFD, 0x0A, 0x03, 0x31// node 1892: dreg.mux6 = mux d.6 alu.mux54 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14892,
+"hex": "06fd4907fd0a0339",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 545,
+"text": ".byte 0x06, 0xFD, 0x49, 0x07, 0xFD, 0x0A, 0x03, 0x39// node 1900: dreg.mux7 = mux d.7 alu.mux55 dreg.and0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14900,
+"hex": "04fd4307fd4007",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 546,
+"text": ".byte 0x04, 0xFD, 0x43, 0x07, 0xFD, 0x40, 0x07// node 1908: ir.or0 = or st.0 st.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14907,
+"hex": "06fd5307fd000601",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 547,
+"text": ".byte 0x06, 0xFD, 0x53, 0x07, 0xFD, 0x00, 0x06, 0x01// node 1911: ir.mux0 = mux irlo.0 decode.nand2 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14915,
+"hex": "06fd5a07fd050609",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 548,
+"text": ".byte 0x06, 0xFD, 0x5A, 0x07, 0xFD, 0x05, 0x06, 0x09// node 1919: ir.mux1 = mux irlo.1 decode.nand5 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14923,
+"hex": "06fd6107fd0a0611",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 549,
+"text": ".byte 0x06, 0xFD, 0x61, 0x07, 0xFD, 0x0A, 0x06, 0x11// node 1927: ir.mux2 = mux irlo.2 decode.nand8 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14931,
+"hex": "06fd6807fd0f0619",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 550,
+"text": ".byte 0x06, 0xFD, 0x68, 0x07, 0xFD, 0x0F, 0x06, 0x19// node 1935: ir.mux3 = mux irlo.3 decode.nand11 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14939,
+"hex": "06fd6f07fd140621",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 551,
+"text": ".byte 0x06, 0xFD, 0x6F, 0x07, 0xFD, 0x14, 0x06, 0x21// node 1943: ir.mux4 = mux irlo.4 decode.nand14 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14947,
+"hex": "06fd7607fd190629",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 552,
+"text": ".byte 0x06, 0xFD, 0x76, 0x07, 0xFD, 0x19, 0x06, 0x29// node 1951: ir.mux5 = mux irlo.5 decode.nand17 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14955,
+"hex": "06fd7d07fd1e0631",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 553,
+"text": ".byte 0x06, 0xFD, 0x7D, 0x07, 0xFD, 0x1E, 0x06, 0x31// node 1959: ir.mux6 = mux irlo.6 decode.nand20 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14963,
+"hex": "06fd8407fd230639",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 554,
+"text": ".byte 0x06, 0xFD, 0x84, 0x07, 0xFD, 0x23, 0x06, 0x39// node 1967: ir.mux7 = mux irlo.7 decode.nand23 ir.or0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14971,
+"hex": "06fd8b07fd4006fd8507",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 555,
+"text": ".byte 0x06, 0xFD, 0x8B, 0x07, 0xFD, 0x40, 0x06, 0xFD, 0x85, 0x07// node 1975: ir.mux8 = mux irhi.0 decode.nand2 st.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14981,
+"hex": "06fd9207fd4506fd8d07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 556,
+"text": ".byte 0x06, 0xFD, 0x92, 0x07, 0xFD, 0x45, 0x06, 0xFD, 0x8D, 0x07// node 1983: ir.mux9 = mux irhi.1 decode.nand5 st.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 14991,
+"hex": "06fd9907fd4a06fd9507",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 557,
+"text": ".byte 0x06, 0xFD, 0x99, 0x07, 0xFD, 0x4A, 0x06, 0xFD, 0x95, 0x07// node 1991: ir.mux10 = mux irhi.2 decode.nand8 st.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15001,
+"hex": "06fda007fd4f06fd9d07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 558,
+"text": ".byte 0x06, 0xFD, 0xA0, 0x07, 0xFD, 0x4F, 0x06, 0xFD, 0x9D, 0x07// node 1999: ir.mux11 = mux irhi.3 decode.nand11 st.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15011,
+"hex": "06fda707fd5406fda507",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 559,
+"text": ".byte 0x06, 0xFD, 0xA7, 0x07, 0xFD, 0x54, 0x06, 0xFD, 0xA5, 0x07// node 2007: ir.mux12 = mux irhi.4 decode.nand14 st.1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15021,
+"hex": "03fdac07fdb807",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 560,
+"text": ".byte 0x03, 0xFD, 0xAC, 0x07, 0xFD, 0xB8, 0x07// node 2015: top.and0 = and st.2 irlo.3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15028,
+"hex": "0301fd8006",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 561,
+"text": ".byte 0x03, 0x01, 0xFD, 0x80, 0x06          // node 2017: decode.and18 = and top.and0 decode.and8",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15033,
+"hex": "0303fd6f06",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 562,
+"text": ".byte 0x03, 0x03, 0xFD, 0x6F, 0x06          // node 2019: decode.and19 = and top.and0 decode.and17",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15038,
+"hex": "02fda107",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 563,
+"text": ".byte 0x02, 0xFD, 0xA1, 0x07                // node 2021: ram.not0 = not addr.mux0",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15042,
+"hex": "02fd9a07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 564,
+"text": ".byte 0x02, 0xFD, 0x9A, 0x07                // node 2022: ram.not1 = not addr.mux1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15046,
+"hex": "02fd9307",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 565,
+"text": ".byte 0x02, 0xFD, 0x93, 0x07                // node 2023: ram.not2 = not addr.mux2",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15050,
+"hex": "02fd8c07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 566,
+"text": ".byte 0x02, 0xFD, 0x8C, 0x07                // node 2024: ram.not3 = not addr.mux3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15054,
+"hex": "02fd8507",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 567,
+"text": ".byte 0x02, 0xFD, 0x85, 0x07                // node 2025: ram.not4 = not addr.mux4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15058,
+"hex": "030504",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 568,
+"text": ".byte 0x03, 0x05, 0x04                      // node 2026: ram.and0 = and ram.not0 ram.not1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15061,
+"hex": "03fda80706",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 569,
+"text": ".byte 0x03, 0xFD, 0xA8, 0x07, 0x06          // node 2028: ram.and1 = and addr.mux0 ram.not1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15066,
+"hex": "0309fda207",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 570,
+"text": ".byte 0x03, 0x09, 0xFD, 0xA2, 0x07          // node 2030: ram.and2 = and ram.not0 addr.mux1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15071,
+"hex": "03fdac07fda407",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 571,
+"text": ".byte 0x03, 0xFD, 0xAC, 0x07, 0xFD, 0xA4, 0x07// node 2032: ram.and3 = and addr.mux0 addr.mux1",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15078,
+"hex": "030b0a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 572,
+"text": ".byte 0x03, 0x0B, 0x0A                      // node 2034: ram.and4 = and ram.not2 ram.not3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15081,
+"hex": "03fda0070c",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 573,
+"text": ".byte 0x03, 0xFD, 0xA0, 0x07, 0x0C          // node 2036: ram.and5 = and addr.mux2 ram.not3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15086,
+"hex": "030ffd9a07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 574,
+"text": ".byte 0x03, 0x0F, 0xFD, 0x9A, 0x07          // node 2038: ram.and6 = and ram.not2 addr.mux3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15091,
+"hex": "03fda407fd9c07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 575,
+"text": ".byte 0x03, 0xFD, 0xA4, 0x07, 0xFD, 0x9C, 0x07// node 2040: ram.and7 = and addr.mux2 addr.mux3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15098,
+"hex": "030711",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 576,
+"text": ".byte 0x03, 0x07, 0x11                      // node 2042: ram.and8 = and ram.and4 ram.not4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15101,
+"hex": "030713",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 577,
+"text": ".byte 0x03, 0x07, 0x13                      // node 2044: ram.and9 = and ram.and5 ram.not4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15104,
+"hex": "030715",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 578,
+"text": ".byte 0x03, 0x07, 0x15                      // node 2046: ram.and10 = and ram.and6 ram.not4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15107,
+"hex": "030717",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 579,
+"text": ".byte 0x03, 0x07, 0x17                      // node 2048: ram.and11 = and ram.and7 ram.not4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15110,
+"hex": "030ffd9e07",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 580,
+"text": ".byte 0x03, 0x0F, 0xFD, 0x9E, 0x07          // node 2050: ram.and12 = and ram.and4 addr.mux4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15115,
+"hex": "030ffda007",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 581,
+"text": ".byte 0x03, 0x0F, 0xFD, 0xA0, 0x07          // node 2052: ram.and13 = and ram.and5 addr.mux4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15120,
+"hex": "030ffda207",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 582,
+"text": ".byte 0x03, 0x0F, 0xFD, 0xA2, 0x07          // node 2054: ram.and14 = and ram.and6 addr.mux4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15125,
+"hex": "030ffda407",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 583,
+"text": ".byte 0x03, 0x0F, 0xFD, 0xA4, 0x07          // node 2056: ram.and15 = and ram.and7 addr.mux4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15130,
+"hex": "030f28",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 584,
+"text": ".byte 0x03, 0x0F, 0x28                      // node 2058: ram.and16 = and ram.and8 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15133,
+"hex": "030f2a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 585,
+"text": ".byte 0x03, 0x0F, 0x2A                      // node 2060: ram.and17 = and ram.and9 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15136,
+"hex": "030f2c",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 586,
+"text": ".byte 0x03, 0x0F, 0x2C                      // node 2062: ram.and18 = and ram.and10 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15139,
+"hex": "030f2e",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 587,
+"text": ".byte 0x03, 0x0F, 0x2E                      // node 2064: ram.and19 = and ram.and11 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15142,
+"hex": "030f30",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 588,
+"text": ".byte 0x03, 0x0F, 0x30                      // node 2066: ram.and20 = and ram.and12 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15145,
+"hex": "030f32",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 589,
+"text": ".byte 0x03, 0x0F, 0x32                      // node 2068: ram.and21 = and ram.and13 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15148,
+"hex": "030f34",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 590,
+"text": ".byte 0x03, 0x0F, 0x34                      // node 2070: ram.and22 = and ram.and14 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15151,
+"hex": "030f36",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 591,
+"text": ".byte 0x03, 0x0F, 0x36                      // node 2072: ram.and23 = and ram.and15 decode.and18",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15154,
+"hex": "ff",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 592,
+"text": ".byte 0xFF                                  // END of body; 2074 core nodes; tie-high node = 2074",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15155,
+"hex": "0920",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 594,
+"text": ".byte 0x09, 0x20                            // chain of 32 x ram_word (type 9)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15157,
+"hex": "030f000004",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 596,
+"text": ".byte 0x03, 0x0F, 0x00, 0x00, 0x04          // tile input i0: PICKHI list hiW from ram.and16, stride 2 nodes, index = k / 4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15162,
+"hex": "031f000004",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 597,
+"text": ".byte 0x03, 0x1F, 0x00, 0x00, 0x04          // tile input i1: PICKHI list hiR from ram.and8, stride 2 nodes, index = k / 4",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15167,
+"hex": "022f000003",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 598,
+"text": ".byte 0x02, 0x2F, 0x00, 0x00, 0x03          // tile input i2: PICKLO list lo from ram.and0, stride 2 nodes, index = k AND 3",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15172,
+"hex": "00fdf00300",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 599,
+"text": ".byte 0x00, 0xFD, 0xF0, 0x03, 0x00          // tile input i3: BCAST alu.mux48 (same source for every tile)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15177,
+"hex": "00fde80300",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 600,
+"text": ".byte 0x00, 0xFD, 0xE8, 0x03, 0x00          // tile input i4: BCAST alu.mux49 (same source for every tile)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15182,
+"hex": "00fde00300",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 601,
+"text": ".byte 0x00, 0xFD, 0xE0, 0x03, 0x00          // tile input i5: BCAST alu.mux50 (same source for every tile)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15187,
+"hex": "00fdd80300",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 602,
+"text": ".byte 0x00, 0xFD, 0xD8, 0x03, 0x00          // tile input i6: BCAST alu.mux51 (same source for every tile)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15192,
+"hex": "00fdd00300",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 603,
+"text": ".byte 0x00, 0xFD, 0xD0, 0x03, 0x00          // tile input i7: BCAST alu.mux52 (same source for every tile)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15197,
+"hex": "00fdc80300",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 604,
+"text": ".byte 0x00, 0xFD, 0xC8, 0x03, 0x00          // tile input i8: BCAST alu.mux53 (same source for every tile)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15202,
+"hex": "00fdc00300",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 605,
+"text": ".byte 0x00, 0xFD, 0xC0, 0x03, 0x00          // tile input i9: BCAST alu.mux54 (same source for every tile)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15207,
+"hex": "00fdb80300",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 606,
+"text": ".byte 0x00, 0xFD, 0xB8, 0x03, 0x00          // tile input i10: BCAST alu.mux55 (same source for every tile)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15212,
+"hex": "0100000000",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 607,
+"text": ".byte 0x01, 0x00, 0x00, 0x00, 0x00          // tile input i11: PREV output 0 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15217,
+"hex": "0100000001",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 608,
+"text": ".byte 0x01, 0x00, 0x00, 0x00, 0x01          // tile input i12: PREV output 1 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15222,
+"hex": "0100000002",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 609,
+"text": ".byte 0x01, 0x00, 0x00, 0x00, 0x02          // tile input i13: PREV output 2 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15227,
+"hex": "0100000003",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 610,
+"text": ".byte 0x01, 0x00, 0x00, 0x00, 0x03          // tile input i14: PREV output 3 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15232,
+"hex": "0100000004",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 611,
+"text": ".byte 0x01, 0x00, 0x00, 0x00, 0x04          // tile input i15: PREV output 4 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15237,
+"hex": "0100000005",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 612,
+"text": ".byte 0x01, 0x00, 0x00, 0x00, 0x05          // tile input i16: PREV output 5 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15242,
+"hex": "0100000006",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 613,
+"text": ".byte 0x01, 0x00, 0x00, 0x00, 0x06          // tile input i17: PREV output 6 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15247,
+"hex": "0100000007",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 614,
+"text": ".byte 0x01, 0x00, 0x00, 0x00, 0x07          // tile input i18: PREV output 7 of the previous tile (tile 0: tie-high)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15252,
+"hex": "1a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 616,
+"text": ".byte 0x1A                                  // 26 ports",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15253,
+"hex": "fdd6070095",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 617,
+"text": ".byte 0xFD, 0xD6, 0x07, 0x00, 0x95          // port rom_addr0 = addr.mux0 -> pin (0,149)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15258,
+"hex": "fdce070096",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 618,
+"text": ".byte 0xFD, 0xCE, 0x07, 0x00, 0x96          // port rom_addr1 = addr.mux1 -> pin (0,150)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15263,
+"hex": "fdc6070097",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 619,
+"text": ".byte 0xFD, 0xC6, 0x07, 0x00, 0x97          // port rom_addr2 = addr.mux2 -> pin (0,151)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15268,
+"hex": "fdbe070098",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 620,
+"text": ".byte 0xFD, 0xBE, 0x07, 0x00, 0x98          // port rom_addr3 = addr.mux3 -> pin (0,152)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15273,
+"hex": "fdb6070099",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 621,
+"text": ".byte 0xFD, 0xB6, 0x07, 0x00, 0x99          // port rom_addr4 = addr.mux4 -> pin (0,153)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15278,
+"hex": "fdae07009a",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 622,
+"text": ".byte 0xFD, 0xAE, 0x07, 0x00, 0x9A          // port rom_addr5 = addr.mux5 -> pin (0,154)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15283,
+"hex": "fda607009b",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 623,
+"text": ".byte 0xFD, 0xA6, 0x07, 0x00, 0x9B          // port rom_addr6 = addr.mux6 -> pin (0,155)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15288,
+"hex": "fd9e07009c",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 624,
+"text": ".byte 0xFD, 0x9E, 0x07, 0x00, 0x9C          // port rom_addr7 = addr.mux7 -> pin (0,156)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15293,
+"hex": "fd9607009d",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 625,
+"text": ".byte 0xFD, 0x96, 0x07, 0x00, 0x9D          // port rom_addr8 = addr.mux8 -> pin (0,157)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15298,
+"hex": "fd8e07009e",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 626,
+"text": ".byte 0xFD, 0x8E, 0x07, 0x00, 0x9E          // port rom_addr9 = addr.mux9 -> pin (0,158)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15303,
+"hex": "fd8607009f",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 627,
+"text": ".byte 0xFD, 0x86, 0x07, 0x00, 0x9F          // port rom_addr10 = addr.mux10 -> pin (0,159)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15308,
+"hex": "fd7e0700a0",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 628,
+"text": ".byte 0xFD, 0x7E, 0x07, 0x00, 0xA0          // port rom_addr11 = addr.mux11 -> pin (0,160)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15313,
+"hex": "fd760700a1",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 629,
+"text": ".byte 0xFD, 0x76, 0x07, 0x00, 0xA1          // port rom_addr12 = addr.mux12 -> pin (0,161)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15318,
+"hex": "fdd607008c",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 630,
+"text": ".byte 0xFD, 0xD6, 0x07, 0x00, 0x8C          // port arm_addr0 = addr.mux0 -> pin (0,140)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15323,
+"hex": "fdce07008d",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 631,
+"text": ".byte 0xFD, 0xCE, 0x07, 0x00, 0x8D          // port arm_addr1 = addr.mux1 -> pin (0,141)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15328,
+"hex": "fdc607008e",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 632,
+"text": ".byte 0xFD, 0xC6, 0x07, 0x00, 0x8E          // port arm_addr2 = addr.mux2 -> pin (0,142)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15333,
+"hex": "fdbe07008f",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 633,
+"text": ".byte 0xFD, 0xBE, 0x07, 0x00, 0x8F          // port arm_addr3 = addr.mux3 -> pin (0,143)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15338,
+"hex": "fdf003018c",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 634,
+"text": ".byte 0xFD, 0xF0, 0x03, 0x01, 0x8C          // port wdata0 = alu.mux48 -> pin (1,140)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15343,
+"hex": "fde803018d",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 635,
+"text": ".byte 0xFD, 0xE8, 0x03, 0x01, 0x8D          // port wdata1 = alu.mux49 -> pin (1,141)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15348,
+"hex": "fde003018e",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 636,
+"text": ".byte 0xFD, 0xE0, 0x03, 0x01, 0x8E          // port wdata2 = alu.mux50 -> pin (1,142)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15353,
+"hex": "fdd803018f",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 637,
+"text": ".byte 0xFD, 0xD8, 0x03, 0x01, 0x8F          // port wdata3 = alu.mux51 -> pin (1,143)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15358,
+"hex": "fdd0030190",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 638,
+"text": ".byte 0xFD, 0xD0, 0x03, 0x01, 0x90          // port wdata4 = alu.mux52 -> pin (1,144)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15363,
+"hex": "fdc8030191",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 639,
+"text": ".byte 0xFD, 0xC8, 0x03, 0x01, 0x91          // port wdata5 = alu.mux53 -> pin (1,145)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15368,
+"hex": "fdc0030192",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 640,
+"text": ".byte 0xFD, 0xC0, 0x03, 0x01, 0x92          // port wdata6 = alu.mux54 -> pin (1,146)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15373,
+"hex": "fdb8030193",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 641,
+"text": ".byte 0xFD, 0xB8, 0x03, 0x01, 0x93          // port wdata7 = alu.mux55 -> pin (1,147)",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 15378,
+"hex": "360090",
+"file": "/home/claude/y/tests/_asm/seed.asm",
+"line": 642,
+"text": ".byte 0x36, 0x00, 0x90                      // port arm_en = decode.and19 -> pin (0,144)",
+"kind": "data",
+"macro": null
+}
+]

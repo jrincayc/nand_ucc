@@ -1,0 +1,38 @@
+== run A (script + 110M ticks)
+ROM image 16350 B; script register writes 196267 ; running 110000000 ticks after the script
+saved /home/claude/w6/A/final.txt
+ticks            110196267
+NAND             44593
+DFF              6312
+ROM parts        3  (393216 bits capacity, 39573 bytes programmed by arms)
+robots (ARM)     4
+sources          13
+wires            66741  (total Manhattan length 23144065)
+faults           0
+settle events    589135346958
+ 
+wall 9838s
+== verify A
+world: tick 110196267, faults 0, 50925 parts, 66741 wires, 3 ROMs
+gen 1: parts 17601 expected, missing 0; wires 33119 expected, missing 0; ROM 13221 bytes, identical to the image: True
+gen 2: parts 16655 expected, missing 0; wires 31227 expected, missing 0; ROM 13176 bytes, identical to the image: True
+ALL OK
+== run C (resumed from A's saved state, +90M ticks)
+saved C/final.txt
+ticks            200196267
+NAND             59142
+DFF              8416
+ROM parts        4  (524288 bits capacity, 13176 bytes programmed by arms)
+robots (ARM)     5
+sources          13
+wires            116373  (total Manhattan length 39676083)
+faults           0
+settle events    756771139268
+== verify C
+world: tick 200196267, faults 0, 67580 parts, 116373 wires, 4 ROMs
+gen 1: parts 17601 expected, missing 0; wires 33119 expected, missing 0; ROM 13221 bytes, identical to the image: True
+gen 2: parts 16655 expected, missing 0; wires 31227 expected, missing 0; ROM 13176 bytes, identical to the image: True
+gen 3: parts 16655 expected, missing 0; wires 31227 expected, missing 0; ROM 13176 bytes, identical to the image: True
+ALL OK
+== mutation (60 mutants)
+60/60 killed; survivors: []

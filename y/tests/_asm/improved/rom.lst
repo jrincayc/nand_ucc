@@ -1,0 +1,627 @@
+2000                          | gap | | [4096 unprogrammed bytes]
+3000  0E                      | /home/claude/y/tests/_asm/improved.asm:6 |  | .byte 0x0E                                  // param ab = 14 (address width; ROM has 13 address bits)
+3001                          | gap | | [31 unprogrammed bytes]
+3020  40 30                   | /home/claude/y/tests/_asm/improved.asm:9 |  | .word mod_nand                              // slot 0: type 0 = nand
+3022  48 30                   | /home/claude/y/tests/_asm/improved.asm:10 |  | .word mod_dff                               // slot 1: type 1 = dff
+3024  50 30                   | /home/claude/y/tests/_asm/improved.asm:11 |  | .word mod_not                               // slot 2: type 2 = not
+3026  58 30                   | /home/claude/y/tests/_asm/improved.asm:12 |  | .word mod_and                               // slot 3: type 3 = and
+3028  63 30                   | /home/claude/y/tests/_asm/improved.asm:13 |  | .word mod_or                                // slot 4: type 4 = or
+302A  71 30                   | /home/claude/y/tests/_asm/improved.asm:14 |  | .word mod_xor                               // slot 5: type 5 = xor
+302C  85 30                   | /home/claude/y/tests/_asm/improved.asm:15 |  | .word mod_mux                               // slot 6: type 6 = mux
+302E  99 30                   | /home/claude/y/tests/_asm/improved.asm:16 |  | .word mod_ha                                // slot 7: type 7 = ha
+3030  B4 30                   | /home/claude/y/tests/_asm/improved.asm:17 |  | .word mod_fa                                // slot 8: type 8 = fa
+3032  DB 30                   | /home/claude/y/tests/_asm/improved.asm:18 |  | .word mod_ram_word                          // slot 9: type 9 = ram_word
+3034  00 00                   | /home/claude/y/tests/_asm/improved.asm:19 |  | .word 0                                     // slot 10: empty
+3036  00 00                   | /home/claude/y/tests/_asm/improved.asm:20 |  | .word 0                                     // slot 11: empty
+3038  00 00                   | /home/claude/y/tests/_asm/improved.asm:21 |  | .word 0                                     // slot 12: empty
+303A  00 00                   | /home/claude/y/tests/_asm/improved.asm:22 |  | .word 0                                     // slot 13: empty
+303C  00 00                   | /home/claude/y/tests/_asm/improved.asm:23 |  | .word 0                                     // slot 14: empty
+303E  00 00                   | /home/claude/y/tests/_asm/improved.asm:24 |  | .word 0                                     // slot 15: empty
+3040  00 02 01 01             | /home/claude/y/tests/_asm/improved.asm:27 |  | .byte 0x00, 0x02, 0x01, 0x01                // nand: flags=primitive, n_in=2, n_out=1, n_gates=1 slots (a skip entry covers several)
+3044  00 00 01                | /home/claude/y/tests/_asm/improved.asm:28 |  | .byte 0x00, 0x00, 0x01                      // g0 = nand i0 i1   the gate itself
+3047  02                      | /home/claude/y/tests/_asm/improved.asm:29 |  | .byte 0x02                                  // outputs: g0
+3048  00 01 01 01             | /home/claude/y/tests/_asm/improved.asm:31 |  | .byte 0x00, 0x01, 0x01, 0x01                // dff: flags=primitive, n_in=1, n_out=1, n_gates=1 slots (a skip entry covers several)
+304C  01 00 00                | /home/claude/y/tests/_asm/improved.asm:32 |  | .byte 0x01, 0x00, 0x00                      // g0 = dff i0   the gate itself
+304F  01                      | /home/claude/y/tests/_asm/improved.asm:33 |  | .byte 0x01                                  // outputs: g0
+3050  01 01 01 01             | /home/claude/y/tests/_asm/improved.asm:35 |  | .byte 0x01, 0x01, 0x01, 0x01                // not: flags=comb/improvable, n_in=1, n_out=1, n_gates=1 slots (a skip entry covers several)
+3054  00 00 00                | /home/claude/y/tests/_asm/improved.asm:36 |  | .byte 0x00, 0x00, 0x00                      // g0 = nand i0 i0   not
+3057  01                      | /home/claude/y/tests/_asm/improved.asm:37 |  | .byte 0x01                                  // outputs: g0
+3058  01 02 01 02             | /home/claude/y/tests/_asm/improved.asm:39 |  | .byte 0x01, 0x02, 0x01, 0x02                // and: flags=comb/improvable, n_in=2, n_out=1, n_gates=2 slots (a skip entry covers several)
+305C  00 00 01                | /home/claude/y/tests/_asm/improved.asm:40 |  | .byte 0x00, 0x00, 0x01                      // g0 = nand i0 i1   nand of the and
+305F  00 02 02                | /home/claude/y/tests/_asm/improved.asm:41 |  | .byte 0x00, 0x02, 0x02                      // g1 = nand g0 g0   and = not(nand)
+3062  03                      | /home/claude/y/tests/_asm/improved.asm:42 |  | .byte 0x03                                  // outputs: g1
+3063  01 02 01 03             | /home/claude/y/tests/_asm/improved.asm:44 |  | .byte 0x01, 0x02, 0x01, 0x03                // or: flags=comb/improvable, n_in=2, n_out=1, n_gates=3 slots (a skip entry covers several)
+3067  00 00 00                | /home/claude/y/tests/_asm/improved.asm:45 |  | .byte 0x00, 0x00, 0x00                      // g0 = nand i0 i0   not a
+306A  00 01 01                | /home/claude/y/tests/_asm/improved.asm:46 |  | .byte 0x00, 0x01, 0x01                      // g1 = nand i1 i1   not b
+306D  00 02 03                | /home/claude/y/tests/_asm/improved.asm:47 |  | .byte 0x00, 0x02, 0x03                      // g2 = nand g0 g1   or = nand(not a, not b)
+3070  04                      | /home/claude/y/tests/_asm/improved.asm:48 |  | .byte 0x04                                  // outputs: g2
+3071  01 02 01 09             | /home/claude/y/tests/_asm/improved.asm:50 |  | .byte 0x01, 0x02, 0x01, 0x09                // xor: flags=comb/improvable, n_in=2, n_out=1, n_gates=9 slots (a skip entry covers several)
+3075  00 00 01                | /home/claude/y/tests/_asm/improved.asm:51 |  | .byte 0x00, 0x00, 0x01                      // g0 = nand i0 i1   improved
+3078  00 00 02                | /home/claude/y/tests/_asm/improved.asm:52 |  | .byte 0x00, 0x00, 0x02                      // g1 = nand i0 g0   improved
+307B  00 01 02                | /home/claude/y/tests/_asm/improved.asm:53 |  | .byte 0x00, 0x01, 0x02                      // g2 = nand i1 g0   improved
+307E  02 05 00                | /home/claude/y/tests/_asm/improved.asm:54 |  | .byte 0x02, 0x05, 0x00                      // g3..g7: 5 unplaced slot(s) (skip entry: kind 2, count)
+3081  00 03 04                | /home/claude/y/tests/_asm/improved.asm:55 |  | .byte 0x00, 0x03, 0x04                      // g8 = nand g1 g2   improved
+3084  0A                      | /home/claude/y/tests/_asm/improved.asm:56 |  | .byte 0x0A                                  // outputs: g8
+3085  01 03 01 08             | /home/claude/y/tests/_asm/improved.asm:58 |  | .byte 0x01, 0x03, 0x01, 0x08                // mux: flags=comb/improvable, n_in=3, n_out=1, n_gates=8 slots (a skip entry covers several)
+3089  00 02 02                | /home/claude/y/tests/_asm/improved.asm:59 |  | .byte 0x00, 0x02, 0x02                      // g0 = nand i2 i2   improved
+308C  00 00 03                | /home/claude/y/tests/_asm/improved.asm:60 |  | .byte 0x00, 0x00, 0x03                      // g1 = nand i0 g0   improved
+308F  00 01 02                | /home/claude/y/tests/_asm/improved.asm:61 |  | .byte 0x00, 0x01, 0x02                      // g2 = nand i1 i2   improved
+3092  02 04 00                | /home/claude/y/tests/_asm/improved.asm:62 |  | .byte 0x02, 0x04, 0x00                      // g3..g6: 4 unplaced slot(s) (skip entry: kind 2, count)
+3095  00 04 05                | /home/claude/y/tests/_asm/improved.asm:63 |  | .byte 0x00, 0x04, 0x05                      // g7 = nand g1 g2   improved
+3098  0A                      | /home/claude/y/tests/_asm/improved.asm:64 |  | .byte 0x0A                                  // outputs: g7
+3099  01 02 02 0B             | /home/claude/y/tests/_asm/improved.asm:66 |  | .byte 0x01, 0x02, 0x02, 0x0B                // ha: flags=comb/improvable, n_in=2, n_out=2, n_gates=11 slots (a skip entry covers several)
+309D  00 00 01                | /home/claude/y/tests/_asm/improved.asm:67 |  | .byte 0x00, 0x00, 0x01                      // g0 = nand i0 i1   improved
+30A0  00 00 02                | /home/claude/y/tests/_asm/improved.asm:68 |  | .byte 0x00, 0x00, 0x02                      // g1 = nand i0 g0   improved
+30A3  00 01 02                | /home/claude/y/tests/_asm/improved.asm:69 |  | .byte 0x00, 0x01, 0x02                      // g2 = nand i1 g0   improved
+30A6  02 05 00                | /home/claude/y/tests/_asm/improved.asm:70 |  | .byte 0x02, 0x05, 0x00                      // g3..g7: 5 unplaced slot(s) (skip entry: kind 2, count)
+30A9  00 03 04                | /home/claude/y/tests/_asm/improved.asm:71 |  | .byte 0x00, 0x03, 0x04                      // g8 = nand g1 g2   improved
+30AC  02 01 00                | /home/claude/y/tests/_asm/improved.asm:72 |  | .byte 0x02, 0x01, 0x00                      // g9..g9: 1 unplaced slot(s) (skip entry: kind 2, count)
+30AF  00 02 02                | /home/claude/y/tests/_asm/improved.asm:73 |  | .byte 0x00, 0x02, 0x02                      // g10 = nand g0 g0   improved
+30B2  0A 0C                   | /home/claude/y/tests/_asm/improved.asm:74 |  | .byte 0x0A, 0x0C                            // outputs: g8 g10
+30B4  01 03 02 19             | /home/claude/y/tests/_asm/improved.asm:76 |  | .byte 0x01, 0x03, 0x02, 0x19                // fa: flags=comb/improvable, n_in=3, n_out=2, n_gates=25 slots (a skip entry covers several)
+30B8  00 00 01                | /home/claude/y/tests/_asm/improved.asm:77 |  | .byte 0x00, 0x00, 0x01                      // g0 = nand i0 i1   improved
+30BB  00 00 03                | /home/claude/y/tests/_asm/improved.asm:78 |  | .byte 0x00, 0x00, 0x03                      // g1 = nand i0 g0   improved
+30BE  00 01 03                | /home/claude/y/tests/_asm/improved.asm:79 |  | .byte 0x00, 0x01, 0x03                      // g2 = nand i1 g0   improved
+30C1  00 04 05                | /home/claude/y/tests/_asm/improved.asm:80 |  | .byte 0x00, 0x04, 0x05                      // g3 = nand g1 g2   improved
+30C4  00 02 06                | /home/claude/y/tests/_asm/improved.asm:81 |  | .byte 0x00, 0x02, 0x06                      // g4 = nand i2 g3   improved
+30C7  00 02 07                | /home/claude/y/tests/_asm/improved.asm:82 |  | .byte 0x00, 0x02, 0x07                      // g5 = nand i2 g4   improved
+30CA  00 06 07                | /home/claude/y/tests/_asm/improved.asm:83 |  | .byte 0x00, 0x06, 0x07                      // g6 = nand g3 g4   improved
+30CD  02 0C 00                | /home/claude/y/tests/_asm/improved.asm:84 |  | .byte 0x02, 0x0C, 0x00                      // g7..g18: 12 unplaced slot(s) (skip entry: kind 2, count)
+30D0  00 08 09                | /home/claude/y/tests/_asm/improved.asm:85 |  | .byte 0x00, 0x08, 0x09                      // g19 = nand g5 g6   improved
+30D3  02 04 00                | /home/claude/y/tests/_asm/improved.asm:86 |  | .byte 0x02, 0x04, 0x00                      // g20..g23: 4 unplaced slot(s) (skip entry: kind 2, count)
+30D6  00 03 07                | /home/claude/y/tests/_asm/improved.asm:87 |  | .byte 0x00, 0x03, 0x07                      // g24 = nand g0 g4   improved
+30D9  16 1B                   | /home/claude/y/tests/_asm/improved.asm:88 |  | .byte 0x16, 0x1B                            // outputs: g19 g24
+30DB  02 13 10 3C             | /home/claude/y/tests/_asm/improved.asm:90 |  | .byte 0x02, 0x13, 0x10, 0x3C                // ram_word: flags=tile, n_in=19, n_out=16, n_gates=60 slots (a skip entry covers several)
+30DF  00 00 02                | /home/claude/y/tests/_asm/improved.asm:91 |  | .byte 0x00, 0x00, 0x02                      // g0 = nand i0 i2   write enable, active low = nand(hiW, lo)
+30E2  00 13 13                | /home/claude/y/tests/_asm/improved.asm:92 |  | .byte 0x00, 0x13, 0x13                      // g1 = nand g0 g0   write enable
+30E5  00 01 02                | /home/claude/y/tests/_asm/improved.asm:93 |  | .byte 0x00, 0x01, 0x02                      // g2 = nand i1 i2   read select, active low = nand(hiR, lo)
+30E8  00 15 15                | /home/claude/y/tests/_asm/improved.asm:94 |  | .byte 0x00, 0x15, 0x15                      // g3 = nand g2 g2   read select
+30EB  01 1A 1A                | /home/claude/y/tests/_asm/improved.asm:95 |  | .byte 0x01, 0x1A, 0x1A                      // g4 = dff g7   bit 0 storage
+30EE  00 17 13                | /home/claude/y/tests/_asm/improved.asm:96 |  | .byte 0x00, 0x17, 0x13                      // g5 = nand g4 g0   bit 0: keep path
+30F1  00 03 14                | /home/claude/y/tests/_asm/improved.asm:97 |  | .byte 0x00, 0x03, 0x14                      // g6 = nand i3 g1   bit 0: write path
+30F4  00 18 19                | /home/claude/y/tests/_asm/improved.asm:98 |  | .byte 0x00, 0x18, 0x19                      // g7 = nand g5 g6   bit 0: next value
+30F7  00 16 17                | /home/claude/y/tests/_asm/improved.asm:99 |  | .byte 0x00, 0x16, 0x17                      // g8 = nand g3 g4   bit 0: selected bit, inverted
+30FA  00 0B 1B                | /home/claude/y/tests/_asm/improved.asm:100 |  | .byte 0x00, 0x0B, 0x1B                      // g9 = nand i11 g8   bit 0: chain value (or of this bit with the previous words)
+30FD  00 1C 1C                | /home/claude/y/tests/_asm/improved.asm:101 |  | .byte 0x00, 0x1C, 0x1C                      // g10 = nand g9 g9   bit 0: inverted chain value, passed to the next word
+3100  01 21 21                | /home/claude/y/tests/_asm/improved.asm:102 |  | .byte 0x01, 0x21, 0x21                      // g11 = dff g14   bit 1 storage
+3103  00 1E 13                | /home/claude/y/tests/_asm/improved.asm:103 |  | .byte 0x00, 0x1E, 0x13                      // g12 = nand g11 g0   bit 1: keep path
+3106  00 04 14                | /home/claude/y/tests/_asm/improved.asm:104 |  | .byte 0x00, 0x04, 0x14                      // g13 = nand i4 g1   bit 1: write path
+3109  00 1F 20                | /home/claude/y/tests/_asm/improved.asm:105 |  | .byte 0x00, 0x1F, 0x20                      // g14 = nand g12 g13   bit 1: next value
+310C  00 16 1E                | /home/claude/y/tests/_asm/improved.asm:106 |  | .byte 0x00, 0x16, 0x1E                      // g15 = nand g3 g11   bit 1: selected bit, inverted
+310F  00 0C 22                | /home/claude/y/tests/_asm/improved.asm:107 |  | .byte 0x00, 0x0C, 0x22                      // g16 = nand i12 g15   bit 1: chain value (or of this bit with the previous words)
+3112  00 23 23                | /home/claude/y/tests/_asm/improved.asm:108 |  | .byte 0x00, 0x23, 0x23                      // g17 = nand g16 g16   bit 1: inverted chain value, passed to the next word
+3115  01 28 28                | /home/claude/y/tests/_asm/improved.asm:109 |  | .byte 0x01, 0x28, 0x28                      // g18 = dff g21   bit 2 storage
+3118  00 25 13                | /home/claude/y/tests/_asm/improved.asm:110 |  | .byte 0x00, 0x25, 0x13                      // g19 = nand g18 g0   bit 2: keep path
+311B  00 05 14                | /home/claude/y/tests/_asm/improved.asm:111 |  | .byte 0x00, 0x05, 0x14                      // g20 = nand i5 g1   bit 2: write path
+311E  00 26 27                | /home/claude/y/tests/_asm/improved.asm:112 |  | .byte 0x00, 0x26, 0x27                      // g21 = nand g19 g20   bit 2: next value
+3121  00 16 25                | /home/claude/y/tests/_asm/improved.asm:113 |  | .byte 0x00, 0x16, 0x25                      // g22 = nand g3 g18   bit 2: selected bit, inverted
+3124  00 0D 29                | /home/claude/y/tests/_asm/improved.asm:114 |  | .byte 0x00, 0x0D, 0x29                      // g23 = nand i13 g22   bit 2: chain value (or of this bit with the previous words)
+3127  00 2A 2A                | /home/claude/y/tests/_asm/improved.asm:115 |  | .byte 0x00, 0x2A, 0x2A                      // g24 = nand g23 g23   bit 2: inverted chain value, passed to the next word
+312A  01 2F 2F                | /home/claude/y/tests/_asm/improved.asm:116 |  | .byte 0x01, 0x2F, 0x2F                      // g25 = dff g28   bit 3 storage
+312D  00 2C 13                | /home/claude/y/tests/_asm/improved.asm:117 |  | .byte 0x00, 0x2C, 0x13                      // g26 = nand g25 g0   bit 3: keep path
+3130  00 06 14                | /home/claude/y/tests/_asm/improved.asm:118 |  | .byte 0x00, 0x06, 0x14                      // g27 = nand i6 g1   bit 3: write path
+3133  00 2D 2E                | /home/claude/y/tests/_asm/improved.asm:119 |  | .byte 0x00, 0x2D, 0x2E                      // g28 = nand g26 g27   bit 3: next value
+3136  00 16 2C                | /home/claude/y/tests/_asm/improved.asm:120 |  | .byte 0x00, 0x16, 0x2C                      // g29 = nand g3 g25   bit 3: selected bit, inverted
+3139  00 0E 30                | /home/claude/y/tests/_asm/improved.asm:121 |  | .byte 0x00, 0x0E, 0x30                      // g30 = nand i14 g29   bit 3: chain value (or of this bit with the previous words)
+313C  00 31 31                | /home/claude/y/tests/_asm/improved.asm:122 |  | .byte 0x00, 0x31, 0x31                      // g31 = nand g30 g30   bit 3: inverted chain value, passed to the next word
+313F  01 36 36                | /home/claude/y/tests/_asm/improved.asm:123 |  | .byte 0x01, 0x36, 0x36                      // g32 = dff g35   bit 4 storage
+3142  00 33 13                | /home/claude/y/tests/_asm/improved.asm:124 |  | .byte 0x00, 0x33, 0x13                      // g33 = nand g32 g0   bit 4: keep path
+3145  00 07 14                | /home/claude/y/tests/_asm/improved.asm:125 |  | .byte 0x00, 0x07, 0x14                      // g34 = nand i7 g1   bit 4: write path
+3148  00 34 35                | /home/claude/y/tests/_asm/improved.asm:126 |  | .byte 0x00, 0x34, 0x35                      // g35 = nand g33 g34   bit 4: next value
+314B  00 16 33                | /home/claude/y/tests/_asm/improved.asm:127 |  | .byte 0x00, 0x16, 0x33                      // g36 = nand g3 g32   bit 4: selected bit, inverted
+314E  00 0F 37                | /home/claude/y/tests/_asm/improved.asm:128 |  | .byte 0x00, 0x0F, 0x37                      // g37 = nand i15 g36   bit 4: chain value (or of this bit with the previous words)
+3151  00 38 38                | /home/claude/y/tests/_asm/improved.asm:129 |  | .byte 0x00, 0x38, 0x38                      // g38 = nand g37 g37   bit 4: inverted chain value, passed to the next word
+3154  01 3D 3D                | /home/claude/y/tests/_asm/improved.asm:130 |  | .byte 0x01, 0x3D, 0x3D                      // g39 = dff g42   bit 5 storage
+3157  00 3A 13                | /home/claude/y/tests/_asm/improved.asm:131 |  | .byte 0x00, 0x3A, 0x13                      // g40 = nand g39 g0   bit 5: keep path
+315A  00 08 14                | /home/claude/y/tests/_asm/improved.asm:132 |  | .byte 0x00, 0x08, 0x14                      // g41 = nand i8 g1   bit 5: write path
+315D  00 3B 3C                | /home/claude/y/tests/_asm/improved.asm:133 |  | .byte 0x00, 0x3B, 0x3C                      // g42 = nand g40 g41   bit 5: next value
+3160  00 16 3A                | /home/claude/y/tests/_asm/improved.asm:134 |  | .byte 0x00, 0x16, 0x3A                      // g43 = nand g3 g39   bit 5: selected bit, inverted
+3163  00 10 3E                | /home/claude/y/tests/_asm/improved.asm:135 |  | .byte 0x00, 0x10, 0x3E                      // g44 = nand i16 g43   bit 5: chain value (or of this bit with the previous words)
+3166  00 3F 3F                | /home/claude/y/tests/_asm/improved.asm:136 |  | .byte 0x00, 0x3F, 0x3F                      // g45 = nand g44 g44   bit 5: inverted chain value, passed to the next word
+3169  01 44 44                | /home/claude/y/tests/_asm/improved.asm:137 |  | .byte 0x01, 0x44, 0x44                      // g46 = dff g49   bit 6 storage
+316C  00 41 13                | /home/claude/y/tests/_asm/improved.asm:138 |  | .byte 0x00, 0x41, 0x13                      // g47 = nand g46 g0   bit 6: keep path
+316F  00 09 14                | /home/claude/y/tests/_asm/improved.asm:139 |  | .byte 0x00, 0x09, 0x14                      // g48 = nand i9 g1   bit 6: write path
+3172  00 42 43                | /home/claude/y/tests/_asm/improved.asm:140 |  | .byte 0x00, 0x42, 0x43                      // g49 = nand g47 g48   bit 6: next value
+3175  00 16 41                | /home/claude/y/tests/_asm/improved.asm:141 |  | .byte 0x00, 0x16, 0x41                      // g50 = nand g3 g46   bit 6: selected bit, inverted
+3178  00 11 45                | /home/claude/y/tests/_asm/improved.asm:142 |  | .byte 0x00, 0x11, 0x45                      // g51 = nand i17 g50   bit 6: chain value (or of this bit with the previous words)
+317B  00 46 46                | /home/claude/y/tests/_asm/improved.asm:143 |  | .byte 0x00, 0x46, 0x46                      // g52 = nand g51 g51   bit 6: inverted chain value, passed to the next word
+317E  01 4B 4B                | /home/claude/y/tests/_asm/improved.asm:144 |  | .byte 0x01, 0x4B, 0x4B                      // g53 = dff g56   bit 7 storage
+3181  00 48 13                | /home/claude/y/tests/_asm/improved.asm:145 |  | .byte 0x00, 0x48, 0x13                      // g54 = nand g53 g0   bit 7: keep path
+3184  00 0A 14                | /home/claude/y/tests/_asm/improved.asm:146 |  | .byte 0x00, 0x0A, 0x14                      // g55 = nand i10 g1   bit 7: write path
+3187  00 49 4A                | /home/claude/y/tests/_asm/improved.asm:147 |  | .byte 0x00, 0x49, 0x4A                      // g56 = nand g54 g55   bit 7: next value
+318A  00 16 48                | /home/claude/y/tests/_asm/improved.asm:148 |  | .byte 0x00, 0x16, 0x48                      // g57 = nand g3 g53   bit 7: selected bit, inverted
+318D  00 12 4C                | /home/claude/y/tests/_asm/improved.asm:149 |  | .byte 0x00, 0x12, 0x4C                      // g58 = nand i18 g57   bit 7: chain value (or of this bit with the previous words)
+3190  00 4D 4D                | /home/claude/y/tests/_asm/improved.asm:150 |  | .byte 0x00, 0x4D, 0x4D                      // g59 = nand g58 g58   bit 7: inverted chain value, passed to the next word
+3193  1D 24 2B 32 39 40 47 4E | /home/claude/y/tests/_asm/improved.asm:151 |  | .byte 0x1D, 0x24, 0x2B, 0x32, 0x39, 0x40, 0x47, 0x4E, 0x1C, 0x23, 0x2A, 0x31, 0x38, 0x3F, 0x46, 0x4D// outputs: g10 g17 g24 g31 g38 g45 g52 g59 g9 g16 g23 g30 g37 g44 g51 g58
+319B  1C 23 2A 31 38 3F 46 4D |  |  |
+31A3                          | gap | | [157 unprogrammed bytes]
+3240  01 FE 72 05             | /home/claude/y/tests/_asm/improved.asm:154 |  | .byte 0x01, 0xFE, 0x72, 0x05                // node 0: pc.0 = dff pc.mux28   # register bit
+3244  01 FE 79 05             | /home/claude/y/tests/_asm/improved.asm:155 |  | .byte 0x01, 0xFE, 0x79, 0x05                // node 1: pc.1 = dff pc.mux29   # register bit
+3248  01 FE 80 05             | /home/claude/y/tests/_asm/improved.asm:156 |  | .byte 0x01, 0xFE, 0x80, 0x05                // node 2: pc.2 = dff pc.mux30   # register bit
+324C  01 FE 87 05             | /home/claude/y/tests/_asm/improved.asm:157 |  | .byte 0x01, 0xFE, 0x87, 0x05                // node 3: pc.3 = dff pc.mux31   # register bit
+3250  01 FE 8E 05             | /home/claude/y/tests/_asm/improved.asm:158 |  | .byte 0x01, 0xFE, 0x8E, 0x05                // node 4: pc.4 = dff pc.mux32   # register bit
+3254  01 FE 95 05             | /home/claude/y/tests/_asm/improved.asm:159 |  | .byte 0x01, 0xFE, 0x95, 0x05                // node 5: pc.5 = dff pc.mux33   # register bit
+3258  01 FE 9C 05             | /home/claude/y/tests/_asm/improved.asm:160 |  | .byte 0x01, 0xFE, 0x9C, 0x05                // node 6: pc.6 = dff pc.mux34   # register bit
+325C  01 FE A3 05             | /home/claude/y/tests/_asm/improved.asm:161 |  | .byte 0x01, 0xFE, 0xA3, 0x05                // node 7: pc.7 = dff pc.mux35   # register bit
+3260  01 FE AA 05             | /home/claude/y/tests/_asm/improved.asm:162 |  | .byte 0x01, 0xFE, 0xAA, 0x05                // node 8: pc.8 = dff pc.mux36   # register bit
+3264  01 FE B1 05             | /home/claude/y/tests/_asm/improved.asm:163 |  | .byte 0x01, 0xFE, 0xB1, 0x05                // node 9: pc.9 = dff pc.mux37   # register bit
+3268  01 FE B8 05             | /home/claude/y/tests/_asm/improved.asm:164 |  | .byte 0x01, 0xFE, 0xB8, 0x05                // node 10: pc.10 = dff pc.mux38   # register bit
+326C  01 FE BF 05             | /home/claude/y/tests/_asm/improved.asm:165 |  | .byte 0x01, 0xFE, 0xBF, 0x05                // node 11: pc.11 = dff pc.mux39   # register bit
+3270  01 FE C6 05             | /home/claude/y/tests/_asm/improved.asm:166 |  | .byte 0x01, 0xFE, 0xC6, 0x05                // node 12: pc.12 = dff pc.mux40   # register bit
+3274  01 FE CD 05             | /home/claude/y/tests/_asm/improved.asm:167 |  | .byte 0x01, 0xFE, 0xCD, 0x05                // node 13: pc.13 = dff pc.mux41   # register bit
+3278  01 FE EB 05             | /home/claude/y/tests/_asm/improved.asm:168 |  | .byte 0x01, 0xFE, 0xEB, 0x05                // node 14: a.0 = dff areg.mux2   # register bit
+327C  01 FE 02 06             | /home/claude/y/tests/_asm/improved.asm:169 |  | .byte 0x01, 0xFE, 0x02, 0x06                // node 15: a.1 = dff areg.mux5   # register bit
+3280  01 FE 19 06             | /home/claude/y/tests/_asm/improved.asm:170 |  | .byte 0x01, 0xFE, 0x19, 0x06                // node 16: a.2 = dff areg.mux8   # register bit
+3284  01 FE 30 06             | /home/claude/y/tests/_asm/improved.asm:171 |  | .byte 0x01, 0xFE, 0x30, 0x06                // node 17: a.3 = dff areg.mux11   # register bit
+3288  01 FE 47 06             | /home/claude/y/tests/_asm/improved.asm:172 |  | .byte 0x01, 0xFE, 0x47, 0x06                // node 18: a.4 = dff areg.mux14   # register bit
+328C  01 FE 5E 06             | /home/claude/y/tests/_asm/improved.asm:173 |  | .byte 0x01, 0xFE, 0x5E, 0x06                // node 19: a.5 = dff areg.mux17   # register bit
+3290  01 FE 75 06             | /home/claude/y/tests/_asm/improved.asm:174 |  | .byte 0x01, 0xFE, 0x75, 0x06                // node 20: a.6 = dff areg.mux20   # register bit
+3294  01 FE 8C 06             | /home/claude/y/tests/_asm/improved.asm:175 |  | .byte 0x01, 0xFE, 0x8C, 0x06                // node 21: a.7 = dff areg.mux23   # register bit
+3298  01 FE A3 06             | /home/claude/y/tests/_asm/improved.asm:176 |  | .byte 0x01, 0xFE, 0xA3, 0x06                // node 22: a.8 = dff areg.mux26   # register bit
+329C  01 FE BA 06             | /home/claude/y/tests/_asm/improved.asm:177 |  | .byte 0x01, 0xFE, 0xBA, 0x06                // node 23: a.9 = dff areg.mux29   # register bit
+32A0  01 FE D1 06             | /home/claude/y/tests/_asm/improved.asm:178 |  | .byte 0x01, 0xFE, 0xD1, 0x06                // node 24: a.10 = dff areg.mux32   # register bit
+32A4  01 FE E8 06             | /home/claude/y/tests/_asm/improved.asm:179 |  | .byte 0x01, 0xFE, 0xE8, 0x06                // node 25: a.11 = dff areg.mux35   # register bit
+32A8  01 FE FF 06             | /home/claude/y/tests/_asm/improved.asm:180 |  | .byte 0x01, 0xFE, 0xFF, 0x06                // node 26: a.12 = dff areg.mux38   # register bit
+32AC  01 FE 16 07             | /home/claude/y/tests/_asm/improved.asm:181 |  | .byte 0x01, 0xFE, 0x16, 0x07                // node 27: a.13 = dff areg.mux41   # register bit
+32B0  01 FE 1F 07             | /home/claude/y/tests/_asm/improved.asm:182 |  | .byte 0x01, 0xFE, 0x1F, 0x07                // node 28: d.0 = dff dreg.mux0   # register bit
+32B4  01 FE 26 07             | /home/claude/y/tests/_asm/improved.asm:183 |  | .byte 0x01, 0xFE, 0x26, 0x07                // node 29: d.1 = dff dreg.mux1   # register bit
+32B8  01 FE 2D 07             | /home/claude/y/tests/_asm/improved.asm:184 |  | .byte 0x01, 0xFE, 0x2D, 0x07                // node 30: d.2 = dff dreg.mux2   # register bit
+32BC  01 FE 34 07             | /home/claude/y/tests/_asm/improved.asm:185 |  | .byte 0x01, 0xFE, 0x34, 0x07                // node 31: d.3 = dff dreg.mux3   # register bit
+32C0  01 FE 3B 07             | /home/claude/y/tests/_asm/improved.asm:186 |  | .byte 0x01, 0xFE, 0x3B, 0x07                // node 32: d.4 = dff dreg.mux4   # register bit
+32C4  01 FE 42 07             | /home/claude/y/tests/_asm/improved.asm:187 |  | .byte 0x01, 0xFE, 0x42, 0x07                // node 33: d.5 = dff dreg.mux5   # register bit
+32C8  01 FE 49 07             | /home/claude/y/tests/_asm/improved.asm:188 |  | .byte 0x01, 0xFE, 0x49, 0x07                // node 34: d.6 = dff dreg.mux6   # register bit
+32CC  01 FE 50 07             | /home/claude/y/tests/_asm/improved.asm:189 |  | .byte 0x01, 0xFE, 0x50, 0x07                // node 35: d.7 = dff dreg.mux7   # register bit
+32D0  01 FE 5A 07             | /home/claude/y/tests/_asm/improved.asm:190 |  | .byte 0x01, 0xFE, 0x5A, 0x07                // node 36: irlo.0 = dff ir.mux0   # register bit
+32D4  01 FE 61 07             | /home/claude/y/tests/_asm/improved.asm:191 |  | .byte 0x01, 0xFE, 0x61, 0x07                // node 37: irlo.1 = dff ir.mux1   # register bit
+32D8  01 FE 68 07             | /home/claude/y/tests/_asm/improved.asm:192 |  | .byte 0x01, 0xFE, 0x68, 0x07                // node 38: irlo.2 = dff ir.mux2   # register bit
+32DC  01 FE 6F 07             | /home/claude/y/tests/_asm/improved.asm:193 |  | .byte 0x01, 0xFE, 0x6F, 0x07                // node 39: irlo.3 = dff ir.mux3   # register bit
+32E0  01 FE 76 07             | /home/claude/y/tests/_asm/improved.asm:194 |  | .byte 0x01, 0xFE, 0x76, 0x07                // node 40: irlo.4 = dff ir.mux4   # register bit
+32E4  01 FE 7D 07             | /home/claude/y/tests/_asm/improved.asm:195 |  | .byte 0x01, 0xFE, 0x7D, 0x07                // node 41: irlo.5 = dff ir.mux5   # register bit
+32E8  01 FE 84 07             | /home/claude/y/tests/_asm/improved.asm:196 |  | .byte 0x01, 0xFE, 0x84, 0x07                // node 42: irlo.6 = dff ir.mux6   # register bit
+32EC  01 FE 8B 07             | /home/claude/y/tests/_asm/improved.asm:197 |  | .byte 0x01, 0xFE, 0x8B, 0x07                // node 43: irlo.7 = dff ir.mux7   # register bit
+32F0  01 FE 92 07             | /home/claude/y/tests/_asm/improved.asm:198 |  | .byte 0x01, 0xFE, 0x92, 0x07                // node 44: irhi.0 = dff ir.mux8   # register bit
+32F4  01 FE 99 07             | /home/claude/y/tests/_asm/improved.asm:199 |  | .byte 0x01, 0xFE, 0x99, 0x07                // node 45: irhi.1 = dff ir.mux9   # register bit
+32F8  01 FE A0 07             | /home/claude/y/tests/_asm/improved.asm:200 |  | .byte 0x01, 0xFE, 0xA0, 0x07                // node 46: irhi.2 = dff ir.mux10   # register bit
+32FC  01 FE A7 07             | /home/claude/y/tests/_asm/improved.asm:201 |  | .byte 0x01, 0xFE, 0xA7, 0x07                // node 47: irhi.3 = dff ir.mux11   # register bit
+3300  01 FE AE 07             | /home/claude/y/tests/_asm/improved.asm:202 |  | .byte 0x01, 0xFE, 0xAE, 0x07                // node 48: irhi.4 = dff ir.mux12   # register bit
+3304  01 FE 75 01             | /home/claude/y/tests/_asm/improved.asm:203 |  | .byte 0x01, 0xFE, 0x75, 0x01                // node 49: st.0 = dff control.or3   # register bit
+3308  01 FE 76 01             | /home/claude/y/tests/_asm/improved.asm:204 |  | .byte 0x01, 0xFE, 0x76, 0x01                // node 50: st.1 = dff control.and5   # register bit
+330C  01 FE 79 01             | /home/claude/y/tests/_asm/improved.asm:205 |  | .byte 0x01, 0xFE, 0x79, 0x01                // node 51: st.2 = dff control.and7   # register bit
+3310  01 FE 7C 01             | /home/claude/y/tests/_asm/improved.asm:206 |  | .byte 0x01, 0xFE, 0x7C, 0x01                // node 52: st.3 = dff control.and9   # register bit
+3314  01 FE 7D 01             | /home/claude/y/tests/_asm/improved.asm:207 |  | .byte 0x01, 0xFE, 0x7D, 0x01                // node 53: st.4 = dff control.and10   # register bit
+3318  00 80 80                | /home/claude/y/tests/_asm/improved.asm:208 |  | .byte 0x00, 0x80, 0x80                      // node 54: c.n = nand rom0 rom0   # constant helper
+331B  00 80 01                | /home/claude/y/tests/_asm/improved.asm:209 |  | .byte 0x00, 0x80, 0x01                      // node 55: one = nand rom0 c.n   # constant 1 = nand(x, not x)
+331E  00 01 01                | /home/claude/y/tests/_asm/improved.asm:210 |  | .byte 0x00, 0x01, 0x01                      // node 56: zero = nand one one   # constant 0
+3321  00 89 89                | /home/claude/y/tests/_asm/improved.asm:211 |  | .byte 0x00, 0x89, 0x89                      // node 57: reset = nand run run
+3324  04 09 08                | /home/claude/y/tests/_asm/improved.asm:212 |  | .byte 0x04, 0x09, 0x08                      // node 58: top.or0 = or st.0 st.1
+3327  06 2F 3D 01             | /home/claude/y/tests/_asm/improved.asm:213 |  | .byte 0x06, 0x2F, 0x3D, 0x01                // node 61: addr.mux0 = mux a.0 pc.0 top.or0
+332B  06 36 44 09             | /home/claude/y/tests/_asm/improved.asm:214 |  | .byte 0x06, 0x36, 0x44, 0x09                // node 69: addr.mux1 = mux a.1 pc.1 top.or0
+332F  06 3D 4B 11             | /home/claude/y/tests/_asm/improved.asm:215 |  | .byte 0x06, 0x3D, 0x4B, 0x11                // node 77: addr.mux2 = mux a.2 pc.2 top.or0
+3333  06 44 52 19             | /home/claude/y/tests/_asm/improved.asm:216 |  | .byte 0x06, 0x44, 0x52, 0x19                // node 85: addr.mux3 = mux a.3 pc.3 top.or0
+3337  06 4B 59 21             | /home/claude/y/tests/_asm/improved.asm:217 |  | .byte 0x06, 0x4B, 0x59, 0x21                // node 93: addr.mux4 = mux a.4 pc.4 top.or0
+333B  06 52 60 29             | /home/claude/y/tests/_asm/improved.asm:218 |  | .byte 0x06, 0x52, 0x60, 0x29                // node 101: addr.mux5 = mux a.5 pc.5 top.or0
+333F  06 59 67 31             | /home/claude/y/tests/_asm/improved.asm:219 |  | .byte 0x06, 0x59, 0x67, 0x31                // node 109: addr.mux6 = mux a.6 pc.6 top.or0
+3343  06 60 6E 39             | /home/claude/y/tests/_asm/improved.asm:220 |  | .byte 0x06, 0x60, 0x6E, 0x39                // node 117: addr.mux7 = mux a.7 pc.7 top.or0
+3347  06 67 75 41             | /home/claude/y/tests/_asm/improved.asm:221 |  | .byte 0x06, 0x67, 0x75, 0x41                // node 125: addr.mux8 = mux a.8 pc.8 top.or0
+334B  06 6E 7C 49             | /home/claude/y/tests/_asm/improved.asm:222 |  | .byte 0x06, 0x6E, 0x7C, 0x49                // node 133: addr.mux9 = mux a.9 pc.9 top.or0
+334F  06 75 FD 83 00 51       | /home/claude/y/tests/_asm/improved.asm:223 |  | .byte 0x06, 0x75, 0xFD, 0x83, 0x00, 0x51    // node 141: addr.mux10 = mux a.10 pc.10 top.or0
+3355  06 7C FD 8A 00 59       | /home/claude/y/tests/_asm/improved.asm:224 |  | .byte 0x06, 0x7C, 0xFD, 0x8A, 0x00, 0x59    // node 149: addr.mux11 = mux a.11 pc.11 top.or0
+335B  06 FD 83 00 FD 91 00 61 | /home/claude/y/tests/_asm/improved.asm:225 |  | .byte 0x06, 0xFD, 0x83, 0x00, 0xFD, 0x91, 0x00, 0x61// node 157: addr.mux12 = mux a.12 pc.12 top.or0
+3363  06 FD 8A 00 FD 98 00 69 | /home/claude/y/tests/_asm/improved.asm:226 |  | .byte 0x06, 0xFD, 0x8A, 0x00, 0xFD, 0x98, 0x00, 0x69// node 165: addr.mux13 = mux a.13 pc.13 top.or0
+336B  07 69 76                | /home/claude/y/tests/_asm/improved.asm:227 |  | .byte 0x07, 0x69, 0x76                      // node 173: addr.ha0 = ha addr.mux0 one
+336E  07 6C 01                | /home/claude/y/tests/_asm/improved.asm:228 |  | .byte 0x07, 0x6C, 0x01                      // node 184: addr.ha1 = ha addr.mux1 addr.ha0.1
+3371  07 6F 01                | /home/claude/y/tests/_asm/improved.asm:229 |  | .byte 0x07, 0x6F, 0x01                      // node 195: addr.ha2 = ha addr.mux2 addr.ha1.1
+3374  07 72 01                | /home/claude/y/tests/_asm/improved.asm:230 |  | .byte 0x07, 0x72, 0x01                      // node 206: addr.ha3 = ha addr.mux3 addr.ha2.1
+3377  07 75 01                | /home/claude/y/tests/_asm/improved.asm:231 |  | .byte 0x07, 0x75, 0x01                      // node 217: addr.ha4 = ha addr.mux4 addr.ha3.1
+337A  07 78 01                | /home/claude/y/tests/_asm/improved.asm:232 |  | .byte 0x07, 0x78, 0x01                      // node 228: addr.ha5 = ha addr.mux5 addr.ha4.1
+337D  07 7B 01                | /home/claude/y/tests/_asm/improved.asm:233 |  | .byte 0x07, 0x7B, 0x01                      // node 239: addr.ha6 = ha addr.mux6 addr.ha5.1
+3380  07 7E 01                | /home/claude/y/tests/_asm/improved.asm:234 |  | .byte 0x07, 0x7E, 0x01                      // node 250: addr.ha7 = ha addr.mux7 addr.ha6.1
+3383  07 FD 81 00 01          | /home/claude/y/tests/_asm/improved.asm:235 |  | .byte 0x07, 0xFD, 0x81, 0x00, 0x01          // node 261: addr.ha8 = ha addr.mux8 addr.ha7.1
+3388  07 FD 84 00 01          | /home/claude/y/tests/_asm/improved.asm:236 |  | .byte 0x07, 0xFD, 0x84, 0x00, 0x01          // node 272: addr.ha9 = ha addr.mux9 addr.ha8.1
+338D  07 FD 87 00 01          | /home/claude/y/tests/_asm/improved.asm:237 |  | .byte 0x07, 0xFD, 0x87, 0x00, 0x01          // node 283: addr.ha10 = ha addr.mux10 addr.ha9.1
+3392  07 FD 8A 00 01          | /home/claude/y/tests/_asm/improved.asm:238 |  | .byte 0x07, 0xFD, 0x8A, 0x00, 0x01          // node 294: addr.ha11 = ha addr.mux11 addr.ha10.1
+3397  07 FD 8D 00 01          | /home/claude/y/tests/_asm/improved.asm:239 |  | .byte 0x07, 0xFD, 0x8D, 0x00, 0x01          // node 305: addr.ha12 = ha addr.mux12 addr.ha11.1
+339C  07 FD 90 00 01          | /home/claude/y/tests/_asm/improved.asm:240 |  | .byte 0x07, 0xFD, 0x90, 0x00, 0x01          // node 316: addr.ha13 = ha addr.mux13 addr.ha12.1
+33A1  02 FD DB 00             | /home/claude/y/tests/_asm/improved.asm:241 |  | .byte 0x02, 0xFD, 0xDB, 0x00                // node 327: decode.not0 = not addr.mux5
+33A5  03 FD 11 01 01          | /home/claude/y/tests/_asm/improved.asm:242 |  | .byte 0x03, 0xFD, 0x11, 0x01, 0x01          // node 328: decode.and0 = and one decode.not0
+33AA  02 FD D6 00             | /home/claude/y/tests/_asm/improved.asm:243 |  | .byte 0x02, 0xFD, 0xD6, 0x00                // node 330: decode.not1 = not addr.mux6
+33AE  03 02 01                | /home/claude/y/tests/_asm/improved.asm:244 |  | .byte 0x03, 0x02, 0x01                      // node 331: decode.and1 = and decode.and0 decode.not1
+33B1  02 FD D1 00             | /home/claude/y/tests/_asm/improved.asm:245 |  | .byte 0x02, 0xFD, 0xD1, 0x00                // node 333: decode.not2 = not addr.mux7
+33B5  03 02 01                | /home/claude/y/tests/_asm/improved.asm:246 |  | .byte 0x03, 0x02, 0x01                      // node 334: decode.and2 = and decode.and1 decode.not2
+33B8  02 FD CC 00             | /home/claude/y/tests/_asm/improved.asm:247 |  | .byte 0x02, 0xFD, 0xCC, 0x00                // node 336: decode.not3 = not addr.mux8
+33BC  03 02 01                | /home/claude/y/tests/_asm/improved.asm:248 |  | .byte 0x03, 0x02, 0x01                      // node 337: decode.and3 = and decode.and2 decode.not3
+33BF  02 FD C7 00             | /home/claude/y/tests/_asm/improved.asm:249 |  | .byte 0x02, 0xFD, 0xC7, 0x00                // node 339: decode.not4 = not addr.mux9
+33C3  03 02 01                | /home/claude/y/tests/_asm/improved.asm:250 |  | .byte 0x03, 0x02, 0x01                      // node 340: decode.and4 = and decode.and3 decode.not4
+33C6  02 FD C2 00             | /home/claude/y/tests/_asm/improved.asm:251 |  | .byte 0x02, 0xFD, 0xC2, 0x00                // node 342: decode.not5 = not addr.mux10
+33CA  03 02 01                | /home/claude/y/tests/_asm/improved.asm:252 |  | .byte 0x03, 0x02, 0x01                      // node 343: decode.and5 = and decode.and4 decode.not5
+33CD  02 FD BD 00             | /home/claude/y/tests/_asm/improved.asm:253 |  | .byte 0x02, 0xFD, 0xBD, 0x00                // node 345: decode.not6 = not addr.mux11
+33D1  03 02 01                | /home/claude/y/tests/_asm/improved.asm:254 |  | .byte 0x03, 0x02, 0x01                      // node 346: decode.and6 = and decode.and5 decode.not6
+33D4  02 FD B8 00             | /home/claude/y/tests/_asm/improved.asm:255 |  | .byte 0x02, 0xFD, 0xB8, 0x00                // node 348: decode.not7 = not addr.mux12
+33D8  03 02 01                | /home/claude/y/tests/_asm/improved.asm:256 |  | .byte 0x03, 0x02, 0x01                      // node 349: decode.and7 = and decode.and6 decode.not7
+33DB  02 FD B3 00             | /home/claude/y/tests/_asm/improved.asm:257 |  | .byte 0x02, 0xFD, 0xB3, 0x00                // node 351: decode.not8 = not addr.mux13
+33DF  03 02 01                | /home/claude/y/tests/_asm/improved.asm:258 |  | .byte 0x03, 0x02, 0x01                      // node 352: decode.and8 = and decode.and7 decode.not8
+33E2  02 FD B6 00             | /home/claude/y/tests/_asm/improved.asm:259 |  | .byte 0x02, 0xFD, 0xB6, 0x00                // node 354: decode.not9 = not addr.mux13
+33E6  03 01 FD FF 00          | /home/claude/y/tests/_asm/improved.asm:260 |  | .byte 0x03, 0x01, 0xFD, 0xFF, 0x00          // node 355: decode.and9 = and decode.not9 addr.mux4
+33EB  03 01 FD F9 00          | /home/claude/y/tests/_asm/improved.asm:261 |  | .byte 0x03, 0x01, 0xFD, 0xF9, 0x00          // node 357: decode.and10 = and decode.and9 addr.mux5
+33F0  03 01 FD F3 00          | /home/claude/y/tests/_asm/improved.asm:262 |  | .byte 0x03, 0x01, 0xFD, 0xF3, 0x00          // node 359: decode.and11 = and decode.and10 addr.mux6
+33F5  03 01 FD ED 00          | /home/claude/y/tests/_asm/improved.asm:263 |  | .byte 0x03, 0x01, 0xFD, 0xED, 0x00          // node 361: decode.and12 = and decode.and11 addr.mux7
+33FA  03 01 FD E7 00          | /home/claude/y/tests/_asm/improved.asm:264 |  | .byte 0x03, 0x01, 0xFD, 0xE7, 0x00          // node 363: decode.and13 = and decode.and12 addr.mux8
+33FF  03 01 FD E1 00          | /home/claude/y/tests/_asm/improved.asm:265 |  | .byte 0x03, 0x01, 0xFD, 0xE1, 0x00          // node 365: decode.and14 = and decode.and13 addr.mux9
+3404  03 01 FD DB 00          | /home/claude/y/tests/_asm/improved.asm:266 |  | .byte 0x03, 0x01, 0xFD, 0xDB, 0x00          // node 367: decode.and15 = and decode.and14 addr.mux10
+3409  03 01 FD D5 00          | /home/claude/y/tests/_asm/improved.asm:267 |  | .byte 0x03, 0x01, 0xFD, 0xD5, 0x00          // node 369: decode.and16 = and decode.and15 addr.mux11
+340E  03 01 FD CF 00          | /home/claude/y/tests/_asm/improved.asm:268 |  | .byte 0x03, 0x01, 0xFD, 0xCF, 0x00          // node 371: decode.and17 = and decode.and16 addr.mux12
+3413  00 14 8A                | /home/claude/y/tests/_asm/improved.asm:269 |  | .byte 0x00, 0x14, 0x8A                      // node 373: decode.nand0 = nand decode.and8 ramrd0
+3416  00 FD CA 00 80          | /home/claude/y/tests/_asm/improved.asm:270 |  | .byte 0x00, 0xFD, 0xCA, 0x00, 0x80          // node 374: decode.nand1 = nand addr.mux13 rom0
+341B  00 02 01                | /home/claude/y/tests/_asm/improved.asm:271 |  | .byte 0x00, 0x02, 0x01                      // node 375: decode.nand2 = nand decode.nand0 decode.nand1
+341E  00 17 8B                | /home/claude/y/tests/_asm/improved.asm:272 |  | .byte 0x00, 0x17, 0x8B                      // node 376: decode.nand3 = nand decode.and8 ramrd1
+3421  00 FD CD 00 81          | /home/claude/y/tests/_asm/improved.asm:273 |  | .byte 0x00, 0xFD, 0xCD, 0x00, 0x81          // node 377: decode.nand4 = nand addr.mux13 rom1
+3426  00 02 01                | /home/claude/y/tests/_asm/improved.asm:274 |  | .byte 0x00, 0x02, 0x01                      // node 378: decode.nand5 = nand decode.nand3 decode.nand4
+3429  00 1A 8C                | /home/claude/y/tests/_asm/improved.asm:275 |  | .byte 0x00, 0x1A, 0x8C                      // node 379: decode.nand6 = nand decode.and8 ramrd2
+342C  00 FD D0 00 82          | /home/claude/y/tests/_asm/improved.asm:276 |  | .byte 0x00, 0xFD, 0xD0, 0x00, 0x82          // node 380: decode.nand7 = nand addr.mux13 rom2
+3431  00 02 01                | /home/claude/y/tests/_asm/improved.asm:277 |  | .byte 0x00, 0x02, 0x01                      // node 381: decode.nand8 = nand decode.nand6 decode.nand7
+3434  00 1D 8D                | /home/claude/y/tests/_asm/improved.asm:278 |  | .byte 0x00, 0x1D, 0x8D                      // node 382: decode.nand9 = nand decode.and8 ramrd3
+3437  00 FD D3 00 83          | /home/claude/y/tests/_asm/improved.asm:279 |  | .byte 0x00, 0xFD, 0xD3, 0x00, 0x83          // node 383: decode.nand10 = nand addr.mux13 rom3
+343C  00 02 01                | /home/claude/y/tests/_asm/improved.asm:280 |  | .byte 0x00, 0x02, 0x01                      // node 384: decode.nand11 = nand decode.nand9 decode.nand10
+343F  00 20 8E                | /home/claude/y/tests/_asm/improved.asm:281 |  | .byte 0x00, 0x20, 0x8E                      // node 385: decode.nand12 = nand decode.and8 ramrd4
+3442  00 FD D6 00 84          | /home/claude/y/tests/_asm/improved.asm:282 |  | .byte 0x00, 0xFD, 0xD6, 0x00, 0x84          // node 386: decode.nand13 = nand addr.mux13 rom4
+3447  00 02 01                | /home/claude/y/tests/_asm/improved.asm:283 |  | .byte 0x00, 0x02, 0x01                      // node 387: decode.nand14 = nand decode.nand12 decode.nand13
+344A  00 23 8F                | /home/claude/y/tests/_asm/improved.asm:284 |  | .byte 0x00, 0x23, 0x8F                      // node 388: decode.nand15 = nand decode.and8 ramrd5
+344D  00 FD D9 00 85          | /home/claude/y/tests/_asm/improved.asm:285 |  | .byte 0x00, 0xFD, 0xD9, 0x00, 0x85          // node 389: decode.nand16 = nand addr.mux13 rom5
+3452  00 02 01                | /home/claude/y/tests/_asm/improved.asm:286 |  | .byte 0x00, 0x02, 0x01                      // node 390: decode.nand17 = nand decode.nand15 decode.nand16
+3455  00 26 90                | /home/claude/y/tests/_asm/improved.asm:287 |  | .byte 0x00, 0x26, 0x90                      // node 391: decode.nand18 = nand decode.and8 ramrd6
+3458  00 FD DC 00 86          | /home/claude/y/tests/_asm/improved.asm:288 |  | .byte 0x00, 0xFD, 0xDC, 0x00, 0x86          // node 392: decode.nand19 = nand addr.mux13 rom6
+345D  00 02 01                | /home/claude/y/tests/_asm/improved.asm:289 |  | .byte 0x00, 0x02, 0x01                      // node 393: decode.nand20 = nand decode.nand18 decode.nand19
+3460  00 29 91                | /home/claude/y/tests/_asm/improved.asm:290 |  | .byte 0x00, 0x29, 0x91                      // node 394: decode.nand21 = nand decode.and8 ramrd7
+3463  00 FD DF 00 87          | /home/claude/y/tests/_asm/improved.asm:291 |  | .byte 0x00, 0xFD, 0xDF, 0x00, 0x87          // node 395: decode.nand22 = nand addr.mux13 rom7
+3468  00 02 01                | /home/claude/y/tests/_asm/improved.asm:292 |  | .byte 0x00, 0x02, 0x01                      // node 396: decode.nand23 = nand decode.nand21 decode.nand22
+346B  03 04 07                | /home/claude/y/tests/_asm/improved.asm:293 |  | .byte 0x03, 0x04, 0x07                      // node 397: control.and0 = and decode.nand20 decode.nand17
+346E  03 03 01                | /home/claude/y/tests/_asm/improved.asm:294 |  | .byte 0x03, 0x03, 0x01                      // node 399: control.and1 = and decode.nand23 control.and0
+3471  02 0B                   | /home/claude/y/tests/_asm/improved.asm:295 |  | .byte 0x02, 0x0B                            // node 401: control.not0 = not decode.nand17
+3473  03 09 01                | /home/claude/y/tests/_asm/improved.asm:296 |  | .byte 0x03, 0x09, 0x01                      // node 402: control.and2 = and decode.nand20 control.not0
+3476  03 08 01                | /home/claude/y/tests/_asm/improved.asm:297 |  | .byte 0x03, 0x08, 0x01                      // node 404: control.and3 = and decode.nand23 control.and2
+3479  02 0A                   | /home/claude/y/tests/_asm/improved.asm:298 |  | .byte 0x02, 0x0A                            // node 406: control.not1 = not decode.nand23
+347B  02 FD 5E 01             | /home/claude/y/tests/_asm/improved.asm:299 |  | .byte 0x02, 0xFD, 0x5E, 0x01                // node 407: control.not2 = not reset
+347F  04 08 03                | /home/claude/y/tests/_asm/improved.asm:300 |  | .byte 0x04, 0x08, 0x03                      // node 408: control.or0 = or control.and1 control.and3
+3482  02 01                   | /home/claude/y/tests/_asm/improved.asm:301 |  | .byte 0x02, 0x01                            // node 411: control.not3 = not control.or0
+3484  03 FD 6A 01 01          | /home/claude/y/tests/_asm/improved.asm:302 |  | .byte 0x03, 0xFD, 0x6A, 0x01, 0x01          // node 412: control.and4 = and st.1 control.not3
+3489  04 FD 69 01 01          | /home/claude/y/tests/_asm/improved.asm:303 |  | .byte 0x04, 0xFD, 0x69, 0x01, 0x01          // node 414: control.or1 = or st.4 control.and4
+348E  04 FD 6E 01 01          | /home/claude/y/tests/_asm/improved.asm:304 |  | .byte 0x04, 0xFD, 0x6E, 0x01, 0x01          // node 417: control.or2 = or st.2 control.or1
+3493  04 FD 6B 01 01          | /home/claude/y/tests/_asm/improved.asm:305 |  | .byte 0x04, 0xFD, 0x6B, 0x01, 0x01          // node 420: control.or3 = or reset control.or2
+3498  03 10 FD 76 01          | /home/claude/y/tests/_asm/improved.asm:306 |  | .byte 0x03, 0x10, 0xFD, 0x76, 0x01          // node 423: control.and5 = and control.not2 st.0
+349D  03 FD 77 01 19          | /home/claude/y/tests/_asm/improved.asm:307 |  | .byte 0x03, 0xFD, 0x77, 0x01, 0x19          // node 425: control.and6 = and st.1 control.and1
+34A2  03 14 01                | /home/claude/y/tests/_asm/improved.asm:308 |  | .byte 0x03, 0x14, 0x01                      // node 427: control.and7 = and control.not2 control.and6
+34A5  03 FD 7B 01 18          | /home/claude/y/tests/_asm/improved.asm:309 |  | .byte 0x03, 0xFD, 0x7B, 0x01, 0x18          // node 429: control.and8 = and st.1 control.and3
+34AA  03 18 01                | /home/claude/y/tests/_asm/improved.asm:310 |  | .byte 0x03, 0x18, 0x01                      // node 431: control.and9 = and control.not2 control.and8
+34AD  03 1A FD 7D 01          | /home/claude/y/tests/_asm/improved.asm:311 |  | .byte 0x03, 0x1A, 0xFD, 0x7D, 0x01          // node 433: control.and10 = and control.not2 st.3
+34B2  06 FD A5 01 3C FD 83 01 | /home/claude/y/tests/_asm/improved.asm:312 |  | .byte 0x06, 0xFD, 0xA5, 0x01, 0x3C, 0xFD, 0x83, 0x01// node 435: alu.mux0 = mux a.0 decode.nand2 irhi.4
+34BA  06 FD AC 01 41 FD 8B 01 | /home/claude/y/tests/_asm/improved.asm:313 |  | .byte 0x06, 0xFD, 0xAC, 0x01, 0x41, 0xFD, 0x8B, 0x01// node 443: alu.mux1 = mux a.1 decode.nand5 irhi.4
+34C2  06 FD B3 01 46 FD 93 01 | /home/claude/y/tests/_asm/improved.asm:314 |  | .byte 0x06, 0xFD, 0xB3, 0x01, 0x46, 0xFD, 0x93, 0x01// node 451: alu.mux2 = mux a.2 decode.nand8 irhi.4
+34CA  06 FD BA 01 4B FD 9B 01 | /home/claude/y/tests/_asm/improved.asm:315 |  | .byte 0x06, 0xFD, 0xBA, 0x01, 0x4B, 0xFD, 0x9B, 0x01// node 459: alu.mux3 = mux a.3 decode.nand11 irhi.4
+34D2  06 FD C1 01 50 FD A3 01 | /home/claude/y/tests/_asm/improved.asm:316 |  | .byte 0x06, 0xFD, 0xC1, 0x01, 0x50, 0xFD, 0xA3, 0x01// node 467: alu.mux4 = mux a.4 decode.nand14 irhi.4
+34DA  06 FD C8 01 55 FD AB 01 | /home/claude/y/tests/_asm/improved.asm:317 |  | .byte 0x06, 0xFD, 0xC8, 0x01, 0x55, 0xFD, 0xAB, 0x01// node 475: alu.mux5 = mux a.5 decode.nand17 irhi.4
+34E2  06 FD CF 01 5A FD B3 01 | /home/claude/y/tests/_asm/improved.asm:318 |  | .byte 0x06, 0xFD, 0xCF, 0x01, 0x5A, 0xFD, 0xB3, 0x01// node 483: alu.mux6 = mux a.6 decode.nand20 irhi.4
+34EA  06 FD D6 01 5F FD BB 01 | /home/claude/y/tests/_asm/improved.asm:319 |  | .byte 0x06, 0xFD, 0xD6, 0x01, 0x5F, 0xFD, 0xBB, 0x01// node 491: alu.mux7 = mux a.7 decode.nand23 irhi.4
+34F2  06 FD D7 01 FD BB 01 FD | /home/claude/y/tests/_asm/improved.asm:320 |  | .byte 0x06, 0xFD, 0xD7, 0x01, 0xFD, 0xBB, 0x01, 0xFD, 0xC4, 0x01// node 499: alu.mux8 = mux d.0 zero irhi.3
+34FA  C4 01                   |  |  |
+34FC  06 FD DE 01 FD C3 01 FD | /home/claude/y/tests/_asm/improved.asm:321 |  | .byte 0x06, 0xFD, 0xDE, 0x01, 0xFD, 0xC3, 0x01, 0xFD, 0xCC, 0x01// node 507: alu.mux9 = mux d.1 zero irhi.3
+3504  CC 01                   |  |  |
+3506  06 FD E5 01 FD CB 01 FD | /home/claude/y/tests/_asm/improved.asm:322 |  | .byte 0x06, 0xFD, 0xE5, 0x01, 0xFD, 0xCB, 0x01, 0xFD, 0xD4, 0x01// node 515: alu.mux10 = mux d.2 zero irhi.3
+350E  D4 01                   |  |  |
+3510  06 FD EC 01 FD D3 01 FD | /home/claude/y/tests/_asm/improved.asm:323 |  | .byte 0x06, 0xFD, 0xEC, 0x01, 0xFD, 0xD3, 0x01, 0xFD, 0xDC, 0x01// node 523: alu.mux11 = mux d.3 zero irhi.3
+3518  DC 01                   |  |  |
+351A  06 FD F3 01 FD DB 01 FD | /home/claude/y/tests/_asm/improved.asm:324 |  | .byte 0x06, 0xFD, 0xF3, 0x01, 0xFD, 0xDB, 0x01, 0xFD, 0xE4, 0x01// node 531: alu.mux12 = mux d.4 zero irhi.3
+3522  E4 01                   |  |  |
+3524  06 FD FA 01 FD E3 01 FD | /home/claude/y/tests/_asm/improved.asm:325 |  | .byte 0x06, 0xFD, 0xFA, 0x01, 0xFD, 0xE3, 0x01, 0xFD, 0xEC, 0x01// node 539: alu.mux13 = mux d.5 zero irhi.3
+352C  EC 01                   |  |  |
+352E  06 FD 01 02 FD EB 01 FD | /home/claude/y/tests/_asm/improved.asm:326 |  | .byte 0x06, 0xFD, 0x01, 0x02, 0xFD, 0xEB, 0x01, 0xFD, 0xF4, 0x01// node 547: alu.mux14 = mux d.6 zero irhi.3
+3536  F4 01                   |  |  |
+3538  06 FD 08 02 FD F3 01 FD | /home/claude/y/tests/_asm/improved.asm:327 |  | .byte 0x06, 0xFD, 0x08, 0x02, 0xFD, 0xF3, 0x01, 0xFD, 0xFC, 0x01// node 555: alu.mux15 = mux d.7 zero irhi.3
+3540  FC 01                   |  |  |
+3542  02 39                   | /home/claude/y/tests/_asm/improved.asm:328 |  | .byte 0x02, 0x39                            // node 563: alu.not0 = not alu.mux8
+3544  02 32                   | /home/claude/y/tests/_asm/improved.asm:329 |  | .byte 0x02, 0x32                            // node 564: alu.not1 = not alu.mux9
+3546  02 2B                   | /home/claude/y/tests/_asm/improved.asm:330 |  | .byte 0x02, 0x2B                            // node 565: alu.not2 = not alu.mux10
+3548  02 24                   | /home/claude/y/tests/_asm/improved.asm:331 |  | .byte 0x02, 0x24                            // node 566: alu.not3 = not alu.mux11
+354A  02 1D                   | /home/claude/y/tests/_asm/improved.asm:332 |  | .byte 0x02, 0x1D                            // node 567: alu.not4 = not alu.mux12
+354C  02 16                   | /home/claude/y/tests/_asm/improved.asm:333 |  | .byte 0x02, 0x16                            // node 568: alu.not5 = not alu.mux13
+354E  02 0F                   | /home/claude/y/tests/_asm/improved.asm:334 |  | .byte 0x02, 0x0F                            // node 569: alu.not6 = not alu.mux14
+3550  02 08                   | /home/claude/y/tests/_asm/improved.asm:335 |  | .byte 0x02, 0x08                            // node 570: alu.not7 = not alu.mux15
+3552  06 41 08 FD 0D 02       | /home/claude/y/tests/_asm/improved.asm:336 |  | .byte 0x06, 0x41, 0x08, 0xFD, 0x0D, 0x02    // node 571: alu.mux16 = mux alu.mux8 alu.not0 irhi.2
+3558  06 41 0F FD 15 02       | /home/claude/y/tests/_asm/improved.asm:337 |  | .byte 0x06, 0x41, 0x0F, 0xFD, 0x15, 0x02    // node 579: alu.mux17 = mux alu.mux9 alu.not1 irhi.2
+355E  06 41 16 FD 1D 02       | /home/claude/y/tests/_asm/improved.asm:338 |  | .byte 0x06, 0x41, 0x16, 0xFD, 0x1D, 0x02    // node 587: alu.mux18 = mux alu.mux10 alu.not2 irhi.2
+3564  06 41 1D FD 25 02       | /home/claude/y/tests/_asm/improved.asm:339 |  | .byte 0x06, 0x41, 0x1D, 0xFD, 0x25, 0x02    // node 595: alu.mux19 = mux alu.mux11 alu.not3 irhi.2
+356A  06 41 24 FD 2D 02       | /home/claude/y/tests/_asm/improved.asm:340 |  | .byte 0x06, 0x41, 0x24, 0xFD, 0x2D, 0x02    // node 603: alu.mux20 = mux alu.mux12 alu.not4 irhi.2
+3570  06 41 2B FD 35 02       | /home/claude/y/tests/_asm/improved.asm:341 |  | .byte 0x06, 0x41, 0x2B, 0xFD, 0x35, 0x02    // node 611: alu.mux21 = mux alu.mux13 alu.not5 irhi.2
+3576  06 41 32 FD 3D 02       | /home/claude/y/tests/_asm/improved.asm:342 |  | .byte 0x06, 0x41, 0x32, 0xFD, 0x3D, 0x02    // node 619: alu.mux22 = mux alu.mux14 alu.not6 irhi.2
+357C  06 41 39 FD 45 02       | /home/claude/y/tests/_asm/improved.asm:343 |  | .byte 0x06, 0x41, 0x39, 0xFD, 0x45, 0x02    // node 627: alu.mux23 = mux alu.mux15 alu.not7 irhi.2
+3582  06 FD C1 00 FD 43 02 FD | /home/claude/y/tests/_asm/improved.asm:344 |  | .byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x43, 0x02, 0xFD, 0x4E, 0x02// node 635: alu.mux24 = mux alu.mux0 zero irhi.1
+358A  4E 02                   |  |  |
+358C  06 FD C1 00 FD 4B 02 FD | /home/claude/y/tests/_asm/improved.asm:345 |  | .byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x4B, 0x02, 0xFD, 0x56, 0x02// node 643: alu.mux25 = mux alu.mux1 zero irhi.1
+3594  56 02                   |  |  |
+3596  06 FD C1 00 FD 53 02 FD | /home/claude/y/tests/_asm/improved.asm:346 |  | .byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x53, 0x02, 0xFD, 0x5E, 0x02// node 651: alu.mux26 = mux alu.mux2 zero irhi.1
+359E  5E 02                   |  |  |
+35A0  06 FD C1 00 FD 5B 02 FD | /home/claude/y/tests/_asm/improved.asm:347 |  | .byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x5B, 0x02, 0xFD, 0x66, 0x02// node 659: alu.mux27 = mux alu.mux3 zero irhi.1
+35A8  66 02                   |  |  |
+35AA  06 FD C1 00 FD 63 02 FD | /home/claude/y/tests/_asm/improved.asm:348 |  | .byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x63, 0x02, 0xFD, 0x6E, 0x02// node 667: alu.mux28 = mux alu.mux4 zero irhi.1
+35B2  6E 02                   |  |  |
+35B4  06 FD C1 00 FD 6B 02 FD | /home/claude/y/tests/_asm/improved.asm:349 |  | .byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x6B, 0x02, 0xFD, 0x76, 0x02// node 675: alu.mux29 = mux alu.mux5 zero irhi.1
+35BC  76 02                   |  |  |
+35BE  06 FD C1 00 FD 73 02 FD | /home/claude/y/tests/_asm/improved.asm:350 |  | .byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x73, 0x02, 0xFD, 0x7E, 0x02// node 683: alu.mux30 = mux alu.mux6 zero irhi.1
+35C6  7E 02                   |  |  |
+35C8  06 FD C1 00 FD 7B 02 FD | /home/claude/y/tests/_asm/improved.asm:351 |  | .byte 0x06, 0xFD, 0xC1, 0x00, 0xFD, 0x7B, 0x02, 0xFD, 0x86, 0x02// node 691: alu.mux31 = mux alu.mux7 zero irhi.1
+35D0  86 02                   |  |  |
+35D2  02 39                   | /home/claude/y/tests/_asm/improved.asm:352 |  | .byte 0x02, 0x39                            // node 699: alu.not8 = not alu.mux24
+35D4  02 32                   | /home/claude/y/tests/_asm/improved.asm:353 |  | .byte 0x02, 0x32                            // node 700: alu.not9 = not alu.mux25
+35D6  02 2B                   | /home/claude/y/tests/_asm/improved.asm:354 |  | .byte 0x02, 0x2B                            // node 701: alu.not10 = not alu.mux26
+35D8  02 24                   | /home/claude/y/tests/_asm/improved.asm:355 |  | .byte 0x02, 0x24                            // node 702: alu.not11 = not alu.mux27
+35DA  02 1D                   | /home/claude/y/tests/_asm/improved.asm:356 |  | .byte 0x02, 0x1D                            // node 703: alu.not12 = not alu.mux28
+35DC  02 16                   | /home/claude/y/tests/_asm/improved.asm:357 |  | .byte 0x02, 0x16                            // node 704: alu.not13 = not alu.mux29
+35DE  02 0F                   | /home/claude/y/tests/_asm/improved.asm:358 |  | .byte 0x02, 0x0F                            // node 705: alu.not14 = not alu.mux30
+35E0  02 08                   | /home/claude/y/tests/_asm/improved.asm:359 |  | .byte 0x02, 0x08                            // node 706: alu.not15 = not alu.mux31
+35E2  06 41 08 FD 97 02       | /home/claude/y/tests/_asm/improved.asm:360 |  | .byte 0x06, 0x41, 0x08, 0xFD, 0x97, 0x02    // node 707: alu.mux32 = mux alu.mux24 alu.not8 irhi.0
+35E8  06 41 0F FD 9F 02       | /home/claude/y/tests/_asm/improved.asm:361 |  | .byte 0x06, 0x41, 0x0F, 0xFD, 0x9F, 0x02    // node 715: alu.mux33 = mux alu.mux25 alu.not9 irhi.0
+35EE  06 41 16 FD A7 02       | /home/claude/y/tests/_asm/improved.asm:362 |  | .byte 0x06, 0x41, 0x16, 0xFD, 0xA7, 0x02    // node 723: alu.mux34 = mux alu.mux26 alu.not10 irhi.0
+35F4  06 41 1D FD AF 02       | /home/claude/y/tests/_asm/improved.asm:363 |  | .byte 0x06, 0x41, 0x1D, 0xFD, 0xAF, 0x02    // node 731: alu.mux35 = mux alu.mux27 alu.not11 irhi.0
+35FA  06 41 24 FD B7 02       | /home/claude/y/tests/_asm/improved.asm:364 |  | .byte 0x06, 0x41, 0x24, 0xFD, 0xB7, 0x02    // node 739: alu.mux36 = mux alu.mux28 alu.not12 irhi.0
+3600  06 41 2B FD BF 02       | /home/claude/y/tests/_asm/improved.asm:365 |  | .byte 0x06, 0x41, 0x2B, 0xFD, 0xBF, 0x02    // node 747: alu.mux37 = mux alu.mux29 alu.not13 irhi.0
+3606  06 41 32 FD C7 02       | /home/claude/y/tests/_asm/improved.asm:366 |  | .byte 0x06, 0x41, 0x32, 0xFD, 0xC7, 0x02    // node 755: alu.mux38 = mux alu.mux30 alu.not14 irhi.0
+360C  06 41 39 FD CF 02       | /home/claude/y/tests/_asm/improved.asm:367 |  | .byte 0x06, 0x41, 0x39, 0xFD, 0xCF, 0x02    // node 763: alu.mux39 = mux alu.mux31 alu.not15 irhi.0
+3612  08 FD C1 00 39 FD CB 02 | /home/claude/y/tests/_asm/improved.asm:368 |  | .byte 0x08, 0xFD, 0xC1, 0x00, 0x39, 0xFD, 0xCB, 0x02// node 771: alu.fa0 = fa alu.mux16 alu.mux32 zero
+361A  08 FD D2 00 4A 01       | /home/claude/y/tests/_asm/improved.asm:369 |  | .byte 0x08, 0xFD, 0xD2, 0x00, 0x4A, 0x01    // node 796: alu.fa1 = fa alu.mux17 alu.mux33 alu.fa0.1
+3620  08 FD E3 00 5B 01       | /home/claude/y/tests/_asm/improved.asm:370 |  | .byte 0x08, 0xFD, 0xE3, 0x00, 0x5B, 0x01    // node 821: alu.fa2 = fa alu.mux18 alu.mux34 alu.fa1.1
+3626  08 FD F4 00 6C 01       | /home/claude/y/tests/_asm/improved.asm:371 |  | .byte 0x08, 0xFD, 0xF4, 0x00, 0x6C, 0x01    // node 846: alu.fa3 = fa alu.mux19 alu.mux35 alu.fa2.1
+362C  08 FD 05 01 7D 01       | /home/claude/y/tests/_asm/improved.asm:372 |  | .byte 0x08, 0xFD, 0x05, 0x01, 0x7D, 0x01    // node 871: alu.fa4 = fa alu.mux20 alu.mux36 alu.fa3.1
+3632  08 FD 16 01 FD 8E 00 01 | /home/claude/y/tests/_asm/improved.asm:373 |  | .byte 0x08, 0xFD, 0x16, 0x01, 0xFD, 0x8E, 0x00, 0x01// node 896: alu.fa5 = fa alu.mux21 alu.mux37 alu.fa4.1
+363A  08 FD 27 01 FD 9F 00 01 | /home/claude/y/tests/_asm/improved.asm:374 |  | .byte 0x08, 0xFD, 0x27, 0x01, 0xFD, 0x9F, 0x00, 0x01// node 921: alu.fa6 = fa alu.mux22 alu.mux38 alu.fa5.1
+3642  08 FD 38 01 FD B0 00 01 | /home/claude/y/tests/_asm/improved.asm:375 |  | .byte 0x08, 0xFD, 0x38, 0x01, 0xFD, 0xB0, 0x00, 0x01// node 946: alu.fa7 = fa alu.mux23 alu.mux39 alu.fa6.1
+364A  03 FD 89 01 FD 01 01    | /home/claude/y/tests/_asm/improved.asm:376 |  | .byte 0x03, 0xFD, 0x89, 0x01, 0xFD, 0x01, 0x01// node 971: alu.and0 = and alu.mux16 alu.mux32
+3651  03 FD 83 01 FD FB 00    | /home/claude/y/tests/_asm/improved.asm:377 |  | .byte 0x03, 0xFD, 0x83, 0x01, 0xFD, 0xFB, 0x00// node 973: alu.and1 = and alu.mux17 alu.mux33
+3658  03 FD 7D 01 FD F5 00    | /home/claude/y/tests/_asm/improved.asm:378 |  | .byte 0x03, 0xFD, 0x7D, 0x01, 0xFD, 0xF5, 0x00// node 975: alu.and2 = and alu.mux18 alu.mux34
+365F  03 FD 77 01 FD EF 00    | /home/claude/y/tests/_asm/improved.asm:379 |  | .byte 0x03, 0xFD, 0x77, 0x01, 0xFD, 0xEF, 0x00// node 977: alu.and3 = and alu.mux19 alu.mux35
+3666  03 FD 71 01 FD E9 00    | /home/claude/y/tests/_asm/improved.asm:380 |  | .byte 0x03, 0xFD, 0x71, 0x01, 0xFD, 0xE9, 0x00// node 979: alu.and4 = and alu.mux20 alu.mux36
+366D  03 FD 6B 01 FD E3 00    | /home/claude/y/tests/_asm/improved.asm:381 |  | .byte 0x03, 0xFD, 0x6B, 0x01, 0xFD, 0xE3, 0x00// node 981: alu.and5 = and alu.mux21 alu.mux37
+3674  03 FD 65 01 FD DD 00    | /home/claude/y/tests/_asm/improved.asm:382 |  | .byte 0x03, 0xFD, 0x65, 0x01, 0xFD, 0xDD, 0x00// node 983: alu.and6 = and alu.mux22 alu.mux38
+367B  03 FD 5F 01 FD D7 00    | /home/claude/y/tests/_asm/improved.asm:383 |  | .byte 0x03, 0xFD, 0x5F, 0x01, 0xFD, 0xD7, 0x00// node 985: alu.and7 = and alu.mux23 alu.mux39
+3682  06 0F FD C5 00 FD B0 03 | /home/claude/y/tests/_asm/improved.asm:384 |  | .byte 0x06, 0x0F, 0xFD, 0xC5, 0x00, 0xFD, 0xB0, 0x03// node 987: alu.mux40 = mux alu.and0 alu.fa0.0 irlo.7
+368A  06 15 FD B4 00 FD B8 03 | /home/claude/y/tests/_asm/improved.asm:385 |  | .byte 0x06, 0x15, 0xFD, 0xB4, 0x00, 0xFD, 0xB8, 0x03// node 995: alu.mux41 = mux alu.and1 alu.fa1.0 irlo.7
+3692  06 1B FD A3 00 FD C0 03 | /home/claude/y/tests/_asm/improved.asm:386 |  | .byte 0x06, 0x1B, 0xFD, 0xA3, 0x00, 0xFD, 0xC0, 0x03// node 1003: alu.mux42 = mux alu.and2 alu.fa2.0 irlo.7
+369A  06 21 FD 92 00 FD C8 03 | /home/claude/y/tests/_asm/improved.asm:387 |  | .byte 0x06, 0x21, 0xFD, 0x92, 0x00, 0xFD, 0xC8, 0x03// node 1011: alu.mux43 = mux alu.and3 alu.fa3.0 irlo.7
+36A2  06 27 FD 81 00 FD D0 03 | /home/claude/y/tests/_asm/improved.asm:388 |  | .byte 0x06, 0x27, 0xFD, 0x81, 0x00, 0xFD, 0xD0, 0x03// node 1019: alu.mux44 = mux alu.and4 alu.fa4.0 irlo.7
+36AA  06 2D 70 FD D8 03       | /home/claude/y/tests/_asm/improved.asm:389 |  | .byte 0x06, 0x2D, 0x70, 0xFD, 0xD8, 0x03    // node 1027: alu.mux45 = mux alu.and5 alu.fa5.0 irlo.7
+36B0  06 33 5F FD E0 03       | /home/claude/y/tests/_asm/improved.asm:390 |  | .byte 0x06, 0x33, 0x5F, 0xFD, 0xE0, 0x03    // node 1035: alu.mux46 = mux alu.and6 alu.fa6.0 irlo.7
+36B6  06 39 4E FD E8 03       | /home/claude/y/tests/_asm/improved.asm:391 |  | .byte 0x06, 0x39, 0x4E, 0xFD, 0xE8, 0x03    // node 1043: alu.mux47 = mux alu.and7 alu.fa7.0 irlo.7
+36BC  02 39                   | /home/claude/y/tests/_asm/improved.asm:392 |  | .byte 0x02, 0x39                            // node 1051: alu.not16 = not alu.mux40
+36BE  02 32                   | /home/claude/y/tests/_asm/improved.asm:393 |  | .byte 0x02, 0x32                            // node 1052: alu.not17 = not alu.mux41
+36C0  02 2B                   | /home/claude/y/tests/_asm/improved.asm:394 |  | .byte 0x02, 0x2B                            // node 1053: alu.not18 = not alu.mux42
+36C2  02 24                   | /home/claude/y/tests/_asm/improved.asm:395 |  | .byte 0x02, 0x24                            // node 1054: alu.not19 = not alu.mux43
+36C4  02 1D                   | /home/claude/y/tests/_asm/improved.asm:396 |  | .byte 0x02, 0x1D                            // node 1055: alu.not20 = not alu.mux44
+36C6  02 16                   | /home/claude/y/tests/_asm/improved.asm:397 |  | .byte 0x02, 0x16                            // node 1056: alu.not21 = not alu.mux45
+36C8  02 0F                   | /home/claude/y/tests/_asm/improved.asm:398 |  | .byte 0x02, 0x0F                            // node 1057: alu.not22 = not alu.mux46
+36CA  02 08                   | /home/claude/y/tests/_asm/improved.asm:399 |  | .byte 0x02, 0x08                            // node 1058: alu.not23 = not alu.mux47
+36CC  06 41 08 FD F9 03       | /home/claude/y/tests/_asm/improved.asm:400 |  | .byte 0x06, 0x41, 0x08, 0xFD, 0xF9, 0x03    // node 1059: alu.mux48 = mux alu.mux40 alu.not16 irlo.6
+36D2  06 41 0F FD 01 04       | /home/claude/y/tests/_asm/improved.asm:401 |  | .byte 0x06, 0x41, 0x0F, 0xFD, 0x01, 0x04    // node 1067: alu.mux49 = mux alu.mux41 alu.not17 irlo.6
+36D8  06 41 16 FD 09 04       | /home/claude/y/tests/_asm/improved.asm:402 |  | .byte 0x06, 0x41, 0x16, 0xFD, 0x09, 0x04    // node 1075: alu.mux50 = mux alu.mux42 alu.not18 irlo.6
+36DE  06 41 1D FD 11 04       | /home/claude/y/tests/_asm/improved.asm:403 |  | .byte 0x06, 0x41, 0x1D, 0xFD, 0x11, 0x04    // node 1083: alu.mux51 = mux alu.mux43 alu.not19 irlo.6
+36E4  06 41 24 FD 19 04       | /home/claude/y/tests/_asm/improved.asm:404 |  | .byte 0x06, 0x41, 0x24, 0xFD, 0x19, 0x04    // node 1091: alu.mux52 = mux alu.mux44 alu.not20 irlo.6
+36EA  06 41 2B FD 21 04       | /home/claude/y/tests/_asm/improved.asm:405 |  | .byte 0x06, 0x41, 0x2B, 0xFD, 0x21, 0x04    // node 1099: alu.mux53 = mux alu.mux45 alu.not21 irlo.6
+36F0  06 41 32 FD 29 04       | /home/claude/y/tests/_asm/improved.asm:406 |  | .byte 0x06, 0x41, 0x32, 0xFD, 0x29, 0x04    // node 1107: alu.mux54 = mux alu.mux46 alu.not22 irlo.6
+36F6  06 41 39 FD 31 04       | /home/claude/y/tests/_asm/improved.asm:407 |  | .byte 0x06, 0x41, 0x39, 0xFD, 0x31, 0x04    // node 1115: alu.mux55 = mux alu.mux47 alu.not23 irlo.6
+36FC  04 39 31                | /home/claude/y/tests/_asm/improved.asm:408 |  | .byte 0x04, 0x39, 0x31                      // node 1123: alu.or0 = or alu.mux48 alu.mux49
+36FF  04 2C 24                | /home/claude/y/tests/_asm/improved.asm:409 |  | .byte 0x04, 0x2C, 0x24                      // node 1126: alu.or1 = or alu.mux50 alu.mux51
+3702  04 1F 17                | /home/claude/y/tests/_asm/improved.asm:410 |  | .byte 0x04, 0x1F, 0x17                      // node 1129: alu.or2 = or alu.mux52 alu.mux53
+3705  04 12 0A                | /home/claude/y/tests/_asm/improved.asm:411 |  | .byte 0x04, 0x12, 0x0A                      // node 1132: alu.or3 = or alu.mux54 alu.mux55
+3708  04 0A 07                | /home/claude/y/tests/_asm/improved.asm:412 |  | .byte 0x04, 0x0A, 0x07                      // node 1135: alu.or4 = or alu.or0 alu.or1
+370B  04 07 04                | /home/claude/y/tests/_asm/improved.asm:413 |  | .byte 0x04, 0x07, 0x04                      // node 1138: alu.or5 = or alu.or2 alu.or3
+370E  04 04 01                | /home/claude/y/tests/_asm/improved.asm:414 |  | .byte 0x04, 0x04, 0x01                      // node 1141: alu.or6 = or alu.or4 alu.or5
+3711  02 01                   | /home/claude/y/tests/_asm/improved.asm:415 |  | .byte 0x02, 0x01                            // node 1144: alu.not24 = not alu.or6
+3713  02 17                   | /home/claude/y/tests/_asm/improved.asm:416 |  | .byte 0x02, 0x17                            // node 1145: pc.not0 = not alu.mux55
+3715  02 02                   | /home/claude/y/tests/_asm/improved.asm:417 |  | .byte 0x02, 0x02                            // node 1146: pc.not1 = not alu.not24
+3717  03 02 01                | /home/claude/y/tests/_asm/improved.asm:418 |  | .byte 0x03, 0x02, 0x01                      // node 1147: pc.and0 = and pc.not0 pc.not1
+371A  03 FD 57 04 1B          | /home/claude/y/tests/_asm/improved.asm:419 |  | .byte 0x03, 0xFD, 0x57, 0x04, 0x1B          // node 1149: pc.and1 = and irlo.2 alu.mux55
+371F  03 FD 5A 04 07          | /home/claude/y/tests/_asm/improved.asm:420 |  | .byte 0x03, 0xFD, 0x5A, 0x04, 0x07          // node 1151: pc.and2 = and irlo.1 alu.not24
+3724  04 03 01                | /home/claude/y/tests/_asm/improved.asm:421 |  | .byte 0x04, 0x03, 0x01                      // node 1153: pc.or0 = or pc.and1 pc.and2
+3727  03 FD 60 04 08          | /home/claude/y/tests/_asm/improved.asm:422 |  | .byte 0x03, 0xFD, 0x60, 0x04, 0x08          // node 1156: pc.and3 = and irlo.0 pc.and0
+372C  04 03 01                | /home/claude/y/tests/_asm/improved.asm:423 |  | .byte 0x04, 0x03, 0x01                      // node 1158: pc.or1 = or pc.or0 pc.and3
+372F  03 FD 56 04 01          | /home/claude/y/tests/_asm/improved.asm:424 |  | .byte 0x03, 0xFD, 0x56, 0x04, 0x01          // node 1161: pc.and4 = and st.2 pc.or1
+3734  06 FD 8B 04 FD 7D 04 01 | /home/claude/y/tests/_asm/improved.asm:425 |  | .byte 0x06, 0xFD, 0x8B, 0x04, 0xFD, 0x7D, 0x04, 0x01// node 1163: pc.mux0 = mux pc.0 a.0 pc.and4
+373C  06 FD 92 04 FD 84 04 09 | /home/claude/y/tests/_asm/improved.asm:426 |  | .byte 0x06, 0xFD, 0x92, 0x04, 0xFD, 0x84, 0x04, 0x09// node 1171: pc.mux1 = mux pc.1 a.1 pc.and4
+3744  06 FD 99 04 FD 8B 04 11 | /home/claude/y/tests/_asm/improved.asm:427 |  | .byte 0x06, 0xFD, 0x99, 0x04, 0xFD, 0x8B, 0x04, 0x11// node 1179: pc.mux2 = mux pc.2 a.2 pc.and4
+374C  06 FD A0 04 FD 92 04 19 | /home/claude/y/tests/_asm/improved.asm:428 |  | .byte 0x06, 0xFD, 0xA0, 0x04, 0xFD, 0x92, 0x04, 0x19// node 1187: pc.mux3 = mux pc.3 a.3 pc.and4
+3754  06 FD A7 04 FD 99 04 21 | /home/claude/y/tests/_asm/improved.asm:429 |  | .byte 0x06, 0xFD, 0xA7, 0x04, 0xFD, 0x99, 0x04, 0x21// node 1195: pc.mux4 = mux pc.4 a.4 pc.and4
+375C  06 FD AE 04 FD A0 04 29 | /home/claude/y/tests/_asm/improved.asm:430 |  | .byte 0x06, 0xFD, 0xAE, 0x04, 0xFD, 0xA0, 0x04, 0x29// node 1203: pc.mux5 = mux pc.5 a.5 pc.and4
+3764  06 FD B5 04 FD A7 04 31 | /home/claude/y/tests/_asm/improved.asm:431 |  | .byte 0x06, 0xFD, 0xB5, 0x04, 0xFD, 0xA7, 0x04, 0x31// node 1211: pc.mux6 = mux pc.6 a.6 pc.and4
+376C  06 FD BC 04 FD AE 04 39 | /home/claude/y/tests/_asm/improved.asm:432 |  | .byte 0x06, 0xFD, 0xBC, 0x04, 0xFD, 0xAE, 0x04, 0x39// node 1219: pc.mux7 = mux pc.7 a.7 pc.and4
+3774  06 FD C3 04 FD B5 04 41 | /home/claude/y/tests/_asm/improved.asm:433 |  | .byte 0x06, 0xFD, 0xC3, 0x04, 0xFD, 0xB5, 0x04, 0x41// node 1227: pc.mux8 = mux pc.8 a.8 pc.and4
+377C  06 FD CA 04 FD BC 04 49 | /home/claude/y/tests/_asm/improved.asm:434 |  | .byte 0x06, 0xFD, 0xCA, 0x04, 0xFD, 0xBC, 0x04, 0x49// node 1235: pc.mux9 = mux pc.9 a.9 pc.and4
+3784  06 FD D1 04 FD C3 04 51 | /home/claude/y/tests/_asm/improved.asm:435 |  | .byte 0x06, 0xFD, 0xD1, 0x04, 0xFD, 0xC3, 0x04, 0x51// node 1243: pc.mux10 = mux pc.10 a.10 pc.and4
+378C  06 FD D8 04 FD CA 04 59 | /home/claude/y/tests/_asm/improved.asm:436 |  | .byte 0x06, 0xFD, 0xD8, 0x04, 0xFD, 0xCA, 0x04, 0x59// node 1251: pc.mux11 = mux pc.11 a.11 pc.and4
+3794  06 FD DF 04 FD D1 04 61 | /home/claude/y/tests/_asm/improved.asm:437 |  | .byte 0x06, 0xFD, 0xDF, 0x04, 0xFD, 0xD1, 0x04, 0x61// node 1259: pc.mux12 = mux pc.12 a.12 pc.and4
+379C  06 FD E6 04 FD D8 04 69 | /home/claude/y/tests/_asm/improved.asm:438 |  | .byte 0x06, 0xFD, 0xE6, 0x04, 0xFD, 0xD8, 0x04, 0x69// node 1267: pc.mux13 = mux pc.13 a.13 pc.and4
+37A4  06 69 FD 46 04 FD BF 04 | /home/claude/y/tests/_asm/improved.asm:439 |  | .byte 0x06, 0x69, 0xFD, 0x46, 0x04, 0xFD, 0xBF, 0x04// node 1275: pc.mux14 = mux pc.mux0 addr.ha0.0 top.or0
+37AC  06 69 FD 43 04 FD C7 04 | /home/claude/y/tests/_asm/improved.asm:440 |  | .byte 0x06, 0x69, 0xFD, 0x43, 0x04, 0xFD, 0xC7, 0x04// node 1283: pc.mux15 = mux pc.mux1 addr.ha1.0 top.or0
+37B4  06 69 FD 40 04 FD CF 04 | /home/claude/y/tests/_asm/improved.asm:441 |  | .byte 0x06, 0x69, 0xFD, 0x40, 0x04, 0xFD, 0xCF, 0x04// node 1291: pc.mux16 = mux pc.mux2 addr.ha2.0 top.or0
+37BC  06 69 FD 3D 04 FD D7 04 | /home/claude/y/tests/_asm/improved.asm:442 |  | .byte 0x06, 0x69, 0xFD, 0x3D, 0x04, 0xFD, 0xD7, 0x04// node 1299: pc.mux17 = mux pc.mux3 addr.ha3.0 top.or0
+37C4  06 69 FD 3A 04 FD DF 04 | /home/claude/y/tests/_asm/improved.asm:443 |  | .byte 0x06, 0x69, 0xFD, 0x3A, 0x04, 0xFD, 0xDF, 0x04// node 1307: pc.mux18 = mux pc.mux4 addr.ha4.0 top.or0
+37CC  06 69 FD 37 04 FD E7 04 | /home/claude/y/tests/_asm/improved.asm:444 |  | .byte 0x06, 0x69, 0xFD, 0x37, 0x04, 0xFD, 0xE7, 0x04// node 1315: pc.mux19 = mux pc.mux5 addr.ha5.0 top.or0
+37D4  06 69 FD 34 04 FD EF 04 | /home/claude/y/tests/_asm/improved.asm:445 |  | .byte 0x06, 0x69, 0xFD, 0x34, 0x04, 0xFD, 0xEF, 0x04// node 1323: pc.mux20 = mux pc.mux6 addr.ha6.0 top.or0
+37DC  06 69 FD 31 04 FD F7 04 | /home/claude/y/tests/_asm/improved.asm:446 |  | .byte 0x06, 0x69, 0xFD, 0x31, 0x04, 0xFD, 0xF7, 0x04// node 1331: pc.mux21 = mux pc.mux7 addr.ha7.0 top.or0
+37E4  06 69 FD 2E 04 FD FF 04 | /home/claude/y/tests/_asm/improved.asm:447 |  | .byte 0x06, 0x69, 0xFD, 0x2E, 0x04, 0xFD, 0xFF, 0x04// node 1339: pc.mux22 = mux pc.mux8 addr.ha8.0 top.or0
+37EC  06 69 FD 2B 04 FD 07 05 | /home/claude/y/tests/_asm/improved.asm:448 |  | .byte 0x06, 0x69, 0xFD, 0x2B, 0x04, 0xFD, 0x07, 0x05// node 1347: pc.mux23 = mux pc.mux9 addr.ha9.0 top.or0
+37F4  06 69 FD 28 04 FD 0F 05 | /home/claude/y/tests/_asm/improved.asm:449 |  | .byte 0x06, 0x69, 0xFD, 0x28, 0x04, 0xFD, 0x0F, 0x05// node 1355: pc.mux24 = mux pc.mux10 addr.ha10.0 top.or0
+37FC  06 69 FD 25 04 FD 17 05 | /home/claude/y/tests/_asm/improved.asm:450 |  | .byte 0x06, 0x69, 0xFD, 0x25, 0x04, 0xFD, 0x17, 0x05// node 1363: pc.mux25 = mux pc.mux11 addr.ha11.0 top.or0
+3804  06 69 FD 22 04 FD 1F 05 | /home/claude/y/tests/_asm/improved.asm:451 |  | .byte 0x06, 0x69, 0xFD, 0x22, 0x04, 0xFD, 0x1F, 0x05// node 1371: pc.mux26 = mux pc.mux12 addr.ha12.0 top.or0
+380C  06 69 FD 1F 04 FD 27 05 | /home/claude/y/tests/_asm/improved.asm:452 |  | .byte 0x06, 0x69, 0xFD, 0x1F, 0x04, 0xFD, 0x27, 0x05// node 1379: pc.mux27 = mux pc.mux13 addr.ha13.0 top.or0
+3814  06 69 FD 33 05 FD 32 05 | /home/claude/y/tests/_asm/improved.asm:453 |  | .byte 0x06, 0x69, 0xFD, 0x33, 0x05, 0xFD, 0x32, 0x05// node 1387: pc.mux28 = mux pc.mux14 zero reset
+381C  06 69 FD 3B 05 FD 3A 05 | /home/claude/y/tests/_asm/improved.asm:454 |  | .byte 0x06, 0x69, 0xFD, 0x3B, 0x05, 0xFD, 0x3A, 0x05// node 1395: pc.mux29 = mux pc.mux15 zero reset
+3824  06 69 FD 43 05 FD 42 05 | /home/claude/y/tests/_asm/improved.asm:455 |  | .byte 0x06, 0x69, 0xFD, 0x43, 0x05, 0xFD, 0x42, 0x05// node 1403: pc.mux30 = mux pc.mux16 zero reset
+382C  06 69 FD 4B 05 FD 4A 05 | /home/claude/y/tests/_asm/improved.asm:456 |  | .byte 0x06, 0x69, 0xFD, 0x4B, 0x05, 0xFD, 0x4A, 0x05// node 1411: pc.mux31 = mux pc.mux17 zero reset
+3834  06 69 FD 53 05 FD 52 05 | /home/claude/y/tests/_asm/improved.asm:457 |  | .byte 0x06, 0x69, 0xFD, 0x53, 0x05, 0xFD, 0x52, 0x05// node 1419: pc.mux32 = mux pc.mux18 zero reset
+383C  06 69 FD 5B 05 FD 5A 05 | /home/claude/y/tests/_asm/improved.asm:458 |  | .byte 0x06, 0x69, 0xFD, 0x5B, 0x05, 0xFD, 0x5A, 0x05// node 1427: pc.mux33 = mux pc.mux19 zero reset
+3844  06 69 FD 63 05 FD 62 05 | /home/claude/y/tests/_asm/improved.asm:459 |  | .byte 0x06, 0x69, 0xFD, 0x63, 0x05, 0xFD, 0x62, 0x05// node 1435: pc.mux34 = mux pc.mux20 zero reset
+384C  06 69 FD 6B 05 FD 6A 05 | /home/claude/y/tests/_asm/improved.asm:460 |  | .byte 0x06, 0x69, 0xFD, 0x6B, 0x05, 0xFD, 0x6A, 0x05// node 1443: pc.mux35 = mux pc.mux21 zero reset
+3854  06 69 FD 73 05 FD 72 05 | /home/claude/y/tests/_asm/improved.asm:461 |  | .byte 0x06, 0x69, 0xFD, 0x73, 0x05, 0xFD, 0x72, 0x05// node 1451: pc.mux36 = mux pc.mux22 zero reset
+385C  06 69 FD 7B 05 FD 7A 05 | /home/claude/y/tests/_asm/improved.asm:462 |  | .byte 0x06, 0x69, 0xFD, 0x7B, 0x05, 0xFD, 0x7A, 0x05// node 1459: pc.mux37 = mux pc.mux23 zero reset
+3864  06 69 FD 83 05 FD 82 05 | /home/claude/y/tests/_asm/improved.asm:463 |  | .byte 0x06, 0x69, 0xFD, 0x83, 0x05, 0xFD, 0x82, 0x05// node 1467: pc.mux38 = mux pc.mux24 zero reset
+386C  06 69 FD 8B 05 FD 8A 05 | /home/claude/y/tests/_asm/improved.asm:464 |  | .byte 0x06, 0x69, 0xFD, 0x8B, 0x05, 0xFD, 0x8A, 0x05// node 1475: pc.mux39 = mux pc.mux25 zero reset
+3874  06 69 FD 93 05 FD 92 05 | /home/claude/y/tests/_asm/improved.asm:465 |  | .byte 0x06, 0x69, 0xFD, 0x93, 0x05, 0xFD, 0x92, 0x05// node 1483: pc.mux40 = mux pc.mux26 zero reset
+387C  06 69 FD 9C 05 FD 9A 05 | /home/claude/y/tests/_asm/improved.asm:466 |  | .byte 0x06, 0x69, 0xFD, 0x9C, 0x05, 0xFD, 0x9A, 0x05// node 1491: pc.mux41 = mux pc.mux27 one reset
+3884  03 FD A9 05 FD 45 04    | /home/claude/y/tests/_asm/improved.asm:467 |  | .byte 0x03, 0xFD, 0xA9, 0x05, 0xFD, 0x45, 0x04// node 1499: areg.and0 = and st.1 control.not1
+388B  04 01 FD A8 05          | /home/claude/y/tests/_asm/improved.asm:468 |  | .byte 0x04, 0x01, 0xFD, 0xA8, 0x05          // node 1501: areg.or0 = or areg.and0 st.4
+3890  03 FD AD 05 FD B7 05    | /home/claude/y/tests/_asm/improved.asm:469 |  | .byte 0x03, 0xFD, 0xAD, 0x05, 0xFD, 0xB7, 0x05// node 1504: areg.and1 = and st.2 irlo.5
+3897  06 FD D4 05 FD B8 01 01 | /home/claude/y/tests/_asm/improved.asm:470 |  | .byte 0x06, 0xFD, 0xD4, 0x05, 0xFD, 0xB8, 0x01, 0x01// node 1506: areg.mux0 = mux a.0 alu.mux48 areg.and1
+389F  06 01 FD 35 05 FD B6 05 | /home/claude/y/tests/_asm/improved.asm:471 |  | .byte 0x06, 0x01, 0xFD, 0x35, 0x05, 0xFD, 0xB6, 0x05// node 1514: areg.mux1 = mux areg.mux0 addr.ha0.0 st.3
+38A7  06 01 FD CE 05 13       | /home/claude/y/tests/_asm/improved.asm:472 |  | .byte 0x06, 0x01, 0xFD, 0xCE, 0x05, 0x13    // node 1522: areg.mux2 = mux areg.mux1 irlo.0 areg.or0
+38AD  06 FD EB 05 FD C8 01 19 | /home/claude/y/tests/_asm/improved.asm:473 |  | .byte 0x06, 0xFD, 0xEB, 0x05, 0xFD, 0xC8, 0x01, 0x19// node 1530: areg.mux3 = mux a.1 alu.mux49 areg.and1
+38B5  06 01 FD 42 05 FD CE 05 | /home/claude/y/tests/_asm/improved.asm:474 |  | .byte 0x06, 0x01, 0xFD, 0x42, 0x05, 0xFD, 0xCE, 0x05// node 1538: areg.mux4 = mux areg.mux3 addr.ha1.0 st.3
+38BD  06 01 FD E5 05 2B       | /home/claude/y/tests/_asm/improved.asm:475 |  | .byte 0x06, 0x01, 0xFD, 0xE5, 0x05, 0x2B    // node 1546: areg.mux5 = mux areg.mux4 irlo.1 areg.or0
+38C3  06 FD 02 06 FD D8 01 31 | /home/claude/y/tests/_asm/improved.asm:476 |  | .byte 0x06, 0xFD, 0x02, 0x06, 0xFD, 0xD8, 0x01, 0x31// node 1554: areg.mux6 = mux a.2 alu.mux50 areg.and1
+38CB  06 01 FD 4F 05 FD E6 05 | /home/claude/y/tests/_asm/improved.asm:477 |  | .byte 0x06, 0x01, 0xFD, 0x4F, 0x05, 0xFD, 0xE6, 0x05// node 1562: areg.mux7 = mux areg.mux6 addr.ha2.0 st.3
+38D3  06 01 FD FC 05 43       | /home/claude/y/tests/_asm/improved.asm:478 |  | .byte 0x06, 0x01, 0xFD, 0xFC, 0x05, 0x43    // node 1570: areg.mux8 = mux areg.mux7 irlo.2 areg.or0
+38D9  06 FD 19 06 FD E8 01 49 | /home/claude/y/tests/_asm/improved.asm:479 |  | .byte 0x06, 0xFD, 0x19, 0x06, 0xFD, 0xE8, 0x01, 0x49// node 1578: areg.mux9 = mux a.3 alu.mux51 areg.and1
+38E1  06 01 FD 5C 05 FD FE 05 | /home/claude/y/tests/_asm/improved.asm:480 |  | .byte 0x06, 0x01, 0xFD, 0x5C, 0x05, 0xFD, 0xFE, 0x05// node 1586: areg.mux10 = mux areg.mux9 addr.ha3.0 st.3
+38E9  06 01 FD 13 06 5B       | /home/claude/y/tests/_asm/improved.asm:481 |  | .byte 0x06, 0x01, 0xFD, 0x13, 0x06, 0x5B    // node 1594: areg.mux11 = mux areg.mux10 irlo.3 areg.or0
+38EF  06 FD 30 06 FD F8 01 61 | /home/claude/y/tests/_asm/improved.asm:482 |  | .byte 0x06, 0xFD, 0x30, 0x06, 0xFD, 0xF8, 0x01, 0x61// node 1602: areg.mux12 = mux a.4 alu.mux52 areg.and1
+38F7  06 01 FD 69 05 FD 16 06 | /home/claude/y/tests/_asm/improved.asm:483 |  | .byte 0x06, 0x01, 0xFD, 0x69, 0x05, 0xFD, 0x16, 0x06// node 1610: areg.mux13 = mux areg.mux12 addr.ha4.0 st.3
+38FF  06 01 FD 2A 06 73       | /home/claude/y/tests/_asm/improved.asm:484 |  | .byte 0x06, 0x01, 0xFD, 0x2A, 0x06, 0x73    // node 1618: areg.mux14 = mux areg.mux13 irlo.4 areg.or0
+3905  06 FD 47 06 FD 08 02 79 | /home/claude/y/tests/_asm/improved.asm:485 |  | .byte 0x06, 0xFD, 0x47, 0x06, 0xFD, 0x08, 0x02, 0x79// node 1626: areg.mux15 = mux a.5 alu.mux53 areg.and1
+390D  06 01 FD 76 05 FD 2E 06 | /home/claude/y/tests/_asm/improved.asm:486 |  | .byte 0x06, 0x01, 0xFD, 0x76, 0x05, 0xFD, 0x2E, 0x06// node 1634: areg.mux16 = mux areg.mux15 addr.ha5.0 st.3
+3915  06 01 FD 41 06 FD 8B 00 | /home/claude/y/tests/_asm/improved.asm:487 |  | .byte 0x06, 0x01, 0xFD, 0x41, 0x06, 0xFD, 0x8B, 0x00// node 1642: areg.mux17 = mux areg.mux16 irlo.5 areg.or0
+391D  06 FD 5E 06 FD 18 02 FD | /home/claude/y/tests/_asm/improved.asm:488 |  | .byte 0x06, 0xFD, 0x5E, 0x06, 0xFD, 0x18, 0x02, 0xFD, 0x91, 0x00// node 1650: areg.mux18 = mux a.6 alu.mux54 areg.and1
+3925  91 00                   |  |  |
+3927  06 01 FD 83 05 FD 46 06 | /home/claude/y/tests/_asm/improved.asm:489 |  | .byte 0x06, 0x01, 0xFD, 0x83, 0x05, 0xFD, 0x46, 0x06// node 1658: areg.mux19 = mux areg.mux18 addr.ha6.0 st.3
+392F  06 01 FD 58 06 FD A3 00 | /home/claude/y/tests/_asm/improved.asm:490 |  | .byte 0x06, 0x01, 0xFD, 0x58, 0x06, 0xFD, 0xA3, 0x00// node 1666: areg.mux20 = mux areg.mux19 irlo.6 areg.or0
+3937  06 FD 75 06 FD 28 02 FD | /home/claude/y/tests/_asm/improved.asm:491 |  | .byte 0x06, 0xFD, 0x75, 0x06, 0xFD, 0x28, 0x02, 0xFD, 0xA9, 0x00// node 1674: areg.mux21 = mux a.7 alu.mux55 areg.and1
+393F  A9 00                   |  |  |
+3941  06 01 FD 90 05 FD 5E 06 | /home/claude/y/tests/_asm/improved.asm:492 |  | .byte 0x06, 0x01, 0xFD, 0x90, 0x05, 0xFD, 0x5E, 0x06// node 1682: areg.mux22 = mux areg.mux21 addr.ha7.0 st.3
+3949  06 01 FD 6F 06 FD BB 00 | /home/claude/y/tests/_asm/improved.asm:493 |  | .byte 0x06, 0x01, 0xFD, 0x6F, 0x06, 0xFD, 0xBB, 0x00// node 1690: areg.mux23 = mux areg.mux22 irlo.7 areg.or0
+3951  06 FD 8C 06 FD 8C 06 FD | /home/claude/y/tests/_asm/improved.asm:494 |  | .byte 0x06, 0xFD, 0x8C, 0x06, 0xFD, 0x8C, 0x06, 0xFD, 0xC1, 0x00// node 1698: areg.mux24 = mux a.8 a.8 areg.and1
+3959  C1 00                   |  |  |
+395B  06 01 FD 9D 05 FD 76 06 | /home/claude/y/tests/_asm/improved.asm:495 |  | .byte 0x06, 0x01, 0xFD, 0x9D, 0x05, 0xFD, 0x76, 0x06// node 1706: areg.mux25 = mux areg.mux24 addr.ha8.0 st.3
+3963  06 01 FD 3B 05 FD D3 00 | /home/claude/y/tests/_asm/improved.asm:496 |  | .byte 0x06, 0x01, 0xFD, 0x3B, 0x05, 0xFD, 0xD3, 0x00// node 1714: areg.mux26 = mux areg.mux25 decode.nand2 areg.or0
+396B  06 FD A3 06 FD A3 06 FD | /home/claude/y/tests/_asm/improved.asm:497 |  | .byte 0x06, 0xFD, 0xA3, 0x06, 0xFD, 0xA3, 0x06, 0xFD, 0xD9, 0x00// node 1722: areg.mux27 = mux a.9 a.9 areg.and1
+3973  D9 00                   |  |  |
+3975  06 01 FD AA 05 FD 8E 06 | /home/claude/y/tests/_asm/improved.asm:498 |  | .byte 0x06, 0x01, 0xFD, 0xAA, 0x05, 0xFD, 0x8E, 0x06// node 1730: areg.mux28 = mux areg.mux27 addr.ha9.0 st.3
+397D  06 01 FD 50 05 FD EB 00 | /home/claude/y/tests/_asm/improved.asm:499 |  | .byte 0x06, 0x01, 0xFD, 0x50, 0x05, 0xFD, 0xEB, 0x00// node 1738: areg.mux29 = mux areg.mux28 decode.nand5 areg.or0
+3985  06 FD BA 06 FD BA 06 FD | /home/claude/y/tests/_asm/improved.asm:500 |  | .byte 0x06, 0xFD, 0xBA, 0x06, 0xFD, 0xBA, 0x06, 0xFD, 0xF1, 0x00// node 1746: areg.mux30 = mux a.10 a.10 areg.and1
+398D  F1 00                   |  |  |
+398F  06 01 FD B7 05 FD A6 06 | /home/claude/y/tests/_asm/improved.asm:501 |  | .byte 0x06, 0x01, 0xFD, 0xB7, 0x05, 0xFD, 0xA6, 0x06// node 1754: areg.mux31 = mux areg.mux30 addr.ha10.0 st.3
+3997  06 01 FD 65 05 FD 03 01 | /home/claude/y/tests/_asm/improved.asm:502 |  | .byte 0x06, 0x01, 0xFD, 0x65, 0x05, 0xFD, 0x03, 0x01// node 1762: areg.mux32 = mux areg.mux31 decode.nand8 areg.or0
+399F  06 FD D1 06 FD D1 06 FD | /home/claude/y/tests/_asm/improved.asm:503 |  | .byte 0x06, 0xFD, 0xD1, 0x06, 0xFD, 0xD1, 0x06, 0xFD, 0x09, 0x01// node 1770: areg.mux33 = mux a.11 a.11 areg.and1
+39A7  09 01                   |  |  |
+39A9  06 01 FD C4 05 FD BE 06 | /home/claude/y/tests/_asm/improved.asm:504 |  | .byte 0x06, 0x01, 0xFD, 0xC4, 0x05, 0xFD, 0xBE, 0x06// node 1778: areg.mux34 = mux areg.mux33 addr.ha11.0 st.3
+39B1  06 01 FD 7A 05 FD 1B 01 | /home/claude/y/tests/_asm/improved.asm:505 |  | .byte 0x06, 0x01, 0xFD, 0x7A, 0x05, 0xFD, 0x1B, 0x01// node 1786: areg.mux35 = mux areg.mux34 decode.nand11 areg.or0
+39B9  06 FD E8 06 FD E8 06 FD | /home/claude/y/tests/_asm/improved.asm:506 |  | .byte 0x06, 0xFD, 0xE8, 0x06, 0xFD, 0xE8, 0x06, 0xFD, 0x21, 0x01// node 1794: areg.mux36 = mux a.12 a.12 areg.and1
+39C1  21 01                   |  |  |
+39C3  06 01 FD D1 05 FD D6 06 | /home/claude/y/tests/_asm/improved.asm:507 |  | .byte 0x06, 0x01, 0xFD, 0xD1, 0x05, 0xFD, 0xD6, 0x06// node 1802: areg.mux37 = mux areg.mux36 addr.ha12.0 st.3
+39CB  06 01 FD 8F 05 FD 33 01 | /home/claude/y/tests/_asm/improved.asm:508 |  | .byte 0x06, 0x01, 0xFD, 0x8F, 0x05, 0xFD, 0x33, 0x01// node 1810: areg.mux38 = mux areg.mux37 decode.nand14 areg.or0
+39D3  06 FD FF 06 FD FF 06 FD | /home/claude/y/tests/_asm/improved.asm:509 |  | .byte 0x06, 0xFD, 0xFF, 0x06, 0xFD, 0xFF, 0x06, 0xFD, 0x39, 0x01// node 1818: areg.mux39 = mux a.13 a.13 areg.and1
+39DB  39 01                   |  |  |
+39DD  06 01 FD DE 05 FD EE 06 | /home/claude/y/tests/_asm/improved.asm:510 |  | .byte 0x06, 0x01, 0xFD, 0xDE, 0x05, 0xFD, 0xEE, 0x06// node 1826: areg.mux40 = mux areg.mux39 addr.ha13.0 st.3
+39E5  06 01 FD A4 05 FD 4B 01 | /home/claude/y/tests/_asm/improved.asm:511 |  | .byte 0x06, 0x01, 0xFD, 0xA4, 0x05, 0xFD, 0x4B, 0x01// node 1834: areg.mux41 = mux areg.mux40 decode.nand17 areg.or0
+39ED  03 FD FF 06 FD 0A 07    | /home/claude/y/tests/_asm/improved.asm:512 |  | .byte 0x03, 0xFD, 0xFF, 0x06, 0xFD, 0x0A, 0x07// node 1842: dreg.and0 = and st.2 irlo.4
+39F4  06 FD 18 07 FD 0A 03 01 | /home/claude/y/tests/_asm/improved.asm:513 |  | .byte 0x06, 0xFD, 0x18, 0x07, 0xFD, 0x0A, 0x03, 0x01// node 1844: dreg.mux0 = mux d.0 alu.mux48 dreg.and0
+39FC  06 FD 1F 07 FD 0A 03 09 | /home/claude/y/tests/_asm/improved.asm:514 |  | .byte 0x06, 0xFD, 0x1F, 0x07, 0xFD, 0x0A, 0x03, 0x09// node 1852: dreg.mux1 = mux d.1 alu.mux49 dreg.and0
+3A04  06 FD 26 07 FD 0A 03 11 | /home/claude/y/tests/_asm/improved.asm:515 |  | .byte 0x06, 0xFD, 0x26, 0x07, 0xFD, 0x0A, 0x03, 0x11// node 1860: dreg.mux2 = mux d.2 alu.mux50 dreg.and0
+3A0C  06 FD 2D 07 FD 0A 03 19 | /home/claude/y/tests/_asm/improved.asm:516 |  | .byte 0x06, 0xFD, 0x2D, 0x07, 0xFD, 0x0A, 0x03, 0x19// node 1868: dreg.mux3 = mux d.3 alu.mux51 dreg.and0
+3A14  06 FD 34 07 FD 0A 03 21 | /home/claude/y/tests/_asm/improved.asm:517 |  | .byte 0x06, 0xFD, 0x34, 0x07, 0xFD, 0x0A, 0x03, 0x21// node 1876: dreg.mux4 = mux d.4 alu.mux52 dreg.and0
+3A1C  06 FD 3B 07 FD 0A 03 29 | /home/claude/y/tests/_asm/improved.asm:518 |  | .byte 0x06, 0xFD, 0x3B, 0x07, 0xFD, 0x0A, 0x03, 0x29// node 1884: dreg.mux5 = mux d.5 alu.mux53 dreg.and0
+3A24  06 FD 42 07 FD 0A 03 31 | /home/claude/y/tests/_asm/improved.asm:519 |  | .byte 0x06, 0xFD, 0x42, 0x07, 0xFD, 0x0A, 0x03, 0x31// node 1892: dreg.mux6 = mux d.6 alu.mux54 dreg.and0
+3A2C  06 FD 49 07 FD 0A 03 39 | /home/claude/y/tests/_asm/improved.asm:520 |  | .byte 0x06, 0xFD, 0x49, 0x07, 0xFD, 0x0A, 0x03, 0x39// node 1900: dreg.mux7 = mux d.7 alu.mux55 dreg.and0
+3A34  04 FD 43 07 FD 40 07    | /home/claude/y/tests/_asm/improved.asm:521 |  | .byte 0x04, 0xFD, 0x43, 0x07, 0xFD, 0x40, 0x07// node 1908: ir.or0 = or st.0 st.3
+3A3B  06 FD 53 07 FD 00 06 01 | /home/claude/y/tests/_asm/improved.asm:522 |  | .byte 0x06, 0xFD, 0x53, 0x07, 0xFD, 0x00, 0x06, 0x01// node 1911: ir.mux0 = mux irlo.0 decode.nand2 ir.or0
+3A43  06 FD 5A 07 FD 05 06 09 | /home/claude/y/tests/_asm/improved.asm:523 |  | .byte 0x06, 0xFD, 0x5A, 0x07, 0xFD, 0x05, 0x06, 0x09// node 1919: ir.mux1 = mux irlo.1 decode.nand5 ir.or0
+3A4B  06 FD 61 07 FD 0A 06 11 | /home/claude/y/tests/_asm/improved.asm:524 |  | .byte 0x06, 0xFD, 0x61, 0x07, 0xFD, 0x0A, 0x06, 0x11// node 1927: ir.mux2 = mux irlo.2 decode.nand8 ir.or0
+3A53  06 FD 68 07 FD 0F 06 19 | /home/claude/y/tests/_asm/improved.asm:525 |  | .byte 0x06, 0xFD, 0x68, 0x07, 0xFD, 0x0F, 0x06, 0x19// node 1935: ir.mux3 = mux irlo.3 decode.nand11 ir.or0
+3A5B  06 FD 6F 07 FD 14 06 21 | /home/claude/y/tests/_asm/improved.asm:526 |  | .byte 0x06, 0xFD, 0x6F, 0x07, 0xFD, 0x14, 0x06, 0x21// node 1943: ir.mux4 = mux irlo.4 decode.nand14 ir.or0
+3A63  06 FD 76 07 FD 19 06 29 | /home/claude/y/tests/_asm/improved.asm:527 |  | .byte 0x06, 0xFD, 0x76, 0x07, 0xFD, 0x19, 0x06, 0x29// node 1951: ir.mux5 = mux irlo.5 decode.nand17 ir.or0
+3A6B  06 FD 7D 07 FD 1E 06 31 | /home/claude/y/tests/_asm/improved.asm:528 |  | .byte 0x06, 0xFD, 0x7D, 0x07, 0xFD, 0x1E, 0x06, 0x31// node 1959: ir.mux6 = mux irlo.6 decode.nand20 ir.or0
+3A73  06 FD 84 07 FD 23 06 39 | /home/claude/y/tests/_asm/improved.asm:529 |  | .byte 0x06, 0xFD, 0x84, 0x07, 0xFD, 0x23, 0x06, 0x39// node 1967: ir.mux7 = mux irlo.7 decode.nand23 ir.or0
+3A7B  06 FD 8B 07 FD 40 06 FD | /home/claude/y/tests/_asm/improved.asm:530 |  | .byte 0x06, 0xFD, 0x8B, 0x07, 0xFD, 0x40, 0x06, 0xFD, 0x85, 0x07// node 1975: ir.mux8 = mux irhi.0 decode.nand2 st.1
+3A83  85 07                   |  |  |
+3A85  06 FD 92 07 FD 45 06 FD | /home/claude/y/tests/_asm/improved.asm:531 |  | .byte 0x06, 0xFD, 0x92, 0x07, 0xFD, 0x45, 0x06, 0xFD, 0x8D, 0x07// node 1983: ir.mux9 = mux irhi.1 decode.nand5 st.1
+3A8D  8D 07                   |  |  |
+3A8F  06 FD 99 07 FD 4A 06 FD | /home/claude/y/tests/_asm/improved.asm:532 |  | .byte 0x06, 0xFD, 0x99, 0x07, 0xFD, 0x4A, 0x06, 0xFD, 0x95, 0x07// node 1991: ir.mux10 = mux irhi.2 decode.nand8 st.1
+3A97  95 07                   |  |  |
+3A99  06 FD A0 07 FD 4F 06 FD | /home/claude/y/tests/_asm/improved.asm:533 |  | .byte 0x06, 0xFD, 0xA0, 0x07, 0xFD, 0x4F, 0x06, 0xFD, 0x9D, 0x07// node 1999: ir.mux11 = mux irhi.3 decode.nand11 st.1
+3AA1  9D 07                   |  |  |
+3AA3  06 FD A7 07 FD 54 06 FD | /home/claude/y/tests/_asm/improved.asm:534 |  | .byte 0x06, 0xFD, 0xA7, 0x07, 0xFD, 0x54, 0x06, 0xFD, 0xA5, 0x07// node 2007: ir.mux12 = mux irhi.4 decode.nand14 st.1
+3AAB  A5 07                   |  |  |
+3AAD  03 FD AC 07 FD B8 07    | /home/claude/y/tests/_asm/improved.asm:535 |  | .byte 0x03, 0xFD, 0xAC, 0x07, 0xFD, 0xB8, 0x07// node 2015: top.and0 = and st.2 irlo.3
+3AB4  03 01 FD 80 06          | /home/claude/y/tests/_asm/improved.asm:536 |  | .byte 0x03, 0x01, 0xFD, 0x80, 0x06          // node 2017: decode.and18 = and top.and0 decode.and8
+3AB9  03 03 FD 6F 06          | /home/claude/y/tests/_asm/improved.asm:537 |  | .byte 0x03, 0x03, 0xFD, 0x6F, 0x06          // node 2019: decode.and19 = and top.and0 decode.and17
+3ABE  02 FD A1 07             | /home/claude/y/tests/_asm/improved.asm:538 |  | .byte 0x02, 0xFD, 0xA1, 0x07                // node 2021: ram.not0 = not addr.mux0
+3AC2  02 FD 9A 07             | /home/claude/y/tests/_asm/improved.asm:539 |  | .byte 0x02, 0xFD, 0x9A, 0x07                // node 2022: ram.not1 = not addr.mux1
+3AC6  02 FD 93 07             | /home/claude/y/tests/_asm/improved.asm:540 |  | .byte 0x02, 0xFD, 0x93, 0x07                // node 2023: ram.not2 = not addr.mux2
+3ACA  02 FD 8C 07             | /home/claude/y/tests/_asm/improved.asm:541 |  | .byte 0x02, 0xFD, 0x8C, 0x07                // node 2024: ram.not3 = not addr.mux3
+3ACE  02 FD 85 07             | /home/claude/y/tests/_asm/improved.asm:542 |  | .byte 0x02, 0xFD, 0x85, 0x07                // node 2025: ram.not4 = not addr.mux4
+3AD2  03 05 04                | /home/claude/y/tests/_asm/improved.asm:543 |  | .byte 0x03, 0x05, 0x04                      // node 2026: ram.and0 = and ram.not0 ram.not1
+3AD5  03 FD A8 07 06          | /home/claude/y/tests/_asm/improved.asm:544 |  | .byte 0x03, 0xFD, 0xA8, 0x07, 0x06          // node 2028: ram.and1 = and addr.mux0 ram.not1
+3ADA  03 09 FD A2 07          | /home/claude/y/tests/_asm/improved.asm:545 |  | .byte 0x03, 0x09, 0xFD, 0xA2, 0x07          // node 2030: ram.and2 = and ram.not0 addr.mux1
+3ADF  03 FD AC 07 FD A4 07    | /home/claude/y/tests/_asm/improved.asm:546 |  | .byte 0x03, 0xFD, 0xAC, 0x07, 0xFD, 0xA4, 0x07// node 2032: ram.and3 = and addr.mux0 addr.mux1
+3AE6  03 0B 0A                | /home/claude/y/tests/_asm/improved.asm:547 |  | .byte 0x03, 0x0B, 0x0A                      // node 2034: ram.and4 = and ram.not2 ram.not3
+3AE9  03 FD A0 07 0C          | /home/claude/y/tests/_asm/improved.asm:548 |  | .byte 0x03, 0xFD, 0xA0, 0x07, 0x0C          // node 2036: ram.and5 = and addr.mux2 ram.not3
+3AEE  03 0F FD 9A 07          | /home/claude/y/tests/_asm/improved.asm:549 |  | .byte 0x03, 0x0F, 0xFD, 0x9A, 0x07          // node 2038: ram.and6 = and ram.not2 addr.mux3
+3AF3  03 FD A4 07 FD 9C 07    | /home/claude/y/tests/_asm/improved.asm:550 |  | .byte 0x03, 0xFD, 0xA4, 0x07, 0xFD, 0x9C, 0x07// node 2040: ram.and7 = and addr.mux2 addr.mux3
+3AFA  03 07 11                | /home/claude/y/tests/_asm/improved.asm:551 |  | .byte 0x03, 0x07, 0x11                      // node 2042: ram.and8 = and ram.and4 ram.not4
+3AFD  03 07 13                | /home/claude/y/tests/_asm/improved.asm:552 |  | .byte 0x03, 0x07, 0x13                      // node 2044: ram.and9 = and ram.and5 ram.not4
+3B00  03 07 15                | /home/claude/y/tests/_asm/improved.asm:553 |  | .byte 0x03, 0x07, 0x15                      // node 2046: ram.and10 = and ram.and6 ram.not4
+3B03  03 07 17                | /home/claude/y/tests/_asm/improved.asm:554 |  | .byte 0x03, 0x07, 0x17                      // node 2048: ram.and11 = and ram.and7 ram.not4
+3B06  03 0F FD 9E 07          | /home/claude/y/tests/_asm/improved.asm:555 |  | .byte 0x03, 0x0F, 0xFD, 0x9E, 0x07          // node 2050: ram.and12 = and ram.and4 addr.mux4
+3B0B  03 0F FD A0 07          | /home/claude/y/tests/_asm/improved.asm:556 |  | .byte 0x03, 0x0F, 0xFD, 0xA0, 0x07          // node 2052: ram.and13 = and ram.and5 addr.mux4
+3B10  03 0F FD A2 07          | /home/claude/y/tests/_asm/improved.asm:557 |  | .byte 0x03, 0x0F, 0xFD, 0xA2, 0x07          // node 2054: ram.and14 = and ram.and6 addr.mux4
+3B15  03 0F FD A4 07          | /home/claude/y/tests/_asm/improved.asm:558 |  | .byte 0x03, 0x0F, 0xFD, 0xA4, 0x07          // node 2056: ram.and15 = and ram.and7 addr.mux4
+3B1A  03 0F 28                | /home/claude/y/tests/_asm/improved.asm:559 |  | .byte 0x03, 0x0F, 0x28                      // node 2058: ram.and16 = and ram.and8 decode.and18
+3B1D  03 0F 2A                | /home/claude/y/tests/_asm/improved.asm:560 |  | .byte 0x03, 0x0F, 0x2A                      // node 2060: ram.and17 = and ram.and9 decode.and18
+3B20  03 0F 2C                | /home/claude/y/tests/_asm/improved.asm:561 |  | .byte 0x03, 0x0F, 0x2C                      // node 2062: ram.and18 = and ram.and10 decode.and18
+3B23  03 0F 2E                | /home/claude/y/tests/_asm/improved.asm:562 |  | .byte 0x03, 0x0F, 0x2E                      // node 2064: ram.and19 = and ram.and11 decode.and18
+3B26  03 0F 30                | /home/claude/y/tests/_asm/improved.asm:563 |  | .byte 0x03, 0x0F, 0x30                      // node 2066: ram.and20 = and ram.and12 decode.and18
+3B29  03 0F 32                | /home/claude/y/tests/_asm/improved.asm:564 |  | .byte 0x03, 0x0F, 0x32                      // node 2068: ram.and21 = and ram.and13 decode.and18
+3B2C  03 0F 34                | /home/claude/y/tests/_asm/improved.asm:565 |  | .byte 0x03, 0x0F, 0x34                      // node 2070: ram.and22 = and ram.and14 decode.and18
+3B2F  03 0F 36                | /home/claude/y/tests/_asm/improved.asm:566 |  | .byte 0x03, 0x0F, 0x36                      // node 2072: ram.and23 = and ram.and15 decode.and18
+3B32  FF                      | /home/claude/y/tests/_asm/improved.asm:567 |  | .byte 0xFF                                  // END of body; 2074 core nodes; tie-high node = 2074
+3B33  09 20                   | /home/claude/y/tests/_asm/improved.asm:569 |  | .byte 0x09, 0x20                            // chain of 32 x ram_word (type 9)
+3B35  03 0F 00 00 04          | /home/claude/y/tests/_asm/improved.asm:571 |  | .byte 0x03, 0x0F, 0x00, 0x00, 0x04          // tile input i0: PICKHI list hiW from ram.and16, stride 2 nodes, index = k / 4
+3B3A  03 1F 00 00 04          | /home/claude/y/tests/_asm/improved.asm:572 |  | .byte 0x03, 0x1F, 0x00, 0x00, 0x04          // tile input i1: PICKHI list hiR from ram.and8, stride 2 nodes, index = k / 4
+3B3F  02 2F 00 00 03          | /home/claude/y/tests/_asm/improved.asm:573 |  | .byte 0x02, 0x2F, 0x00, 0x00, 0x03          // tile input i2: PICKLO list lo from ram.and0, stride 2 nodes, index = k AND 3
+3B44  00 FD F0 03 00          | /home/claude/y/tests/_asm/improved.asm:574 |  | .byte 0x00, 0xFD, 0xF0, 0x03, 0x00          // tile input i3: BCAST alu.mux48 (same source for every tile)
+3B49  00 FD E8 03 00          | /home/claude/y/tests/_asm/improved.asm:575 |  | .byte 0x00, 0xFD, 0xE8, 0x03, 0x00          // tile input i4: BCAST alu.mux49 (same source for every tile)
+3B4E  00 FD E0 03 00          | /home/claude/y/tests/_asm/improved.asm:576 |  | .byte 0x00, 0xFD, 0xE0, 0x03, 0x00          // tile input i5: BCAST alu.mux50 (same source for every tile)
+3B53  00 FD D8 03 00          | /home/claude/y/tests/_asm/improved.asm:577 |  | .byte 0x00, 0xFD, 0xD8, 0x03, 0x00          // tile input i6: BCAST alu.mux51 (same source for every tile)
+3B58  00 FD D0 03 00          | /home/claude/y/tests/_asm/improved.asm:578 |  | .byte 0x00, 0xFD, 0xD0, 0x03, 0x00          // tile input i7: BCAST alu.mux52 (same source for every tile)
+3B5D  00 FD C8 03 00          | /home/claude/y/tests/_asm/improved.asm:579 |  | .byte 0x00, 0xFD, 0xC8, 0x03, 0x00          // tile input i8: BCAST alu.mux53 (same source for every tile)
+3B62  00 FD C0 03 00          | /home/claude/y/tests/_asm/improved.asm:580 |  | .byte 0x00, 0xFD, 0xC0, 0x03, 0x00          // tile input i9: BCAST alu.mux54 (same source for every tile)
+3B67  00 FD B8 03 00          | /home/claude/y/tests/_asm/improved.asm:581 |  | .byte 0x00, 0xFD, 0xB8, 0x03, 0x00          // tile input i10: BCAST alu.mux55 (same source for every tile)
+3B6C  01 00 00 00 00          | /home/claude/y/tests/_asm/improved.asm:582 |  | .byte 0x01, 0x00, 0x00, 0x00, 0x00          // tile input i11: PREV output 0 of the previous tile (tile 0: tie-high)
+3B71  01 00 00 00 01          | /home/claude/y/tests/_asm/improved.asm:583 |  | .byte 0x01, 0x00, 0x00, 0x00, 0x01          // tile input i12: PREV output 1 of the previous tile (tile 0: tie-high)
+3B76  01 00 00 00 02          | /home/claude/y/tests/_asm/improved.asm:584 |  | .byte 0x01, 0x00, 0x00, 0x00, 0x02          // tile input i13: PREV output 2 of the previous tile (tile 0: tie-high)
+3B7B  01 00 00 00 03          | /home/claude/y/tests/_asm/improved.asm:585 |  | .byte 0x01, 0x00, 0x00, 0x00, 0x03          // tile input i14: PREV output 3 of the previous tile (tile 0: tie-high)
+3B80  01 00 00 00 04          | /home/claude/y/tests/_asm/improved.asm:586 |  | .byte 0x01, 0x00, 0x00, 0x00, 0x04          // tile input i15: PREV output 4 of the previous tile (tile 0: tie-high)
+3B85  01 00 00 00 05          | /home/claude/y/tests/_asm/improved.asm:587 |  | .byte 0x01, 0x00, 0x00, 0x00, 0x05          // tile input i16: PREV output 5 of the previous tile (tile 0: tie-high)
+3B8A  01 00 00 00 06          | /home/claude/y/tests/_asm/improved.asm:588 |  | .byte 0x01, 0x00, 0x00, 0x00, 0x06          // tile input i17: PREV output 6 of the previous tile (tile 0: tie-high)
+3B8F  01 00 00 00 07          | /home/claude/y/tests/_asm/improved.asm:589 |  | .byte 0x01, 0x00, 0x00, 0x00, 0x07          // tile input i18: PREV output 7 of the previous tile (tile 0: tie-high)
+3B94  1A                      | /home/claude/y/tests/_asm/improved.asm:591 |  | .byte 0x1A                                  // 26 ports
+3B95  FD D6 07 00 95          | /home/claude/y/tests/_asm/improved.asm:592 |  | .byte 0xFD, 0xD6, 0x07, 0x00, 0x95          // port rom_addr0 = addr.mux0 -> pin (0,149)
+3B9A  FD CE 07 00 96          | /home/claude/y/tests/_asm/improved.asm:593 |  | .byte 0xFD, 0xCE, 0x07, 0x00, 0x96          // port rom_addr1 = addr.mux1 -> pin (0,150)
+3B9F  FD C6 07 00 97          | /home/claude/y/tests/_asm/improved.asm:594 |  | .byte 0xFD, 0xC6, 0x07, 0x00, 0x97          // port rom_addr2 = addr.mux2 -> pin (0,151)
+3BA4  FD BE 07 00 98          | /home/claude/y/tests/_asm/improved.asm:595 |  | .byte 0xFD, 0xBE, 0x07, 0x00, 0x98          // port rom_addr3 = addr.mux3 -> pin (0,152)
+3BA9  FD B6 07 00 99          | /home/claude/y/tests/_asm/improved.asm:596 |  | .byte 0xFD, 0xB6, 0x07, 0x00, 0x99          // port rom_addr4 = addr.mux4 -> pin (0,153)
+3BAE  FD AE 07 00 9A          | /home/claude/y/tests/_asm/improved.asm:597 |  | .byte 0xFD, 0xAE, 0x07, 0x00, 0x9A          // port rom_addr5 = addr.mux5 -> pin (0,154)
+3BB3  FD A6 07 00 9B          | /home/claude/y/tests/_asm/improved.asm:598 |  | .byte 0xFD, 0xA6, 0x07, 0x00, 0x9B          // port rom_addr6 = addr.mux6 -> pin (0,155)
+3BB8  FD 9E 07 00 9C          | /home/claude/y/tests/_asm/improved.asm:599 |  | .byte 0xFD, 0x9E, 0x07, 0x00, 0x9C          // port rom_addr7 = addr.mux7 -> pin (0,156)
+3BBD  FD 96 07 00 9D          | /home/claude/y/tests/_asm/improved.asm:600 |  | .byte 0xFD, 0x96, 0x07, 0x00, 0x9D          // port rom_addr8 = addr.mux8 -> pin (0,157)
+3BC2  FD 8E 07 00 9E          | /home/claude/y/tests/_asm/improved.asm:601 |  | .byte 0xFD, 0x8E, 0x07, 0x00, 0x9E          // port rom_addr9 = addr.mux9 -> pin (0,158)
+3BC7  FD 86 07 00 9F          | /home/claude/y/tests/_asm/improved.asm:602 |  | .byte 0xFD, 0x86, 0x07, 0x00, 0x9F          // port rom_addr10 = addr.mux10 -> pin (0,159)
+3BCC  FD 7E 07 00 A0          | /home/claude/y/tests/_asm/improved.asm:603 |  | .byte 0xFD, 0x7E, 0x07, 0x00, 0xA0          // port rom_addr11 = addr.mux11 -> pin (0,160)
+3BD1  FD 76 07 00 A1          | /home/claude/y/tests/_asm/improved.asm:604 |  | .byte 0xFD, 0x76, 0x07, 0x00, 0xA1          // port rom_addr12 = addr.mux12 -> pin (0,161)
+3BD6  FD D6 07 00 8C          | /home/claude/y/tests/_asm/improved.asm:605 |  | .byte 0xFD, 0xD6, 0x07, 0x00, 0x8C          // port arm_addr0 = addr.mux0 -> pin (0,140)
+3BDB  FD CE 07 00 8D          | /home/claude/y/tests/_asm/improved.asm:606 |  | .byte 0xFD, 0xCE, 0x07, 0x00, 0x8D          // port arm_addr1 = addr.mux1 -> pin (0,141)
+3BE0  FD C6 07 00 8E          | /home/claude/y/tests/_asm/improved.asm:607 |  | .byte 0xFD, 0xC6, 0x07, 0x00, 0x8E          // port arm_addr2 = addr.mux2 -> pin (0,142)
+3BE5  FD BE 07 00 8F          | /home/claude/y/tests/_asm/improved.asm:608 |  | .byte 0xFD, 0xBE, 0x07, 0x00, 0x8F          // port arm_addr3 = addr.mux3 -> pin (0,143)
+3BEA  FD F0 03 01 8C          | /home/claude/y/tests/_asm/improved.asm:609 |  | .byte 0xFD, 0xF0, 0x03, 0x01, 0x8C          // port wdata0 = alu.mux48 -> pin (1,140)
+3BEF  FD E8 03 01 8D          | /home/claude/y/tests/_asm/improved.asm:610 |  | .byte 0xFD, 0xE8, 0x03, 0x01, 0x8D          // port wdata1 = alu.mux49 -> pin (1,141)
+3BF4  FD E0 03 01 8E          | /home/claude/y/tests/_asm/improved.asm:611 |  | .byte 0xFD, 0xE0, 0x03, 0x01, 0x8E          // port wdata2 = alu.mux50 -> pin (1,142)
+3BF9  FD D8 03 01 8F          | /home/claude/y/tests/_asm/improved.asm:612 |  | .byte 0xFD, 0xD8, 0x03, 0x01, 0x8F          // port wdata3 = alu.mux51 -> pin (1,143)
+3BFE  FD D0 03 01 90          | /home/claude/y/tests/_asm/improved.asm:613 |  | .byte 0xFD, 0xD0, 0x03, 0x01, 0x90          // port wdata4 = alu.mux52 -> pin (1,144)
+3C03  FD C8 03 01 91          | /home/claude/y/tests/_asm/improved.asm:614 |  | .byte 0xFD, 0xC8, 0x03, 0x01, 0x91          // port wdata5 = alu.mux53 -> pin (1,145)
+3C08  FD C0 03 01 92          | /home/claude/y/tests/_asm/improved.asm:615 |  | .byte 0xFD, 0xC0, 0x03, 0x01, 0x92          // port wdata6 = alu.mux54 -> pin (1,146)
+3C0D  FD B8 03 01 93          | /home/claude/y/tests/_asm/improved.asm:616 |  | .byte 0xFD, 0xB8, 0x03, 0x01, 0x93          // port wdata7 = alu.mux55 -> pin (1,147)
+3C12  36 00 90                | /home/claude/y/tests/_asm/improved.asm:617 |  | .byte 0x36, 0x00, 0x90                      // port arm_en = decode.and19 -> pin (0,144)

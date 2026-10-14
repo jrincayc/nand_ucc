@@ -1,0 +1,11 @@
+AB = 15
+ARM_BASE = 16368
+CNT = 17
+OUT = 18
+ROM_BASE = 16384
+SUM = 16
+halt = 16444
+loop = 16400
+ptr = 16448
+start = 16384
+table = 16450

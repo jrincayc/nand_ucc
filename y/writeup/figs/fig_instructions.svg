@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" width="900" font-family="system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-label="Instructions executed by one build">
+<title>Instructions executed by one build</title>
+<rect width="900" height="380" fill="#fcfcfb"/>
+<text x="30.0" y="24.0" font-size="15" fill="#0b0b0b" text-anchor="start" font-weight="bold">Instructions executed per generation (behavioural model, 256 B RAM)</text>
+<text x="30.0" y="42.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">gen 1 -&gt; gen 2: the improver finds gains.  gen 2 -&gt; gen 3: it searches and finds nothing (fixed point).</text>
+<text x="140.0" y="92.0" font-size="12" fill="#0b0b0b" text-anchor="end" font-weight="normal">gen 1 builds gen 2</text>
+<rect x="150.0" y="70.0" width="246.9" height="32.0" rx="0" fill="#2a78d6" />
+<rect x="398.9" y="70.0" width="205.9" height="32.0" rx="0" fill="#1baf7a" />
+<rect x="606.8" y="70.0" width="64.5" height="32.0" rx="0" fill="#6250d6" />
+<rect x="673.2" y="70.0" width="91.2" height="32.0" rx="0" fill="#eb6834" />
+<rect x="766.5" y="70.0" width="47.2" height="32.0" rx="0" fill="#eda100" />
+<rect x="815.7" y="70.0" width="13.7" height="32.0" rx="0" fill="#e87ba4" />
+<text x="837.3" y="91.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="bold">31.7 M</text>
+<text x="140.0" y="144.0" font-size="12" fill="#0b0b0b" text-anchor="end" font-weight="normal">gen 2 builds gen 3</text>
+<rect x="150.0" y="122.0" width="246.9" height="32.0" rx="0" fill="#2a78d6" />
+<rect x="398.9" y="122.0" width="205.9" height="32.0" rx="0" fill="#1baf7a" />
+<rect x="606.8" y="122.0" width="64.4" height="32.0" rx="0" fill="#6250d6" />
+<rect x="673.2" y="122.0" width="16.1" height="32.0" rx="0" fill="#eb6834" />
+<rect x="691.4" y="122.0" width="4.6" height="32.0" rx="0" fill="#eda100" />
+<rect x="697.9" y="122.0" width="0.5" height="32.0" rx="0" fill="#e87ba4" />
+<text x="706.4" y="143.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="bold">25.6 M</text>
+<rect x="40.0" y="179.0" width="14.0" height="14.0" rx="2" fill="#2a78d6" />
+<text x="62.0" y="190.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="normal">byte reads, 16-bit adds, 5-byte copies (rdb, add16, put5)</text>
+<text x="650.0" y="190.0" font-size="12" fill="#52514e" text-anchor="end" font-weight="normal">11.57 M</text>
+<text x="740.0" y="190.0" font-size="12" fill="#52514e" text-anchor="end" font-weight="normal">11.57 M</text>
+<rect x="40.0" y="203.0" width="14.0" height="14.0" rx="2" fill="#1baf7a" />
+<text x="62.0" y="214.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="normal">wiring logic (decref, resolve, emit, gates)</text>
+<text x="650.0" y="214.0" font-size="12" fill="#52514e" text-anchor="end" font-weight="normal"> 9.66 M</text>
+<text x="740.0" y="214.0" font-size="12" fill="#52514e" text-anchor="end" font-weight="normal"> 9.66 M</text>
+<rect x="40.0" y="227.0" width="14.0" height="14.0" rx="2" fill="#6250d6" />
+<text x="62.0" y="238.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="normal">group walk, skipping, ROM copy, tiles, ports, misc</text>
+<text x="650.0" y="238.0" font-size="12" fill="#52514e" text-anchor="end" font-weight="normal"> 3.09 M</text>
+<text x="740.0" y="238.0" font-size="12" fill="#52514e" text-anchor="end" font-weight="normal"> 3.09 M</text>
+<rect x="40.0" y="251.0" width="14.0" height="14.0" rx="2" fill="#eb6834" />
+<text x="62.0" y="262.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="normal">improver: exhaustive NAND search</text>
+<text x="650.0" y="262.0" font-size="12" fill="#52514e" text-anchor="end" font-weight="normal"> 4.33 M</text>
+<text x="740.0" y="262.0" font-size="12" fill="#52514e" text-anchor="end" font-weight="normal"> 0.84 M</text>
+<rect x="40.0" y="275.0" width="14.0" height="14.0" rx="2" fill="#eda100" />
+<text x="62.0" y="286.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="normal">improver: cones and cuts</text>
+<text x="650.0" y="286.0" font-size="12" fill="#52514e" text-anchor="end" font-weight="normal"> 2.29 M</text>
+<text x="740.0" y="286.0" font-size="12" fill="#52514e" text-anchor="end" font-weight="normal"> 0.30 M</text>
+<rect x="40.0" y="299.0" width="14.0" height="14.0" rx="2" fill="#e87ba4" />
+<text x="62.0" y="310.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="normal">improver: compaction, load, rewrite, layout, other</text>
+<text x="650.0" y="310.0" font-size="12" fill="#52514e" text-anchor="end" font-weight="normal"> 0.73 M</text>
+<text x="740.0" y="310.0" font-size="12" fill="#52514e" text-anchor="end" font-weight="normal"> 0.11 M</text>
+<text x="650.0" y="176.0" font-size="11" fill="#52514e" text-anchor="end" font-weight="normal">gen 1-&gt;2</text>
+<text x="740.0" y="176.0" font-size="11" fill="#52514e" text-anchor="end" font-weight="normal">gen 2-&gt;3</text>
+<text x="40.0" y="354.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="normal">improver share: 23% of the first build, 5% of the fixed-point build.</text>
+<text x="40.0" y="372.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="normal">at about 2.6 clock ticks per instruction: roughly 82 M and 66 M ticks per generation.</text>
+</svg>

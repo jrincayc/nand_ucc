@@ -1,0 +1,40 @@
+4000  0A 00                   | /home/claude/y/tests/../examples/demo.asm:18 |  | @10                 // A = 10
+4002  10 EC                   | /home/claude/y/tests/../examples/demo.asm:19 |  | D=A                 // D = 10
+4004                          | /home/claude/y/tests/../examples/demo.asm:20 |  | STD CNT  // CNT = 10
+4004  11 00                   | /home/claude/y/tests/../examples/demo.asm:13 | macro STD @/home/claude/y/tests/../examples/demo.asm:20 | @CNT              // A = address of the variable
+4006  08 E3                   | /home/claude/y/tests/../examples/demo.asm:14 | macro STD @/home/claude/y/tests/../examples/demo.asm:20 | M=D                 // store D there
+4008  00 00                   | /home/claude/y/tests/../examples/demo.asm:21 |  | @0                  // A = 0
+400A  10 EC                   | /home/claude/y/tests/../examples/demo.asm:22 |  | D=A                 // D = 0
+400C                          | /home/claude/y/tests/../examples/demo.asm:23 |  | STD SUM  // SUM = 0
+400C  10 00                   | /home/claude/y/tests/../examples/demo.asm:13 | macro STD @/home/claude/y/tests/../examples/demo.asm:23 | @SUM              // A = address of the variable
+400E  08 E3                   | /home/claude/y/tests/../examples/demo.asm:14 | macro STD @/home/claude/y/tests/../examples/demo.asm:23 | M=D                 // store D there
+4010                          | /home/claude/y/tests/../examples/demo.asm:25 |  | LDD SUM  // D = SUM
+4010  10 00                   | /home/claude/y/tests/../examples/demo.asm:8 | macro LDD @/home/claude/y/tests/../examples/demo.asm:25 | @SUM              // A = address of the variable
+4012  10 FC                   | /home/claude/y/tests/../examples/demo.asm:9 | macro LDD @/home/claude/y/tests/../examples/demo.asm:25 | D=M                 // D = its value
+4014  11 00                   | /home/claude/y/tests/../examples/demo.asm:26 |  | @CNT                // A = &CNT
+4016  90 F0                   | /home/claude/y/tests/../examples/demo.asm:27 |  | D=D+M               // D = SUM + CNT
+4018                          | /home/claude/y/tests/../examples/demo.asm:28 |  | STD SUM  // SUM = D
+4018  10 00                   | /home/claude/y/tests/../examples/demo.asm:13 | macro STD @/home/claude/y/tests/../examples/demo.asm:28 | @SUM              // A = address of the variable
+401A  08 E3                   | /home/claude/y/tests/../examples/demo.asm:14 | macro STD @/home/claude/y/tests/../examples/demo.asm:28 | M=D                 // store D there
+401C  11 00                   | /home/claude/y/tests/../examples/demo.asm:29 |  | @CNT                // A = &CNT
+401E  88 FC                   | /home/claude/y/tests/../examples/demo.asm:30 |  | M=M-1               // CNT = CNT - 1
+4020  10 FC                   | /home/claude/y/tests/../examples/demo.asm:31 |  | D=M                 // D = CNT (for the jump test)
+4022  10 40                   | /home/claude/y/tests/../examples/demo.asm:32 |  | @loop               // A = loop target
+4024  01 E3                   | /home/claude/y/tests/../examples/demo.asm:33 |  | D;JGT               // repeat while CNT > 0
+4026  40 40                   | /home/claude/y/tests/../examples/demo.asm:34 |  | @ptr                // A = &ptr (two-byte pointer in ROM)
+4028  00 C0                   | /home/claude/y/tests/../examples/demo.asm:35 |  | AP                  // A = pointer value = &table
+402A  10 FC                   | /home/claude/y/tests/../examples/demo.asm:36 |  | D=M                 // D = table[0]
+402C                          | /home/claude/y/tests/../examples/demo.asm:37 |  | STD OUT  // OUT[0] = D
+402C  12 00                   | /home/claude/y/tests/../examples/demo.asm:13 | macro STD @/home/claude/y/tests/../examples/demo.asm:37 | @OUT              // A = address of the variable
+402E  08 E3                   | /home/claude/y/tests/../examples/demo.asm:14 | macro STD @/home/claude/y/tests/../examples/demo.asm:37 | M=D                 // store D there
+4030  40 40                   | /home/claude/y/tests/../examples/demo.asm:38 |  | @ptr                // A = &ptr
+4032  00 C0                   | /home/claude/y/tests/../examples/demo.asm:39 |  | AP                  // A = &table
+4034  E0 ED                   | /home/claude/y/tests/../examples/demo.asm:40 |  | A=A+1               // A = &table[1]   (writes A[7:0] only; table does not cross a page)
+4036  10 FC                   | /home/claude/y/tests/../examples/demo.asm:41 |  | D=M                 // D = table[1]
+4038                          | /home/claude/y/tests/../examples/demo.asm:42 |  | STD OUT+1  // OUT[1] = D
+4038  13 00                   | /home/claude/y/tests/../examples/demo.asm:13 | macro STD @/home/claude/y/tests/../examples/demo.asm:42 | @OUT+1              // A = address of the variable
+403A  08 E3                   | /home/claude/y/tests/../examples/demo.asm:14 | macro STD @/home/claude/y/tests/../examples/demo.asm:42 | M=D                 // store D there
+403C  3C 40                   | /home/claude/y/tests/../examples/demo.asm:44 |  | @halt               // A = &halt
+403E  87 EA                   | /home/claude/y/tests/../examples/demo.asm:45 |  | 0;JMP               // jump to self
+4040  42 40                   | /home/claude/y/tests/../examples/demo.asm:46 |  | ptr:  .word table       // pointer to the table
+4042  11 22 33                | /home/claude/y/tests/../examples/demo.asm:47 |  | table: .byte 0x11, 0x22, 0x33  // data: three bytes to be copied

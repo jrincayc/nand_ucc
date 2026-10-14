@@ -1,0 +1,19 @@
+[package]
+name = "rndw"
+version = "0.1.0"
+edition = "2021"
+description = "RNDW: Robot + NAND + DFF + Wires (+ ROM) world simulator (std only)"
+
+[lib]
+name = "rndw"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rndw"
+path = "src/main.rs"
+
+[dependencies]
+
+[profile.release]
+opt-level = 3
+debug = false

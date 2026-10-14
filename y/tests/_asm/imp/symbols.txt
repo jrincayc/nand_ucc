@@ -1,0 +1,14 @@
+HD_BASE = 10240
+hd_body = 10816
+hd_chain = 12965
+hd_dir = 10272
+hd_header = 10240
+hd_ports = 13024
+mod_and = 10311
+mod_fa = 10373
+mod_ha = 10357
+mod_mux = 10344
+mod_not = 10304
+mod_or = 10320
+mod_ram_word = 10397
+mod_xor = 10331

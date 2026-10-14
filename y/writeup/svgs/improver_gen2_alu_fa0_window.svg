@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="1582 283 52 17" width="936" height="306">
+<!-- rndw tick=110196267 parts=50925 wires=66741 faults=0 mode=detail window=(1582,283,1634,300) shown_parts=10 shown_wires=26 -->
+<style>.n{fill:#8ab4f8}.d{fill:#81c995}.r{fill:#fdd663}.a{fill:#f28b82}.s{fill:#bdc1c6}.p{fill:#202124}.h{fill:#d93025}.w{stroke:#80868b;stroke-width:.08;fill:none}.wh{stroke:#d93025;stroke-width:.12;fill:none}</style>
+<rect x="1582" y="283" width="52" height="17" fill="#fff"/>
+<rect class="n" x="1582" y="289" width="2" height="2" rx=".15"/>
+<rect class="n" x="1584" y="289" width="2" height="2" rx=".15"/>
+<rect class="n" x="1586" y="289" width="2" height="2" rx=".15"/>
+<rect class="n" x="1588" y="289" width="2" height="2" rx=".15"/>
+<rect class="n" x="1590" y="289" width="2" height="2" rx=".15"/>
+<rect class="n" x="1592" y="289" width="2" height="2" rx=".15"/>
+<rect class="n" x="1594" y="289" width="2" height="2" rx=".15"/>
+<rect class="n" x="1620" y="289" width="2" height="2" rx=".15"/>
+<rect class="n" x="1630" y="289" width="2" height="2" rx=".15"/>
+<rect class="n" x="1632" y="289" width="2" height="2" rx=".15"/>
+<path class="w" d="M1621.5 289.5L2018.5 289.5M1197.5 289.5L1582.5 289.5M1469.5 289.5L1582.5 290.5M1197.5 289.5L1584.5 289.5M1469.5 289.5L1586.5 289.5M123.5 289.5L1590.5 289.5M1589.5 289.5L1590.5 290.5M123.5 289.5L1592.5 289.5M1589.5 289.5L1594.5 289.5M1485.5 289.5L1632.5 290.5M1631.5 289.5L1640.5 289.5M1631.5 289.5L1642.5 289.5"/>
+<path class="wh" d="M1583.5 289.5L1584.5 290.5M1583.5 289.5L1586.5 290.5M1585.5 289.5L1588.5 289.5M1587.5 289.5L1588.5 290.5M1591.5 289.5L1592.5 290.5M1591.5 289.5L1594.5 290.5M1593.5 289.5L1620.5 289.5M1595.5 289.5L1620.5 290.5M1583.5 289.5L1630.5 289.5M1591.5 289.5L1630.5 290.5M1213.5 289.5L1632.5 289.5M1633.5 289.5L1634.5 290.5M1633.5 289.5L1636.5 290.5M1633.5 289.5L1680.5 289.5"/>
+<circle class="p" cx="1582.5" cy="289.5" r=".14"/>
+<circle class="p" cx="1582.5" cy="290.5" r=".14"/>
+<circle class="h" cx="1583.5" cy="289.5" r=".14"/>
+<circle class="p" cx="1584.5" cy="289.5" r=".14"/>
+<circle class="h" cx="1584.5" cy="290.5" r=".14"/>
+<circle class="h" cx="1585.5" cy="289.5" r=".14"/>
+<circle class="p" cx="1586.5" cy="289.5" r=".14"/>
+<circle class="h" cx="1586.5" cy="290.5" r=".14"/>
+<circle class="h" cx="1587.5" cy="289.5" r=".14"/>
+<circle class="h" cx="1588.5" cy="289.5" r=".14"/>
+<circle class="h" cx="1588.5" cy="290.5" r=".14"/>
+<circle class="p" cx="1589.5" cy="289.5" r=".14"/>
+<circle class="p" cx="1590.5" cy="289.5" r=".14"/>
+<circle class="p" cx="1590.5" cy="290.5" r=".14"/>
+<circle class="h" cx="1591.5" cy="289.5" r=".14"/>
+<circle class="p" cx="1592.5" cy="289.5" r=".14"/>
+<circle class="h" cx="1592.5" cy="290.5" r=".14"/>
+<circle class="h" cx="1593.5" cy="289.5" r=".14"/>
+<circle class="p" cx="1594.5" cy="289.5" r=".14"/>
+<circle class="h" cx="1594.5" cy="290.5" r=".14"/>
+<circle class="h" cx="1595.5" cy="289.5" r=".14"/>
+<circle class="h" cx="1620.5" cy="289.5" r=".14"/>
+<circle class="h" cx="1620.5" cy="290.5" r=".14"/>
+<circle class="p" cx="1621.5" cy="289.5" r=".14"/>
+<circle class="h" cx="1630.5" cy="289.5" r=".14"/>
+<circle class="h" cx="1630.5" cy="290.5" r=".14"/>
+<circle class="p" cx="1631.5" cy="289.5" r=".14"/>
+<circle class="h" cx="1632.5" cy="289.5" r=".14"/>
+<circle class="p" cx="1632.5" cy="290.5" r=".14"/>
+<circle class="h" cx="1633.5" cy="289.5" r=".14"/>
+</svg>

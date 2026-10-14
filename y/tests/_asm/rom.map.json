@@ -1,0 +1,410 @@
+[
+{
+"addr": 16384,
+"hex": "0a00",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 18,
+"text": "@10                 // A = 10",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16386,
+"hex": "10ec",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 19,
+"text": "D=A                 // D = 10",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16388,
+"hex": "",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 20,
+"text": "STD CNT  // CNT = 10",
+"kind": "call",
+"macro": null
+},
+{
+"addr": 16388,
+"hex": "1100",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 13,
+"text": "@CNT              // A = address of the variable",
+"kind": "instr",
+"macro": [
+"STD",
+"/home/claude/y/tests/../examples/demo.asm",
+20
+]
+},
+{
+"addr": 16390,
+"hex": "08e3",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 14,
+"text": "M=D                 // store D there",
+"kind": "instr",
+"macro": [
+"STD",
+"/home/claude/y/tests/../examples/demo.asm",
+20
+]
+},
+{
+"addr": 16392,
+"hex": "0000",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 21,
+"text": "@0                  // A = 0",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16394,
+"hex": "10ec",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 22,
+"text": "D=A                 // D = 0",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16396,
+"hex": "",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 23,
+"text": "STD SUM  // SUM = 0",
+"kind": "call",
+"macro": null
+},
+{
+"addr": 16396,
+"hex": "1000",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 13,
+"text": "@SUM              // A = address of the variable",
+"kind": "instr",
+"macro": [
+"STD",
+"/home/claude/y/tests/../examples/demo.asm",
+23
+]
+},
+{
+"addr": 16398,
+"hex": "08e3",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 14,
+"text": "M=D                 // store D there",
+"kind": "instr",
+"macro": [
+"STD",
+"/home/claude/y/tests/../examples/demo.asm",
+23
+]
+},
+{
+"addr": 16400,
+"hex": "",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 25,
+"text": "LDD SUM  // D = SUM",
+"kind": "call",
+"macro": null
+},
+{
+"addr": 16400,
+"hex": "1000",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 8,
+"text": "@SUM              // A = address of the variable",
+"kind": "instr",
+"macro": [
+"LDD",
+"/home/claude/y/tests/../examples/demo.asm",
+25
+]
+},
+{
+"addr": 16402,
+"hex": "10fc",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 9,
+"text": "D=M                 // D = its value",
+"kind": "instr",
+"macro": [
+"LDD",
+"/home/claude/y/tests/../examples/demo.asm",
+25
+]
+},
+{
+"addr": 16404,
+"hex": "1100",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 26,
+"text": "@CNT                // A = &CNT",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16406,
+"hex": "90f0",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 27,
+"text": "D=D+M               // D = SUM + CNT",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16408,
+"hex": "",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 28,
+"text": "STD SUM  // SUM = D",
+"kind": "call",
+"macro": null
+},
+{
+"addr": 16408,
+"hex": "1000",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 13,
+"text": "@SUM              // A = address of the variable",
+"kind": "instr",
+"macro": [
+"STD",
+"/home/claude/y/tests/../examples/demo.asm",
+28
+]
+},
+{
+"addr": 16410,
+"hex": "08e3",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 14,
+"text": "M=D                 // store D there",
+"kind": "instr",
+"macro": [
+"STD",
+"/home/claude/y/tests/../examples/demo.asm",
+28
+]
+},
+{
+"addr": 16412,
+"hex": "1100",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 29,
+"text": "@CNT                // A = &CNT",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16414,
+"hex": "88fc",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 30,
+"text": "M=M-1               // CNT = CNT - 1",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16416,
+"hex": "10fc",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 31,
+"text": "D=M                 // D = CNT (for the jump test)",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16418,
+"hex": "1040",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 32,
+"text": "@loop               // A = loop target",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16420,
+"hex": "01e3",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 33,
+"text": "D;JGT               // repeat while CNT > 0",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16422,
+"hex": "4040",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 34,
+"text": "@ptr                // A = &ptr (two-byte pointer in ROM)",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16424,
+"hex": "00c0",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 35,
+"text": "AP                  // A = pointer value = &table",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16426,
+"hex": "10fc",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 36,
+"text": "D=M                 // D = table[0]",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16428,
+"hex": "",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 37,
+"text": "STD OUT  // OUT[0] = D",
+"kind": "call",
+"macro": null
+},
+{
+"addr": 16428,
+"hex": "1200",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 13,
+"text": "@OUT              // A = address of the variable",
+"kind": "instr",
+"macro": [
+"STD",
+"/home/claude/y/tests/../examples/demo.asm",
+37
+]
+},
+{
+"addr": 16430,
+"hex": "08e3",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 14,
+"text": "M=D                 // store D there",
+"kind": "instr",
+"macro": [
+"STD",
+"/home/claude/y/tests/../examples/demo.asm",
+37
+]
+},
+{
+"addr": 16432,
+"hex": "4040",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 38,
+"text": "@ptr                // A = &ptr",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16434,
+"hex": "00c0",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 39,
+"text": "AP                  // A = &table",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16436,
+"hex": "e0ed",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 40,
+"text": "A=A+1               // A = &table[1]   (writes A[7:0] only; table does not cross a page)",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16438,
+"hex": "10fc",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 41,
+"text": "D=M                 // D = table[1]",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16440,
+"hex": "",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 42,
+"text": "STD OUT+1  // OUT[1] = D",
+"kind": "call",
+"macro": null
+},
+{
+"addr": 16440,
+"hex": "1300",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 13,
+"text": "@OUT+1              // A = address of the variable",
+"kind": "instr",
+"macro": [
+"STD",
+"/home/claude/y/tests/../examples/demo.asm",
+42
+]
+},
+{
+"addr": 16442,
+"hex": "08e3",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 14,
+"text": "M=D                 // store D there",
+"kind": "instr",
+"macro": [
+"STD",
+"/home/claude/y/tests/../examples/demo.asm",
+42
+]
+},
+{
+"addr": 16444,
+"hex": "3c40",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 44,
+"text": "@halt               // A = &halt",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16446,
+"hex": "87ea",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 45,
+"text": "0;JMP               // jump to self",
+"kind": "instr",
+"macro": null
+},
+{
+"addr": 16448,
+"hex": "4240",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 46,
+"text": "ptr:  .word table       // pointer to the table",
+"kind": "data",
+"macro": null
+},
+{
+"addr": 16450,
+"hex": "112233",
+"file": "/home/claude/y/tests/../examples/demo.asm",
+"line": 47,
+"text": "table: .byte 0x11, 0x22, 0x33  // data: three bytes to be copied",
+"kind": "data",
+"macro": null
+}
+]
