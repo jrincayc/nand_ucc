@@ -37,7 +37,7 @@ Reports: `nandgen/y/M1…M7`: `M1_REPORT.md` … `M6_REPORT.md`, `M7_WRITEUP.md`
 
 **Not in the Project (too big):** the saved worlds, the two ROM images and the seed scripts. They were delivered as `rndw_states_M7.tar.gz` (quine g1–g4, improver g1–g3; `states/README.md` inside explains restarts and `SHA256SUMS` lists hashes). If that archive is lost, regenerate with `tests/run_y_world.py` (about 7 h of simulator time for 200 M ticks on 2 shared cores) and the X run scripts.
 
-## 4. How to run (from `nandgen/y`; build the simulator first with `cargo build --release --offline` in `nandgen/rndw`; no absolute paths needed since 2026-10-15, `$RNDW` overrides the simulator location)
+## 4. How to run (from `nandgen/y`; build the simulator first with `cargo build --release --offline` in `nandgen/rndw`; no absolute paths needed since 2026-10-15, `$RNDW` overrides the simulator location). Minimal file set for `run_y_world.py`: see M7_WRITEUP §9 (includes `isa/fastsim.py`, which `machine_lockstep.py` imports)
 
 ```
 python3 tests/test_m5.py && python3 tests/test_m5_improver.py     # builder and improver in the assembly model
@@ -65,7 +65,7 @@ A saved state resumes with `rndw --world FILE --steps N --save OUT`; the `cfg` l
 6. **Only combinational library modules are improved.** The DFFs, the RAM array (2,048 of the 2,104 DFF), the arm, the ROM size and the improver itself are never changed. "Improves its gate-level logic" is the claim; "improves itself" is not.
 7. **The seed is textbook.** The improver removes redundancy that the seed contains. A seed that is already optimal improves nothing, and the 946 NAND are in some sense a property of the seed choice. Audit B shows the improved gate lists are not stored in ROM; audit C shows xnor, maj and and3 are handled without being in the seed library.
 8. **Cost model.** Weighted cost NAND + 6·DFF gives −3.4 %. If ROM bits are charged at the earlier factor (f × 12.3 per bit) the improver's ~8 KB of code costs more than it saves for any f ≳ 0.01 (estimate). Decide which figure is the headline before quoting Y.
-9. **Time estimates.** Y's tick figures are derived, not measured. Wall-clock for a 200 M tick run was about 7 h on the shared 2 cores; the session can be restarted mid-run (one run was lost that way; use `--save` and resume).
+9. **Checkpoints.** `run_y_world.py` saves a checkpoint every `$CHUNK` ticks (default 10 M) and `RESUME=1` continues an interrupted run (added 2026-10-15; the M6 runs predate it, and one was lost to a session restart). **Time estimates.** Y's tick figures are derived, not measured. Wall-clock for a 200 M tick run was about 7 h on the shared 2 cores; the session can be restarted mid-run (one run was lost that way; use `--save` and resume).
 10. **Workspace vs Project.** The cloud workspace is not persistent across sessions; the Project is. `project_write` needs absolute local paths. Y_SPEC lives at `nandgen/Y_SPEC.md` (not `nandgen/y/`). The Project knowledge budget is 2,000,000 B (about 0.64 MB used before M7 uploads).
 11. **Mutation testing caveats.** 60/60 killed in M6 is a sample of executed words, with an oracle slightly stricter than set equality; dead code cannot be tested that way. The core-decode mutation sample (M1, AB = 14) killed 59 of 60 (the survivor differs only in non-one-hot states).
 12. **Documentation drift.** `Y_SPEC.md` still contains the AB = 14 plan in several places (sizes, expected ROM); `HACK_VN.md` is X's (AB = 13) and `HACK_VN_AB.md` is Y's. `y/isa/` is Y's own copy of the ISA files and differs from `nandgen/isa/`.

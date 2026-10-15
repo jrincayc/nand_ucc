@@ -40,7 +40,27 @@ if __name__ == '__main__':
     cmds = seed_commands(RF.flatten(hd0), img0); nw = reg_writes(cmds)
     sf = os.path.join(out, 'seed.script'); open(sf, 'w').write(to_script(cmds))
     final = os.path.join(out, 'final.txt')
-    args = [RNDW, '--width', '65536', '--height', '4096', '--rom-bits', str(AB_ - 1), '--save', final, '--script', sf, '--steps', str(nw + steps)]
-    print('ROM image', len(img0), 'B; script register writes', nw, '; running', steps, 'ticks after the script', flush=True)
-    t = time.time(); r = subprocess.run(args, capture_output=True, text=True)
-    print(r.stdout[-1500:], r.stderr[-500:]); print(f'wall {time.time()-t:.0f}s')
+    # Checkpointing (the simulator has no periodic save, so the run is cut into segments, each ending with --save).
+    # CHUNK (env, ticks per segment; default 10,000,000) ; set RESUME=1 to continue an interrupted run in the same OUTDIR from its newest
+    # OUT/ckpt_<ticks>.txt (ticks = ticks run after the driver script).  A resumed state restores the DFF values (checked: bit-identical result).
+    import glob, re
+    chunk = int(os.environ.get('CHUNK', 10_000_000))
+    done, prev = 0, None
+    if os.environ.get('RESUME'):
+        cks = sorted(glob.glob(os.path.join(out, 'ckpt_*.txt')), key=lambda f: int(re.search(r'ckpt_(\d+)', f).group(1)))
+        if cks: prev = cks[-1]; done = int(re.search(r'ckpt_(\d+)', prev).group(1))
+    base = ['--width', '65536', '--height', '4096', '--rom-bits', str(AB_ - 1)]
+    print('ROM image', len(img0), 'B; script register writes', nw, '; running', steps, 'ticks after the script; checkpoint every', chunk,
+          ('; resuming from ' + prev) if prev else '', flush=True)
+    t = time.time(); r = None
+    while done < steps:
+        n = min(chunk, steps - done); done += n; ck = os.path.join(out, f'ckpt_{done}.txt')
+        args = [RNDW] + (['--world', prev, '--steps', str(n)] if prev else base + ['--script', sf, '--steps', str(nw + n)]) + ['--save', ck]
+        r = subprocess.run(args, capture_output=True, text=True)
+        if r.returncode != 0 or not os.path.exists(ck):
+            print(r.stdout[-1500:], r.stderr[-500:]); sys.exit(f'segment ending at {done} ticks failed; rerun with RESUME=1 to continue from {prev}')
+        print(f'  {done}/{steps} ticks  wall {time.time()-t:.0f}s  saved {ck}', flush=True)
+        if prev and os.path.basename(prev) != 'final.txt': os.remove(prev)     # keep only the newest checkpoint
+        prev = ck
+    os.replace(prev, final)
+    print(r.stdout[-1500:] if r else '', r.stderr[-500:] if r else ''); print(f'wall {time.time()-t:.0f}s; final state {final}')
