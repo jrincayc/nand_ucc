@@ -5,12 +5,12 @@ import os, sys, subprocess, time, tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 for d in ('tools', 'isa', 'tests', '.'):
     sys.path.insert(0, os.path.join(HERE, '..', d))
-sys.path.insert(0, '/home/claude/pkg/rndw-stage/isa')
 import hd as HDM, ref_flatten as RF, run_builder as RB, hd2asm, ref_improve as RI
 import common as _c
 AB_ = _c.AB
-from script_world import to_script, reg_writes
-RNDW = os.environ.get('RNDW', '/home/claude/pkg/rndw-stage/rndw/target/release/rndw')
+from script_world import to_script, reg_writes      # tools/script_world.py (vendored from X)
+# the simulator: $RNDW, else <nandgen>/rndw/target/release/rndw (cargo build --release --offline in nandgen/rndw)
+RNDW = os.environ.get('RNDW', os.path.join(HERE, '..', '..', 'rndw', 'target', 'release', 'rndw'))
 
 
 def seed_commands(f, image):

@@ -125,7 +125,7 @@ def core_row():
     sys.path[:0] = [os.path.join(HERE, '..', 'tools')]
     import hd as H
     hd = H.read(open(os.path.join(HERE, '..', 'hd', 'core_r8.hd')).read())
-    st = load_state('/home/claude/w6/A/final.txt')
+    st = load_state(os.environ.get('STATE_G2', os.path.join(HERE, 'states', 'improver_gen2_built_tick110M.txt')))
     node = 0; inst = []
     for i in hd.body:
         n = 1 if i.type in ('nand', 'dff') else hd.module(i.type).n_gates(); inst.append((i.type, i.name, node, n)); node += n
@@ -163,7 +163,7 @@ def core_row():
 
 # ------------------------------------------------------------------ world stripes (schematic from the state)
 def stripes():
-    st = load_state('/home/claude/w6/C/final.txt')
+    st = load_state(os.environ.get('STATE_G3', os.path.join(HERE, 'states', 'improver_gen3_built_tick200M.txt')))
     import collections
     W, H = 1000, 380; s = Svg(W, H, 'World layout: one stripe per generation')
     s.text(30, 24, 'The world after generation 2 has built generation 3 (tick 200 M): one 140-cell stripe per generation', 15, INK, weight='bold')

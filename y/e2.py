@@ -1,4 +1,4 @@
-import sys; sys.path.insert(0,'/home/claude/pkg/rndw-stage/isa')
+import sys; import os; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'isa'))
 import nandgen as ng
 from nl_core import build_core
 # module library: gate lists over inputs 0..n-1, gates appended as signals n, n+1, ...; outs = signal indices

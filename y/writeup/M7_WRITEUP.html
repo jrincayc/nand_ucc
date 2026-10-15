@@ -586,14 +586,17 @@
 <li><strong>ROM dominates.</strong> In bits, the ROM is 131 kbit against 17.6 k parts; any cost model that counts ROM makes the improver a net loss at this size (§6.2).</li>
 </ol>
 <h2>9. Reproduce</h2>
-<pre><code>cd nandgen/y
+<p>Layout assumed (as in the <code>nandgen_workspace.tar.gz</code> / the Project): <code>nandgen/y/</code> (everything for Y) and <code>nandgen/rndw/</code> (the Rust simulator). Needs Python 3 (standard library only) and a Rust toolchain; nothing else. No absolute paths are used any more; the simulator is found at <code>nandgen/rndw/target/release/rndw</code> or via <code>$RNDW</code>.</p>
+<pre><code>(cd nandgen/rndw &amp;&amp; cargo build --release --offline)                    # the simulator, no dependencies
+cd nandgen/y
 python3 tests/test_m5.py &amp;&amp; python3 tests/test_m5_improver.py          # model: builder and improver
 python3 tests/test_m6_audit.py &amp;&amp; python3 tests/test_m6_behaviour.py    # audits, behaviour
-python3 tests/run_y_world.py hd/core_r8.hd 200000000 OUT                # RNDW run (Rust simulator, ~7 h)
+python3 tests/run_y_world.py hd/core_r8.hd 200000000 OUT                # RNDW run (~7 h; try 300000 first: ~20 s, only checks the build starts)
 python3 tests/verify_y_world.py OUT/final.txt 1:hd/core_r8.hd:OUT/seed.bin 2:hd/core_r8_improved.hd:OUT/child.bin
-python3 writeup/collect.py &amp;&amp; python3 writeup/figs.py                   # measurements and figures of this report
+python3 writeup/collect.py &amp;&amp; python3 writeup/figs.py                   # measurements and figures (figs.py reads writeup/states/*.txt, or $STATE_G2 / $STATE_G3)
 </code></pre>
-<p>Restart points: <code>states/README.md</code> (a state resumes with <code>rndw --world FILE --steps N --save OUT</code>; <code>SHA256SUMS</code> lists hashes).</p>
+<p>Files <code>run_y_world.py</code> needs: <code>tests/run_y_world.py</code>, <code>tests/run_builder.py</code>, <code>tests/machine_lockstep.py</code>, <code>tools/{hd,hd2asm,ref_flatten,ref_improve,asm,script_world}.py</code>, <code>isa/{common,isahack}.py</code> (+ <code>isa/nl_*.py</code>, <code>nandgen.py</code> for the netlist-level tests), <code>src/{macros,ram,builder,improver}.asm</code>, <code>hd/core_r8.hd</code>, and the built <code>rndw</code>. (<code>script_world.py</code> was vendored from X's <code>isa/</code> on 2026-10-15; before that the script imported it from a hard-coded path outside the tree.) <code>OUT/child.hd</code> (the improved description the ROM should build) is byte-identical to the committed <code>hd/core_r8_improved.hd</code> (checked).
+Restart points: <code>states/README.md</code> (a state resumes with <code>rndw --world FILE --steps N --save OUT</code>; <code>SHA256SUMS</code> lists hashes).</p>
 <h2>10. File index</h2>
 <ul>
 <li><code>HACK_VN_AB.md</code> — the Hack-vN-AB ISA as used by Y (memory map, AP, timing, size, verification).</li>

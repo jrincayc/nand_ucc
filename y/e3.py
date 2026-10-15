@@ -1,6 +1,6 @@
 """E3: record the level-0 core as a cell-instance list and estimate a plain (no tricks) description size."""
 import sys, math, collections
-sys.path.insert(0,'/home/claude/pkg/rndw-stage/isa')
+import os; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'isa'))
 import nandgen as ng
 from nl_core import build_core
 rec=[]; depth=[0]

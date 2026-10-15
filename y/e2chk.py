@@ -1,5 +1,5 @@
 import random, sys
-sys.path.insert(0,'/home/claude/pkg/rndw-stage/isa')
+import os; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'isa'))
 exec(open('e2.py').read().split("for v in (0,1,2):")[0])
 def ev(c, ins, dff):
     v = list(ins)+list(dff)

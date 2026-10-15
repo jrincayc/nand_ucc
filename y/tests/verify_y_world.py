@@ -1,5 +1,5 @@
 """verify_y_world.py -- check a saved RNDW state: generation g (arm origin (0, 140 g)) must equal the reference commands exactly.
-usage: verify_y_world.py STATE HDFILE IMAGE_BIN GEN..."""
+usage: verify_y_world.py STATE G:HDFILE:IMAGE_BIN [G:HDFILE:IMAGE_BIN ...]   (G = generation number)"""
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 for d in ('tools', 'isa', '.'):

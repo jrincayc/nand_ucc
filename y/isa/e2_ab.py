@@ -1,4 +1,4 @@
-import sys; sys.path.insert(0,'/home/claude/y/isa')
+import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import nandgen as ng
 from nl_core import build_core
 # module library: gate lists over inputs 0..n-1, gates appended as signals n, n+1, ...; outs = signal indices

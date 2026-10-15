@@ -198,14 +198,18 @@ Instructions are measured (31.67 M for g1→g2, 25.58 M for g2→g3 in the model
 
 ## 9. Reproduce
 
+Layout assumed (as in the `nandgen_workspace.tar.gz` / the Project): `nandgen/y/` (everything for Y) and `nandgen/rndw/` (the Rust simulator). Needs Python 3 (standard library only) and a Rust toolchain; nothing else. No absolute paths are used any more; the simulator is found at `nandgen/rndw/target/release/rndw` or via `$RNDW`.
+
 ```
+(cd nandgen/rndw && cargo build --release --offline)                    # the simulator, no dependencies
 cd nandgen/y
 python3 tests/test_m5.py && python3 tests/test_m5_improver.py          # model: builder and improver
 python3 tests/test_m6_audit.py && python3 tests/test_m6_behaviour.py    # audits, behaviour
-python3 tests/run_y_world.py hd/core_r8.hd 200000000 OUT                # RNDW run (Rust simulator, ~7 h)
+python3 tests/run_y_world.py hd/core_r8.hd 200000000 OUT                # RNDW run (~7 h; try 300000 first: ~20 s, only checks the build starts)
 python3 tests/verify_y_world.py OUT/final.txt 1:hd/core_r8.hd:OUT/seed.bin 2:hd/core_r8_improved.hd:OUT/child.bin
-python3 writeup/collect.py && python3 writeup/figs.py                   # measurements and figures of this report
+python3 writeup/collect.py && python3 writeup/figs.py                   # measurements and figures (figs.py reads writeup/states/*.txt, or $STATE_G2 / $STATE_G3)
 ```
+Files `run_y_world.py` needs: `tests/run_y_world.py`, `tests/run_builder.py`, `tests/machine_lockstep.py`, `tools/{hd,hd2asm,ref_flatten,ref_improve,asm,script_world}.py`, `isa/{common,isahack}.py` (+ `isa/nl_*.py`, `nandgen.py` for the netlist-level tests), `src/{macros,ram,builder,improver}.asm`, `hd/core_r8.hd`, and the built `rndw`. (`script_world.py` was vendored from X's `isa/` on 2026-10-15; before that the script imported it from a hard-coded path outside the tree.) `OUT/child.hd` (the improved description the ROM should build) is byte-identical to the committed `hd/core_r8_improved.hd` (checked).
 Restart points: `states/README.md` (a state resumes with `rndw --world FILE --steps N --save OUT`; `SHA256SUMS` lists hashes).
 
 ## 10. File index
