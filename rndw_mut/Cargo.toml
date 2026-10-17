@@ -1,0 +1,19 @@
+[package]
+name = "rndw"
+version = "0.1.0"
+edition = "2021"
+description = "RNDW world simulator (std only) -- local copy of nandgen/rndw world.rs + state.rs, plus mutant harness"
+
+[lib]
+name = "rndw"
+path = "src/lib.rs"
+
+[[bin]]
+name = "mutrun"
+path = "src/bin/mutrun.rs"
+
+[dependencies]
+
+[profile.release]
+opt-level = 3
+debug = false

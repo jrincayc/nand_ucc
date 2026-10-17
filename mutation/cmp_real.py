@@ -1,0 +1,12 @@
+import time, emu, pymodel as pm, load
+X = load.X_image(); print('X image', len(X))
+t=time.time(); st, n, m = pm.run(13, 32, X, 20_000_000); print('python X', st, n, len(m.armlog), '%.0fs'%(time.time()-t))
+cmds, rom = pm.decode(m.armlog)
+t=time.time(); r = emu.run(13, 32, X, max_instr=20_000_000, record=True, outcap=1_000_000); print('C X', r.name, r.instr, r.nnon, r.nrom, '%.2fs'%(time.time()-t))
+print('X commands equal:', r.cmds == cmds, ' rom cmds equal count:', r.nrom == len(rom), ' instr equal:', r.instr == n or r.instr==n-1)
+Y = load.Y_image(2)
+t=time.time(); st, n, m = pm.run(15, 256, Y, 2_000_000); print('python Y 2M', st, n, len(m.armlog), '%.0fs'%(time.time()-t))
+cmds, rom = pm.decode(m.armlog)
+r = emu.run(15, 256, Y, max_instr=2_000_000, record=True, outcap=1_000_000)
+print('C Y 2M', r.name, r.instr, r.nnon, r.nrom, ' equal:', r.cmds == cmds, r.nrom == len(rom))
+t=time.time(); r = emu.run(15, 256, Y, max_instr=100_000_000, record=True, outcap=1_000_000); print('C Y full', r.name, r.instr, r.nnon, r.nrom, '%.2fs'%(time.time()-t))
