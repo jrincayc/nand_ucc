@@ -15,6 +15,7 @@ World source (default: an empty world):
   --world FILE             load a saved state (rndp-state 1); its cfg line overrides the parameters below
   --netlist FILE           import a nandgen netlist (inputs become SOURCEs) on a diagonal test layout, 2+ layers
   --vectors FILE           with --netlist: replay a rndw-vectors trace against the Python reference; exit 1 on mismatch
+  --build FILE             apply build commands directly (absolute coordinates; place/track/via/rom), no arm, no ticks
   --script FILE            build things through a driven arm, one register write per tick.  Harness block
                            x 8..13, y 2..10 is reserved.  Lines: place KIND X Y [ROT] [ABITS] | track L AX AY BX BY |
                            via X Y | rom X Y ADDR VAL | nop [N] | idle [N] | source X Y [V]
@@ -58,6 +59,7 @@ fn real_main() -> Result<i32, String> {
     let mut cfg = Config::default();
     let (mut world_f, mut script_f, mut save_f, mut svg_end): (Option<String>, Option<String>, Option<String>, Option<String>) = (None, None, None, None);
     let mut pads_f: Option<String> = None;
+    let mut build_f: Option<String> = None;
     let (mut netlist_f, mut vectors_f): (Option<String>, Option<String>) = (None, None);
     let mut steps: Option<u64> = None;
     let mut o = RunOpts { out_dir: PathBuf::from("."), ..Default::default() };
@@ -73,6 +75,7 @@ fn real_main() -> Result<i32, String> {
             "--world" => world_f = Some(val(&a, &mut i)?.to_string()),
             "--netlist" => netlist_f = Some(val(&a, &mut i)?.to_string()),
             "--vectors" => vectors_f = Some(val(&a, &mut i)?.to_string()),
+            "--build" => build_f = Some(val(&a, &mut i)?.to_string()),
             "--script" => script_f = Some(val(&a, &mut i)?.to_string()),
             "--width" => cfg.width = pn(val(&a, &mut i)?)? as u32,
             "--height" => cfg.height = pn(val(&a, &mut i)?)? as u32,
@@ -133,6 +136,11 @@ fn real_main() -> Result<i32, String> {
         let text = fs::read_to_string(f).map_err(|e| format!("{}: {}", f, e))?;
         let mut d = Driver::install(&mut r.w)?;
         run_script(&mut r, &mut d, &text)?;
+    }
+    if let Some(f) = &build_f {
+        let text = fs::read_to_string(f).map_err(|e| format!("{}: {}", f, e))?;
+        let (ok, bad) = run_build(&mut r.w, &text)?;
+        eprintln!("build: {} commands ok, {} refused", ok, bad);
     }
     let mut mism = 0usize;
     if let Some(f) = &netlist_f {

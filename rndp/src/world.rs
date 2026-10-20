@@ -920,6 +920,8 @@ impl World {
 
     /// One tick: arms act, network re-settles, DFFs and RAMs latch, network settles.
     pub fn step(&mut self) {
+        // Settle first: a world just built (or loaded) has unsettled nets, and the arms must sample settled values (tick 0 fix).
+        self.settle();
         self.run_arms();
         self.settle();
         self.latch();

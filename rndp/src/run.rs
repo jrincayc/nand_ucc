@@ -225,3 +225,37 @@ pub fn run_script(r: &mut Runner, d: &mut Driver, text: &str) -> Result<(), Stri
     }
     Ok(())
 }
+
+/// Apply build commands directly to the world, without a driver arm and without ticks (seed construction / validation).
+/// Same line syntax as `run_script` for place / track / via / rom, absolute coordinates.  Failed commands count as faults.
+pub fn run_build(w: &mut World, text: &str) -> Result<(u64, u64), String> {
+    let (mut ok, mut bad) = (0u64, 0u64);
+    for (n, line) in text.lines().enumerate() {
+        let line = line.split('#').next().unwrap().trim();
+        if line.is_empty() {
+            continue;
+        }
+        let t: Vec<&str> = line.split_whitespace().collect();
+        let num = |i: usize| -> Result<i32, String> {
+            t.get(i).ok_or(format!("build line {}: missing argument", n + 1))?.parse::<i32>().map_err(|e| format!("build line {}: {}", n + 1, e))
+        };
+        let res = match t[0] {
+            "place" => {
+                let k = Kind::from_code(num(1)? as u8).ok_or(format!("build line {}: bad kind", n + 1))?;
+                w.place(k, num(2)?, num(3)?, num(4)? as u8, num(5)? as u32).map(|_| ())
+            }
+            "track" => w.track(num(1)? as u32, (num(2)?, num(3)?), (num(4)?, num(5)?)),
+            "via" => w.via(num(1)?, num(2)?),
+            "rom" => w.program_rom(num(1)?, num(2)?, num(3)? as u64, num(4)? as u8),
+            c => return Err(format!("build line {}: unknown command {}", n + 1, c)),
+        };
+        match res {
+            Ok(()) => ok += 1,
+            Err(e) => {
+                bad += 1;
+                w.fault(format!("build line {}: {}", n + 1, e));
+            }
+        }
+    }
+    Ok((ok, bad))
+}
