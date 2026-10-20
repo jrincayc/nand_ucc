@@ -1,0 +1,21 @@
+glue region: 231 NAND, 281 nets, kinds {'in_any': 51, 'out_any': 34, 'internal': 196}; layers 3
+pitch 3x3 seed 1: area 50x53=2650 failed 31
+pitch 3x3 seed 2: area 50x53=2650 failed 19
+pitch 3x3 seed 3: area 50x53=2650 failed 25
+pitch 3x3 seed 4: area 50x53=2650 failed 18
+pitch 4x3 seed 1: area 57x59=3363 failed 10
+pitch 4x3 seed 2: area 57x59=3363 failed 12
+pitch 4x3 seed 3: area 57x59=3363 failed 2
+pitch 4x3 seed 4: area 57x59=3363 failed 4
+pitch 4x4 seed 1: area 65x69=4485 failed 0
+pitch 4x4 seed 2: area 65x69=4485 failed 2
+pitch 4x4 seed 3: area 65x69=4485 failed 1
+pitch 4x4 seed 4: area 65x69=4485 failed 0
+
+BEST: pitch 4x4 seed 1: 65x69 = 4485 cells (4.85x NAND area), copper length 5139
+class             links  segments  vias  seg/link  via/link
+module-internal     164       301     4      1.84      0.02
+inter-instance      332       784    46      2.36      0.14
+all: links 496, segments 1085, vias 50, explicit bytes (5/seg + 2/via) 5525 = 11.1 per link
+inter-instance nets: 183; median copper cells per link 10.0, max 65.0
+wrote out_glue_L3/routes.json

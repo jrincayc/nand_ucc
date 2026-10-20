@@ -1,0 +1,20 @@
+=== sweep 1: layer count (bend 2, via 6; smallest pitch that routes, best of 10 seeds) ===
+ L  pitch       area x NAND area routed/seeds  segs  vias   len  bytes
+ 2 3x  3 41x31= 1271       3.69x     2/10       346    21  1422   1772
+     checker: PASS: connectivity from geometry equals the netlist; no shorts, no opens
+ 3 3x  3 41x31= 1271       3.69x    10/10       322    11  1387   1632
+     checker: PASS: connectivity from geometry equals the netlist; no shorts, no opens
+ 4 3x  3 41x31= 1271       3.69x    10/10       311     7  1357   1569
+     checker: PASS: connectivity from geometry equals the netlist; no shorts, no opens
+
+=== sweep 2: cost weights at L=2, pitch 4x3, 10 seeds each (segments vs vias trade-off) ===
+bend  via     ok  segs  vias   len  bytes seg/link int seg/link inter
+   0    2  10/10   395    24  1578   2023         1.93           2.94
+   0    6   9/10   394    23  1632   2016         1.99           2.94
+   0   20   8/10   400    12  1604   2024         2.06           2.44
+   2    2   9/10   342    44  1561   1798         1.82           2.38
+   2    6   7/10   341    19  1535   1743         1.81           2.35
+   2   20   7/10   342    17  1543   1744         1.81           2.38
+   6    2   1/10   361   180  1620   2165         1.88           2.47
+   6    6   7/10   343    45  1571   1805         1.80           2.41
+   6   20   8/10   340    20  1551   1740         1.80           2.41

@@ -1,0 +1,125 @@
+instances in body: 426   gates: 2148   NAND: 2092   DFF: 56
+
+gates by group (incl. DFF):
+  alu        710   (DFF 0)
+  pc         393   (DFF 15)
+  areg       367   (DFF 0)
+  addr       285   (DFF 0)
+  ir         107   (DFF 0)
+  decode      79   (DFF 0)
+  dreg        66   (DFF 0)
+  ram         53   (DFF 0)
+  control     38   (DFF 0)
+  a           15   (DFF 15)
+  d            8   (DFF 8)
+  irlo         8   (DFF 8)
+  irhi         5   (DFF 5)
+  st           5   (DFF 5)
+  top          5   (DFF 0)
+  const        4   (DFF 0)
+
+nets with at least one sink: 2150  (external sources: ['ramrd0', 'ramrd1', 'ramrd2', 'ramrd3', 'ramrd4', 'ramrd5', 'ramrd6', 'ramrd7', 'rom0', 'rom1', 'rom2', 'rom3', 'rom4', 'rom5', 'rom6', 'rom7', 'run'])
+sink pads: 4240   driver pads (gates): 2148
+
+fan-out distribution (sink pads per net):
+  1       963
+  2      1037
+  3        33
+  4        60
+  5-8      37
+  9-16      3
+  17+      17
+
+gates with both inputs on one net (nand x x): 1299
+
+net classes (heuristic, by bit-slice index; no placement exists yet):
+  class              nets  sink pads  connections
+  slice-local        1871       2997         2997
+  slice-neighbour      21         84           84
+  broadcast            14        484          484
+  irregular           244        675          675
+  total              2150       4240         4240
+  (connection = one driver-to-sink-pad link; a net with s sinks needs at least s links)
+
+refined: inter-instance nets only (module-internal nets belong to the module template):
+  class              nets  gate links
+  slice-local         270         425
+  slice-neighbour      21          63
+  broadcast            14         336
+  irregular           146         402
+  total               451        1226
+  module-internal nets: 1699 (inside 426 instances; templates: ['and', 'fa', 'ha', 'mux', 'not', 'or'])
+  gates with both inputs on one INTER-instance net (need a pad-to-pad stub): 318
+  irregular inter-instance gate links: 402
+  explicit route bytes ~= links * segments_per_link * bytes_per_segment (parametric, NOT measured)
+    segs/link \ bytes/seg:      4       6       8
+                      2     3216    4824    6432
+                      3     4824    7236    9648
+                      4     6432    9648   12864
+  irregular inter-instance nets by driver group:
+    decode     nets   40  gate links   82
+    control    nets   19  gate links   24
+    ram        nets   17  gate links   28
+    alu        nets   16  gate links   35
+    addr       nets   15  gate links   91
+    ir         nets   13  gate links   13
+    pc         nets    8  gate links    8
+    irlo       nets    6  gate links   18
+    st         nets    5  gate links   57
+    const      nets    3  gate links   39
+    external   nets    2  gate links    4
+    areg       nets    1  gate links    1
+    top        nets    1  gate links    2
+
+irregular nets by group of driver:
+  decode     nets   62  sink pads   128
+  ram        nets   41  sink pads    76
+  control    nets   38  sink pads    60
+  alu        nets   30  sink pads    66
+  pc         nets   17  sink pads    26
+  addr       nets   15  sink pads   122
+  ir         nets   15  sink pads    15
+  irlo       nets    6  sink pads    18
+  st         nets    5  sink pads    84
+  areg       nets    5  sink pads     8
+  top        nets    4  sink pads     6
+  const      nets    3  sink pads    58
+  external   nets    2  sink pads     6
+  dreg       nets    1  sink pads     2
+
+highest fan-out nets (all classes):
+    90  top.or0/g2             broadcast
+    49  reset                  irregular
+    48  st.3                   irregular
+    45  pc.and4/g1             broadcast
+    45  areg.or0/g2            broadcast
+    45  areg.and1/g1           broadcast
+    34  zero                   broadcast
+    26  irlo.6                 broadcast
+    26  irlo.7                 broadcast
+    25  irhi.0                 broadcast
+    25  irhi.1                 broadcast
+    25  irhi.2                 broadcast
+    25  irhi.3                 broadcast
+    25  irhi.4                 broadcast
+    24  dreg.and0/g1           broadcast
+    24  ir.or0/g2              broadcast
+    21  st.1                   irregular
+    16  addr.mux14/g7          irregular
+    11  addr.mux4/g7           irregular
+     9  decode.and9/g1         irregular
+
+irregular connections C = 675
+explicit route bytes ~= C * segments_per_connection * bytes_per_segment   (parametric, NOT measured)
+  segments/conn \ bytes/seg:      4        6        8
+                          2      5400     8100    10800
+                          3      8100    12150    16200
+                          4     10800    16200    21600
+
+--- RAM (32 words x 8 bits, tile ram_word modelled from its structure) ---
+per word: 52 NAND + 8 DFF;  x32: 1664 NAND + 256 DFF
+external pad connections per word: 20;  total 640
+  8 data buses x 32 words, 8 write-select nets x 4 words, 8 read-select nets x 4 words,
+  4 low-select nets x 8 words (2 pads each), and 31 x 8 word-to-word chain links:
+  all described by the chain rules (bcast / pick / prev), i.e. rule-generated.
+  in-word nets with fan-out 8: ['g0', 'g1', 'g3']; per-bit nets fan-out 1-2
