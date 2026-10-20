@@ -1,4 +1,5 @@
 //! rndp command line.  Standard library only.
+use rndp::netlist::{run_vectors, Netlist};
 use rndp::run::*;
 use rndp::world::*;
 use std::fs;
@@ -12,6 +13,8 @@ USAGE: rndp [OPTIONS]
 
 World source (default: an empty world):
   --world FILE             load a saved state (rndp-state 1); its cfg line overrides the parameters below
+  --netlist FILE           import a nandgen netlist (inputs become SOURCEs) on a diagonal test layout, 2+ layers
+  --vectors FILE           with --netlist: replay a rndw-vectors trace against the Python reference; exit 1 on mismatch
   --script FILE            build things through a driven arm, one register write per tick.  Harness block
                            x 8..13, y 2..10 is reserved.  Lines: place KIND X Y [ROT] [ABITS] | track L AX AY BX BY |
                            via X Y | rom X Y ADDR VAL | nop [N] | idle [N] | source X Y [V]
@@ -55,6 +58,7 @@ fn real_main() -> Result<i32, String> {
     let mut cfg = Config::default();
     let (mut world_f, mut script_f, mut save_f, mut svg_end): (Option<String>, Option<String>, Option<String>, Option<String>) = (None, None, None, None);
     let mut pads_f: Option<String> = None;
+    let (mut netlist_f, mut vectors_f): (Option<String>, Option<String>) = (None, None);
     let mut steps: Option<u64> = None;
     let mut o = RunOpts { out_dir: PathBuf::from("."), ..Default::default() };
     let (mut ck, mut ck_n, mut sp, mut sp_n) = (None::<String>, 0u64, None::<String>, 0u64);
@@ -67,6 +71,8 @@ fn real_main() -> Result<i32, String> {
                 return Ok(0);
             }
             "--world" => world_f = Some(val(&a, &mut i)?.to_string()),
+            "--netlist" => netlist_f = Some(val(&a, &mut i)?.to_string()),
+            "--vectors" => vectors_f = Some(val(&a, &mut i)?.to_string()),
             "--script" => script_f = Some(val(&a, &mut i)?.to_string()),
             "--width" => cfg.width = pn(val(&a, &mut i)?)? as u32,
             "--height" => cfg.height = pn(val(&a, &mut i)?)? as u32,
@@ -128,7 +134,20 @@ fn real_main() -> Result<i32, String> {
         let mut d = Driver::install(&mut r.w)?;
         run_script(&mut r, &mut d, &text)?;
     }
-    r.run(steps.unwrap_or(if script_f.is_some() { 0 } else { 1000 }));
+    let mut mism = 0usize;
+    if let Some(f) = &netlist_f {
+        let nl = Netlist::parse(&fs::read_to_string(f).map_err(|e| format!("{}: {}", f, e))?)?;
+        let map = nl.build(&mut r.w)?;
+        if let Some(vf) = &vectors_f {
+            let rep = run_vectors(&mut r.w, &nl, &map, &fs::read_to_string(vf).map_err(|e| format!("{}: {}", vf, e))?)?;
+            println!("vectors: {} ticks, {} comparisons, {} mismatches", rep.ticks, rep.compared, rep.mismatches);
+            for m in &rep.first {
+                println!("  {}", m);
+            }
+            mism = rep.mismatches;
+        }
+    }
+    r.run(steps.unwrap_or(if script_f.is_some() || netlist_f.is_some() { 0 } else { 1000 }));
     for n in &r.notes {
         eprintln!("{}", n);
     }
@@ -159,7 +178,7 @@ fn real_main() -> Result<i32, String> {
         println!("  fault: {}", m);
     }
     eprintln!("wall time {:.2}s", t0.elapsed().as_secs_f64());
-    Ok(0)
+    Ok(if mism > 0 || r.w.faults > 0 && netlist_f.is_some() { 1 } else { 0 })
 }
 
 fn main() {

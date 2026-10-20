@@ -3,7 +3,7 @@
 Robot + NAND + DFF + PCB (+ optional ROM, RAM). Rust, standard library only. Implements `nandgen/RNDP_SPEC.md` v0.3.
 
     cargo build --release
-    cargo test --release          # 16 integration tests
+    cargo test --release          # 20 integration tests
     ./target/release/rndp --help
 
 ## Status (first milestone)
@@ -15,8 +15,12 @@ atomically for TRACK, VIA and PLACE; PLACE onto existing copper; ROM lock; arm i
 `--dump-on-en`, `--checkpoint`, `--snapshot-prefix`; SVG per layer; scripted driver arm; capability flags
 (`--layers`, `--rom`, `--ram`, `--max-rom-addr-bits`, `--max-ram-addr-bits`, default 16 bits, up to 32 with sparse memory).
 
-Not done: netlist import/export, differential test against the Python reference `nandgen.Sim` (needs routed
-netlists), RAM-bit identification in the report, interactive mode, coarse SVG for huge worlds, any replicator.
+Netlist import (`--netlist`, `--vectors`): a nandgen netlist is laid out as real copper on a diagonal test layout
+(every pad gets its own row and column, so shorts are impossible; area-wasteful, for correctness testing only) and
+replayed against `nandgen.Sim` traces. `./diff_test.sh` runs the 7 RNDW designs: 0 mismatches over about 2.9 million
+comparisons at 3000 ticks, and a corrupted-wire control gives 1,264 mismatches.
+
+Not done: netlist export, RAM-bit identification in the report, interactive mode, coarse SVG for huge worlds, any replicator.
 
 ## Cross-check against the router experiment
 
