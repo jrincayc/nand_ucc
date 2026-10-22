@@ -14,7 +14,7 @@ pub fn render(w: &World, window: Option<(i32, i32, i32, i32)>, scale: f64) -> St
     let _ = writeln!(s, "<rect width='100%' height='100%' fill='#fff'/>");
     let cx = |x: i32| (x - x0) as f64 * scale + scale / 2.0;
     let cy = |y: i32| (y - y0) as f64 * scale + scale / 2.0;
-    for p in &w.parts {
+    for (pi, p) in w.parts.iter().enumerate() {
         if p.x + p.w <= x0 || p.x >= x1 || p.y + p.h <= y0 || p.y >= y1 {
             continue;
         }
@@ -26,24 +26,25 @@ pub fn render(w: &World, window: Option<(i32, i32, i32, i32)>, scale: f64) -> St
             Kind::Arm => "#fd8",
             Kind::Source => "#ddd",
         };
+        let nm = match p.kind { Kind::Nand => "nand", Kind::Dff => "dff", Kind::Rom => "rom", Kind::Ram => "ram", Kind::Arm => "arm", Kind::Source => "source" };
         let _ = writeln!(
             s,
-            "<rect x='{:.1}' y='{:.1}' width='{:.1}' height='{:.1}' fill='{}' stroke='#667' stroke-width='0.5'/>",
-            (p.x - x0) as f64 * scale, (p.y - y0) as f64 * scale, p.w as f64 * scale, p.h as f64 * scale, col
+            "<rect id='{}{}' x='{:.1}' y='{:.1}' width='{:.1}' height='{:.1}' fill='{}' stroke='#667' stroke-width='0.5'/>",
+            nm, pi, (p.x - x0) as f64 * scale, (p.y - y0) as f64 * scale, p.w as f64 * scale, p.h as f64 * scale, col
         );
     }
     let sw = (scale * 0.5).max(0.8);
-    for op in &w.log {
+    for (oi, op) in w.log.iter().enumerate() {
         match *op {
             CopperOp::Seg { l, x0: ax, y0: ay, x1: bx, y1: by } => {
                 let _ = writeln!(
                     s,
-                    "<line x1='{:.1}' y1='{:.1}' x2='{:.1}' y2='{:.1}' stroke='{}' stroke-width='{:.1}' stroke-linecap='square' opacity='0.8'/>",
-                    cx(ax), cy(ay), cx(bx), cy(by), LAYER_COL[(l % 8) as usize], sw
+                    "<line id='track{}' x1='{:.1}' y1='{:.1}' x2='{:.1}' y2='{:.1}' stroke='{}' stroke-width='{:.1}' stroke-linecap='square' opacity='0.8'/>",
+                    oi, cx(ax), cy(ay), cx(bx), cy(by), LAYER_COL[(l % 8) as usize], sw
                 );
             }
             CopperOp::Via { x, y } => {
-                let _ = writeln!(s, "<circle cx='{:.1}' cy='{:.1}' r='{:.1}' fill='#fff' stroke='#000' stroke-width='0.8'/>", cx(x), cy(y), scale * 0.35);
+                let _ = writeln!(s, "<circle id='via{}' cx='{:.1}' cy='{:.1}' r='{:.1}' fill='#fff' stroke='#000' stroke-width='0.8'/>", oi, cx(x), cy(y), scale * 0.35);
             }
         }
     }

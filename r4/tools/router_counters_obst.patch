@@ -1,0 +1,63 @@
+--- /home/claude/c3/layout/src/main.rs	2026-10-20 23:30:10.615779557 +0000
++++ /tmp/layout_cnt/src/main.rs	2026-10-21 19:39:43.834407259 +0000
+@@ -83,6 +83,7 @@
+         ml: g("ml", 6.0) as i32, mr: g("mr", 6.0) as i32, seed: g("seed", 1.0) as u64, effort: g("effort", 1.0),
+         via: g("via", 3.0) as i32, turn: g("turn", 2.0) as i32, rom_rot: g("rom_rot", 1.0) as usize, arm_rot: g("arm_rot", 1.0) as usize,
+         ram_rot: g("ram_rot", 1.0) as usize, iters: g("iters", 60.0) as usize, ram_side: g("ram_side", 0.0) as i32, aspect: g("aspect", 1.0), edge: g("edge", 14.0) as i32 };
++    if std::env::var("OBST").is_ok() { OBST.store(true, std::sync::atomic::Ordering::Relaxed); }
+     let nl = read_nl(&a[1]);
+     run(&nl, &cfg, &a[2]);
+ }
+@@ -293,7 +294,8 @@
+             rerouted += 1;
+         }
+         let over = r.occ.iter().filter(|&&o| o > 1).count();
+-        eprintln!("  iter {it}: rerouted {rerouted}, overused cells {over}, pres {:.1} ({:.1}s)", r.pres, t0.elapsed().as_secs_f64());
++        eprintln!("  pops {}", POPS.load(std::sync::atomic::Ordering::Relaxed)); eprintln!("  iter {it}: rerouted {rerouted}, overused cells {over}, pres {:.1} ({:.1}s)", r.pres, t0.elapsed().as_secs_f64());
++        if OBST.load(std::sync::atomic::Ordering::Relaxed) { eprintln!("OBST pass: failed sinks {} of {} pops {}", FAILS.load(std::sync::atomic::Ordering::Relaxed), sinks.len(), POPS.load(std::sync::atomic::Ordering::Relaxed)); std::process::exit(0); }
+         if over == 0 { ok = true; break; }
+         if over < best_over { best_over = over; stagn = 0; } else { stagn += 1; if stagn > 40 { stagn = 6; } }
+         for i in 0..r.occ.len() { if r.occ[i] > 1 { r.hist[i] += 2.0; } }
+@@ -342,6 +344,7 @@
+         }
+     }
+     fs::write(out, o).unwrap();
++    eprintln!("pops {}", POPS.load(std::sync::atomic::Ordering::Relaxed));
+     // extent of copper
+     eprintln!("done: {} tracks {} vias, path cells {}, route time {:.1}s, board {}x{} = {} cells for {} nodes ({:.1}/node)",
+         tracks, vias, cellsum, t0.elapsed().as_secs_f64(), w, h, w * h, n, (w * h) as f64 / n as f64);
+@@ -350,6 +353,9 @@
+ fn net_congested(r: &Router, net: &NetR) -> bool { net.cells.iter().any(|&c| r.occ[c as usize] > 1) }
+ fn rip(r: &mut Router, net: &mut NetR) { for &c in &net.cells { r.occ[c as usize] -= 1; } net.cells.clear(); net.paths.clear(); }
+ 
++static OBST: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
++static FAILS: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
++static POPS: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+ fn route_net(r: &mut Router, net: &mut NetR, sinks: &[((i32, i32), u8)], ni: usize) {
+     let (w, h) = (r.w, r.h);
+     let cell = |l: usize, x: i32, y: i32| -> usize { (l * h + y as usize) * w + x as usize };
+@@ -372,6 +378,7 @@
+         let mut found: Option<u32> = None;
+         while let Some(Reverse((_, g, s))) = heap.pop() {
+             if r.dist[s as usize] != g || r.seen[s as usize] != st { continue; }
++            POPS.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+             let c = (s / 5) as usize; let dir = (s % 5) as usize;
+             let l = c / (w * h); let rem = c % (w * h); let (x, y) = ((rem % w) as i32, (rem / w) as i32);
+             if r.tree[c] == ts && dir != 4 { found = Some(s); break; }
+@@ -397,7 +404,7 @@
+                 }
+             }
+         }
+-        let mut s = match found { Some(s) => s, None => { eprintln!("no path for sink {si} of net {ni}"); std::process::exit(3) } };
++        let mut s = match found { Some(s) => s, None => { if OBST.load(std::sync::atomic::Ordering::Relaxed) { FAILS.fetch_add(1, std::sync::atomic::Ordering::Relaxed); continue; } eprintln!("no path for sink {si} of net {ni}"); std::process::exit(3) } };
+         let mut path: Vec<u32> = vec![];
+         loop { path.push(s); let p = r.prev[s as usize]; if p == u32::MAX { break; } s = p; }
+         path.reverse();       // from sink pad to the tree
+@@ -410,6 +417,7 @@
+ #[inline] fn passable(r: &Router, c: usize, ni: usize, ts: u32) -> bool {
+     let o = r.owner[c];
+     if o != 0 && o != ni as u32 + 1 { return false; }
++    if OBST.load(std::sync::atomic::Ordering::Relaxed) && r.occ[c] as i32 - (if r.tree[c]==ts {1} else {0}) > 0 { return false; }
+     if o != 0 && r.sinkpad[c] >= 0 && r.tree[c] != ts { return false; }     // an unrouted sink pad of this net: not a through route
+     // driver pads have owner = ni+1 and are in the tree; fine
+     true }
