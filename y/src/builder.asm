@@ -1,111 +1,62 @@
-// builder.asm -- the Y builder (flattener): reads the hardware description (hd_data.asm) from ROM and builds a copy of
-// the machine through the arm (PLACE every part, copy the ROM, WIRE everything, wire EN, wire RUN last).  M4, Hack-vN-AB.
-//
-// The program is a direct transcription of ref_flatten.commands() (tools/ref_flatten.py).  Geometry (all coordinates are
-// relative to the arm that issues the command, spec v0.5):
-//     child arm origin (0, STRIDE=140);  child ROM at (0, 149);  core node i at (6+2i, 149), the tie-high NAND is node n_core;
-//     RAM tile k, node j at (6+2k, 153+2j).   NAND pins: A (x,y) B (x,y+1) Y (x+1,y);  DFF pins: D (x,y) Q (x+1,y).
-// Two passes over the same description: MODE 0 places the parts, then the ROM is copied; MODE 1 wires.
-// Registers of the arm: 0,1 A.x  2,3 A.y  4,5 B.x  6,7 B.y  8 KIND  9 ANGLE  10 VAL  15 CMD.  CMD 1 PLACE, 2 WIRE, 3 PROGRAM_ROM.
-//
-// A "source" is 5 bytes: x (2), y (2) of the OUTPUT pin that drives an input, and a flag byte (1 = the RUN line).
-// Subroutines (CALL / RET macros, return address in RA_<name>): rdb add16 put5 lookup decref resolve emit gates.
+// builder.asm -- RNDP Replicator 1 builder: reads the hardware description (hd_data.asm) from ROM and builds a copy of the machine
+// through the arm: PLACE every part, copy the ROM image, wire everything (dedicated-lane layout), wire EN, wire RUN last.
+// It is a direct transcription of ref_flatten.commands() (tools/ref_flatten.py).  All coordinates are relative to the parent's arm;
+// the child's arm is at x = CHILD_DX.  Positions: core node g at (X0+2g, Y0+3g); the tie-high node is node n_core; RAM tile gates
+// follow, gate j of tile k at (XT+2j, Y0+3(n_core+1+TG k+j)), XT = tie_x+8.  NAND pins A (x,y) B (x,y+1) Y (x+1,y); DFF D (x,y) Q (x+1,y).
+// Wiring one sink = TRACK L1 (tc,dr)-(tc,r); VIA (tc,r); TRACK L0 (px,r)-(tc,r); [r != py] TRACK L0 (px,r)-(px,py).
+// Arm registers: 0,1 A.x  2,3 A.y  4,5 B.x  6,7 B.y  8 KIND  9 ANGLE  10 VAL  15 CMD.  CMD 1 PLACE, 3 PROGRAM_ROM, 4 TRACK, 5 VIA.
 
-.equ ARM,     ARM_BASE       // first arm register (ROM_BASE - 16), predefined by the assembler
-.equ NODE_X0, 6              // x of core node 0
-.equ ROW_Y,   149            // y of the core row and of the ROM origin (STRIDE 140 + arm height 9)
-.equ TILE_Y,  153            // y of tile node 0 (ROM origin + 4)
-.equ ARM_Y,   140            // y of the child's arm origin (= STRIDE)
-
-// (the RAM variables are defined in ram.asm)
+.equ ARM,      ARM_BASE      // first arm register
+.equ CHILD_DX, 4700          // x offset of the child's arm
+.equ X0,       10            // x of core node 0 (relative to the arm that owns it)
+.equ Y0,       13            // y of core node 0
 
 // ================================================================================================== main
-// Flow (M5): the child's ROM and arm are placed first; then two phases over the same description.  A phase walks the body once per
-// module type (group TSEL = 0 .. 15); only the instances of type TSEL are placed (phase 0) or wired (phase 1), the other
-// instances are stepped over.  At the start of each group the improver is run on the record of type TSEL; when it improves it,
-// the improved record is in RECB and this group (and only this group) reads that record instead of the one in ROM.
-// Phase 0 also programs each type's record (improved or not) into the child's ROM; the rest of the ROM is copied after the groups.
 start:                       // reset lands here (ROM_BASE)
     SET MODE, 0              // phase 0 places
-    SET TSEL, 16             // no type selected
-    SET IMPR, 0              // no improved record
-    SET PSEL, P              // rdb reads through P
-    SET16 TIEX, 0            // not known before the body has been walked once
-    SET RUNP, RUNS           // next free RUN sink slot
     SET AUH, 0               // add16 addend high byte is 0 between calls
-    SET PB+4, 0              // the pin-base slot is never RUN
-    // ---- the chain record: tile module type and tile count
+    SET RUNP, RUNS           // next free RUN sink slot
+    SET PSEL, P              // rdb reads through P
     SET16 P, hd_chain        // P -> chain record
     CALL rdb                 // D = tile module type
     ST TY8                   // keep it
-    CALL rdb                 // D = number of tiles
-    ST WN                    // index of the LAST tile, W - 1 (W = 256 does not fit a byte)
+    CALL rdb                 // D = index of the last tile (count - 1)
+    ST WN                    // keep
     CALL lookup              // MP = tile record, NIN/NG = its inputs and gates
-    COPY16 TMP, MP           // keep the tile record
+    COPY16 TMP, MP           // keep the tile record address
     LD NIN                   // D = tile inputs
     ST TNIN                  // keep
     LD NG                    // D = tile gates
     ST TG                    // keep
-    // TOUTP = TMP + 4 + 3 * TG  (the list of output signals follows the gates)
-    COPY16 TOUTP, TMP        // start at the record
+    COPY16 TOUTP, TMP        // the output list follows the header (4) and 3 bytes per gate
+    ADDI TOUTP, 4            // skip the header
     LD TG                    // D = TG
     D=D+M                    // D = 2 TG
     D=D+M                    // D = 3 TG
-    @4                       // A = 4
-    D=D+A                    // D = 3 TG + 4
     ST AUL                   // addend low
     SET ADST, TOUTP          // add to TOUTP
     CALL add16               // TOUTP done
-    // RAMX = 7 + 2 (W-1)  (x of the output pins of the last tile column: 6 + 2 (W-1) + 1)
-    SET16 RAMX, 7            // 7
-    SET ADST, RAMX           // add to RAMX
-    LD WN                    // D = W - 1
-    ST AUL                   // addend low
-    CALL add16               // RAMX = 7 + (W-1)
-    LD WN                    // D = W - 1 (add16 does not keep AUL)
-    ST AUL                   // addend low
-    CALL add16               // RAMX = 7 + 2 (W-1)  (a 16-bit sum: 2 W can exceed 255)
-
+    LD AUL                   // D = 3 TG (add16 does not change AUL)
+    D=-D                     // D = -3 TG (low byte)
+    ST TG3N                  // low byte of -3 TG
+    SET TG3N+1, 255          // high byte: -3 TG is negative
     // ---- place the child's ROM and arm first (PROGRAM_ROM needs the ROM; nothing is wired before phase 1)
-    WRK 0, 0                 // A.x low = 0 (ROM at x = 0)
-    WRK 1, 0                 // A.x high
-    WRK 2, ROW_Y             // A.y low = 149
-    WRK 3, 0                 // A.y high
+    WR16 0, CHILD_DX-15      // A.x = x of the ROM origin
+    WR16 2, 0                // A.y = 0
     WRK 8, 2                 // KIND = ROM
-    WRK 9, 0                 // ANGLE = 0
+    WRK 9, 1                 // ANGLE = 1 (rotated)
+    WRK 10, AB-1             // VAL = number of ROM address bits
     WRK 15, 1                // CMD = PLACE
-    WRK 2, ARM_Y             // A.y low = 140 (the child's arm)
+    WR16 0, CHILD_DX         // A.x = x of the child's arm
     WRK 8, 3                 // KIND = ARM
+    WRK 10, 0                // VAL = 0
     WRK 15, 1                // CMD = PLACE
+    WRK 9, 0                 // ANGLE = 0 for every NAND and DFF
 
-phase:                       // ---- start of a phase: all groups
-    SET TSEL, 0              // first type
-group:
-    LD TSEL                  // D = type
-    @16                      // A = 16
-    D=D-A                    // D = TSEL - 16
-    IFGE phase_done          // all types done
-    LD TSEL                  // D = type
-    DBL                      // D = 2 * type
-    @hd_dir                  // A = directory (aligned)
-    A=D+A                    // A = slot
-    A=A+1                    // A = slot + 1 (high byte of the record address; 0 = empty slot)
-    D=M                      // D = it
-    IFEQ group_next          // no such type
-    LD TSEL                  // D = type
-    ST ITY                   // the improver works on this type
-    CALL improve_type        // IMPR, RECB, RECN   (clobbers every temporary; the persistent block survives)
-    @MODE                    // A = &MODE
-    D=M                      // D = phase
-    IFNE no_prog             // phase 1: the ROM is already programmed
-    CALL progrec             // PROGRAM_ROM the record of this type
-no_prog:
-    SET PSEL, P              // rdb reads through P
-    SET PB+4, 0              // the pin-base slot is never RUN
-    SET AUH, 0               // add16 addend high byte
+phase:                       // ---- start of a phase: the core body
     SET16 P, hd_body         // P -> first instance
-    SET16 NB, NODE_X0        // node 0 is at x = 6 ...
-    SET16 NB+2, ROW_Y        // ... y = 149
+    SET16 CX, CHILD_DX+X0    // node 0 ...
+    SET16 CY, Y0             // ... at (CHILD_DX + X0, Y0)
 inst_next:                   // ---- next body instance
     SET PSEL, P              // read through P
     CALL rdb                 // D = type (0xFF = END)
@@ -113,234 +64,184 @@ inst_next:                   // ---- next body instance
     D=D+1                    // 0xFF + 1 = 0 -> END
     IFEQ body_end            // leave the loop at END
     CALL lookup              // MP, NIN, NG for this type; GP -> first gate
-    LD TY8                   // D = type of this instance
-    @TSEL                    // A = &TSEL
-    D=D-M                    // zero when it is the type of this group
-    IFEQ inst_sel            // ours
-    CALL skiprefs            // not ours: step over its references ...
-    LD NG                    // D = its slots
-    DBL                      // D = 2 * slots
-    ST AUL                   // addend low
-    SET ADST, NB             // x of the next instance ...
-    CALL add16               // ... = x + 2 * slots
+    SET PSEL, P              // back to P
+    COPY16 RP, P             // the references of this instance start here
+    CALL skiprefs            // step P over them
+    COPY16 BX, CX            // base: output pin of the instance's first node ...
+    ADDI BX, 1               // ... x + 1
+    COPY16 BY, CY            // ... y
+    SET WALK, 0              // a core instance
+    CALL gates               // place or wire every gate of the instance
     GOTO inst_next           // next instance
-inst_sel:
-    @IMPR                    // A = &IMPR
-    D=M                      // D = 1 when the record of this type was improved
-    IFEQ inst_rec            // no: gates come from ROM
-    SET16 GP, RECB+4         // yes: gates come from the improved record in RAM (same format)
-inst_rec:
+
+body_end:                    // END of the body: CX, CY = position of the tie-high node
     @MODE                    // A = &MODE
     D=M                      // D = phase
-    IFNE inst_decode         // phase 1: wire, which needs the sources
-    CALL skiprefs            // phase 0: only place; the references are not needed
-    GOTO inst_walk           // go
-inst_decode:
-    // reference base: XR = x of the output pin of the instance's first node = NB.x + 1 (NB.x is even)
-    LD NB                    // D = NB.x low
-    @1                       // A = 1
-    D=D|A                    // D = NB.x low | 1
-    ST XR                    // XR.low
-    LD NB+1                  // D = NB.x high
-    ST XR+1                  // XR.high
-    // decode the input references into SRC[0..NIN-1]
-    SET RESP, SRC            // results are written starting at SRC
-    LD NIN                   // D = number of inputs
-    ST SN                    // loop counter
-src_loop:                    // for each input reference
-    LD SN                    // D = refs left
-    IFEQ src_done            // none left
-    CALL decref              // decode one reference into the slot at RESP (RESP advances by 5)
-    @SN                      // A = &SN
-    M=M-1                    // one less
-    GOTO src_loop            // next
-src_done:
-    COPY16 PB, XR            // pin base: x of the output pin of node 0 ...
-    COPY16 PB+2, NB+2        // ... and its y
-inst_walk:
-    SET WALK, 0              // walking a core instance
-    COPY16 CUR, NB           // current node = first node
-    COPY16 CUR+2, NB+2       // (y)
-    CALL gates               // place or wire every gate of the instance
-    COPY16 NB, CUR           // the next instance starts where this one ended
-    GOTO inst_next           // next instance
-
-body_end:                    // END of the body reached
-    COPY16 TIEX, NB          // TIEX = x of the tie-high node (the same in every walk)
-group_next:
-    @TSEL                    // A = &TSEL
-    M=M+1                    // next type
-    GOTO group               // go
-
-phase_done:                  // ---- all groups done: the tie-high node and the RAM tiles
-    COPY16 NB, TIEX          // the tie-high node is at the end of the core row ...
-    SET16 NB+2, ROW_Y        // ... y = 149
-    @MODE                    // A = &MODE
-    D=M                      // D = pass
-    IFNE no_tie              // wiring phase: the tie node needs no command
+    IFNE tiles_start         // wire pass: the tie node is already known and placed
+    COPY16 TIEX, CX          // output pin of the tie node: x + 1
+    ADDI TIEX, 1             // ... x + 1
+    COPY16 TIEY, CY          // ... y
     SET EK, 0                // the tie-high node is a NAND with unconnected inputs
-    COPY16 CUR, NB           // at the end of the core row
-    COPY16 CUR+2, NB+2       // (y)
     CALL emit                // PLACE it
-no_tie:
-    // ---- the RAM tiles: one column per byte, tile k at x = 6 + 2k.  Chain references are relative to the tie node.
-    LD TIEX                  // D = TIEX.low (even)
-    @1                       // A = 1
-    D=D|A                    // + 1: output pin of the tie node
-    ST XR                    // XR.low
-    LD TIEX+1                // D = TIEX.high
-    ST XR+1                  // XR.high
+tiles_start:                 // ---- the RAM tiles, stacked in y: tile k gate j at (XT + 2j, y of global node n_core + 1 + TG k + j)
+    COPY16 CY, TIEY          // y of the tie node
+    ADDI CY, 3               // y of tile 0, gate 0
     SET KT, 0                // tile 0
-    SET16 NB, NODE_X0        // column 0 is at x = 6 ...
-    SET16 NB+2, TILE_Y       // ... starting at y = 153
-tile_loop:                   // for k = 0 .. W-1 (the test for the last tile is at the end: k = 255 is a valid index)
+tile_loop:
+    COPY16 CX, TIEX          // XT = tie_x + 8 = TIEX + 7 (columns are reused by every tile)
+    ADDI CX, 7               // x of gate 0
+    @MODE                    // A = &MODE
+    D=M                      // D = phase
+    IFNE tl_nolog            // wire pass: LY0 is known
+    LD KT                    // D = k
+    @WN                      // A = &WN
+    D=D-M                    // zero for the last tile
+    IFNE tl_nolog            // not the last
+    COPY16 LY0, CY           // y of gate 0 of the last tile
+tl_nolog:
+    COPY16 BX, CX            // base: output pin of gate 0
+    ADDI BX, 1               // x + 1
+    COPY16 BY, CY            // y
     COPY16 GP, TMP           // GP -> tile record
-    ADDI GP, 4               // skip the 4 header bytes: GP -> first gate
+    ADDI GP, 4               // skip the header: GP -> first gate
     LD TNIN                  // D = tile inputs
     ST NIN                   // (resolve compares signals with NIN)
     LD TG                    // D = tile gates
     ST NG                    // gates to do
-    LD NB                    // D = column x low (even)
-    @1                       // A = 1
-    D=D|A                    // + 1 = x of the tile's output pins
-    ST PB                    // PB.x low
-    LD NB+1                  // D = column x high
-    ST PB+1                  // PB.x high
-    COPY16 PB+2, NB+2        // PB.y = y of tile node 0
-    SET WALK, 1              // walking a tile
-    COPY16 CUR, NB           // current node = node 0 of the column
-    COPY16 CUR+2, NB+2       // (y)
+    SET WALK, 1              // a tile
     CALL gates               // place or wire the gates of the tile
     LD KT                    // D = k
     @WN                      // A = &WN
-    D=D-M                    // zero after the last tile (an equality test: safe for k >= 128)
+    D=D-M                    // zero after the last tile
     IFEQ tiles_done          // all tiles done
     @KT                      // A = &KT
     M=M+1                    // next tile
-    ADDI NB, 2               // next column: x += 2
     GOTO tile_loop           // continue
 
 tiles_done:
     @MODE                    // A = &MODE
-    D=M                      // D = pass
-    IFNE pass2_tail          // wiring phase: ports, EN and RUN remain
-    // ---- end of phase 0: copy the rest of the ROM image.  The record area (hd_mods .. hd_mods_end) was programmed type by type.
-    // PROGRAM_ROM: A = ROM origin, B.x = address, VAL = byte; zero bytes are skipped (unprogrammed cells read 0)
-    WRK 0, 0                 // A.x low = 0 (ROM at x = 0)
-    WRK 1, 0                 // A.x high
-    WRK 2, ROW_Y             // A.y = 149 (origin of the ROM)
-    WRK 3, 0                 // A.y high
+    D=M                      // D = phase
+    IFNE wiring_tail         // wire pass: ports and RUN remain
+    // ---- end of phase 0: copy the ROM image (program ROM before anything is wired).  Zero bytes need no command.
+    WR16 0, CHILD_DX-15      // A.x = x of the child's ROM origin
+    WR16 2, 0                // A.y = 0
     SET16 CA, 0              // ROM offset 0
     SET16 P, ROM_BASE        // read pointer = start of this ROM
     SET PSEL, P              // rdb reads through P
-rom_loop:                    // for every ROM address
-    LD P+1                   // D = read pointer high
-    @hi(hd_mods)             // A = high byte of the start of the record area
-    D=D-A                    // zero when in that page
-    IFNE rom_go              // no
-    LD P                     // D = read pointer low
-    @lo(hd_mods)             // A = low byte of the start of the record area
-    D=D-A                    // zero at the start of the record area
-    IFNE rom_go              // no
-    SET16 P, hd_mods_end     // jump over the record area ...
-    LD P                     // ... the offset follows: CA.low = P.low
-    ST CA                    // store
-    LD P+1                   // D = P.high
-    @hi(ROM_BASE)            // A = ROM_BASE high byte
-    D=D-A                    // D = offset high
-    ST CA+1                  // CA.high
-rom_go:
+rom_loop:                    // for every ROM address up to hd_end
     CALL rdb                 // D = ROM byte at P; P += 1
-    ST VALV                  // keep it
+    ST T0                    // keep it
     IFEQ rom_skip            // zero: nothing to program
     WRA 4, CA                // B.x low = offset
     WRA 5, CA+1              // B.x high
-    WRA 10, VALV             // VAL = byte
+    WRA 10, T0               // VAL = byte
     WRK 15, 3                // CMD = PROGRAM_ROM
 rom_skip:
     INC16 CA                 // next offset
-    LD CA+1                  // D = offset high
-    @hi(ROM_BASE)            // A = high byte of the ROM size (ROM_BASE = 2^(AB-1) = the ROM size)
-    D=D-A                    // zero when the offset reached the end
+    LD P                     // D = pointer low
+    @lo(hd_end)              // A = low byte of the end
+    D=D-A                    // zero at the end
     IFNE rom_loop            // more to do
+    LD P+1                   // D = pointer high
+    @hi(hd_end)              // A = high byte of the end
+    D=D-A                    // zero at the end
+    IFNE rom_loop            // more to do
+    // ---- RAM read bits: extend the real pin of output 8+c of the last tile to the out column, with a via
+    SET NP, 0                // c = 0
+ext_loop:
+    COPY16 SP, TOUTP         // SP -> output list of the tile
+    LD NP                    // D = c
+    @8                       // A = 8
+    D=D+A                    // D = 8 + c
+    ST AUL                   // addend low
+    SET ADST, SP             // add to SP
+    CALL add16               // SP -> outs[8 + c]
+    SET PSEL, SP             // read through SP
+    CALL rdb                 // D = output signal
+    @TNIN                    // A = &TNIN
+    D=D-M                    // D = gate index g' in the tile
+    ST T0                    // T = g'
+    SET T1, 0                // (high byte 0)
+    SET PSEL, P              // back to P
+    CALL dist                // U = 2 g', V = 3 g'
+    COPY16 DR, LY0           // y of gate 0 of the last tile
+    ADDV DR, V               // y of the gate
+    COPY16 TC, TIEX          // tie output pin x
+    ADDI TC, 8               // ... + 8
+    ADDV TC, U               // x of the real pin: TIEX + 8 + 2 g'
+    WRA 0, TC                // A.x
+    WRA 1, TC+1              // A.x high
+    WRA 2, DR                // A.y
+    WRA 3, DR+1              // A.y high
+    COPY16 TC, TIEX          // out column: XR = TIEX + 131
+    ADDI TC, 131             // ... + 131
+    LD NP                    // D = c
+    ST AUL                   // addend low
+    SET ADST, TC             // add to TC
+    CALL add16               // TC = XR + c
+    WRA 4, TC                // B.x
+    WRA 5, TC+1              // B.x high
+    WRA 6, DR                // B.y
+    WRA 7, DR+1              // B.y high
+    WRK 10, 0                // layer 0
+    WRK 15, 4                // CMD = TRACK
+    WRA 0, TC                // A.x = out column
+    WRA 1, TC+1              // A.x high
+    WRK 15, 5                // CMD = VIA (A.y is still the pin row)
+    @NP                      // A = &NP
+    M=M+1                    // next c
+    D=M                      // D = c
+    @8                       // A = 8
+    D=D-A                    // zero after c = 7
+    IFNE ext_loop            // more
     SET MODE, 1              // phase 1: wiring
     GOTO phase               // walk everything again
 
-
-pass2_tail:                  // ---- ports, then EN (the last port), then RUN
+wiring_tail:                 // ---- ports (EN last), then RUN
     SET16 P, hd_ports        // P -> ports record
+    SET PSEL, P              // read through P
     CALL rdb                 // D = number of ports
     ST NP                    // ports left
 port_loop:                   // for each port
     LD NP                    // D = ports left
     IFEQ ports_done          // none
-    SET RESP, IN             // decref result goes to IN
-    CALL decref              // IN = source pin of this port
-    CALL rdb                 // D = sink pin x
-    ST T0                    // keep
-    CALL rdb                 // D = sink pin y
-    ST T1                    // keep
-    WRA 0, IN                // A.x low = source x low
-    WRA 1, IN+1              // A.x high
-    WRA 2, IN+2              // A.y low
-    WRA 3, IN+3              // A.y high
-    WRA 4, T0                // B.x low = sink x
-    WRK 5, 0                 // B.x high = 0
-    WRA 6, T1                // B.y low = sink y
-    WRK 7, 0                 // B.y high = 0
-    WRK 15, 2                // CMD = WIRE
+    SET PSEL, P              // read through P
+    CALL decref              // driver of the port: relative to the tie node, or absolute
+    CALL addtie              // make it absolute
+    SET PSEL, P              // back to P
+    CALL rdb                 // D = sink pad x + 32
+    ST PX                    // keep
+    SET PX+1, 0              // high byte
+    ADDK PX, CHILD_DX-32     // x in the parent's frame
+    CALL rdb                 // D = sink pad y + 32
+    ST PY                    // keep
+    SET PY+1, 0              // high byte
+    ADDK PY, 65536-32        // y
+    CALL rdb                 // D = lane row + 32
+    ST RR                    // keep
+    SET RR+1, 0              // high byte
+    ADDK RR, 65536-32        // row
+    CALL wire_sink           // wire it
     @NP                      // A = &NP
     M=M-1                    // one less
-    GOTO port_loop           // next port
+    GOTO port_loop           // next
 ports_done:
-    // RUN wires last: from the output pin of the tie node to every recorded sink pin
-    LD TIEX                  // D = tie node x low
-    @1                       // A = 1
-    D=D|A                    // + 1 = output pin of the tie node
-    ST TY                    // TY = its x low (TY reused as scratch)
-    LD TIEX+1                // D = tie node x high
-    ST TY+1                  // TY.high
-    SET RUNN, RUNS           // read pointer = first recorded sink
+    SET NP, RUNS             // read pointer = first recorded RUN sink
 run_loop:                    // for each recorded sink
-    LD RUNN                  // D = read pointer
+    LD NP                    // D = read pointer
     @RUNP                    // A = &write pointer
     D=D-M                    // zero when all sinks have been wired
     IFEQ halt                // done
-    WRA 0, TY                // A.x low = tie output pin x low
-    WRA 1, TY+1              // A.x high
-    WRK 2, ROW_Y             // A.y low = 149
-    WRK 3, 0                 // A.y high
-    @RUNN                    // A = &read pointer
-    A=M                      // A = address of the sink's x low
-    D=M                      // D = x low
-    @ARM+4                   // A = B.x low register
-    M=D                      // write it
-    @RUNN                    // A = &read pointer
-    A=M+1                    // A = address of x high
-    D=M                      // D = x high
-    @ARM+5                   // A = B.x high register
-    M=D                      // write it
-    @RUNN                    // A = &read pointer
-    D=M                      // D = read pointer
-    @2                       // A = 2
-    A=D+A                    // A = address of y low
-    D=M                      // D = y low
-    @ARM+6                   // A = B.y low register
-    M=D                      // write it
-    @RUNN                    // A = &read pointer
-    D=M                      // D = read pointer
-    @3                       // A = 3
-    A=D+A                    // A = address of y high
-    D=M                      // D = y high
-    @ARM+7                   // A = B.y high register
-    M=D                      // write it
-    WRK 15, 2                // CMD = WIRE
-    @RUNN                    // A = &read pointer
-    D=M                      // D = read pointer
-    @4                       // A = 4
-    D=D+A                    // + 4 bytes per sink
-    @RUNN                    // A = &read pointer
-    M=D                      // store
+    LD NP                    // D = read pointer
+    ST SPT                   // source of the copy
+    SET DPT, PX              // destination = PX, PY, RR
+    SET SK, 6                // 6 bytes
+    CALL copyb               // restore the sink
+    LD SPT                   // D = new read pointer
+    ST NP                    // keep
+    COPY16 TC, TIEX          // the driver is the tie node's output pin
+    COPY16 DR, TIEY          // ... y
+    CALL wire_sink           // wire it
     GOTO run_loop            // next sink
 halt:                        // finished: the child is built; the model's halt convention
     @halt                    // A = &halt
@@ -368,7 +269,7 @@ rdb_done:
     D=M                      // D = the byte
     RET rdb                  // return
 
-add16:                       // the 16-bit variable at RAM address ADST += (AUH:AUL), unsigned wrap-around; AUH is cleared
+add16:                       // the 16-bit variable at RAM address ADST += (AUH:AUL), mod 2^16; AUH is cleared
     @ADST                    // A = &ADST
     A=M                      // A = address of the variable (low byte)
     D=M                      // D = its low byte
@@ -419,95 +320,52 @@ add16_nc:
     M=0                      // addend high is 0 again for the next caller
     RET add16                // return
 
-put5:                        // copy 5 bytes from RAM[SPT..] to RAM[RESP..]; RESP += 5
-    SET SK, 5                // five bytes
-put5_loop:
+dist:                        // T (16-bit signed, nodes) -> U = 2 T, V = 3 T
+    COPY16 U, T0             // U = T
+    ADDV U, T0               // U = 2 T
+    COPY16 V, U              // V = 2 T
+    ADDV V, T0               // V = 3 T
+    RET dist                 // return
+
+copyb:                       // copy SK bytes from RAM[SPT..] to RAM[DPT..]; both pointers advance
     @SPT                     // A = &SPT
     A=M                      // A = source byte address
     D=M                      // D = the byte
-    PUT RESP                 // store it at the destination and advance RESP
+    PUT DPT                  // store it at the destination and advance DPT
     @SPT                     // A = &SPT
     M=M+1                    // next source byte
     @SK                      // A = &SK
     M=M-1                    // one less
     D=M                      // D = bytes left
-    IFNE put5_loop           // repeat
-    RET put5                 // return
+    IFNE copyb               // repeat
+    RET copyb                // return
 
-skiprefs:                    // step over the NIN reference bytes of the current instance at P (no decoding)
-    SET PSEL, P              // read through P
-    LD NIN                   // D = references
-    ST SN                    // loop counter
-sk_loop:
-    LD SN                    // D = references left
-    IFEQ sk_done             // none
+skip1:                       // step over one reference at the pointer in PSEL (1 byte, or 3 for 0xFD / 0xFE)
     CALL rdb                 // D = reference byte
     @3                       // A = 3
     D=D+A                    // D = byte + 3 (mod 256): 0 for 0xFD, 1 for 0xFE
     IFEQ sk_far              // 0xFD: two more bytes follow
-    D=D-1                    // 1 for 0xFE
-    IFNE sk_next             // an ordinary one-byte reference
+    D=D-1                    // 0 for 0xFE
+    IFNE sk_done             // an ordinary one-byte reference
 sk_far:
     CALL rdb                 // distance low
     CALL rdb                 // distance high
-sk_next:
+sk_done:
+    RET skip1                // return
+
+skiprefs:                    // step P over the NIN references of the current instance
+    SET PSEL, P              // read through P
+    LD NIN                   // D = references
+    ST SN                    // loop counter
+sr_loop:
+    LD SN                    // D = references left
+    IFEQ sr_done             // none
+    CALL skip1               // one reference
     @SN                      // A = &SN
     M=M-1                    // one less
-    GOTO sk_loop             // next
-sk_done:
+    GOTO sr_loop             // next
+sr_done:
     RET skiprefs             // return
-
-progrec:                     // PROGRAM_ROM the record of type TSEL into the child at the same ROM address (the improved record when IMPR)
-    LD TSEL                  // D = type
-    ST TY8                   // lookup works on TY8
-    CALL lookup              // MP = record in ROM, NG = its slots, NOUT = its outputs
-    @IMPR                    // A = &IMPR
-    D=M                      // D = 1 when improved
-    IFEQ pg_rom              // no
-    LD RECN                  // D = length of the improved record
-    ST PL                    // bytes to program
-    SET16 GP, RECB           // source = the improved record in RAM
-    GOTO pg_go               // go
-pg_rom:
-    LD NG                    // D = slots (the extent of the record is fixed: 4 + 3 slots + outputs)
-    D=D+M                    // 2 slots
-    D=D+M                    // 3 slots
-    @4                       // A = 4
-    D=D+A                    // + 4 header bytes
-    @NOUT                    // A = &NOUT
-    D=D+M                    // + outputs
-    ST PL                    // bytes to program
-    COPY16 GP, MP            // source = the record in ROM
-pg_go:
-    LD MP                    // D = record address low
-    ST CA                    // ROM offset low
-    LD MP+1                  // D = record address high
-    @hi(ROM_BASE)            // A = ROM_BASE high byte
-    D=D-A                    // D = offset high
-    ST CA+1                  // ROM offset high
-    WRK 0, 0                 // A.x low = 0 (ROM at x = 0)
-    WRK 1, 0                 // A.x high
-    WRK 2, ROW_Y             // A.y = 149
-    WRK 3, 0                 // A.y high
-    SET PSEL, GP             // read the source through GP
-pg_loop:
-    LD PL                    // D = bytes left
-    IFEQ pg_done             // none
-    CALL rdb                 // D = next byte
-    ST VALV                  // keep
-    IFEQ pg_skip             // zero: nothing to program
-    WRA 4, CA                // B.x low = offset
-    WRA 5, CA+1              // B.x high
-    WRA 10, VALV             // VAL = byte
-    WRK 15, 3                // CMD = PROGRAM_ROM
-pg_skip:
-    INC16 CA                 // next offset
-    @PL                      // A = &PL
-    M=M-1                    // one byte less
-    GOTO pg_loop             // next
-pg_done:
-    SET PSEL, P              // back to P
-    RET progrec              // return
 
 lookup:                      // TY8 = type -> MP = its record, NIN, NG from the header, GP -> first gate
     LD TY8                   // D = type
@@ -528,24 +386,21 @@ lookup:                      // TY8 = type -> MP = its record, NIN, NG from the 
     CALL rdb                 // flags (ignored)
     CALL rdb                 // n_in
     ST NIN                   // inputs
-    CALL rdb                 // n_out
-    ST NOUT                  // keep (progrec needs the record length)
+    CALL rdb                 // n_out (ignored)
     CALL rdb                 // n_gates
     ST NG                    // gates
     SET PSEL, P              // back to P
     RET lookup               // return
 
-decref:                      // decode one reference at P (format: hd2asm.py header); relative to XR; 5-byte result at RESP
-    SET PSEL, P              // read through P
+decref:                      // decode one reference at the pointer in PSEL.  RFL = 0: relative, U/V valid (node offset from the base
+                             // node); 1: absolute site in TC/DR; 2: RUN (absolute site of the tie node, wired last)
     CALL rdb                 // D = reference byte
     ST DB                    // keep it
     IFLT dec_big             // 0x80 and above: special sources
-    DBL                      // 1..127: node b back; D = 2b
-    D=!D                     // ~(2b), low byte
-    ST AUL                   // addend low
-    SET AUH, 255             // addend high (the 16-bit value is ~(2b))
-    SET BK, 1                // backward: add 1 afterwards  (x = XR + ~(2b) + 1 = XR - 2b)
-    GOTO dec_core            // do the arithmetic
+    D=-D                     // 1..127: node b back; T = -b
+    ST T0                    // T low
+    SET T1, 255              // T high (negative)
+    GOTO dec_rel             // go
 dec_big:
     LD DB                    // D = reference byte
     @127                     // A = 0x7F
@@ -562,153 +417,147 @@ dec_big:
     D=D-A                    // D = EV - 18
     IFLT dec_ramrd           // EV 10..17: RAM read bit EV-10
     LD EV                    // D = EV
-    @125                     // A = 125 (0xFD)
+    @125                     // A = 0x7D
     D=D-A                    // D = EV - 125
-    IFEQ dec_far_back        // 0xFD: far backward
-    SET BK, 0                // 0xFE: far forward
-    GOTO dec_far             // read the 16-bit distance
-dec_far_back:
-    SET BK, 1                // backward
-dec_far:
-    CALL rdb                 // D = distance low byte
-    ST T0                    // keep
-    CALL rdb                 // D = distance high byte
-    ST T1                    // keep
-    LD T0                    // D = distance low
-    DBL                      // D = 2 * low (mod 256)
-    ST AUL                   // addend low
-    LD T1                    // D = distance high
-    DBL                      // D = 2 * high
-    ST AUH                   // addend high (carry from the low byte follows)
-    LD T0                    // D = distance low
-    IFGE far_nc              // low byte < 128: doubling did not carry
-    @AUH                     // A = &AUH
-    M=M+1                    // carry into the high byte
-far_nc:
-    LD BK                    // D = 1 when backward
-    IFEQ dec_core            // forward: addend is 2d
-    LD AUL                   // backward: one's complement of 2d
+    IFEQ dec_fback           // 0xFD: far backward
+    CALL rdb                 // 0xFE: distance low
+    ST T0                    // T low
+    CALL rdb                 // distance high
+    ST T1                    // T high
+    GOTO dec_rel             // go
+dec_fback:
+    CALL rdb                 // distance low
     D=!D                     // ~low
-    ST AUL                   // store
-    LD AUH                   // D = high
+    ST T0                    // T low
+    CALL rdb                 // distance high
     D=!D                     // ~high
-    ST AUH                   // store
-dec_core:                    // RX = XR + (AUH:AUL) (+1 when backward)
-    COPY16 RX, XR            // start from the reference pin
-    SET ADST, RX             // add to RX
-    CALL add16               // RX += addend
-    LD BK                    // D = 1 when backward
-    IFEQ dec_core2           // forward: done
-    ADDI RX, 1               // two's complement: ~v + 1
-dec_core2:
-    SET16 RY, ROW_Y          // core nodes are on the core row
-    SET RFL, 0               // not RUN
-    GOTO dec_out             // store the result
-dec_rom:                     // ROM data pin EV: at (1, 149 + EV)
-    SET16 RX, 1              // x = 1 (ROM at x = 0, data pins in column 1)
-    @ROW_Y                   // A = 149
-    D=A                      // D = 149
+    ST T1                    // T high
+    INC16 T0                 // T = -distance
+dec_rel:
+    CALL dist                // U = 2 T, V = 3 T
+    SET RFL, 0               // relative
+    RET decref               // return
+dec_rom:                     // ROM data bit EV: site (CHILD_DX - 2 - EV, 1)
+    @lo(CHILD_DX-2)          // A = low byte of the x of data bit 0
+    D=A                      // D = it
     @EV                      // A = &EV
-    D=D+M                    // D = 149 + EV
-    ST RY                    // RY.low
-    SET RY+1, 0              // RY.high
-    SET RFL, 0               // not RUN
-    GOTO dec_out             // store the result
+    D=D-M                    // D = low byte of x (no borrow: the low byte is large)
+    ST TC                    // TC low
+    SET TC+1, hi(CHILD_DX-2) // TC high
+    SET16 DR, 1              // y = 1
+    SET RFL, 1               // absolute
+    RET decref               // return
 dec_tie:
-    SET RFL, 0               // tie-high node
-    GOTO dec_tp              // share the pin computation
+    SET RFL, 1               // absolute
+    GOTO dec_tp              // share the site
 dec_run:
-    SET RFL, 1               // RUN: same pin as the tie node, but wired last
+    SET RFL, 2               // RUN: the same site, wired last
 dec_tp:
-    LD TIEX                  // D = tie node x low
-    @1                       // A = 1
-    D=D|A                    // + 1: its output pin
-    ST RX                    // RX.low
-    LD TIEX+1                // D = high
-    ST RX+1                  // RX.high
-    SET16 RY, ROW_Y          // on the core row
-    GOTO dec_out             // store the result
-dec_ramrd:                   // RAM read bit j = EV - 10: output signal outs[8 + j] of the last tile
-    COPY16 TP, TOUTP         // TP -> list of tile output signals
+    COPY16 TC, TIEX          // tie output pin x
+    COPY16 DR, TIEY          // y
+    RET decref               // return
+dec_ramrd:                   // RAM read bit c = EV - 10: output 8 + c of the last tile
+    COPY16 SP, TOUTP         // SP -> output list
     LD EV                    // D = EV
     @2                       // A = 2
-    D=D-A                    // D = EV - 2 = 8 + j
+    D=D-A                    // D = 8 + c
     ST AUL                   // addend low
-    SET ADST, TP             // add to TP
-    CALL add16               // TP -> outs[8 + j]
-    SET PSEL, TP             // read through TP
-    CALL rdb                 // D = output signal number
-    ST T0                    // keep
-    SET PSEL, P              // back to P
-    COPY16 RX, RAMX          // x of the last tile column's output pins
-    LD T0                    // D = signal
+    SET ADST, SP             // add to SP
+    CALL add16               // SP -> outs[8 + c]
+    SET PSEL, SP             // read through SP
+    CALL rdb                 // D = output signal
     @TNIN                    // A = &TNIN
-    D=D-M                    // D = gate index inside the tile
-    DBL                      // D = 2 * index
+    D=D-M                    // D = gate index in the tile
+    ST T0                    // T = g'
+    SET T1, 0                // high byte
+    CALL dist                // V = 3 g'
+    COPY16 DR, LY0           // y of gate 0 of the last tile
+    ADDV DR, V               // y of the gate
+    COPY16 TC, TIEX          // XR = TIEX + 131
+    ADDI TC, 131             // ... + 131
+    LD EV                    // D = EV
+    @10                      // A = 10
+    D=D-A                    // D = c
     ST AUL                   // addend low
-    SET16 RY, TILE_Y         // y of tile node 0
-    SET ADST, RY             // add to RY
-    CALL add16               // RY = 153 + 2 * index
-    SET RFL, 0               // not RUN
-dec_out:                     // store RES (RX, RY, RFL) at RESP
-    SET SPT, RES             // source = the result block
-    CALL put5                // copy it
+    SET ADST, TC             // add to TC
+    CALL add16               // TC = XR + c
+    SET RFL, 1               // absolute
     RET decref               // return
 
-resolve:                     // SIG = signal number of the current module/tile; 5-byte source at RESP (RESP advances by 5)
-    LD RESP                  // D = start of the result slot
-    ST DESTA                 // keep it (the slot is modified after writing)
+addtie:                      // a relative result (RFL 0) is relative to the tie node: make it absolute
+    @RFL                     // A = &RFL
+    D=M                      // D = flag
+    IFNE at_done             // already absolute
+    COPY16 TC, TIEX          // tie output pin x
+    ADDV TC, U               // + 2 d
+    COPY16 DR, TIEY          // tie y
+    ADDV DR, V               // + 3 d
+at_done:
+    RET addtie               // return
+
+resolve:                     // SIG = signal number of the current module/tile; result RFL + site (TC, DR), absolute
+    SET RFL, 0               // normal
     LD SIG                   // D = signal
     @NIN                     // A = &NIN
     D=D-M                    // D = SIG - NIN
     IFLT res_input           // a module input
-    DBL                      // an earlier gate j of the instance: D = 2 j
-    ST AUL                   // addend low
-    SET SPT, PB              // start from the pin of node 0
-    CALL put5                // slot = pin base
-    LD DESTA                 // D = slot address = address of x
-    ST ADST                  // add to x ...
-    LD WALK                  // D = 0 core, 1 tile
-    IFEQ res_add             // core nodes are spaced 2 apart in x
-    @ADST                    // A = &ADST
-    M=M+1                    // tile nodes are spaced 2 apart in y:
-    M=M+1                    // ADST = slot + 2 = address of y
-res_add:
-    CALL add16               // pin position of gate j
+    ST T0                    // an earlier gate g' of the instance: T = g'
+    SET T1, 0                // high byte
+    CALL dist                // U = 2 g', V = 3 g'
+    COPY16 TC, BX            // base output pin x
+    ADDV TC, U               // + 2 g'
+    COPY16 DR, BY            // base y
+    ADDV DR, V               // + 3 g'
     RET resolve              // return
 res_input:
-    LD WALK                  // D = walk kind
+    @WALK                    // A = &WALK
+    D=M                      // D = 0 core, 1 tile
     IFNE ti_start            // tiles use their rule table
-    LD SIG                   // D = s
-    DBL                      // 2 s
-    DBL                      // 4 s
-    @SIG                     // A = &SIG
-    D=D+M                    // 5 s
-    @SRC                     // A = SRC
-    D=D+A                    // D = address of SRC[s]
-    ST SPT                   // source address
-    CALL put5                // copy it
+    COPY16 SP, RP            // core: the references of the instance
+    SET PSEL, SP             // read through SP
+    LD SIG                   // D = input number
+    ST SN                    // references to step over
+rs_loop:
+    LD SN                    // D = references left
+    IFEQ rs_found            // at the wanted one
+    CALL skip1               // step over one
+    @SN                      // A = &SN
+    M=M-1                    // one less
+    GOTO rs_loop             // next
+rs_found:
+    CALL decref              // decode it
+    @RFL                     // A = &RFL
+    D=M                      // D = flag
+    IFNE rs_done             // absolute
+    COPY16 TC, BX            // relative to the instance's first node
+    ADDV TC, U               // + 2 d
+    COPY16 DR, BY            // y
+    ADDV DR, V               // + 3 d
+rs_done:
+    SET PSEL, P              // back to P
     RET resolve              // return
 ti_start:                    // ---- tile input SIG for tile KT, from the 5-byte rule at hd_rules + 5 * SIG
-    SET16 P, hd_rules        // P -> rule table
+    SET16 RP, hd_rules       // RP -> rule table
     LD SIG                   // D = input number
     DBL                      // 2
     DBL                      // 4
     @SIG                     // A = &SIG
     D=D+M                    // 5 * input = offset of its rule
     ST AUL                   // addend low
-    SET ADST, P              // add to P
-    CALL add16               // P -> the rule
-    COPY16 RP, P             // remember the rule start
-    SET PSEL, P              // read through P
+    SET ADST, RP             // add to RP
+    CALL add16               // RP -> the rule
+    COPY16 SP, RP            // read the rule through SP
+    SET PSEL, SP             // (PSEL)
     CALL rdb                 // D = opcode
     ST OP                    // keep
     IFEQ ti_bcast            // 0 BCAST
     D=D-1                    // opcode - 1
     IFEQ ti_prev             // 1 PREV
-    CALL decref              // 2/3 PICK: the first list element's pin -> result slot
-    COPY16 P, RP             // P -> rule start
-    ADDI P, 4                // P -> parameter
+    CALL decref              // 2/3 PICK: the first list element
+    CALL addtie              // absolute
+    COPY16 SP, RP            // SP -> rule start
+    ADDI SP, 4               // SP -> parameter
+    SET PSEL, SP             // read through SP
     CALL rdb                 // D = mask or divisor
     ST T0                    // keep
     LD OP                    // D = opcode
@@ -716,28 +565,6 @@ ti_start:                    // ---- tile input SIG for tile KT, from the 5-byte
     D=D-A                    // D = opcode - 2
     IFEQ ti_lo               // PICKLO: index = k AND mask
     SET T1, 0                // PICKHI: quotient = 0
-    LD KT                    // D = k
-    IFGE ti_rest             // k < 128: the signed tests below are exact
-    SET AX, 64               // k >= 128: k / d = 2 * (64 / d) + (k - 128) / d   (d is a power of two, at most 64)
-ti_d64:
-    LD AX                    // D = remainder
-    @T0                      // A = &T0
-    D=D-M                    // D = remainder - divisor
-    IFLT ti_d64_done         // finished
-    ST AX                    // remainder -= divisor
-    @T1                      // A = &T1
-    M=M+1                    // quotient += 1
-    GOTO ti_d64              // repeat
-ti_d64_done:
-    LD T1                    // D = 64 / d
-    DBL                      // D = 128 / d
-    ST T1                    // quotient so far
-    LD KT                    // D = k
-    @127                     // A = 127
-    D=D&A                    // D = k - 128
-    ST AX                    // remainder
-    GOTO ti_div              // divide the rest
-ti_rest:
     LD KT                    // D = k
     ST AX                    // remainder
 ti_div:                      // while remainder >= divisor: subtract
@@ -756,71 +583,98 @@ ti_lo:
     LD KT                    // D = k
     @T0                      // A = &T0
     D=D&M                    // D = k AND mask
-ti_scale:                    // D = list index; the list entries are 2 nodes = 4 x-units apart
+ti_scale:                    // D = list index; the list entries are 2 nodes apart: T = 2 idx
     DBL                      // 2 idx
-    DBL                      // 4 idx
-    ST AUL                   // addend low
-    LD DESTA                 // D = slot address (x of the pin)
-    ST ADST                  // add to x
-    CALL add16               // x += 4 idx
+    ST T0                    // T low
+    SET T1, 0                // T high
+    CALL dist                // U = 4 idx, V = 6 idx
+    ADDV TC, U               // x += 4 idx
+    ADDV DR, V               // y += 6 idx
+    SET PSEL, P              // back to P
     RET resolve              // return
 ti_bcast:
     CALL decref              // same source for every tile
+    CALL addtie              // absolute
+    SET PSEL, P              // back to P
     RET resolve              // return
-ti_prev:                     // output j of the previous tile
-    COPY16 P, RP             // P -> rule start
-    ADDI P, 4                // P -> parameter
+ti_prev:                     // output j of the previous tile (tile 0: the tie node)
+    COPY16 SP, RP            // SP -> rule start
+    ADDI SP, 4               // SP -> parameter
+    SET PSEL, SP             // read through SP
     CALL rdb                 // D = which output of the previous tile
     ST T0                    // keep
     SET RFL, 0               // never RUN
     LD KT                    // D = k
     IFNE ti_prev_k           // k > 0: the previous tile's pin
-    LD TIEX                  // tile 0: the tie-high node is the previous word: x low
-    @1                       // A = 1
-    D=D|A                    // + 1: its output pin
-    ST RX                    // RX.low
-    LD TIEX+1                // x high
-    ST RX+1                  // RX.high
-    SET16 RY, ROW_Y          // on the core row
-    GOTO ti_out              // store
+    COPY16 TC, TIEX          // tile 0: the tie node
+    COPY16 DR, TIEY          // y
+    SET PSEL, P              // back to P
+    RET resolve              // return
 ti_prev_k:
-    COPY16 TP, TOUTP         // TP -> list of tile output signals
+    COPY16 SP, TOUTP         // SP -> list of tile output signals
     LD T0                    // D = j
     ST AUL                   // addend low
-    SET ADST, TP             // add to TP
-    CALL add16               // TP -> outs[j]
-    SET PSEL, TP             // read through TP
+    SET ADST, SP             // add to SP
+    CALL add16               // SP -> outs[j]
+    SET PSEL, SP             // read through SP
     CALL rdb                 // D = output signal
-    ST T1                    // keep
-    SET PSEL, P              // back to P
-    COPY16 RX, PB            // output pin x of this tile
-    SET AUL, 254             // -2 (the previous column is 2 to the left)
-    SET AUH, 255             // high byte of -2
-    SET ADST, RX             // add to RX
-    CALL add16               // RX = pin x of the previous column
-    LD T1                    // D = signal
     @TNIN                    // A = &TNIN
-    D=D-M                    // D = gate index in the tile
-    DBL                      // 2 * index
-    ST AUL                   // addend low
-    SET16 RY, TILE_Y         // y of tile node 0
-    SET ADST, RY             // add to RY
-    CALL add16               // RY = 153 + 2 * index
-ti_out:
-    SET SPT, RES             // source = the result block
-    CALL put5                // copy it to the slot
+    D=D-M                    // D = gate index g' in the tile
+    ST T0                    // T = g'
+    SET T1, 0                // high byte
+    CALL dist                // U = 2 g', V = 3 g'
+    COPY16 TC, BX            // this tile's gate 0 is in the same column as the previous tile's
+    ADDV TC, U               // x of gate g'
+    COPY16 DR, BY            // y of this tile's gate 0
+    ADDV DR, V               // + 3 g'
+    ADDV DR, TG3N            // - 3 TG: the previous tile
+    SET PSEL, P              // back to P
     RET resolve              // return
 
-emit:                        // the current gate (EK, CUR, SA, SB): PLACE it (MODE 0) or WIRE its inputs (MODE 1)
+wire_sink:                   // driver site (TC, DR), sink pad (PX, PY), lane row RR
+    WRA 0, TC                // A.x = tc
+    WRA 1, TC+1              // A.x high
+    WRA 2, DR                // A.y = dr
+    WRA 3, DR+1              // A.y high
+    WRA 4, TC                // B.x = tc
+    WRA 5, TC+1              // B.x high
+    WRA 6, RR                // B.y = r
+    WRA 7, RR+1              // B.y high
+    WRK 10, 1                // layer 1
+    WRK 15, 4                // TRACK (tc,dr)-(tc,r)
+    WRA 2, RR                // A.y = r
+    WRA 3, RR+1              // A.y high
+    WRK 15, 5                // VIA at (tc,r)
+    WRA 0, PX                // A.x = px
+    WRA 1, PX+1              // A.x high
+    WRK 10, 0                // layer 0
+    WRK 15, 4                // TRACK (px,r)-(tc,r)
+    LD RR                    // D = r low
+    @PY                      // A = &PY
+    D=D-M                    // r low - py low
+    IFNE ws_vert             // differ
+    LD RR+1                  // D = r high
+    @PY+1                    // A = &PY.high
+    D=D-M                    // r high - py high
+    IFEQ ws_done             // r == py: no vertical segment
+ws_vert:
+    WRA 4, PX                // B.x = px
+    WRA 5, PX+1              // B.x high
+    WRA 6, PY                // B.y = py
+    WRA 7, PY+1              // B.y high
+    WRK 15, 4                // TRACK (px,r)-(px,py)
+ws_done:
+    RET wire_sink            // return
+
+emit:                        // the current gate (EK, CX, CY, SA, SB): PLACE it (phase 0) or wire its inputs (phase 1)
     @MODE                    // A = &MODE
-    D=M                      // D = pass
-    IFNE em_wire             // wiring pass
-    WRA 0, CUR               // A.x low
-    WRA 1, CUR+1             // A.x high
-    WRA 2, CUR+2             // A.y low
-    WRA 3, CUR+3             // A.y high
+    D=M                      // D = phase
+    IFNE em_wire             // wire pass
+    WRA 0, CX                // A.x
+    WRA 1, CX+1              // A.x high
+    WRA 2, CY                // A.y
+    WRA 3, CY+1              // A.y high
     WRA 8, EK                // KIND = 0 NAND / 1 DFF
-    WRK 9, 0                 // ANGLE = 0
     WRK 15, 1                // CMD = PLACE
     RET emit                 // return
 em_wire:
@@ -828,35 +682,33 @@ em_wire:
     LD SA                    // D = its signal
     ST SIG                   // resolve it
 em_pin:
-    SET RESP, IN             // the source goes to IN
-    CALL resolve             // IN = output pin driving this input
-    COPY16 TY, CUR+2         // sink y = node y + pin
-    LD PIN                   // D = pin
-    IFEQ em_y                // pin 0: y as is
-    ADDI TY, 1               // pin 1: one below
-em_y:
-    @IN+4                    // A = &flag
-    D=M                      // D = RUN flag
-    IFNE em_run              // RUN: wire it last
-    WRA 0, IN                // A.x low = source x low
-    WRA 1, IN+1              // A.x high
-    WRA 2, IN+2              // A.y low
-    WRA 3, IN+3              // A.y high
-    WRA 4, CUR               // B.x low = sink x
-    WRA 5, CUR+1             // B.x high
-    WRA 6, TY                // B.y low = sink y
-    WRA 7, TY+1              // B.y high
-    WRK 15, 2                // CMD = WIRE
+    CALL resolve             // RFL, (TC, DR) = the driver's output site
+    COPY16 PX, CX            // sink pad x
+    COPY16 PY, CY            // sink pad y = node y + pin
+    COPY16 RR, CY            // lane row = node y - 1 + 2 pin
+    @PIN                     // A = &PIN
+    D=M                      // D = pin
+    IFEQ em_p0               // pin 0
+    ADDI PY, 1               // pin 1: y + 1
+    ADDI RR, 1               // r = y - 1 + 2 = y + 1
+    GOTO em_lane             // go
+em_p0:
+    ADDK RR, 65535           // r = y - 1
+em_lane:
+    LD RFL                   // D = flag
+    D=D-1                    // 1 less
+    D=D-1                    // 2 less: zero for RUN
+    IFNE em_wire_it          // an ordinary source
+    LD RUNP                  // RUN: remember the sink (PX, PY, RR) for the end of the build
+    ST DPT                   // destination
+    SET SPT, PX              // source
+    SET SK, 6                // 6 bytes
+    CALL copyb               // copy
+    LD DPT                   // D = new write pointer
+    ST RUNP                  // keep
     GOTO em_next             // done with this pin
-em_run:                      // RUN source: remember the sink pin (x, y) for the end of the build
-    LD CUR                   // sink x low
-    PUT RUNP                 // record
-    LD CUR+1                 // sink x high
-    PUT RUNP                 // record
-    LD TY                    // sink y low
-    PUT RUNP                 // record
-    LD TY+1                  // sink y high
-    PUT RUNP                 // record
+em_wire_it:
+    CALL wire_sink           // wire it
 em_next:
     LD EK                    // D = kind
     IFNE em_done             // a DFF has only one input pin
@@ -869,7 +721,7 @@ em_next:
 em_done:
     RET emit                 // return
 
-gates:                       // walk NG gate records at GP; for each: emit (place or wire), step CUR
+gates:                       // walk NG gate records at GP; for each: emit (place or wire), step CX, CY
     @NG                      // A = &NG
     D=M                      // D = gates left
     IFEQ gt_done             // none: finished
@@ -881,29 +733,9 @@ gates:                       // walk NG gate records at GP; for each: emit (plac
     CALL rdb                 // D = second input signal
     ST SB                    // keep
     SET PSEL, P              // back to P
-    LD EK                    // D = kind
-    @2                       // A = 2
-    D=D-A                    // D = kind - 2 (kind 2 = skip entry of an improved module)
-    IFNE gt_real             // an ordinary gate
-    LD SA                    // D = number of unplaced slots k
-    DBL                      // D = 2 k (k <= 26)
-    ST AUL                   // addend low = 2 k
-    SET ADST, CUR            // x of the current node
-    CALL add16               // CUR.x += 2 k: those slots stay empty
-    LD NG                    // D = slots left
-    @SA                      // A = &SA
-    D=D-M                    // D = slots left - k
-    ST NG                    // store
-    GOTO gates               // next entry
-gt_real:
     CALL emit                // PLACE or WIRE
-    SET ADST, CUR            // step to the next node: x += 2 for core instances ...
-    LD WALK                  // D = walk kind
-    IFEQ gt_step             // core
-    SET ADST, CUR+2          // ... y += 2 for tiles
-gt_step:
-    SET AUL, 2               // addend 2
-    CALL add16               // CUR += step
+    ADDI CX, 2               // next node: x += 2 ...
+    ADDI CY, 3               // ... y += 3
     @NG                      // A = &NG
     M=M-1                    // one gate less
     GOTO gates               // next gate

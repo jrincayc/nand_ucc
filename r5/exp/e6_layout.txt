@@ -1,0 +1,7 @@
+commands {'place': 3854, 'track': 24174, 'via': 16708} gates 3770 nodes 3851
+layers Counter({1: 12421, 0: 11753}) axis-aligned 24174 of 24174 zero-length 0
+chains 7675 mean elements 5.326644951140065
+(A) naive 16-bit fields: 558.6 bits/gate   (B) chain+zigzag-gamma: 113.7 bits/gate  = 52.3 KiB for 3770 gates (routing only)
+(C) BOUND zero-order entropy of segment symbols: 52.6 bits/gate (+ chain starts 32.6 if ~8 bits each coord)
+placement deltas, zigzag-gamma: 13.45 bits/place (13.75 per gate; 3854 places)
+TOTAL layout (placement + routing, chain model) = 127.5 bits/gate   [R3c measured 55 bits/gate; R4 module HD 26]

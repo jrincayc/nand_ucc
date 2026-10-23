@@ -1,0 +1,30 @@
+ROM 5.5/byte, state ring 6.5/bit x 100 bits
+
+-- description cost 13 bits/gate (13 = xz of netlist, needs a decompressor; 26 = R4 module HD; 55 = R3c routed layout data): 9 extra units per irregular gate or DFF
+ISA         CPU raw  CPU+descr  code ROM  state    total  descr share  source
+SUBLEQ         1230       8648      1298    650    10596         70%  estimate; K1 only, others unwritten
+Hack-vN        1017       7783      3685    650    12118         56%  measured netlist
+ACC8           1575      12881      1584    650    15115         75%  measured netlist
+6502-lite      1646      12961      2206    650    15816         72%  estimate
+Z80-lite       2140      16798      1194    650    18641         79%  estimate
+
+-- description cost 26 bits/gate (13 = xz of netlist, needs a decompressor; 26 = R4 module HD; 55 = R3c routed layout data): 18 extra units per irregular gate or DFF
+ISA         CPU raw  CPU+descr  code ROM  state    total  descr share  source
+SUBLEQ         1230      16066      1298    650    18014         82%  estimate; K1 only, others unwritten
+Hack-vN        1017      14548      3685    650    18883         72%  measured netlist
+ACC8           1575      24187      1584    650    26421         86%  measured netlist
+6502-lite      1646      24276      2206    650    27131         83%  estimate
+Z80-lite       2140      31455      1194    650    33298         88%  estimate
+
+-- description cost 55 bits/gate (13 = xz of netlist, needs a decompressor; 26 = R4 module HD; 55 = R3c routed layout data): 38 extra units per irregular gate or DFF
+ISA         CPU raw  CPU+descr  code ROM  state    total  descr share  source
+Hack-vN        1017      29641      3685    650    33976         84%  measured netlist
+SUBLEQ         1230      32614      1298    650    34562         91%  estimate; K1 only, others unwritten
+ACC8           1575      49408      1584    650    51642         93%  measured netlist
+6502-lite      1646      49517      2206    650    52372         91%  estimate
+Z80-lite       2140      64152      1194    650    65996         94%  estimate
+
+Break-even: how many irregular gates must a serial/sequencer design save to beat Hack-vN?  (Hack-vN 757 gates+DFF)
+  13 bits/gate: each gate removed saves 10 units; Hack-vN total 12118
+  26 bits/gate: each gate removed saves 19 units; Hack-vN total 18883
+  55 bits/gate: each gate removed saves 39 units; Hack-vN total 33976

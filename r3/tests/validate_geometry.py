@@ -53,7 +53,8 @@ def main():
     cmds = RF.commands(f, rom)
     if os.environ.get('MUTATE'):
         m = int(os.environ['MUTATE']); print('negative control: dropping', cmds[m]); del cmds[m]
-    out = '/tmp/claude-0/work'
+    import tempfile; out = os.environ.get('GEOM_OUT') or tempfile.mkdtemp(prefix='rndp_geom_')
+    os.makedirs(out, exist_ok=True)
     write_build(cmds, f'{out}/geom.build')
     print(f'{len(cmds)} commands generated in {time.time() - t0:.1f}s; extent {RF.extent(f)}', flush=True)
     t0 = time.time()

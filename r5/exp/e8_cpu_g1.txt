@@ -1,0 +1,10 @@
+identity         W= 969 board~968x912  cmds= 45473 tracks= 24524 vias= 17095 wire length=768939
+dfs              W= 889 board~888x920  cmds= 45368 tracks= 24481 vias= 17033 wire length=726899
+lpa (R4 placer)  W= 872 board~871x785  cmds= 44736 tracks= 24174 vias= 16708 wire length=597232
+random           router failed: TypeError '<' not supported between instances of 'NoneType' and 'int'
+
+netlist storage cost in placement order (3770 NAND, 81 DFF):
+  identity          15.16 bits/NAND
+  dfs               14.50 bits/NAND
+  lpa (R4 placer)   15.74 bits/NAND
+  random            33.12 bits/NAND

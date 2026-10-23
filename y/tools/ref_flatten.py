@@ -1,19 +1,33 @@
 #!/usr/bin/env python3
-"""ref_flatten.py -- reference flattener (Python) for the HD of section 4/5 of Y_SPEC.md.  The ROM program must
-reproduce its command sequence exactly (as a set, wires in any order).  Also converts the flat machine to a nandgen
-`Compiled` netlist so that the existing lockstep/fast-simulation tools can run it.
+"""ref_flatten.py -- reference flattener for RNDP replicator 1 (Y machine, hardware description -> PCB build commands).
 
-Layout (relative to the issuing arm's child origin (ox, oy)):  arm at (ox,oy); ROM at (ox,oy+ARM_H);
-core node i at (ox+6+2i, oy+9); tie-high = node n_core, last of the row; RAM tile k (one RAM byte per column),
-node j at (ox+6+2k, oy+13+2j).   Pins: NAND A(0,0) B(0,1) Y(1,0); DFF D(0,0) Q(1,0)."""
+Geometry = the "dedicated-lane" layout (RNDP spec, replicator 1).  All coordinates are RELATIVE to the issuing arm's origin.
+The child's arm is placed at (CHILD_DX, 0); its coordinates are the parent's plus that offset.
+
+  ARM  rotation 1 at (0,0):   occupies x 0..8, y 0..1.  pins: ADDRi (8-i,0)  EN (4,0)  DATAj (8-j,1)
+  ROM  rotation 1 at (-15,0): occupies x -15..-2, y 0..1 (14 address bits).  pins: ADDRi (-2-i,0)  DATAj (-2-j,1)
+  node g of the core diagonal (core nodes 0..n_core-1, tie = n_core):   NAND/DFF at (X0+2g, Y0+3g)
+  RAM tile k, gate j:  global id g = n_core+1+TG*k+j ;  at (XT+2j, Y0+3g)   with XT = x(tie)+8   (tiles are stacked in y)
+  NAND pins: A (x,y) B (x,y+1) Y (x+1,y);  DFF pins: D (x,y) Q (x+1,y).
+
+Wiring one sink: driver output pin (tc,dr), sink pad (px,py), lane row r:
+   TRACK layer1 (tc,dr)-(tc,r) ; VIA (tc,r) ; TRACK layer0 (px,r)-(tc,r) ; [if r != py] TRACK layer0 (px,r)-(px,py)
+   NAND/DFF input pin p:  r = y-1+2p.   ARM/ROM sinks: see PORT_* below.
+Special driver sites: ROM data j -> (-2-j, 1).  RAM read bit c (output 8+c of the last tile) -> the real pin is first extended
+   along its row to the out column XR+c:  TRACK layer0 (xpin,ypin)-(XR+c,ypin), VIA (XR+c,ypin);  driver site = (XR+c, ypin).
+"""
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path[:0] = [HERE, os.path.join(HERE, '..', 'isa')]
+sys.path[:0] = [HERE]
 import hd as H
 
-ARM_H = 9
-STRIDE = 140
-CORE_Y, TILE_Y0 = 9, 13
+X0, Y0 = 10, 13
+ROM_X, ROM_Y, ROM_ROT = -15, 0, 1
+ARM_ROT = 1
+CHILD_DX = 4700
+TILE_GAP = 8             # XT = x(tie) + TILE_GAP
+OUTCOL_GAP = 124         # XR = XT + OUTCOL_GAP
+KIND = {'nand': 0, 'dff': 1, 'rom': 2, 'arm': 3}
 
 
 class Flat:
@@ -23,9 +37,9 @@ class Flat:
 def flatten(hd):
     f = Flat(); f.hd = hd
     ab = hd.params['ab']; f.rom_abits = ab - 1
-    f.kind, f.ins = [], []                      # core nodes 0..n_core-1: 'nand'|'dff' ; ins: list of src
-    names = {}                                  # instance name -> list of output node ids
-    pend = []                                   # (node, [ref strings], module, inst) resolved after all nodes exist
+    f.kind, f.ins = [], []
+    names = {}
+    pend = []
     for inst in hd.body:
         base = len(f.kind)
         if inst.type in ('nand', 'dff'):
@@ -46,13 +60,13 @@ def flatten(hd):
     f.n_nodes = f.n_core + 1 + f.W * f.TG
 
     def tile_id(k, j): return f.n_core + 1 + k * f.TG + j
+    f.tile_id = tile_id
 
     def resolve(ref):
         if ref == 'run': return ('run',)
         if ref == 'tie': return ('n', f.tie)
         if ref.startswith('rom') and ref[3:].isdigit(): return ('rom', int(ref[3:]))
-        if ref.startswith('ramrd') and ref[5:].isdigit():
-            return ('n', tile_id(f.W - 1, f.tile.outs[8 + int(ref[5:])] - f.tile.n_in))
+        if ref.startswith('ramrd') and ref[5:].isdigit(): return ('ramrd', int(ref[5:]))
         if ref not in names: raise H.HDError(f'unknown reference {ref}')
         o = names[ref]
         if len(o) != 1: raise H.HDError(f'{ref} has several outputs; use {ref}.k')
@@ -69,7 +83,6 @@ def flatten(hd):
                 if x is None: continue
                 a, b = x
                 f.ins[base + g] = [src[s] if s < m.n_in else ('n', base + s - m.n_in) for s in (a, b)]
-    # ---- tiles
     f.tkind, f.tins = [], []
     if f.tile:
         t = f.tile; ch = hd.chain
@@ -90,8 +103,11 @@ def flatten(hd):
                 sgn = lambda s: tin(s) if s < t.n_in else ('n', tile_id(k, s - t.n_in))
                 if x[0] == 'dff': f.tkind.append('dff'); f.tins.append([sgn(x[1])])
                 else: f.tkind.append('nand'); f.tins.append([sgn(x[1]), sgn(x[2])])
-    # ---- ports
     f.ports = [(n, resolve(r)) for n, r in hd.ports]
+    # geometry constants derived from the machine
+    f.tie_x = X0 + 2 * f.tie; f.tie_y = Y0 + 3 * f.tie
+    f.XT = f.tie_x + TILE_GAP
+    f.XR = f.XT + OUTCOL_GAP
     return f
 
 
@@ -107,10 +123,10 @@ def node_ins(f, i):
     return f.tins[i - f.n_core - 1]
 
 
-def node_pos(f, i, ox=0, oy=STRIDE):
-    if i <= f.n_core: return (ox + 6 + 2 * i, oy + CORE_Y)
+def node_pos(f, i):
+    if i <= f.n_core: return (X0 + 2 * i, Y0 + 3 * i)
     k, j = divmod(i - f.n_core - 1, f.TG)
-    return (ox + 6 + 2 * k, oy + TILE_Y0 + 2 * j)
+    return (f.XT + 2 * j, Y0 + 3 * i)
 
 
 def counts(f):
@@ -119,88 +135,115 @@ def counts(f):
     return dict(nand=c['nand'] + c['tie'], dff=c['dff'], nodes=f.n_nodes)
 
 
-def commands(f, rom_bytes, ox=0, oy=STRIDE):
-    """Reference build sequence (spec v0.5 section 7 order).  Entries: ('place', kind, x, y), ('rom', rx, ry, addr, val),
-    ('wire', x1, y1, x2, y2).  The ARM is placed last; run wires are last."""
-    rom_h = max(f.rom_abits, 8); y0 = oy + ARM_H
-    rx, ry, ax, ay = ox, y0, ox, oy
-    cmds = [('place', 'dff' if node_kind(f, i) == 'dff' else 'nand', *node_pos(f, i, ox, oy)) for i in range(f.n_nodes) if node_kind(f, i) != 'hole']
-    cmds.append(('place', 'rom', rx, ry)); cmds.append(('place', 'arm', ax, ay))
+def extent(f):
+    """bounding box of parts (x0,y0,x1,y1), relative coordinates."""
+    xs = [node_pos(f, i)[0] for i in range(f.n_nodes)]
+    ys = [node_pos(f, i)[1] for i in range(f.n_nodes)]
+    return (ROM_X, -19, f.XR + 8, max(ys) + 1)
+
+
+# port sink geometry (arm-relative): (px, py, r)
+def port_sink(name):
+    if name.startswith('rom_addr'):
+        i = int(name[8:]); return (-2 - i, 0, -6 - i)
+    if name.startswith('arm_addr'):
+        i = int(name[8:]); return (8 - i, 0, -1 - i)
+    if name.startswith('wdata'):
+        j = int(name[5:]); return (8 - j, 1, 2 + j)
+    if name == 'arm_en': return (4, 0, -5)
+    raise KeyError(name)
+
+
+def out_site(f, s):
+    """(tc, dr): driver site for the lane scheme."""
+    if s[0] == 'rom': return (-2 - s[1], 1)
+    if s[0] == 'run': return (f.tie_x + 1, f.tie_y)
+    if s[0] == 'ramrd':
+        g = ramrd_gate(f, s[1]); return (f.XR + s[1], Y0 + 3 * g)
+    x, y = node_pos(f, s[1]); return (x + 1, y)
+
+
+def ramrd_gate(f, c):
+    """global id of the last-tile node that is output 8+c of the tile."""
+    return f.tile_id(f.W - 1, f.tile.outs[8 + c] - f.tile.n_in)
+
+
+def sink_cmds(site, px, py, r):
+    tc, dr = site
+    c = [('track', 1, tc, dr, tc, r), ('via', tc, r), ('track', 0, px, r, tc, r)]
+    if r != py: c.append(('track', 0, px, r, px, py))
+    return c
+
+
+def commands(f, rom_bytes, dx=0):
+    cmds = _commands(f, rom_bytes)
+    return [shift(c, dx) for c in cmds]
+
+
+def shift(c, dx):
+    if c[0] == 'place': return ('place', c[1], c[2] + dx, c[3], c[4], c[5])
+    if c[0] == 'track': return ('track', c[1], c[2] + dx, c[3], c[4] + dx, c[5])
+    if c[0] == 'via': return ('via', c[1] + dx, c[2])
+    if c[0] == 'rom': return ('rom', c[1] + dx, c[2], c[3], c[4])
+    raise ValueError(c)
+
+
+def _commands(f, rom_bytes):
+    cmds = []
+    for i in range(f.n_nodes):
+        k = node_kind(f, i)
+        if k == 'hole': continue
+        x, y = node_pos(f, i)
+        cmds.append(('place', 1 if k == 'dff' else 0, x, y, 0, 0))
+    cmds.append(('place', KIND['rom'], ROM_X, ROM_Y, ROM_ROT, f.rom_abits))
+    cmds.append(('place', KIND['arm'], 0, 0, ARM_ROT, 0))
     for a, v in enumerate(rom_bytes):
-        if v: cmds.append(('rom', rx, ry, a, v))
-    def out_site(s):
-        if s[0] == 'rom': return (rx + 1, ry + s[1])
-        if s[0] == 'run': return out_site(('n', f.tie))
-        x, y = node_pos(f, s[1], ox, oy); return (x + 1, y)
-    run_wires = []
+        if v: cmds.append(('rom', ROM_X, ROM_Y, a, v))
+    # RAM read bits: extend the real pin to the out column
+    for c in range(8):
+        g = ramrd_gate(f, c); x, y = node_pos(f, g)
+        cmds.append(('track', 0, x + 1, y, f.XR + c, y)); cmds.append(('via', f.XR + c, y))
+    run_cmds = []
     for i in range(f.n_nodes):
         k = node_kind(f, i)
         if k in ('tie', 'hole'): continue
-        x, y = node_pos(f, i, ox, oy)
-        for pin, s in enumerate(node_ins(f, i)):
-            w = ('wire',) + out_site(s) + (x, y + pin)
-            (run_wires if s[0] == 'run' else cmds).append(w)
+        x, y = node_pos(f, i)
+        for p, s in enumerate(node_ins(f, i)):
+            cs = sink_cmds(out_site(f, s), x, y + p, y - 1 + 2 * p)
+            (run_cmds if s[0] == 'run' else cmds).extend(cs)
     P = dict(f.ports)
-    for n, s in f.ports:
-        if n.startswith('rom_addr'): cmds.append(('wire',) + out_site(s) + (rx, ry + int(n[8:])))
-        elif n.startswith('arm_addr'): cmds.append(('wire',) + out_site(s) + (ax, ay + int(n[8:])))
-        elif n.startswith('wdata'): cmds.append(('wire',) + out_site(s) + (ax + 1, ay + int(n[5:])))
-    cmds.append(('wire',) + out_site(P['arm_en']) + (ax, ay + 4))
-    cmds += run_wires
+    order = [n for n, _ in f.ports]
+    assert order[-1] == 'arm_en'
+    for n in order:
+        px, py, r = port_sink(n)
+        cmds.extend(sink_cmds(out_site(f, P[n]), px, py, r))
+    cmds.extend(run_cmds)
+    f.n_run_cmds = len(run_cmds)
     return cmds
 
 
-def to_compiled(f):
-    """nandgen.Compiled for simulation.  Inputs: romdata[8], run, tie (tie must be held at 1: it is the unwired NAND of the
-    real machine).  The ROM address and arm interface are outputs.  RAM bits are DFFs named in c.ram_q[k][j]."""
-    import nandgen as ng
-    inputs = [('rom', j) for j in range(8)] + [('run',)]
-    n_in = len(inputs)
-    dff_nodes = [i for i in range(f.n_nodes) if node_kind(f, i) == 'dff']
-    nand_nodes = [i for i in range(f.n_nodes) if node_kind(f, i) in ('nand',)]
-    wire = {}
-    for k, s in enumerate(inputs): wire[s] = k
-    # tie node = constant 1: model as an extra input
-    n_in += 1; wire[('tie',)] = n_in - 1
-    for k, i in enumerate(dff_nodes): wire[('n', i)] = n_in + k
-    base = n_in + len(dff_nodes)
-    # topological order of NAND nodes
-    order, state = [], {}
-    def src_w(s):
-        if s == ('run',): return wire[('run',)]
-        if s[0] == 'n' and s[1] == f.tie: return wire[('tie',)]
-        return wire.get(s)
-    sys.setrecursionlimit(100000)
-    def visit(i):
-        st = state.get(i)
-        if st == 2: return
-        if st == 1: raise H.HDError(f'combinational loop through node {i}')
-        state[i] = 1
-        for s in node_ins(f, i):
-            if s[0] == 'n' and node_kind(f, s[1]) == 'nand': visit(s[1])
-        state[i] = 2; order.append(i)
-    for i in nand_nodes: visit(i)
-    for k, i in enumerate(order): wire[('n', i)] = base + k
-    c = ng.Compiled()
-    c.n_in, c.n_dff = n_in, len(dff_nodes)
-    c.gates = [tuple(src_w(s) if src_w(s) is not None else wire[s] for s in node_ins(f, i)) for i in order]
-    c.dffd = [src_w(node_ins(f, i)[0]) for i in dff_nodes]
-    c.gate_tags = ['x'] * len(order); c.dff_tags = ['x'] * len(dff_nodes)
-    c.buses = {'romdata': list(range(8)), 'run': [8], 'tie': [n_in - 1]}
-    def w_of(s): return src_w(s)
-    c.outs = {}
-    for key in ('rom_addr', 'arm_addr', 'wdata'):
-        c.outs[key] = [w_of(s) for n, s in f.ports if n.startswith(key)]
-    c.outs['arm_en'] = [w_of(dict(f.ports)['arm_en'])]
-    named = {}
-    for nm, ids in f.names.items():
-        if nm.split('.')[0] in ('pc', 'a', 'd', 'irlo', 'irhi', 'st') and len(ids) == 1 and nm.count('.') == 1 and nm.split('.')[1].isdigit(): named.setdefault(nm.split('.')[0], []).append((int(nm.split('.')[1]), ids[0]))
-    for key, lst in named.items(): c.outs[key] = [wire[('n', i)] for _, i in sorted(lst)]
-    c.nid = {}; c.hint = {}
-    c.ram_q = [[wire[('n', f.n_core + 1 + k * f.TG + g)] for g, x in enumerate(f.tile.gates) if x[0] == 'dff'] for k in range(f.W)] if f.tile else []
-    return c
+def netlist_pins(f):
+    """for the validation: list of (part_key, pin, x, y, net_key) ; part_key = ('n', node) | 'rom' | 'arm'."""
+    pins = []
+    for i in range(f.n_nodes):
+        k = node_kind(f, i)
+        if k == 'hole': continue
+        x, y = node_pos(f, i)
+        pins.append((x + 1, y, ('n', i)))                         # output pin
+        for p, s in enumerate(node_ins(f, i)):
+            pins.append((x, y + p, s if s[0] != 'run' else ('n', f.tie)))
+    for j in range(8): pins.append((-2 - j, 1, ('rom', j)))
+    P = dict(f.ports)
+    for n in [n for n, _ in f.ports]:
+        px, py, r = port_sink(n); s = P[n]
+        pins.append((px, py, s))
+    for i in range(14): pins.append((-2 - i, 0, ('romaddr', i)))   # placeholder, replaced below
+    return pins
 
 
 if __name__ == '__main__':
     hd = H.read(open(sys.argv[1]).read()); f = flatten(hd)
-    print(counts(f), 'ports', len(f.ports))
+    print(counts(f), 'ports', len(f.ports), 'extent', extent(f), 'XT', f.XT, 'XR', f.XR)
+    cm = commands(f, [])
+    from collections import Counter
+    print(Counter(c[0] for c in cm))

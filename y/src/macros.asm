@@ -1,7 +1,6 @@
-// macros.asm -- small helper macros for the Y builder/improver (Hack-vN-AB).  Every macro line below is expanded in place;
-// the listing (rom.lst) shows each expanded instruction with the comment of the macro line that produced it.
-// Conventions: a 16-bit variable occupies two consecutive RAM bytes, low byte first (v = low, v+1 = high).
-// D is the accumulator; A is clobbered by almost everything; a "ROM pointer" is a 16-bit RAM variable (loaded with AP).
+// macros.asm -- small helper macros for the RNDP builder (Hack-vN-AB).  Every macro line is expanded in place.
+// Conventions: a 16-bit variable occupies two consecutive RAM bytes, low byte first.  D is the accumulator; A is clobbered by almost
+// everything; a "ROM pointer" is a 16-bit RAM variable (loaded with AP).  Subroutines: CALL stores the return address in RA_<sub>.
 
 .macro LD v                  // D = RAM[v]
     @\v                      // A = address of the variable
@@ -20,7 +19,7 @@
     M=D                      // store it
 .endm
 
-.macro SET16 v k             // 16-bit variable v = constant k (any 14-bit value or address)
+.macro SET16 v k             // 16-bit variable v = constant k (any 16-bit value)
     @lo(\k)                  // A = low byte of the constant
     D=A                      // D = low byte
     @\v                      // A = &v
@@ -65,16 +64,6 @@
 .macro IFGE l                // if D >= 0 (signed) goto l
     @\l                      // A = target
     D;JGE                    // jump when D is not negative
-.endm
-
-.macro IFLE l                // if D <= 0 (signed) goto l
-    @\l                      // A = target
-    D;JLE                    // jump when D is zero or negative
-.endm
-
-.macro IFGT l                // if D > 0 (signed) goto l
-    @\l                      // A = target
-    D;JGT                    // jump when D is positive
 .endm
 
 .macro INC16 v               // 16-bit increment of the variable v
@@ -136,7 +125,18 @@ ret\@:                       // (label) the subroutine returns here
     M=D                      // write the register
 .endm
 
-.macro ADDI v k              // 16-bit variable v += constant k (0..255), via the add16 subroutine
+.macro WR16 reg k            // arm register pair reg, reg+1 = 16-bit constant k
+    @lo(\k)                  // A = low byte
+    D=A                      // D = it
+    @ARM+\reg                // A = register low
+    M=D                      // write it
+    @hi(\k)                  // A = high byte
+    D=A                      // D = it
+    @ARM+\reg+1              // A = register high
+    M=D                      // write it
+.endm
+
+.macro ADDI v k              // 16-bit variable v += constant k (0..255), via add16 (AUH is 0 between calls)
     @\v                      // A = RAM address of the variable
     D=A                      // D = that address
     @ADST                    // A = &ADST
@@ -144,6 +144,38 @@ ret\@:                       // (label) the subroutine returns here
     @\k                      // A = the constant
     D=A                      // D = k
     @AUL                     // A = &AUL
-    M=D                      // addend low = k  (addend high AUH is 0 between calls)
+    M=D                      // addend low = k
     CALL add16               // v += k
+.endm
+
+.macro ADDK v k              // 16-bit variable v += 16-bit constant k (mod 2^16)
+    @lo(\k)                  // A = low byte of k
+    D=A                      // D = it
+    @AUL                     // A = &AUL
+    M=D                      // addend low
+    @hi(\k)                  // A = high byte of k
+    D=A                      // D = it
+    @AUH                     // A = &AUH
+    M=D                      // addend high
+    @\v                      // A = RAM address of the variable
+    D=A                      // D = it
+    @ADST                    // A = &ADST
+    M=D                      // ADST = &v
+    CALL add16               // v += k
+.endm
+
+.macro ADDV v w              // 16-bit variable v += 16-bit variable w (v may equal w)
+    @\w                      // A = &w.low
+    D=M                      // D = w.low
+    @AUL                     // A = &AUL
+    M=D                      // addend low
+    @\w+1                    // A = &w.high
+    D=M                      // D = w.high
+    @AUH                     // A = &AUH
+    M=D                      // addend high
+    @\v                      // A = RAM address of v
+    D=A                      // D = it
+    @ADST                    // A = &ADST
+    M=D                      // ADST = &v
+    CALL add16               // v += w
 .endm

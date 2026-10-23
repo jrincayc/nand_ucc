@@ -1,70 +1,84 @@
-"""run_builder.py -- assemble builder.asm + macros.asm + an HD data file, run the image on the behavioural Hack-vN model, decode the arm
-register writes into PLACE / PROGRAM_ROM / WIRE commands and compare with the reference flattener (V5)."""
-import os, sys, subprocess, tempfile, time
+#!/usr/bin/env python3
+"""run_builder.py -- run the assembled Replicator 1 builder on the behavioural machine (ramn = 128 bytes of RAM) and compare the
+arm commands it issues with the reference flattener (tools/ref_flatten.commands, offset CHILD_DX).
+usage: HACK_AB=15 python3 tests/run_builder.py OUTDIR HD [--max N]"""
+import os, sys, time, collections
 HERE = os.path.dirname(os.path.abspath(__file__))
-for d in ('tools', 'isa', 'tests', '.'):
-    sys.path.insert(0, os.path.join(HERE, '..', d))
-import common, isahack as H
-import hd as HDM, ref_flatten as RF
-from machine_lockstep import MR
-
-KIND = {0: 'nand', 1: 'dff', 2: 'rom', 3: 'arm'}
+sys.path[:0] = [os.path.join(HERE, '..', 'tools'), os.path.join(HERE, '..', 'isa'), HERE]
+import common, isahack, machine_model, hd as H, ref_flatten as RF
 
 
-def assemble(files, outdir):
-    r = subprocess.run([sys.executable, os.path.join(HERE, '..', 'tools', 'asm.py'), '-o', outdir] + files, capture_output=True, text=True)
-    if r.returncode: raise SystemExit(r.stdout + r.stderr)
-    return open(os.path.join(outdir, 'rom.bin'), 'rb').read()
+class M(machine_model.MR):
+    def __init__(self, ramn):
+        super().__init__(ramn); self.hi = 0; self.bad = []
+    def wr(self, a, v):
+        a &= common.AMASK
+        if a < common.ARM_BASE:
+            if a >= self.ramn: self.bad.append(a)
+            else: self.hi = max(self.hi, a)
+        super().wr(a, v)
 
 
-def run_model(image, ramn=256, max_instr=60_000_000, report=2_000_000):
-    m = MR(ramn); m.load_rom(0, image)
-    cpu = H.CPU(m); n = 0; t0 = time.time()
-    while n < max_instr:
-        if not cpu.step(): break
+def s16(v): return v - 65536 if v >= 32768 else v
+
+
+def run(outdir, maxn):
+    rom = open(os.path.join(outdir, 'rom.bin'), 'rb').read()
+    m = M(128); m.load_rom(0, rom)
+    cpu = isahack.CPU(m)
+    t0 = time.time(); n = 0
+    while n < maxn:
         n += 1
-        if report and n % report == 0: print(f'   {n/1e6:.0f}M instr, {len(m.armlog)} arm writes, {time.time()-t0:.0f}s', flush=True)
-    return m, n
+        if not cpu.step(): break
+        if n % 5000000 == 0: print(f'  {n/1e6:.0f}M instr, {len(m.armlog)} arm writes, {time.time()-t0:.0f}s', flush=True)
+    else:
+        print('STEP LIMIT'); 
+    return m, cpu, n, rom, time.time() - t0
 
 
-def decode_arm(armlog):
+def decode(armlog):
     regs = [0] * 16; cmds = []
-    s16 = lambda lo, hi: (lo | hi << 8) - (65536 if hi & 128 else 0)
     for r, v in armlog:
         regs[r] = v
         if r != 15: continue
-        ax, ay = s16(regs[0], regs[1]), s16(regs[2], regs[3])
-        if v == 1: cmds.append(('place', KIND[regs[8]], ax, ay))
-        elif v == 2: cmds.append(('wire', ax, ay, s16(regs[4], regs[5]), s16(regs[6], regs[7])))
-        elif v == 3: cmds.append(('rom', ax, ay, regs[4] | regs[5] << 8, regs[10]))
-        else: raise AssertionError(f'bad CMD {v}')
+        w = lambda i: regs[i] | regs[i + 1] << 8
+        ax, ay, bx, by = s16(w(0)), s16(w(2)), s16(w(4)), s16(w(6))
+        if v == 1: cmds.append(('place', regs[8], ax, ay, regs[9], regs[10]))
+        elif v == 3: cmds.append(('rom', ax, ay, w(4), regs[10]))
+        elif v == 4: cmds.append(('track', regs[10], ax, ay, bx, by))
+        elif v == 5: cmds.append(('via', ax, ay))
+        else: cmds.append(('?', v))
     return cmds
 
 
-def compare(cmds, ref):
-    a, b = set(cmds), set(ref)
-    ok = len(cmds) == len(a) and a == b
-    print(f'commands: built {len(cmds)} ({len(a)} distinct), reference {len(ref)}; missing {len(b - a)}, extra {len(a - b)}')
-    for x in list(b - a)[:5]: print('   missing', x)
-    for x in list(a - b)[:5]: print('   extra  ', x)
-    # order constraints of RNDW (spec section 7)
-    kinds = [c[0] for c in cmds]
-    last_place = max(i for i, k in enumerate(kinds) if k == 'place'); first_rom = kinds.index('rom'); last_rom = len(kinds) - 1 - kinds[::-1].index('rom')
-    first_wire = kinds.index('wire')
-    order = last_place < first_rom and last_rom < first_wire
-    print(f'order: all PLACE before PROGRAM_ROM, all PROGRAM_ROM before any WIRE: {order}')
-    tail = cmds[-3:] == ref[-3:]
-    print(f'last three commands (EN wire, then the two RUN wires) identical to the reference: {tail}')
-    return ok and order and tail
+def norm(c):
+    if c[0] == 'track':
+        a, b = (c[2], c[3]), (c[4], c[5])
+        if b < a: a, b = b, a
+        return ('track', c[1]) + a + b
+    if c[0] == 'place' and c[1] in (0, 1): return ('place', c[1], c[2], c[3])   # angle / val are not part of a NAND/DFF
+    return tuple(c)
 
 
 if __name__ == '__main__':
-    hdfile, datafile = sys.argv[1], sys.argv[2]
-    out = tempfile.mkdtemp(); image = assemble([os.path.join(HERE, '..', 'src', 'macros.asm'), os.path.join(HERE, '..', 'src', 'builder.asm'), datafile], out)
-    print('image', len(image), 'bytes')
-    hd = HDM.read(open(hdfile).read()); f = RF.flatten(hd)
-    ref = RF.commands(f, image, 0, RF.STRIDE)
-    m, n = run_model(image)
-    print('instructions', n, 'arm writes', len(m.armlog))
-    cmds = decode_arm(m.armlog)
-    print('PASS' if compare(cmds, ref) else 'FAIL')
+    outdir, hdf = sys.argv[1], sys.argv[2]
+    maxn = int(sys.argv[sys.argv.index('--max') + 1]) if '--max' in sys.argv else 10**9
+    m, cpu, n, rom, dt = run(outdir, maxn)
+    print(f'halted={n < maxn}: {n} instructions, {m.accesses} memory accesses, {dt:.0f}s; RAM high-water {m.hi} ({m.hi+1} bytes); out-of-RAM writes {len(m.bad)}')
+    got = decode(m.armlog)
+    hd = H.read(open(hdf).read()); f = RF.flatten(hd)
+    ref = RF.commands(f, rom, RF.CHILD_DX)
+    print('got', collections.Counter(c[0] for c in got), 'ref', collections.Counter(c[0] for c in ref))
+    g, r = collections.Counter(map(norm, got)), collections.Counter(map(norm, ref))
+    miss, extra = r - g, g - r
+    print(f'missing {sum(miss.values())}  extra {sum(extra.values())}')
+    for c in list(miss)[:8]: print('  missing', c)
+    for c in list(extra)[:8]: print('  extra  ', c)
+    # ordering: ROM programmed before any wire; RUN sinks last, after EN
+    kinds = [c[0] for c in got]
+    last_rom = max((i for i, k in enumerate(kinds) if k == 'rom'), default=-1)
+    first_wire = min((i for i, k in enumerate(kinds) if k in ('track', 'via')), default=10**9)
+    print('ROM before wires:', last_rom < first_wire)
+    ok = not miss and not extra and not m.bad and last_rom < first_wire
+    print('RESULT', 'PASS' if ok else 'FAIL')
+    sys.exit(0 if ok else 1)

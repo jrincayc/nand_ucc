@@ -1,4 +1,5 @@
 """hd.py -- data model, text reader and writer for the readable hardware description (HD) of the Y project.
+(Copy of nandgen/y/tools/hd.py from the Project.)
 
 HD text (see hd/core.hd):
   # comment

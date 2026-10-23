@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""asm.py -- text assembler for Hack-vN-AB (Y project, M2).  Trusted base: keep it small and readable.
+"""asm.py -- text assembler for Hack-vN-AB (Y project, M2).  Copy of nandgen/y/tools/asm.py.  Trusted base: keep it small and readable.
 
 usage:  python3 asm.py -o OUTDIR file.asm [file2.asm ...]      (files are assembled in order, one location counter)
 output: OUTDIR/rom.bin   bytes from ROM_BASE to the last programmed byte (gaps = 0 = unprogrammed)
@@ -9,22 +9,20 @@ output: OUTDIR/rom.bin   bytes from ROM_BASE to the last programmed byte (gaps =
 Source syntax (Hack style; comments start with //):
   label:                      define a label at the location counter (may share a line with a statement)
   @expr                       A-instruction (0 <= expr <= AMASK)
-  [dest=]comp[;jump]          C-instruction, Hack syntax: dest in A,D,M,AM,AD,MD,AMD; comp as in HACK_VN.md
+  [dest=]comp[;jump]          C-instruction, Hack syntax: dest in A,D,M,AM,AD,MD,AMD
   AP                          indirect A load  A = {mem[A+1][AB-9:0], mem[A]}
   .org expr                   set the location counter (absolute address; skipped bytes stay unprogrammed)
   .equ NAME, expr             constant   (predefined: ROM_BASE, ARM_BASE, AB)
   .byte e,e,...  .word e,...  data (little endian words)    .space n   n zero bytes (programmed)
   .macro NAME p1 p2 ... / .endm   text macro; body uses \\p1 ...; \\@ = unique number per expansion
 Expressions: numbers (dec, 0x, 0b), symbols, + - *, parentheses, lo(x), hi(x).
-Every emitted line must carry a // comment: that is checked by trace_check.py, not here.
 """
 import os, re, sys, json
 
-AB = int(os.environ.get('HACK_AB', 15))
+AB = int(os.environ.get('HACK_AB', 14))
 ROM_BASE = 1 << (AB - 1)
 AMASK = (1 << AB) - 1
 
-# Hack comp field (6 bits) for the a=0 forms; a=1 uses M in place of A.  HACK_VN.md section 2.
 COMP = {'0': 0b101010, '1': 0b111111, '-1': 0b111010, 'D': 0b001100, 'A': 0b110000, '!D': 0b001101,
         '!A': 0b110001, '-D': 0b001111, '-A': 0b110011, 'D+1': 0b011111, 'A+1': 0b110111,
         'D-1': 0b001110, 'A-1': 0b110010, 'D+A': 0b000010, 'D-A': 0b010011, 'A-D': 0b000111,
@@ -42,7 +40,6 @@ def split_comment(text):
     return (text[:i], text[i + 2:].strip()) if i >= 0 else (text, '')
 
 
-# ------------------------------------------------------------------------------ expressions
 TOK = re.compile(r'\s*(0x[0-9a-fA-F]+|0b[01]+|\d+|[A-Za-z_.][A-Za-z_0-9.]*|[-+*(),])')
 
 
@@ -68,7 +65,7 @@ def evaluate(expr, syms):
     def atom():
         x = take()
         if x == '(':
-            v = add(); 
+            v = add()
             if take() != ')': raise AsmError('missing )')
             return v
         if x == '-': return -atom()
@@ -96,7 +93,6 @@ def evaluate(expr, syms):
 
 
 def split_args(s):
-    """split on commas not inside parentheses"""
     out, depth, cur = [], 0, ''
     for ch in s:
         if ch == '(': depth += 1
@@ -107,7 +103,6 @@ def split_args(s):
     return out
 
 
-# ------------------------------------------------------------------------------ C-instruction
 def encode_c(text):
     s = text.replace(' ', '')
     dest, jump = '', ''
@@ -121,7 +116,7 @@ def encode_c(text):
     if 'M' in comp and 'A' in comp: raise AsmError(f'comp {s!r} mixes A and M')
     a = 1 if 'M' in comp else 0
     comp = comp.replace('M', 'A')
-    for sep in '+&|':                      # commutative forms: A+D == D+A
+    for sep in '+&|':
         if sep in comp[1:]:
             x, y = comp.split(sep, 1)
             if (x, y) == ('A', 'D'): comp = 'D' + sep + 'A'
@@ -129,9 +124,7 @@ def encode_c(text):
     return 7 << 13 | a << 12 | COMP[comp] << 6 | DEST[dkey] << 3 | JUMP[jump]
 
 
-# ------------------------------------------------------------------------------ assembler
 class Item:
-    """one emitted source line"""
     def __init__(self, kind, addr, size, file, line, text, macro=None):
         self.kind, self.addr, self.size, self.file, self.line, self.text, self.macro = kind, addr, size, file, line, text, macro
         self.data = b''; self.stmt = ''
@@ -145,8 +138,6 @@ def read_lines(paths):
 
 
 def expand_macros(lines):
-    """Pass 0: collect .macro definitions, expand calls.  Yields (file, line, text, macro_info) where macro_info is
-    None or (macro_name, call_file, call_line)."""
     macros, out, cur, uid = {}, [], None, 0
     for f, n, text, _ in lines:
         code, _c = split_comment(text)
@@ -174,14 +165,14 @@ def expand_macros(lines):
             args = split_args(argstr)
             if len(args) != len(params): raise AsmError(f'{f}:{n}: macro {name} takes {len(params)} arguments')
             if depth > 8: raise AsmError('macro nesting too deep')
-            uid += 1; myid = uid                       # nested expansions bump uid: keep this expansion's own number
+            uid += 1; myid = uid
             if m.group(1).strip(): res.append((f, n, m.group(1).strip() + '  ' + ('//' + comment if comment else ''), None))
             res.append((f, n, (name + ' ' + argstr.strip()).strip() + ('  // ' + comment if comment else ''), ('@call', name)))
             for bf, bn, bt in body:
                 t = bt
                 for p, a in zip(params, args): t = t.replace('\\' + p, a)
                 t = t.replace('\\@', str(myid))
-                expand(bf, bn, t, depth + 1, (name, f, n))      # macros may call macros
+                expand(bf, bn, t, depth + 1, (name, f, n))
             return
         res.append((f, n, text, info))
 
@@ -192,14 +183,12 @@ def expand_macros(lines):
 def assemble(paths):
     lines = expand_macros(read_lines(paths))
     syms, items, pc = {'ROM_BASE': ROM_BASE, 'ARM_BASE': ROM_BASE - 16, 'AB': AB}, [], ROM_BASE
-    pend_labels = []
-    # ---- pass 1: sizes and labels
     for f, n, text, mac in lines:
-        if mac and mac[0] == '@call':               # the macro call line itself: listed, emits nothing
+        if mac and mac[0] == '@call':
             it = Item('call', pc, 0, f, n, text.strip()); it.stmt = ''; items.append(it); continue
         code, comment = split_comment(text)
         c = code.strip()
-        while True:                                  # leading labels
+        while True:
             m = re.match(r'^([A-Za-z_.][A-Za-z_0-9.]*):\s*(.*)$', c)
             if not m: break
             name = m.group(1)
@@ -224,7 +213,6 @@ def assemble(paths):
         it = Item('data' if d.startswith('.') else 'instr', pc, size, f, n, text.strip(), macinfo)
         it.stmt = c
         items.append(it); pc += size
-    # ---- pass 2: encode
     mem = {}
     for it in items:
         c = it.stmt
@@ -246,7 +234,7 @@ def assemble(paths):
                 if not 0 <= v <= AMASK: raise AsmError(f'A-instruction value {v:#x} outside 0..{AMASK:#x}')
                 it.data = bytes([v & 255, v >> 8])
             elif c.replace(' ', '') == 'AP':
-                it.data = bytes([0, 6 << 5])             # 110 0000000000000
+                it.data = bytes([0, 6 << 5])
             else:
                 v = encode_c(c); it.data = bytes([v & 255, v >> 8])
         except AsmError as e:
@@ -271,16 +259,13 @@ def write_outputs(outdir, items, syms, mem):
             lines.append(f'{last:04X}  {"":<24}| gap | | [{it.addr - last} unprogrammed bytes]')
         mac = f'macro {it.macro[0]} @{it.macro[1]}:{it.macro[2]}' if it.macro and it.macro[0] != '@call' else ''
         chunks = [it.data[k:k + 8] for k in range(0, len(it.data), 8)] or [b'']
-        for k, ch in enumerate(chunks):                     # first line carries the source, the rest are continuations
+        for k, ch in enumerate(chunks):
             hexb = ' '.join(f'{b:02X}' for b in ch)
             if k == 0: lines.append(f'{it.addr:04X}  {hexb:<24}| {it.file}:{it.line} | {mac} | {it.text}')
             else: lines.append(f'{it.addr + 8 * k:04X}  {hexb:<24}|  |  |')
         last = it.addr + len(it.data)
     open(os.path.join(outdir, 'rom.lst'), 'w').write('\n'.join(lines) + '\n')
     open(os.path.join(outdir, 'symbols.txt'), 'w').write(''.join(f'{k} = {v}\n' for k, v in sorted(syms.items())))
-    json.dump([dict(addr=i.addr, hex=i.data.hex(), file=i.file, line=i.line, text=i.text, kind=i.kind,
-                    macro=list(i.macro) if i.macro and i.macro[0] != '@call' else None) for i in sorted(items, key=lambda i: i.addr)],
-              open(os.path.join(outdir, 'rom.map.json'), 'w'), indent=0)
     return bytes(rom)
 
 

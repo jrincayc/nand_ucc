@@ -29,3 +29,10 @@ Caveats:
 Layout 810 x 751 = 608k cells, built in rndp, 0 problems (`cpu_g1_mlpa.state/.svg`).  Operation counts (COUNTED): 21 LPA sweeps over all levels, 28,403 vertex visits, 182,972 neighbour visits; chaining: 70k cluster-edge visits, 9k candidate scans.
 Instructions (ESTIMATED from the measured kernel: about 25 per neighbour visit + 127 per vertex visit): LPA about 8.2 M; chaining about 2.2 M (7 per scan, 30 per edge visit); the rest of the pipeline as in the table above without the breadth-first step (CSR 1.0 M, fold 0.1 M, router about 1.8 M, emission about 3 M).  Total about 16 M, again about 1.2% of the week budget.  RAM about 200 KB (estimate; the contracted graphs are smaller than the gate graph).
 The caveats above (fixed vs shuffled order, no recursion in the first version) apply; this version does recurse: 4 levels.
+
+
+## Update 2026-10-22: placement measured
+The whole placement order (graph build, four LPA/contraction levels, chaining, flatten) now exists as hand-written RV32EC assembly (kernels/build_graph.s, lpa_level.s, chain.s, place_order.s; 3,674 ROM bytes, all traceable) and reproduces tools/place_ref.py exactly.
+**Measured** on the Rust emulator: 17.2-17.9M instructions (old-map g1) and 18.3-19.3M instructions (new 256 KiB map g1). Of that, graph build 2.3-2.4M, LPA level 0 about 6.9M (all 15 sweeps run), the rest the coarser levels, chaining and contraction.
+This replaces the earlier estimate for placement (the old 16-17M estimate was for placement AND routing together); routing kernels are still unwritten, so the total will be larger. At 26 ticks per instruction and about 60k ticks per second (estimates), 19.3M instructions is about 2.3 hours of simulation.
+RAM used by the placement kernels: all of 0x1000-0x3FFF0 of the 256 KiB map (see kernels/memmap.s); capacity limits 4080 vertices, 20480 directed edges.

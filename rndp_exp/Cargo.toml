@@ -1,0 +1,19 @@
+[package]
+name = "rndp"
+version = "0.1.0"
+edition = "2021"
+description = "RNDP: Robot + NAND + DFF + PCB (+ optional ROM, RAM) world simulator (std only)"
+
+[lib]
+name = "rndp"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rndp"
+path = "src/main.rs"
+
+[dependencies]
+
+[profile.release]
+opt-level = 3
+debug = false
