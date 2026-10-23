@@ -338,6 +338,7 @@ pub struct World {
     pub tick: u64,
     pub faults: u64,
     pub fault_log: Vec<String>,
+    pub cmd_log: Option<Vec<String>>,      // when Some: one line per executed arm command, drained by the runner (--cmd-log)
     pub events: u64,
     pub rom_written: u64,
     pub en_events: u64,
@@ -378,6 +379,7 @@ impl World {
             tick: 0,
             faults: 0,
             fault_log: vec![],
+            cmd_log: None,
             events: 0,
             rom_written: 0,
             en_events: 0,
@@ -977,6 +979,11 @@ impl World {
             CMD_VIA => self.via(ax, ay),
             c => Err(format!("unknown arm command {}", c)),
         };
+        if let Some(log) = self.cmd_log.as_mut() {
+            let name = match code { CMD_NOP => "nop", CMD_PLACE => "place", CMD_PROGRAM_ROM => "rom", CMD_TRACK => "track", CMD_VIA => "via", _ => "?" };
+            let status = match &res { Ok(()) => "ok".to_string(), Err(m) => format!("FAULT {}", m) };
+            log.push(format!("t{} arm{} {} A=({},{}) B=({},{}) kind={} angle={} val={} -> {}", self.tick, ai, name, ax, ay, bx, by, r[R_KIND], r[R_ANGLE], r[R_VAL], status));
+        }
         if let Err(msg) = res {
             self.fault(msg);
         }

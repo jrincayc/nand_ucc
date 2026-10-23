@@ -22,6 +22,7 @@ pub struct RunOpts {
     pub svg_every: u64,
     pub svg_window: Option<(i32, i32, i32, i32)>,
     pub svg_scale: f64,
+    pub cmd_log: Option<String>,
 }
 
 pub struct Runner {
@@ -56,6 +57,13 @@ impl Runner {
     pub fn step(&mut self) {
         self.w.step();
         let t = self.w.tick;
+        if let (Some(f), Some(buf)) = (self.o.cmd_log.as_ref(), self.w.cmd_log.as_mut()) {
+            if !buf.is_empty() {
+                use std::io::Write;
+                let mut fh = fs::OpenOptions::new().create(true).append(true).open(f).expect("cmd log");
+                for l in buf.drain(..) { writeln!(fh, "{}", l).unwrap(); }
+            }
+        }
         if self.w.take_en_event() {
             if let Some(pre) = self.o.dump_on_en.clone() {
                 let p = self.path(&format!("{}_t{}.state", pre, t));

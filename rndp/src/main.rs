@@ -37,6 +37,7 @@ Output:
   --checkpoint FILE --checkpoint-every N    rewrite FILE every N ticks (temp file + rename)
   --snapshot-prefix P --snapshot-every M    write a new numbered state file every M ticks
   --svg-at-end FILE | --svg-on-en | --svg-every N   SVG snapshots (--svg-window X0,Y0,X1,Y1  --svg-scale F)
+  --cmd-log FILE           append one line per executed arm command (tick, arm, command, absolute A/B, registers, ok/FAULT) to FILE
   --dump-pads FILE         write one line per part pin: part kind pin x y net-id (for cross-checks)
   --report                 print the report at the end (default on)
   -h, --help
@@ -104,6 +105,7 @@ fn real_main() -> Result<i32, String> {
                 }
                 o.svg_window = Some((v[0], v[1], v[2], v[3]));
             }
+            "--cmd-log" => o.cmd_log = Some(val(&a, &mut i)?.to_string()),
             "--dump-pads" => pads_f = Some(val(&a, &mut i)?.to_string()),
             "--report" => {}
             s => return Err(format!("unknown option {} (try --help)", s)),
@@ -131,6 +133,7 @@ fn real_main() -> Result<i32, String> {
     };
     fs::create_dir_all(&o.out_dir).map_err(|e| e.to_string())?;
     let mut r = Runner::new(world, o);
+    if r.o.cmd_log.is_some() { r.w.cmd_log = Some(vec![]); }
     let t0 = Instant::now();
     if let Some(f) = &script_f {
         let text = fs::read_to_string(f).map_err(|e| format!("{}: {}", f, e))?;
