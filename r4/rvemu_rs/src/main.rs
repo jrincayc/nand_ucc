@@ -78,7 +78,7 @@ fn expand(h: u32) -> Result<u32, String> {
     }
 }
 
-struct M { rom: Vec<u8>, ram: Vec<u8>, rom_bits: u32, ab: u32, pc: u32, icount: u64, halted: bool, armlog: Vec<(u8, u8)>, armcount: u64 }
+struct M { rom: Vec<u8>, ram: Vec<u8>, rom_bits: u32, ab: u32, pc: u32, icount: u64, halted: bool, armlog: Vec<(u8, u8)>, armcount: u64, prof: bool, touched: std::cell::RefCell<Vec<u8>>, pch: Vec<u64>, phase: usize, ph_touched: std::cell::RefCell<Vec<Vec<u8>>> }
 
 impl M {
     fn rom_base(&self) -> u32 { 1 << self.ab }
@@ -88,13 +88,13 @@ impl M {
         let a = a & self.amask();
         if a & self.rom_base() != 0 { let o = ((a - self.rom_base()) & self.pcm()) as usize; return if o < self.rom.len() { self.rom[o] } else { 0 }; }
         if (a >> 4) == ((self.rom_base() - 16) >> 4) { return 0; }
-        if (a as usize) < self.ram.len() { self.ram[a as usize] } else { 0 }
+        if (a as usize) < self.ram.len() { if self.prof { self.touched.borrow_mut()[a as usize] |= 1; let p = self.phase; if !self.ph_touched.borrow().is_empty() { self.ph_touched.borrow_mut()[p][a as usize] |= 1; } } self.ram[a as usize] } else { 0 }
     }
     fn wb(&mut self, a: u32, v: u8) {
         let a = a & self.amask();
         if a & self.rom_base() != 0 { return; }
         if (a >> 4) == ((self.rom_base() - 16) >> 4) { self.armcount += 1; self.armlog.push(((a & 15) as u8, v)); return; }
-        if (a as usize) < self.ram.len() { self.ram[a as usize] = v; }
+        if (a as usize) < self.ram.len() { if self.prof && self.ram[a as usize] != v { self.touched.borrow_mut()[a as usize] |= 2; let p = self.phase; if !self.ph_touched.borrow().is_empty() { self.ph_touched.borrow_mut()[p][a as usize] |= 2; } } self.ram[a as usize] = v; }
     }
     fn rd(&self, a: u32, n: u32) -> u32 { let mut v = 0u32; for i in 0..n { v |= (self.rb(a.wrapping_add(i)) as u32) << (8 * i); } v }
     fn wr(&mut self, a: u32, n: u32, v: u32) { for i in 0..n { self.wb(a.wrapping_add(i), (v >> (8 * i)) as u8); } }
@@ -174,31 +174,42 @@ fn main() {
     if args.len() < 2 { eprintln!("usage: rvemu ROM.bin [--rom-bits N] [--ram-bytes N] [--max N] [--armlog F] [--trace F] [--dump-ram F] [--load-ram F] [--pc N]"); std::process::exit(1); }
     let rom = std::fs::read(&args[1]).expect("rom");
     let (mut rom_bits, mut ab, mut ram_bytes, mut maxn, mut pc0) = (14u32, 0u32, 256usize, u64::MAX, 0u32);
-    let (mut armlog, mut trace, mut dump, mut load) = (None, None, None, None);
+    let (mut armlog, mut trace, mut dump, mut load) = (None, None, None, None); let mut profile: Option<String> = None; let mut phases: Vec<u32> = vec![];
     let mut i = 2;
     while i < args.len() {
         let v = args.get(i + 1).cloned().unwrap_or_default();
         match args[i].as_str() {
             "--rom-bits" => rom_bits = v.parse().unwrap(), "--ab" => ab = v.parse().unwrap(), "--ram-bytes" => ram_bytes = v.parse().unwrap(),
             "--max" => maxn = v.parse().unwrap(), "--pc" => pc0 = v.parse().unwrap(),
-            "--armlog" => armlog = Some(v), "--trace" => trace = Some(v), "--dump-ram" => dump = Some(v), "--load-ram" => load = Some(v),
+            "--armlog" => armlog = Some(v), "--trace" => trace = Some(v), "--dump-ram" => dump = Some(v), "--load-ram" => load = Some(v), "--profile" => profile = Some(v), "--phases" => phases = v.split(',').map(|x| u32::from_str_radix(x, 16).unwrap()).collect(),
             o => { eprintln!("unknown option {o}"); std::process::exit(1); }
         }
         i += 2;
     }
     if ab == 0 { ab = rom_bits; }
-    let mut m = M { rom, ram: vec![0; ram_bytes], rom_bits, ab, pc: pc0, icount: 0, halted: false, armlog: vec![], armcount: 0 };
+    let mut m = M { rom, ram: vec![0; ram_bytes], rom_bits, ab, pc: pc0, icount: 0, halted: false, armlog: vec![], armcount: 0, prof: profile.is_some(), touched: std::cell::RefCell::new(vec![0; ram_bytes]), pch: vec![0; 1 << 17], phase: 0, ph_touched: std::cell::RefCell::new(if phases.is_empty() { vec![] } else { vec![vec![0; ram_bytes]; phases.len() + 1] }) };
     if let Some(f) = load { let d = std::fs::read(f).expect("load-ram"); let n = d.len().min(ram_bytes); m.ram[..n].copy_from_slice(&d[..n]); }
     let mut tr = trace.map(|f| BufWriter::new(std::fs::File::create(f).unwrap()));
     let mut code = 0;
     while !m.halted {
         if m.icount >= maxn { code = 3; break; }
+        if !phases.is_empty() { if let Some(k) = phases.iter().position(|&p| p == m.pc) { m.phase = k + 1; } }
         match m.step() {
-            Ok((pc, raw, comp)) => { if let Some(t) = tr.as_mut() { writeln!(t, "{:x} {:0w$x}", pc, raw, w = if comp { 4 } else { 8 }).unwrap(); } }
+            Ok((pc, raw, comp)) => { if m.prof { let o = (pc as usize) >> 1; if o < m.pch.len() { m.pch[o] += 1; } } if let Some(t) = tr.as_mut() { writeln!(t, "{:x} {:0w$x}", pc, raw, w = if comp { 4 } else { 8 }).unwrap(); } }
             Err(e) => { eprintln!("illegal: {e} (after {} instructions)", m.icount); code = 2; break; }
         }
     }
     if let Some(f) = armlog { let mut w = BufWriter::new(std::fs::File::create(f).unwrap()); for (r, v) in &m.armlog { writeln!(w, "{} {}", r, v).unwrap(); } }
+    if let Some(f) = profile {
+        // text: 'pc ADDR COUNT' for every executed instruction address, then 'ram LO HI FLAGS' for maximal runs of equal touched-flags (1 read, 2 written, 3 both)
+        let mut w = BufWriter::new(std::fs::File::create(f).unwrap());
+        for (i, c) in m.pch.iter().enumerate() { if *c > 0 { writeln!(w, "pc {:x} {}", m.rom_base() as usize + 2 * i, c).unwrap(); } }
+        for (k, pt) in m.ph_touched.borrow().iter().enumerate() {
+            let mut i = 0; while i < pt.len() { if pt[i] == 0 { i += 1; continue; } let f = pt[i]; let mut j = i; while j + 1 < pt.len() && pt[j + 1] == f { j += 1; } writeln!(w, "phram {} {:x} {:x} {}", k, i, j, f).unwrap(); i = j + 1; }
+        }
+        let t = m.touched.borrow(); let mut i = 0;
+        while i < t.len() { if t[i] == 0 { i += 1; continue; } let f = t[i]; let mut j = i; while j + 1 < t.len() && t[j + 1] == f { j += 1; } writeln!(w, "ram {:x} {:x} {}", i, j, f).unwrap(); i = j + 1; }
+    }
     if let Some(f) = dump { std::fs::write(f, &m.ram).unwrap(); }
     eprintln!("instructions {} arm_writes {} pc {:#x} halted {}", m.icount, m.armcount, m.pc, m.halted);
     std::process::exit(code);

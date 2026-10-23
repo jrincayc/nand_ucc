@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""compare_gen.py STATE [DX] -- the quine check: the copy built at x >= (parent's minimum x + DX - 1) must equal the parent
-shifted by DX: same parts (kind, x, y, rot, val), same track segments, same vias, same ROM contents."""
+"""compare_gen.py STATE [DX=880] -- S8 quine check: the child (parts with x >= parent min x + DX - 4) must equal the parent shifted by DX: same parts (kind, x, y, rot, val), track segments (collinear pieces merged), vias, ROM bytes. R4: DX = W + 8 = 880 (tools/make_seed.py writes it to seed.json)."""
 import sys, collections
-st = sys.argv[1]; DX = int(sys.argv[2]) if len(sys.argv) > 2 else 4700
+st = sys.argv[1]; DX = int(sys.argv[2]) if len(sys.argv) > 2 else 880
 parts, segs, vias, mems = [], [], [], collections.defaultdict(dict)
 for line in open(st):
     w = line.split()
@@ -12,7 +11,7 @@ for line in open(st):
         l, x0, y0, x1, y1 = map(int, w[1:]); a, b = sorted([(x0, y0), (x1, y1)]); segs.append((l,) + a + b)
     elif w[0] == 'via': vias.append(tuple(map(int, w[1:])))
     elif w[0] == 'mem': mems[int(w[1])][int(w[2])] = int(w[3])
-import os; CUTM = int(os.environ.get("CUTM", "24"))
+import os; CUTM = int(os.environ.get("CUTM", "4"))
 xmin = min(p[2] for p in parts)
 cut = xmin + DX - CUTM
 cut2 = xmin + 2 * DX - CUTM     # beyond this: the grandchild, ignored

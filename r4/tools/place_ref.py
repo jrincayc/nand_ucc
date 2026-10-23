@@ -12,27 +12,35 @@ class Rng:
     def __init__(self, seed): self.s = (seed * 2654435761 + 1) & 0xFFFFFFFF or 1
     def next(self):
         x = self.s; x ^= (x << 13) & 0xFFFFFFFF; x ^= x >> 17; x ^= (x << 5) & 0xFFFFFFFF; self.s = x; return x
-    def below(self, n): return ((self.next() >> 8) * n) >> 24          # 24-bit fraction times n: no division
+    def below(self, n):
+        """uniform in [0, n), n < 65536: mask of the next power of two minus one, take bits 8.. of the draw, reject if >= n (no multiply, no divide)"""
+        m = n - 1; m |= m >> 1; m |= m >> 2; m |= m >> 4; m |= m >> 8
+        while True:
+            j = (self.next() >> 8) & m
+            if j < n: return j
+
+
+def net_id(tok, N):
+    """integer id of a source token: gate n -> n, romJ -> N+J, ramoC -> N+8+C, anything else (open) -> None"""
+    b = tok.split('@')[0]
+    if b.startswith('n') and b[1:].isdigit(): return int(b[1:])
+    if b.startswith('rom') and b[3:].isdigit(): return N + int(b[3:])
+    if b.startswith('ramo') and b[4:].isdigit(): return N + 8 + int(b[4:])
+    return None
 
 
 def nets_anchored(nl):
-    N = len(nl.nodes); pins = {}
+    """pin lists of all nets, in the order of the net id (gate outputs 0..N-1, ROM bits N..N+7, RAM-out bits N+8..N+15).  Vertex N is the anchor
+    (ROM, ARM, RAM).  Pins of a net: driver first (anchor for ROM/RAM-out bits), then the sink gates in ascending number (once each), then the anchor if a port reads the net."""
+    N = len(nl.nodes); pins = [[k] for k in range(N)] + [[N] for _ in range(16)]
     for k, (kind, ins) in enumerate(nl.nodes):
-        pins.setdefault(k, [k])
         for t in ins:
-            b = t.split('@')[0]
-            if b.startswith('n') and b[1:].isdigit():
-                d = int(b[1:]); pins.setdefault(d, [d])
-                if k not in pins[d]: pins[d].append(k)
-            elif b.startswith('rom') or b.startswith('ramo'):
-                pins.setdefault(b, [N])
-                if k not in pins[b]: pins[b].append(k)
+            d = net_id(t, N)
+            if d is not None and k not in pins[d]: pins[d].append(k)
     for name, t in nl.ports:
-        b = t.split('@')[0]
-        if b.startswith('n') and b[1:].isdigit():
-            d = int(b[1:]); pins.setdefault(d, [d])
-            if N not in pins[d]: pins[d].append(N)
-    return [v for v in pins.values() if len(v) > 1]
+        d = net_id(t, N)
+        if d is not None and d < N and N not in pins[d]: pins[d].append(N)
+    return [v for v in pins if len(v) > 1]
 
 
 def build_graph(nl):
@@ -46,7 +54,8 @@ def build_graph(nl):
     return adj
 
 
-def lpa(nodes, adj, vsize, cap, rng):
+def lpa_labels(nodes, adj, vsize, cap, rng):
+    """one size-capped label-propagation level; returns the label of every node (the kernel's LAB array)"""
     lab = {v: v for v in nodes}; size = {v: vsize[v] for v in nodes}; order = list(nodes)
     for _ in range(SWEEPS):
         for i in range(len(order) - 1, 0, -1):
@@ -57,7 +66,7 @@ def lpa(nodes, adj, vsize, cap, rng):
             for u, w in adj[v].items():
                 l = lab[u]; votes[l] = votes.get(l, 0) + w            # dict keeps first-touch order, like the touched list
             if not votes: continue
-            best = max(votes.values()); cur = lab[v]
+            best = max(votes.values()); cur = lab[v]; assert best < 1 << 32          # kernel keeps votes in u32
             if votes.get(cur, 0) >= best: continue
             new = None
             for l, x in votes.items():
@@ -65,6 +74,11 @@ def lpa(nodes, adj, vsize, cap, rng):
             if new is None: continue
             size[cur] -= vsize[v]; size[new] += vsize[v]; lab[v] = new; moved += 1
         if not moved: break
+    return lab
+
+
+def lpa(nodes, adj, vsize, cap, rng):
+    lab = lpa_labels(nodes, adj, vsize, cap, rng)
     groups = {}
     for v in nodes: groups.setdefault(lab[v], []).append(v)
     return list(groups.values())

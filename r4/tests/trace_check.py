@@ -3,7 +3,7 @@
 (builder.s or cpu_data.asm), and the listing bytes must reproduce rom.bin exactly."""
 import sys, re, os
 import os
-ROM_BASE = 1 << int(os.environ.get('ROM_BITS', '14'))
+ROM_BASE = 1 << int(os.environ.get('AB', os.environ.get('ROM_BITS', '14')))
 d = sys.argv[1]; rom = open(os.path.join(d, 'rom.bin'), 'rb').read()
 cover = [0] * len(rom); img = bytearray(len(rom)); bad = 0
 for ln in open(os.path.join(d, 'rom.lst')):

@@ -20,7 +20,7 @@ Immediate operands accept expressions; branch/jump operands are labels or expres
 import os, re, sys
 
 import os as _os
-ROM_BASE = 1 << int(_os.environ.get('ROM_BITS', '14')); ARM_BASE = ROM_BASE - 16
+ROM_BASE = 1 << int(_os.environ.get('AB', _os.environ.get('ROM_BITS', '14'))); ARM_BASE = ROM_BASE - 16
 REGS = {}
 for _i in range(16): REGS[f'x{_i}'] = _i
 REGS.update(zero=0, ra=1, sp=2, gp=3, tp=4, t0=5, t1=6, t2=7, s0=8, fp=8, s1=9, a0=10, a1=11, a2=12, a3=13, a4=14, a5=15)
@@ -327,7 +327,9 @@ class Asm:
             # first sweep: labels with current sizes
             for it in self.items:
                 it.addr = pc
-                if it.kind == 'label': labels[it.text] = pc; self.syms[it.text] = pc; continue
+                if it.kind == 'label':
+                    if it.text in labels: raise AsmError(f'{it.file}:{it.line}: label {it.text!r} defined twice')
+                    labels[it.text] = pc; self.syms[it.text] = pc; continue
                 if it.text.startswith('.'):
                     pass
                 else:
@@ -337,6 +339,10 @@ class Asm:
                 if d == '.org': pc = self.ev(w[1], it, pc) if w[1].strip() else pc
                 elif d == '.equ':
                     n, e = w[1].split(',', 1)
+                    where = getattr(self, 'equ_at', None)
+                    if where is None: where = self.equ_at = {}
+                    if n.strip() in where and where[n.strip()] != (it.file, it.line): raise AsmError(f'{it.file}:{it.line}: .equ {n.strip()} already defined at {where[n.strip()][0]}:{where[n.strip()][1]}')
+                    where[n.strip()] = (it.file, it.line)
                     try: self.syms[n.strip()] = self.ev(e, it, pc)
                     except AsmError: pass
                 elif d in ('.byte', '.half', '.word'): pc += len(w[1].split(',')) * {'.byte': 1, '.half': 2, '.word': 4}[d]
@@ -377,8 +383,10 @@ class Asm:
             for k, byte in enumerate(data):
                 if it.addr + k in mem: raise AsmError(f'{it.file}:{it.line}: address {it.addr + k:#x} programmed twice')
                 mem[it.addr + k] = byte
-            shown = ' '.join(f'{x:02X}' for x in data[:6]) + (' ..' if len(data) > 6 else '')
-            lst.append(f'{it.addr:04X}  {shown:<12} | {it.file}:{it.line} | {it.macro or "":<12} | {it.text}')
+            lim = 16                                                       # every programmed byte is listed (long data directives continue on following lines), so trace_check can cover all of them
+            for c in range(0, max(len(data), 1), lim):
+                shown = ' '.join(f'{x:02X}' for x in data[c:c + lim])
+                lst.append(f'{it.addr + c:04X}  {shown:<12} | {it.file}:{it.line} | {it.macro or "":<12} | {it.text if c == 0 else "(cont.)"}')
         end = max(mem) + 1 if mem else ROM_BASE
         img = bytearray(end - ROM_BASE)
         for a, v in mem.items(): img[a - ROM_BASE] = v
