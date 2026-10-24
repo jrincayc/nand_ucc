@@ -1,6 +1,6 @@
 # E4 result: decoder-based token-ring quine (R5, pruned architecture)
 
-Status 2026-10-23. Everything below is MEASURED unless marked otherwise.
+Status 2026-10-23. **Superseded for the final numbers by E5_REPORT.md (column inversion, metric 198,526).** Everything below is MEASURED unless marked otherwise.
 
 ## Design (as built)
 - Plane: one DFF per row (token ring), 24 columns, tile = INV+NAND per 1-bit. W = 11,350 rows (16 interpreter, 899 pattern, 9,833 compressed layout words, 231 zero pad, 370 explicit C rows, 1 A row).

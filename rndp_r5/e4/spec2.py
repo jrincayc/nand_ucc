@@ -10,3 +10,5 @@ def pack_int(d=0, reg=0, src=0, D=0, cpol=1, ccol=CC_ALWAYS, ph=0):
     return d | reg << F_REG | src << F_SRC | D << F_DFL | cpol << F_CPOL | ccol << F_CCOL | ph << F_PH
 def bits(w): return [(w >> i) & 1 for i in range(B)]
 def unpack(w): return dict(d=w & 255, reg=(w >> F_REG) & 15, src=(w >> F_SRC) & 7, D=(w >> F_DFL) & 1, cpol=(w >> F_CPOL) & 1, ccol=(w >> F_CCOL) & 31, ph=(w >> F_PH) & 3)
+
+INV = tuple(int(c) for c in __import__('os').environ.get('E5_INV', '').split(',') if c != '')   # E5: stored plane bit = logical bit ^ (j in INV); the engine inverts those plane outputs (1 NAND each)

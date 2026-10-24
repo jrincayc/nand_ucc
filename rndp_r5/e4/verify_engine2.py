@@ -10,7 +10,9 @@ import engine2_net as E2, engine_net as EN, engine2_model as EM
 rows, M = T.rows, T.M
 writes, cyc = EM.run(rows, M)
 N, sp = E2.build(len(rows), M=M); info = EN.export_nl(N, sp, '/tmp/eng2.nl'); print('NAND', info['nand'], 'DFF', info['dff'])
-open('/tmp/rows2.txt', 'w').write('\n'.join(str(w) for w in rows))
+import spec2 as S2
+MASK = sum(1 << j for j in S2.INV)
+open('/tmp/rows2.txt', 'w').write('\n'.join(str(w ^ MASK) for w in rows))
 subprocess.run(['./engsim/engsim', '/tmp/eng2.nl', '/tmp/rows2.txt', '--cycles', str(cyc + 100), '--armlog', '/tmp/arm2.log'], check=True)
 got = [tuple(map(int, l.split())) for l in open('/tmp/arm2.log')]
 print('model', len(writes), 'gate', len(got), 'equal', got == writes)

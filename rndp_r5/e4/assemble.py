@@ -71,9 +71,12 @@ print('A', len(A_rows), 'interp', len(interp), 'pat', len(pat), 'data', len(data
 assert pad >= 0, 'W too small'
 rows = A_rows + interp + pat + data + [0] * pad + C_rows
 assert len(rows) == W
-json.dump(dict(rows=rows, W=W, M=M, X0=X0, RX=RX, DX=DX, BX=BX, AYP=AYP, Y0P=Y0P, CX=CX, CY=CY, nA=len(A_rows), nint=len(interp), npat=len(pat), ndata=len(data), npad=pad, nC=len(C_rows)), open('/tmp/e4_rows.json', 'w'))
+INVMASK = sum(1 << j for j in S.INV)
+json.dump(dict(rows=rows, srows=[w ^ INVMASK for w in rows], inv=list(S.INV), W=W, M=M, X0=X0, RX=RX, DX=DX, BX=BX, AYP=AYP, Y0P=Y0P, CX=CX, CY=CY, nA=len(A_rows), nint=len(interp), npat=len(pat), ndata=len(data), npad=pad, nC=len(C_rows)), open('/tmp/e4_rows.json', 'w'))
 # ---- parent world: plane (parent coords, uses the real bits of every row) + engine body + C commands
-planec = PL.plane([S.bits(w) for w in rows], X0, Y0P, RX)
+INVMASK = sum(1 << j for j in S.INV)
+srows = [w ^ INVMASK for w in rows]
+planec = PL.plane([S.bits(w) for w in srows], X0, Y0P, RX)
 parent = planec + [blk(c) for c in body] + cC
 child_expect = shift(parent, DX)
 pickle.dump((parent, child_expect), open('/tmp/e4_parent.pkl', 'wb'))

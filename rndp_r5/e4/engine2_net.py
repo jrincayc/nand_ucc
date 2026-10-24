@@ -19,7 +19,8 @@ def eq_const(N, bits, val):
 def build(W, M=16319, NB=14, decoder=True):
     N = NLm.Net(); E0 = M - W + 1
     x = [N.inp(f'x{i}') for i in range(25)]
-    w = x[:24]; qlast = x[24]
+    import spec2
+    w = [N.not_(x[j]) if j in spec2.INV else x[j] for j in range(24)]; qlast = x[24]
     run_q = N.dff('run'); started = N.dff('started'); N.set_d(run_q, N.inp('tie'))
     t = [N.dff(f't{i}') for i in range(NB)]; rr = [N.dff(f'rr{i}') for i in range(NB)]
     wr = [N.dff(f'wr{i}') for i in range(24)]

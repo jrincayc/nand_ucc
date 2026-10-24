@@ -59,7 +59,8 @@ AY = 4 * (M + 1) - 32768; Y0 = AY - 4 * W
 a2 = Arm()
 for r, v in fmt2.decode(data, CX, CY): a2.write(r, v)
 exp1 = a2.cmds
-bitsrows = [S.bits(w) for w in rows]
+INVMASK = sum(1 << j for j in S.INV)
+bitsrows = [S.bits(w ^ INVMASK) for w in rows]
 exp2 = [c for c in PL.plane(bitsrows, X0, Y0, RX)]
 def s16(v): return v - 65536 if v >= 32768 else v
 def absc(c):
@@ -80,4 +81,4 @@ if c2 != e2:
     print('missing', list((e2 - c2).items())[:3], 'extra', list((c2 - e2).items())[:3])
 import os
 if os.environ.get('DUMP'):
-    open(os.environ['DUMP'], 'w').write(' '.join(map(str, rows))); open(os.environ['DUMP'] + '.w', 'w').write(' '.join(f'{r},{v}' for r, v in writes))
+    open(os.environ['DUMP'], 'w').write(' '.join(map(str, [w ^ INVMASK for w in rows]))); open(os.environ['DUMP'] + '.w', 'w').write(' '.join(f'{r},{v}' for r, v in writes))

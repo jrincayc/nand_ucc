@@ -79,7 +79,7 @@ def build_pattern(X0, RX, xoff, B=S.B):
         for bit in (1, 0):
             cmds = sym(PL.cell_cmds(x, 0, bit), xoff)
             w = best_order(cmds, pre, pre)
-            words += [dict(x_, ph=S.PH_P, cen=1, cpol=bit, ccol=j) for x_ in w]
+            words += [dict(x_, ph=S.PH_P, cen=1, cpol=bit ^ (1 if j in __import__('spec2').INV else 0), ccol=j) for x_ in w]
     return words
 
 if __name__ == '__main__':

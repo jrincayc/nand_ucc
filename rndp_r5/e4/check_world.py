@@ -15,7 +15,7 @@ rn = os.path.expanduser('~/rndp/target/release/rndp') if False else '/home/claud
 r = subprocess.run([rn, '--build', '/tmp/e4_parent.build', '--rom', 'off', '--ram', 'off', '--width', '2048', '--height', '50000', '--dump-pads', '/tmp/e4_parent.pads', '--steps', '0'], capture_output=True, text=True)
 print(r.stdout[-1500:], r.stderr[-500:])
 nl = elay.read_nl(f'/tmp/fp_{W}_{SEED}.nl')
-bits = [S.bits(w) for w in d['rows']]
+bits = [S.bits(w) for w in d['srows']]
 pins = PL.logical_nets(bits, X0, Y0P, RX, probes=False)     # plane pins (P frame)
 # column top nets
 alias = {}
