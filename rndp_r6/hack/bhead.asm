@@ -1,0 +1,26 @@
+// builder_r6.asm -- R6: Hack-vN-AB quine builds its own ROM plane and RAM tiles (no ROM/RAM parts).
+.equ ARM, ARM_BASE
+.equ XB, 24
+.equ XG, 84
+.equ X0, 138
+.equ INVY, 2
+.equ BASE0, 1041
+.equ SH, 53
+.equ TOPB, 7780
+.equ TOPLO, 7773
+.equ LASTX, 1154
+.equ NSTRIP, 128
+.equ XEND, 1164
+.equ SX, 14
+.equ SY, 16
+.equ KP, 22
+.equ TPT, 24
+.equ ROWL, 44
+.equ COLL, 45
+.equ SKIPL, 46
+.equ NEXTK, 47
+.equ KINDV, 48
+.equ NP, 49
+.equ RA_sitekind, 26
+.equ RA_kinit, 28
+.equ RA_tabpt, 38

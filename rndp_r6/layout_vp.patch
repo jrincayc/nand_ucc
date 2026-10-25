@@ -1,0 +1,75 @@
+--- main.rs.orig	2026-10-25 17:23:01.575948877 +0000
++++ main.rs	2026-10-25 17:23:19.565874206 +0000
+@@ -53,7 +53,7 @@
+ 
+ // ---------------------------------------------------------------- fixed parts
+ #[derive(Clone)]
+-struct FixedPart { name: &'static str, kind: u8, abits: usize, rot: usize, x: i32, y: i32, w: i32, h: i32 }
++struct FixedPart { name: &'static str, kind: u8, abits: usize, rot: usize, x: i32, y: i32, w: i32, h: i32, vp: i32, pinrow: i32, pinx0: i32 }
+ fn base_dims(kind: u8, abits: usize) -> (i32, i32) {
+     match kind { 2 => (2, abits.max(8) as i32), 3 => (2, 9), 4 => (2, abits as i32 + 9), _ => (2, 2) }
+ }
+@@ -64,6 +64,11 @@
+ fn rot_dims(w: i32, h: i32, rot: usize) -> (i32, i32) { if rot % 2 == 1 { (h, w) } else { (w, h) } }
+ impl FixedPart {
+     fn cell(&self, dx: i32, dy: i32) -> (i32, i32) {
++        if self.vp > 0 && (self.kind == 2 || self.kind == 4) {
++            let na = if self.kind == 2 { self.abits.max(8) as i32 } else { self.abits as i32 + 9 };
++            let idx = if dx == 0 { dy } else { na + dy };
++            return (self.pinx0 + self.vp * idx, self.pinrow);
++        }
+         let (bw, bh) = base_dims(self.kind, self.abits);
+         let c = rot_cell((dx, dy), bw, bh, self.rot);
+         (self.x + c.0, self.y + c.1)
+@@ -72,7 +77,7 @@
+ 
+ // ---------------------------------------------------------------- config
+ struct Cfg { px: i32, py: i32, cols: usize, gap: i32, ml: i32, mr: i32, seed: u64, effort: f64, via: i32, turn: i32,
+-             rom_rot: usize, arm_rot: usize, ram_rot: usize, iters: usize, ram_side: i32, aspect: f64, edge: i32 }
++             rom_rot: usize, arm_rot: usize, ram_rot: usize, iters: usize, ram_side: i32, aspect: f64, edge: i32, vp: i32, vpx: i32 }
+ 
+ fn main() {
+     let a: Vec<String> = std::env::args().collect();
+@@ -82,7 +87,7 @@
+     let cfg = Cfg { px: g("px", 4.0) as i32, py: g("py", 4.0) as i32, cols: g("cols", 0.0) as usize, gap: g("gap", 6.0) as i32,
+         ml: g("ml", 6.0) as i32, mr: g("mr", 6.0) as i32, seed: g("seed", 1.0) as u64, effort: g("effort", 1.0),
+         via: g("via", 3.0) as i32, turn: g("turn", 2.0) as i32, rom_rot: g("rom_rot", 1.0) as usize, arm_rot: g("arm_rot", 1.0) as usize,
+-        ram_rot: g("ram_rot", 1.0) as usize, iters: g("iters", 60.0) as usize, ram_side: g("ram_side", 0.0) as i32, aspect: g("aspect", 1.0), edge: g("edge", 14.0) as i32 };
++        ram_rot: g("ram_rot", 1.0) as usize, iters: g("iters", 60.0) as usize, ram_side: g("ram_side", 0.0) as i32, aspect: g("aspect", 1.0), edge: g("edge", 14.0) as i32, vp: g("vp", 0.0) as i32, vpx: g("vpx", 4.0) as i32 };
+     let nl = read_nl(&a[1]);
+     run(&nl, &cfg, &a[2]);
+ }
+@@ -121,13 +126,13 @@
+         // aspect: grid width/height in cells = aspect
+         let c = ((n as f64 * cfg.py as f64 / cfg.px as f64) * cfg.aspect).sqrt().ceil() as usize; c.max(2) };
+     let rows = (n + cols - 1) / cols;
+-    let mut rom = FixedPart { name: "rom", kind: 2, abits: nl.rom_abits, rot: cfg.rom_rot, x: 0, y: 0, w: 0, h: 0 };
+-    let mut arm = FixedPart { name: "arm", kind: 3, abits: 0, rot: cfg.arm_rot, x: 0, y: 0, w: 0, h: 0 };
++    let mut rom = FixedPart { name: "rom", kind: 2, abits: nl.rom_abits, rot: cfg.rom_rot, x: 0, y: 0, w: 0, h: 0, vp: cfg.vp, pinrow: 0, pinx0: cfg.vpx };
++    let mut arm = FixedPart { name: "arm", kind: 3, abits: 0, rot: cfg.arm_rot, x: 0, y: 0, w: 0, h: 0, vp: 0, pinrow: 0, pinx0: 0 };
+     let (bw, bh) = base_dims(2, rom.abits); let (rw, rh) = rot_dims(bw, bh, rom.rot); rom.w = rw; rom.h = rh;
+     let (bw, bh) = base_dims(3, 0); let (aw, ah) = rot_dims(bw, bh, arm.rot); arm.w = aw; arm.h = ah;
+     let gridw = cols as i32 * cfg.px; let gridh = rows as i32 * cfg.py;
+     let mut ram = if nl.ram_abits > 0 {
+-        let mut r = FixedPart { name: "ram", kind: 4, abits: nl.ram_abits, rot: cfg.ram_rot, x: 0, y: 0, w: 0, h: 0 };
++        let mut r = FixedPart { name: "ram", kind: 4, abits: nl.ram_abits, rot: cfg.ram_rot, x: 0, y: 0, w: 0, h: 0, vp: cfg.vp, pinrow: 0, pinx0: cfg.vpx };
+         let (bw, bh) = base_dims(4, r.abits); let (w, h) = rot_dims(bw, bh, r.rot); r.w = w; r.h = h; Some(r) } else { None };
+     let top_h = rom.h.max(arm.h) + cfg.gap + cfg.edge;
+     let bot_h = ram.as_ref().map(|r| r.h + cfg.gap + cfg.edge).unwrap_or(cfg.gap);
+@@ -135,7 +140,7 @@
+     let h = top_h + gridh + bot_h;
+     rom.x = cfg.ml; rom.y = cfg.edge;
+     arm.x = cfg.ml + rom.w + 2; arm.y = cfg.edge;
+-    if let Some(r) = ram.as_mut() { r.x = cfg.ml; r.y = h - r.h - cfg.edge; }
++    if let Some(r) = ram.as_mut() { r.x = cfg.ml; r.y = h - r.h - cfg.edge; r.pinrow = h - 1; }
+     Board { w, h, gx0: cfg.ml, gy0: top_h, cols, rows, rom, arm, ram }
+ }
+ 
+@@ -310,6 +315,7 @@
+     let mut o = String::new();
+     o += &format!("dims {} {} px {} py {} cols {} rows {}\n", w, h, cfg.px, cfg.py, b.cols, b.rows);
+     for p in [&b.rom, &b.arm].into_iter().chain(b.ram.iter()) { o += &format!("part {} {} {} {} {}\n", p.name, p.x, p.y, p.rot, p.abits); }
++    if cfg.vp > 0 { for p in [&b.rom].into_iter().chain(b.ram.iter()) { o += &format!("vp {} {} {} {}\n", p.name, p.vp, p.pinx0, p.pinrow); } }
+     let mut at: Vec<usize> = vec![usize::MAX; b.cols * b.rows]; for k in 0..n { at[site_of[k]] = k; }
+     for s in 0..b.cols * b.rows { let (x, y) = (b.gx0 + (s % b.cols) as i32 * cfg.px, b.gy0 + (s / b.cols) as i32 * cfg.py);
+         if at[s] == usize::MAX { o += &format!("site {s} {x} {y} E -1\n"); } else { o += &format!("site {s} {x} {y} {} {}\n", nl.kind[at[s]] as char, at[s]); } }
