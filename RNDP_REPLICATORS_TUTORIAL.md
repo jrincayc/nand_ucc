@@ -58,10 +58,20 @@ python3 tests/compare_gen.py WORK/gen1.state
 8. rndp: seed, 40-step warm-up, then run. The quick test (452 commands, 1 M ticks, 0 mismatches) is feasible; the full quine (~764k commands x ~318 ticks) is not (~470 ticks/s).
 Result: 141,277 units, board 1,696 x 7,840.
 
-## 6. Pitfalls
+## 6. R5 versus R6 component count (both all-gates, no ROM/RAM parts)
+| | R5 (E5) | R6 |
+|---|---|---|
+| NAND | 132,214 | 134,797 |
+| DFF | 11,052 (66,312 units) | 1,080 (6,480 units) |
+| total units | 198,526 | 141,277 |
+| board (cells) | 429 x 44,260 | 1,696 x 7,840 |
+| Turing complete | no | yes (Hack-vN-AB, 16 KiB image) |
+The NAND counts are nearly equal; the whole difference is the DFFs. R5's row-per-word token-ring plane and engine need ~11k DFFs, R6 needs only its Hack core (56 DFF) plus 128 RAM tiles of 8 DFF (1,024), and its program sits in a state-free ROM plane. R6 pays about 2.6k more NAND (Huffman-raised plane ones, RAM tiles, interface). Sources: `rndp_r5/E5_REPORT.md`, `rndp_r6/R6_DESIGN.md`, `REPLICATOR_COMPARISON.md`.
+
+## 7. Pitfalls
 - Forgetting `HACK_AB=15` (AB<=15 in the model); ROM cap 16 KiB.
 - Skipping the 40-tick warm-up: CPU never starts.
 - Child wires extend ~16 cells left of the child board: use the margin in `compare_gen` (CUTM=24).
 - Arm-relative origin must be set (R4 lesson) or the child overlaps the parent.
-- Some helper test scripts from R6 (cmp4.py, cmpd.py, cmplog.py, dumpcmds.py, shiftb.py) are not filed in the Project.
+- R6 helper test scripts (`cmp3/cmp4/cmpd/cmplog.py`, `dumpcmds.py`, `shiftb.py`, `run_emit.py`, `reg_plane.sh`) are in `rndp_r6/tests/`; they were moved there from `hack/` and are not re-run since.
 - The generated `*_data.asm` files of R1, R2 and `y` (hand-lane trees) were removed from the Project to save space; regenerate them with `python3 tools/hd2asm.py HD OUT.asm` (first step of each pipeline).
