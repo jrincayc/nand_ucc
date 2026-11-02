@@ -1,0 +1,8 @@
+tracks 392440 vias 70242 gates 94269; copper cells 5011463; distinct edges 4917172; components 94291
+pins 282807 logical nets 94291 missing 0 opens 0 shorts 0
+pin-carrying nets 94291; cells: median 8 p90 62 p99 1365 max 61994; total 5011463
+largest nets (cells, edges): [(61994, 61993), (61990, 61989), (61988, 61987), (61986, 61985), (61982, 61981), (61980, 61979), (61976, 61975), (61968, 61967)]
+cover-time bound 2m(n-1): sum 8.918e+10 (2^36.4), max net 7.686e+09 (2^32.8)
+ walks x1: steps 8.92e+10 2^36.4; with per-step scan of 556951 commands: 2^55.5
+ walks x30: steps 2.68e+12 2^41.3; with per-step scan of 556951 commands: 2^60.4
+top 10 nets share of cover-bound sum: 69.7%

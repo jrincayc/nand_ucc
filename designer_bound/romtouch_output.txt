@@ -1,0 +1,2 @@
+ROM_BASE? ['ARM_BASE', 'ROM_BASE', 'ROM_BYTES']
+{'instr': 3472535, 'image': 13050, 'nonzero': 12435, 'fetched': 2178, 'read': 13050, 'both': 2178, 'untouched_nonzero': 0, 'untouched_all': 0}

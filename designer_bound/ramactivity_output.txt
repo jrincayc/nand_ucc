@@ -1,0 +1,4 @@
+1M 1s
+2M 2s
+3M 4s
+{'instr': 3472535, 'bytes_written': 51, 'bytes_read': 51, 'toggle_bits': 287, 'bytes_toggled': 50, 'max_distinct': 256, 'distinct_total': 4178}

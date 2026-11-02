@@ -1,0 +1,25 @@
+A builder source (R6 hack + R2c core builder)
+   files=16 raw=66889 xz=11488 bz2=12711 | stripped raw=51011 xz=8164 bz2=9201
+B hardware description (R2c core netlist)
+   files=1 raw=20623 xz=2428 bz2=3021 | stripped raw=16840 xz=2120 bz2=2678
+C python image generators + asm tools
+   files=12 raw=71828 xz=22456 bz2=22641 | stripped raw=68489 xz=21300 bz2=21499
+D layout tool (annealer+router) source
+   files=2 raw=33984 xz=9160 bz2=9481 | stripped raw=31929 xz=8300 bz2=8573
+E stored layout output (r2c_vp_p5.lay)
+   files=1 raw=289426 xz=46412 bz2=62687 | stripped raw=289425 xz=46412 bz2=62687
+F world spec
+   files=1 raw=16743 xz=7164 bz2=6766 | stripped raw=16696 xz=7152 bz2=6761
+G simulator (rndp Rust)
+   files=7 raw=75342 xz=18036 bz2=17356 | stripped raw=69007 xz=15540 bz2=14956
+--- joint
+A+B (builder+netlist)                                   stripped=False raw=  87512 xz= 13676 bz2= 16049
+A+B (builder+netlist)                                   stripped=True  raw=  67851 xz= 10076 bz2= 12233
+A+B+C (+image generators)                               stripped=False raw= 159340 xz= 35148 bz2= 38313
+A+B+C (+image generators)                               stripped=True  raw= 136340 xz= 30780 bz2= 33814
+A+B+C+D (+layout tool) = designer knowledge             stripped=False raw= 193324 xz= 43796 bz2= 48153
+A+B+C+D (+layout tool) = designer knowledge             stripped=True  raw= 168269 xz= 38664 bz2= 42865
+A+B+C+D+G (+simulator as world model)                   stripped=False raw= 268666 xz= 60452 bz2= 64816
+A+B+C+D+G (+simulator as world model)                   stripped=True  raw= 237276 xz= 53004 bz2= 57380
+everything but E                                        stripped=False raw= 285409 xz= 66552 bz2= 71193
+everything but E                                        stripped=True  raw= 253972 xz= 59364 bz2= 63985
