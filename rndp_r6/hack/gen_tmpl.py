@@ -12,7 +12,7 @@ T={
 }
 
 import json
-TJ=json.load(open('../out/tile.json')); PO=TJ['ports']; H=TJ['H']; TH=H+1
+TJ=json.load(open(__import__('os').environ.get('TILE_JSON','../out/tile.json'))); PO=TJ['ports']; H=TJ['H']; TH=H+1
 XBUS=92; TX0=116; XGR=36
 rt=[]
 for idx in range(9):

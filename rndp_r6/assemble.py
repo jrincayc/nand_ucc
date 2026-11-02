@@ -2,7 +2,7 @@
 """assemble.py LAY NL PLANE.build RAM.build OUT_PREFIX -- whole R6-B board: R2c core (vp pins) + ROM plane + RAM block + formula interface wires.
 Writes OUT.build (global coords, shifted by OFS) , OUT.keys.json (pin -> expected net key) and prints stats."""
 import sys, json, collections, os
-sys.path.insert(0, '/home/claude/c3/tools')
+sys.path.insert(0, os.environ.get('LAYTOOLS', '/home/claude/c3/tools'))
 import lay
 layf, nlf, planef, ramf, out = sys.argv[1:6]
 OFS = tuple(int(v) for v in os.environ.get('OFS', '260,40').split(','))

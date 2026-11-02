@@ -47,15 +47,17 @@ python3 tests/compare_gen.py WORK/gen1.state
 
 **R5** (`rndp_r5`): pruned-architecture quine; the program is constant NAND gates (token-ring ROM plane), no ROM/RAM parts, not Turing complete. Read `R5_DESIGN.md`, then `e4/E4_RESULT.md` (design and verification) and `E5_REPORT.md` (final numbers, column inversion). Tools in `e4/`: `assemble.py`, `check_world.py`, `cmp_child.py`, `engine2_model.py`, `verify_engine2.py`. Result 198,526 units (E5).
 
-**R6** (`rndp_r6`): Hack-vN-AB quine (Turing complete) that builds its own ROM plane and RAM tiles from gates; no ROM/RAM parts. Read `R6_DESIGN.md` first (Measurement 9 is the final one). Pipeline (run in `rndp_r6`, tools from `rndp_layout`):
-1. Layout the core with edge pins: `r2c_vp_p5.lay` (+ `layout_vp.patch` to the layout tool).
-2. `lay2asm.py --hack` (CHILD_DX=1730) -> core layout data; `huff_pack.py` -> Huffman path stream.
-3. Generators: `plane3_gen.py` (ROM plane), `ramblock_gen.py` + `tile_gen.py`/`tile_paths.py`/`tile_enc.py` (RAM tiles), `iface_gen.py` (interface wires), `hack/gen_tmpl.py` (templates).
-4. `hack/mkb.py` composes `builder_r6.asm` from `hack/*.asm` (`gvm2.asm` glue VM, `huff.asm`, `ram_r6.asm` RAM map, `macros.asm`, `emit3.asm`, ...). Options: `--noemit`, `--quick`, `--test=LABEL`.
-5. Assemble with `HACK_AB=15`; image must stay <= 16,384 B (now 16,006). ROM is mapped at 16384..32767.
-6. Model check: `emit_model.py` / `sim_gen*.py` (~754 M instructions, 763,734 commands equal the reference apart from RAM-block track segmentation, same copper).
-7. `assemble.py` (env `OFS`) builds the whole board; `chk_full.py` checks pin connectivity (0 opens/shorts, 406,564 pins).
-8. rndp: seed, 40-step warm-up, then run. The quick test (452 commands, 1 M ticks, 0 mismatches) is feasible; the full quine (~764k commands x ~318 ticks) is not (~470 ticks/s).
+**R6** (`rndp_r6`): Hack-vN-AB quine (Turing complete) that builds its own ROM plane and RAM tiles from gates; no ROM/RAM parts. Read `R6_DESIGN.md` first (Measurement 9 is the final one). One script rebuilds and checks it (tested 2026-11-02, about 10 s plus a few s for the pin check):
+```
+cd nandgen/rndp_r6
+ROOT=.. RNDP=<path to rndp binary> ./build_r6.sh [WORK]        # add CHECK=1 to load the board in rndp and check all 406,564 pins
+```
+It needs `rndp_layout/tools/lay.py`, `y/tools/asm.py`, `rndp_r2c/src/builder_c.asm` and a built `rndp`; each path is overridable (see the script header). Steps it performs:
+1. `lay2asm.py --hack` (CHILD_DX=1730) + `huff_pack.py` turn the stored layout `r2c_vp_p5.lay` (+ `data/work_r2.nl`) into the Huffman-packed core data (`hack/lay_data.asm`). `layout_vp.patch` is only needed to regenerate the `.lay` with the layout tool.
+2. `data/tile.json` (the RAM tile, from `tile_gen.py` + the R5 mrouter, deterministic) -> `tile_paths.py` -> `tile_enc.py` -> `hack/tile.asm`; `hack/gen_tmpl.py` -> `hack/tmpl.asm`.
+3. Fixed point: `hack/mkb.py` -> `builder_r6.asm` -> assemble (`HACK_AB=15`) -> `out/rom.bin` (16,006 B; cap 16,384) -> `plane3_gen.py` (ROM plane), `ramblock_gen.py` (RAM block), `assemble.py` (whole board, `full.build`, `full.wires.pkl`) -> `iface_gen.py ... 1698 -14` -> `hack/iface_gen.asm`; repeated until the interface data stops changing (one pass with the stored files).
+4. `chk_full.py` (CHECK=1): board in rndp, 0 opens, 0 shorts. MODEL=1 additionally runs the Hack-model emitter check (`emit_model.py`, `hack/run_emit.py`; 754 M instructions, hours, and `run_emit.py` still has `/home/claude/r2c` paths).
+A full tick-level run of the quine is not feasible (~764k commands x ~318 ticks at ~470 ticks/s); the quick test (452 commands, 1 M ticks) was done with the `rndp --cmd-log` method described in `R6_DESIGN.md`.
 Result: 141,277 units, board 1,696 x 7,840.
 
 ## 6. R5 versus R6 component count (both all-gates, no ROM/RAM parts)

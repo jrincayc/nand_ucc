@@ -7,7 +7,7 @@ def seg(a,b):
     i=e.index(a); j=e.index(b) if b else len(e); return e[i:j]
 gvm=open(gvmf).read()
 rest=open('prims.asm').read() if 'prims' in sys.argv else seg('emt:                         // TRACK','rdb:')
-rdb_all=open('/home/claude/r2c/src/builder_c.asm').read()
+rdb_all=open(__import__('os').environ.get('R2C_SRC','/home/claude/r2c/src')+'/builder_c.asm').read()
 i=rdb_all.index('rdb:'); j=rdb_all.index('\n',rdb_all.index('RET add16'))
 rdbadd=rdb_all[i:j+1]
 g=rdb_all.index('getlen:'); d=rdb_all.index('rdb:')

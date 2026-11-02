@@ -2,7 +2,7 @@
 """chk_full.py PREFIX [OX OY] -- load PREFIX.build in rndp, compare every dumped pin's world net to the expected key (PREFIX.keys.json)."""
 import sys, json, subprocess, collections, time
 pre = sys.argv[1]; OX, OY = (int(sys.argv[2]), int(sys.argv[3])) if len(sys.argv) > 3 else (260, 40)
-RNDP = '/home/claude/rndp/target/release/rndp'
+import os; RNDP = os.environ.get('RNDP', '/home/claude/rndp/target/release/rndp')
 t0 = time.time()
 r = subprocess.run([RNDP, '--build', pre + '.build', '--rom', 'off', '--ram', 'off', '--layers', '2', '--width', '2048', '--height', '8192', '--steps', '0', '--dump-pads', pre + '.pads'], capture_output=True, text=True)
 o = r.stdout + r.stderr

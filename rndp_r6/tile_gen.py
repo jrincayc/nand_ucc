@@ -46,7 +46,7 @@ for n, d in nets.items():
     prob.append(f'net {ids[n]} {len(d["sinks"])}'); prob.append('d %d %d %d' % d['drv'])
     for s in d['sinks']: prob.append('s %d %d %d' % s)
 open('/tmp/tile.prob', 'w').write('\n'.join(prob) + '\n')
-r = subprocess.run(['/home/claude/r5/e4/mrouter/mrouter', '/tmp/tile.prob', '/tmp/tile.out', '--iters', '80'], capture_output=True, text=True)
+r = subprocess.run([__import__('os').environ.get('MROUTER','/home/claude/r5/e4/mrouter/mrouter'), '/tmp/tile.prob', '/tmp/tile.out', '--iters', '80'], capture_output=True, text=True)
 print(r.stderr[-200:])
 trk = []; vias = []; fails = 0
 for l in open('/tmp/tile.out'):
