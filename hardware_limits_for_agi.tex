@@ -1,0 +1,1202 @@
+\documentclass[letterpaper,twocolumn]{article}
+\usepackage[hyphens]{url}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage[round]{natbib}
+
+\setlength\voffset{-1in}
+\setlength\textheight{9.0in}
+
+\title{Memory and FLOP/S Hardware Limits to Prevent AGI?}
+\author{Joshua J. Cogliati\footnote{\url{mailto:cogljosh@isu.edu}}}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Existing discussions of AGI safety have primarily involved preventing
+dangerous programs from running on computers. This article focuses
+instead on preventing independence gaining AGI from running based on
+hardware memory and floating point operations per second limits. AI
+programs capable of gaining the capability to obtain resources without
+needing humans are different from a safety perspective. We show that a
+64 KiB memory and storage limit can be used make an independence
+gaining AGI practically impossible. There is some evidence shown that
+the actual independence gaining AGI limit is above 2 MiB of R/W
+storage, and probably below what is available in current high-end
+desktop personal computers, but the evidence for this is not
+conclusive. These limits are substantially below what is required for
+current state of the art AI, but the state of the art is expected to
+advance, so future limits are useful for longer term planning.
+\end{abstract}
+
+\section{Introduction}
+
+%TODO Add some other citations of more formal AI safety analysis
+
+Stuart Russell has discussed methods of having safe AI software
+\citep{humancompatible} and proposed in an interview
+\citep{russellCnnInterview} ``we need to ensure that the hardware and
+the operating system won’t run anything unless it knows that it’s
+safe.'' For sufficiently powerful computers (such as ones that could
+effectively out think an entire university), this requires fully
+understanding the software that runs on the computer. Restricting the
+software to software that has been formally verified to be safe is one
+way to demonstrate safety. However, this paper will show that if the
+computational space and speed of the hardware is sufficiently limited,
+the software can be unrestricted. The threat model is that either
+intentionally or accidentally a human will create an AI program that
+is sufficiently intelligent to be able to gain independence, such as
+by creating a self-replicating computer capable of obtaining energy
+and other things needed to achieve goals without any further
+assistance from humans. Note that some AI techniques and algorithms
+are well understood and probably could be proved to be safe even when
+run on extremely powerful computers including minimax search with a
+fixed game of GO evaluation function and a climate general circulation
+model.
+
+%Note that some AI techniques and algorithms are well understood and
+%are not likely to be a problem even when run on powerful computers
+%including minimax search with a fixed evaluation function and a
+%climate general circulation model.  Techniques or simulations that
+%can simulate NAND gates, flip-flops and connections could result in
+%more unexpected behavior. A purely feed-forward neural network that
+%is not retrained for example cannot emulate a flip-flop, but a
+%recurrent neural network can emulate a flip-flop by storing the
+%flip-flop state in the network.
+
+%Note, I think the minimax/alpha-beta comment is from Yudkowsky, but I could not find a citation.
+
+\section{Definitions}
+
+%TODO should we just use independence gaining AI instead of AGI?
+%As in if the AI can gain independence, it doesn't really need to
+%be any more general.
+
+For this paper, the definition of Artificial General Intelligence
+(AGI) is artificial intelligence that is capable of performing any
+scientific, technological, engineering or mathematical (STEM) task
+that a human could do that is needed to gain
+independence.\footnote{Some illustrative examples: An
+independence gaining AGI connected to today's internet might complete
+intellectual tasks for money and then use the money to mail order
+printed circuit boards and other hardware. An independence gaining AGI
+with access to 1800s level technology might mine coal and build a
+steam engine to power a Babbage-like computer and then bootstrap to
+faster computing elements. An independence gaining AGI on Earth's moon
+might be able to produce solar panels and CPUs from the elements in
+the moon's crust, and produce an electromagnetic rail to launch probes
+off the moon.}  So an independence gaining AGI can use knowledge about
+the world the AGI is in to design ways to scale up computational
+capacity.  Note that independence gaining AGI is a subset of general
+AGI, so if an independence gaining AGI is prevented, that also
+prevents the less narrow AGI.
+
+Super-intelligence (ASI) is harder to define, but a
+working definition is that a super-intelligence AGI would be capable
+of out thinking an entire university or research laboratory for any
+STEM task necessary to gain independence; alternatively this is the
+intelligence of approximately a thousand trained people working
+together. For this definition, the intelligence comes from
+the people in the university or research laboratory, not the
+electronic computing hardware, otherwise the floating point operations
+per second would be primarily from the computers there. For this
+definition a university or research laboratory in roughly 1940 or
+before would automatically fit it, but for more modern ones, the
+computation from the computers would have to be subtracted off to get
+the intelligence from just the humans. There are two reasons for the ``gain
+independence'' limitation to be included. The first is to prevent needing to
+simulate human brains, for which humans might have an inherent
+advantage. The second is that if the AGI has the ability and goal to ``gain
+independence'' this is sufficient to be dangerous if the AGI is not
+aligned with human goals and ethics.
+
+This paper is concerned with an AGI that is capable of achieving
+independence. There are three basic ways for an AGI to
+achieve independence. The three are convincing humans to help,
+creating hardware in the environment, or expanding into other computer
+infrastructure. Expanding into other computer infrastructure is
+already something that has been done by computer viruses for decades,
+and may lead to the AGI gaining other resources which can be used for
+one of the other methods to achieve independence. Computer virus can
+be written in 10s to 100s of instructions, so preventing this is the
+computer security problem of securing potential targets and in many
+cases can be solved by shutting down the infected computers. A
+computer virus is completely dependent on the computers that it runs
+on and so is not physically independent, and while escaping to other
+computers to gain resources or to computers with more access to the
+physical world might be an important step to a computer gaining
+physical independence, this paper leaves that discussion and research
+to others.
+
+This paper is primarily concerned with the other two methods.
+Convincing humans probably requires at least some level of fluency in
+language and some understanding of how to motivate or negotiate with
+humans. Creating hardware in the environment requires both some
+knowledge of the environment and some ability to simulate it.  The
+method this paper uses to show that it is practically impossible for
+an AGI to gain independence is to show that the available computing
+power does not allow fluent language and does not allow sufficient
+simulations.
+
+\section{AGI Limits}
+
+Having hardware limits for independence gaining AGI and
+superintelligent AGI would be useful because these help assess the
+risk of running an experimental piece of software. If the software is
+run on a higher powered computer, then we need to show the software is
+safe. On lower powered computers the risk is reduced. Running software
+on a lower powered computer may require more programming effort or not
+be possible. Note that the AGI definition does not include any speed
+or timing considerations, only the super-intelligence definition
+includes speed. This is intentional, since an AGI that gains
+independence slower than a human would in similar circumstances, still
+gains independence.
+
+It is worth noting that the Halting Problem and Rice's theorem are for
+Turing machines with an infinite tape; this paper is dealing with
+machines with finite space (memory + disk storage), so those theorems do not
+demonstrate that finding a hardware limit for having the property of
+being able to run an independence gaining AGI is impossible.
+
+Estimates of when sufficient compute is available for simulating a
+human brain have been done such as 1 EFLOP/S in
+\cite{hpcbrainscience}. Computer transistors and brain neurons are
+both capable of remembering information and boolean logic. However,
+using transistors to simulate brain neurons performing a task will be
+less efficient than directly performing the task\footnote{Unless the
+task is simulating neurons.} on the computer transistors.  1 EFLOP/S
+is likely a much more powerful computer than will be needed for AGI
+(with the possible exception of tasks that require a deep
+understanding of human brains).  The inefficiencies of simulating
+neurons with transistors has been pointed out in
+\cite{byrneshardwarerequirements}.  A literature review did not find
+many existing estimates for a limit below which an AGI is not
+possible. One estimate is that a human level AGI could be done on an
+Intel 286 if the programmer is a superintelligent AGI or a ``home
+computer from 1995'' (which roughly corresponds to a 90 MHz Pentium)
+if the programmer is a human \citep{yudkowskyagilimit} but no method
+for how this estimate was calculated is provided which greatly limits
+the use of this estimate.  \cite{byrneshardwarerequirements} estimated
+that $10^{14}$ FLOP/S\footnote{For comparison, an NVIDIA RTX 4090
+retail gaming GPU from 2022 has 8.3e13 FLOP/S.} and 16 GiB of RAM
+would likely (75\%) be sufficient for human-level human-speed
+AGI. This was calculated by estimating that the amount of information
+a human brain stores is possibly less than 10 GiB and probably less
+than 100 GiB. Combining that memory estimate with an estimation that
+humans are likely memory-bandwidth limited led Byrnes to a conclusion
+that $10^{14}$ FLOP/S is capable of processing all the
+memory-bandwidth. Byrnes estimated a sufficient level for human-level
+AGI and did not estimate a lower limit since his estimate was already
+at the level of currently available high-end gaming PCs.
+
+
+
+%As
+%George Box has said ``All models are wrong; some models are useful''
+%so the trick is figuring out if the model's approximations are too
+%great to make the model not useful. The more computing power
+%available, the less approximations that are needed.
+
+\section{Limiting Estimates}
+\label{limitingestsec}
+
+This section will show that an AGI restricted to 64 KiB of readable and
+writable space (RAM and re-writable drives, with no read only storage)
+is very unlikely to be capable of gaining independence. Being fluent at human
+language or the ability to simulate the hardware needed to gain
+independence almost certainly will require more than 64 KiB of
+space. This section will also discuss requirements for this
+restriction to hold, and I/O restrictions and which types of I/O might be
+allowed. This section will also discuss mixtures of read only, write
+once/read many and read/writable storage.
+
+Fluent English language understanding and creation appears practically
+impossible in 64 KiB. A typical human vocabulary of 20,000 words would
+not fit in this amount of space without
+compression\footnote{\url{https://www.mit.edu/~ecprice/wordlist.10000}
+for example is 75880 bytes. Those 10,000 words can be compressed down
+to 27848 bytes using {\texttt{gzip -9}} (version 1.13). This is a word
+list, not words with the meaning.  Word vectors, which do have some
+meaning attached, usually have vector length of at least 100
+\citep{pennington-etal-2014-glove}, so 64 KiB would not even fit a
+1000 basic words with the vectors. However other architectures that do
+not use word vectors are possible, so this is not definitive.} and
+adding definitions would increase the size even more, so it would be
+practically impossible to fit a program that used unrestricted
+language fluently. This lack of ability means that programs on the
+computer would be less able to ask for help from humans, and also less
+able to make use of English documents to understand more about the
+world.
+
+A 64 KiB computer is unlikely to be able to simulate enough of the
+world to design hardware to gain independence. For example, a
+molecular simulation that used 4 bytes per float, 3 vectors of 3
+floats, and a beginning and end state could not fit a simulation of a
+10x10x10 cube in 64 KiB.\footnote{$4 \text{ bytes/float} * 3 \text{
+  floats/vector} * 3 \text{ vectors/molecule} = 36 \text{
+  bytes/molecule}$. The simulation will either require keeping two
+states, or keeping a state and the state delta, so this doubles the
+ram. So $10*10*10*2*36=72000$ which is more than 64 KiB. For
+reference, a silicon atom is about 0.2 nanometers, transistors
+currently are on the order of 5 nanometers, so simulating a transistor
+at the atomic level could require simulating a cube of
+$25*25*25=15625$ atoms, and simulating the quantum effects needed to
+determine the electronic band structure is more complicated than a
+simple molecular simulation.}  Another reference point is P16C5x
+microcontroller (an LGPL version of the PIC16C5x microcontroller),
+which is described by 19853 bytes of Verilog source
+code.\footnote{\url{https://opencores.org/projects/p16c5x} and
+processed with
+{\texttt{cat *.v | sed 's/\textbackslash/\textbackslash/.*//' | uniq | wc -c}} to
+remove comments and redundant lines. Note that memory representation
+and Verilog source code can be different.} This microcontroller is a
+very reduced instruction set computer and does not include features
+like multiplication. A full hardware description would also need to
+describe how to make the hardware like registers and logic functions,
+as well as wire routing information and so would be significantly
+larger. In addition, to run a computer also requires energy and matter
+(otherwise, the computer will still be dependent on humans), which
+will require more parts.\footnote{Note that without fluent language,
+obtaining the parts from humans would likely be very difficult.}
+Digital parts are made from analog components, and analog components
+need to be simulated with a sufficiently accurate physical
+model.\footnote{While many simulations can be approximated with less
+memory, this usually requires having some method to check that the
+approximation is correct. These include having experimental data to
+benchmark against, or being able to run a mesh convergence study,
+which requires being able to run finer meshes then needed.} Fitting
+simulations into 64 KiB requires reducing the number of elements in a
+molecular simulation or a finite element simulation, carefully
+choosing the provided parameters to fit what is needed, and getting
+this wrong results in faulty simulations. Simulating an independence
+gaining computer would likely require creating small memory models of
+all necessary components, and having enough room left over to design
+the rest of the computational and support equipment. From this, we see
+that holding the design of even a very simple computer and support
+components would require compression and other tricks to work in 64
+KiB. An AI project is unlikely to have the needed electronic component
+data, and very unlikely to be able to design the needed components
+from scratch in 64 KiB, so this method of AGI independence gaining
+also appears to be practically impossible in 64 KiB.
+
+So a 64 KiB computer can do neither fluent language
+nor complicated simulations. Note that this is not an exact
+calculation (64.5 KiB for example is also limited), nor is this a
+proof.
+
+%obtaining hardware from humans likely difficult for a computer lacking fluent language
+
+%4*3*3*2 = 72; 64*1024/72 = 910.2...
+
+There are several clarifications that need to be made about this 64
+KiB limit. Networking together multiple 64 KiB computers would allow
+the memory space to be increased, which could allow AGI to be done on
+the combined computers by effectively creating a computer with larger
+memory space. Even without an intentional network, there can be side
+channels that transmit and receive data, such as with radio waves, so
+fully enforcing the limit requires preventing all networking. If time
+for computation is ignored (as it is for this paper's definition of
+independence gaining AGI) it does not matter if the storage is RAM,
+floppy drive, hard drive or flash drive; these all increase
+capabilities. Register or vector storage on the CPU needs to be
+counted as well, however, for CPUs with less than 1 KiB of registers,
+this will not change the analysis; 65 KiB is still unlikely to
+be able to do fluent language nor complicated simulations.
+
+One type of I/O likely can be allowed, which this paper will refer to
+as manual W1$\oplus$R1, which is I/O that can either be written once or read
+once,\footnote{Note that most human interface devices such as
+keyboards and displays are trivially manual W1$\oplus$R1.} and rereading or
+rewriting requires manual intervention. Early computers often had
+punch card readers and writers.\footnote{For example, the IBM 1402
+Card Read-Punch from the 1960s was a manual W1$\oplus$R1.} The workflow for
+writing would be punch cards would come from the punch hopper and be
+written to and then go to output stacks. Cards to be read would come
+from a read hopper, and then be read and then go to output
+stacks. Re-reading a punched card would require manually moving the
+card from an output stack to the read hopper. An example from early
+home computers of manual W1$\oplus$R1 was the use of a tape
+player,\footnote{Such as with the Commodore 64.} and in order to read
+the tape, the user would press play on the tape player, and to write
+would need to press the record button, and to re-read or rewrite would
+require rewinding and then pressing the needed button. Since the
+output data cannot be automatically reread in manual W1$\oplus$R1, this makes
+using this restricted type of I/O impossible to use as a way to extend
+usable memory without assistance from the human operator or adding
+additional hardware.
+
+Write once, read many (WORM) media (such as paper tape, punch cards,
+CD-R or DVD-R) or media where there is manual work needed (such as
+original cassette drives that required the user to manually switch
+from reading to recording or UV erasable programmable read only memory
+(UV-EPROM)) are significantly different than RAM because they can only
+be written once without intervention. Only writing once is a
+significant limitation for most uses in simulation or learning
+algorithms.\footnote{Substantially more write once/read many storage
+than R/W storage is needed if a simulation step cannot be fit in the
+R/W storage. For example, if a simulation needed 64 KiB of data that
+was updated each timestep and there were a 1000 timesteps, then a
+computer with 64,000 KiB of WORM drive could do a calculation even
+without having RAM to store an individual timestep. We can roughly
+show how this would work for 64 KiB limit of read/write storage with
+the approximate formula $S + W/m \le 64 \text{ KiB}$ where $S$ is the
+amount of read/write storage, $W$ is the amount of WORM space, and $m$
+is a heuristic multiple approximately determined by how many times the
+state will change in search or simulation. In short, more WORM storage
+may be allowed than read/write storage.} In addition, if the data
+cannot be overwritten at the bit level,\footnote{For example, on a
+paper tape using ASCII, a delete (0b1111111) can overwrite other
+characters and hide what was originally written.} the data can be read
+back to see what computational data was being stored, which allows
+retrospective forensic analysis.
+
+Note that the statement that an AGI restricted to 64 KiB of read and
+writable space is very unlikely to be capable of gaining independence
+does not imply that the code to create an independence gaining AGI
+would require more than 64 KiB.  It seems possible that 64 KiB of
+binary RISC-V RV64GCV machine language code (or similar computers with
+hardware floating point) would be able to include a machine learning
+training and running program,\footnote{A feed-forward multi-layer
+neural network with back-propagation and stability improvements might
+be able to be fit into 64 KiB of code and with sufficient parameters
+in additional memory might be able to do the work of current
+transformer models.} and a simple and less efficient\footnote{By
+choosing simpler algorithms, the compiled code can be smaller, but the
+run-time speed and run-time memory usage will be worse.} simulation of
+Feynman's classical physics formulation \citep[Vol.~2 Table
+  18-4]{feynmanphysics}. Alternatively, the program could fit a
+mathematical representation of the standard model and general
+relativity instead, and possibly the code to simulate those equations
+in 64 KiB. So a small program that is enough to get to a near AGI and
+a basic understanding of the universe possibly could fit in 64 KiB (or
+close to it) of code if run on a large and fast enough computer. Note
+that if we want to create a safe AGI, the code also would need to have
+the ethics and know how to coexist with current life, which would
+likely be substantially more complicated;\footnote{Is the energy being
+gathered being taken away from an existing ecosystem?  Are the atoms
+being used for construction part of something living?  What is life
+versus non-life? How can I find sentient beings in the neighborhood
+and communicate with them and understand their values?  Those are some
+of the types of questions that a safely coexisting AGI probably needs
+to carefully and ethically answer before taking actions.} an AGI
+missing these would likely be a very dangerous AGI. So 64 KiB might be
+enough to store the binary code for a seed AGI program, however,
+running the program would require access to more RAM and storage.
+
+\section{Nonlimiting Estimates}
+\label{nonlimitingestsec}
+
+This section goes through several sample comparisons to give an order
+of magnitude sense of scale, but none of these provide hard
+bounds. These include comparison to existing naturally evolved
+independent life, symbolic AI and self-replicating automaton examples,
+and modern machine learning codes.  These can be compared to the 64
+KiB limit estimated in the previous section, and provide reference
+numbers that suggest a higher limit.
+
+%https://www.science.org/doi/10.1126/science.1114057
+%Pelagibacter ubique, Giovannoni_Science_2005.pdf, 1,308,759 base pairs
+%Longest protein: https://www.ncbi.nlm.nih.gov/protein/WP_011282049
+
+The smallest known cell able to replicate independently in nature is
+{\em Pelagibacter ubique} and has a genome with 1,308,759 base pairs
+\citep{Giovannoni_Science_2005}. The largest protein in it is an amino
+acid sequence of length 7317 \citep{WP011282049}.  Amino acids have
+between 10 and 27 atoms with an average of 19.2
+\citep{aminoacidlength}.  Designing the sequence requires representing
+each atom, which if that takes six single precision floating point
+numbers then designing the largest protein would take at least 3 MiB of
+storage.\footnote{One simple representation of the atoms would be to
+store 3 floats for the position vector and 3 for the velocity
+vector. This ignores storing information about the electron's quantum
+state.  For the 6 floats per atom the calculation is $4 \text{
+  bytes/float} * 6 \text{ floats/atom} * 7317 \text{ amino
+  acids} \hspace{\stretch{1}} \\ * 19.2 \text{ atoms/amino acids} *
+1/1024^2 \text{MiB/byte} \approx 3.215 \text{ MiB}$} As each protein
+is designed, the DNA sequence to create it would need to be stored, so
+the memory needed will be for the protein currently being designed,
+plus the DNA encoding all the proteins already designed.  So in
+addition, storing the genome uncompressed (4 pairs per byte) would
+take another 300 KiB. To the extent that that {\em P. ubique} is the
+minimum viable independent organism, designing it gives a lower memory
+limit of above 3 MiB of storage. Note that this could be both an over
+estimate or an underestimate.  It is possible that substantially
+smaller replicating organisms could be designed compared to {\em
+  P. ubique} which would lower the number of atoms to simulate. Actual
+simulations of quantum electrodynamics are usually more memory
+intensive than six floating point numbers per atom, and the atoms that
+the proteins are interacting with also need to be simulated, so
+substantially more memory might be required than we hypothetically
+assigned above. Additionally, the design of an independent AGI might
+be done at the component level, not at the atomic level, so the
+relevant memory use would depend on the number of different
+components, their complexity, and how the components' use is
+described.  So if an AGI designs an independently existing machine the
+design calculations need to be very efficient memory wise, and in some
+sense simpler than {\em P. ubique} since these considerations point to
+needing more than 3 MiB for designing {\em P. ubique}.
+
+The SHRDLU program was a 1970s natural-language computer program that
+was only capable of discussing stacking blocks and had a vocabulary of
+approximately 500 words\footnote{estimated from counting the DEFS in
+the file {\texttt{dictio}} in the source code for SHRDLU}, and it used
+approximately 450 KiB (100 to 140 K of 36 bit words from the README in
+\cite{shrdlucode}).  Using the SHRDLU program with 500 words per 450
+KiB and assuming that the vocabulary is expanded to 5000 words to be
+more fluent in more topics in English and assuming this is linear on
+the number of understood words gives an estimate of 4500 KiB of
+storage needed for fluent English. These are likely false assumptions
+however. This could be an overestimate if language understanding can
+be done more efficiently than SHRDLU (such as by more efficient
+coding, by better than linear scaling (possible if adding new concepts
+are less work because existing concepts can be leveraged), or fixed
+costs (such as operating system overhead and common parts such as
+parsing) become a smaller percentage of the storage needs).
+Conversely, this can be an underestimate if the concepts in English
+that SHRDLU interpreted are easier than typical English concepts
+(which seems likely since the stacking blocks are a physically simple
+system), and 5000 words is more along the lines of basic proficiency
+than fluent English, so more vocabulary would be needed. Assuming that
+SHRDLU's efficiency of word representation is reasonably
+optimal, and that increasing the vocabulary and concepts understood
+will be linear or more, this suggests a lower-end estimate. This is a
+back-of-the-envelope calculation deliberately designed to be on the
+lower end, so an AGI would very likely need much more than
+approximately 4.5 MiB to be fluent in English.
+
+Another way to get an estimate of the size of data needed for a self-replicating computer is to examine self-replicating computers in
+simulated environments such as cellular automaton environments. There
+is a minimum size as stated in a paper by \cite{vonneumannselfreproducing}:
+
+\begin{quote}
+  There is a minimum number of parts below which complication is degenerative, in the sense that if one automaton makes another, the second is less complex than the first, but above which it is possible for an automation to construct other automata of equal or higher complexity.
+\end{quote}
+%page 483
+
+In cellular automaton environments, self-replicating computers have
+been created. An early example is John von Neumann's universal
+constructor \citep{theoryofselfreproducingautomata}. Devore's
+self-reproducing automaton is smaller and ran in a world where each
+cell had 8 possible states and fit into a rectangle of 259 cells by
+366 cells (94,794 cells) \citep{kozaartificiallife,devorecode} and so would
+require about 36 KiB of information uncompressed.\footnote{8 states
+can be described in 3 bits, so $94794*(3/8) = 35547.75$ and it is worth
+noting that there is repetition so compression is possible.} Devore's
+self-reproducing automaton was also computationally universal (Turing
+complete). Note that this does not prove that designing a
+self-replicating computer requires 36 KiB since there is no proof that
+Devore's automaton is the minimum.\footnote{If just replication is
+needed, and not computational universality, very small models, such as
+Langton Loops are possible \citep{langton1984}.} In addition, a
+self-replicating computer in standard model physics would likely be
+significantly more complicated, because of requirements such as
+obtaining energy and the needed atoms, that are present in real world
+chemistry but are absent in the simple cellular automaton
+simulations. Creating a self-replicating computer in the real world is
+both difficult and dangerous, so these toy models are useful for
+theory, and further research on them potentially provides a
+possibility of establishing hard limits. If it can be theoretically
+shown that there is a minimum number of parts for computationally
+universal automata, this shows that physical computationally
+universal automata must be at least that level of complexity since a cellular
+automaton universal constructor will be simpler than a real-world
+universal constructor. However, present uncertainties limit the
+information current cellular automaton theory provides for this
+paper's estimates for limits for independence-gaining AGIs.
+
+%If sufficiently accurate scaling information between components in the cellular automaton environment and real world components was known (for example, if a flip-flop takes $X$ states in the cellular automaton, and $K X$ atoms in the real world) then it might be possible to get an estimate of the real world complexity of a computationally universal self-reproducing automaton. 
+
+The AlphaFold program \citep{Jumper2021,Abramson2024}, predicts
+protein structure, and since predicting protein structure is a key
+component for designing biological hardware, this can be used for
+estimating the computation power needed for that. An example computer
+used to run AlphaFold2 was an Intel Xeon W9-3495X with 56 cores, 512
+GB of RAM and 1.92 TB of SSD storage \citep{alphafoldbenchmark} which
+shows that AlphaFold 2 can run on a 2.3 TFLOP/S computer with 0.5 TiB
+of RAM. Since AlphaFold uses a trained neural network the
+calculation's prediction can be incorrect and predicting protein
+structure is only part of what is needed for designing biological
+hardware, so information about AlphaFold does not prove this computer
+is sufficient for independence gaining. This does provide an example
+showing current state of the art computations for biological molecules
+are substantially above the low end memory requirements estimate for designing
+{\em P. ubique} earlier in this section.
+
+%From https://www.techpowerup.com/gpu-specs/rtx-a4500.c3849, RTX-A4500 has 23.65 TFLOP/S FP16 and FP32 theoretical performance
+
+%Smallest phi-1 model: 135 GPU hours of training on Nvidia-A100 GPU (312 TFLOP/S,
+% https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/a100/pdf/nvidia-a100-datasheet-us-nvidia-1758950-r4-web.pdf \citep{nvidiaa100} \citep{gunasekar2023textbooksneed}
+% so  135*312*3600 = 151632000 TFLOP/S or 1.51632e+20 FLOP/S
+% 1.51632e20/(10*365*24*3600) = 4.808219e+11
+% 350M parameters 350e6*4/1024**3 = 1.30385160446167 ~ 1.3 GiB
+
+%LaMDA 3.55e+23 FLOP/S (section 10) \citep{thoppilan2022lamdalanguagemodelsdialog} 137B parameters 137e9*4/1024**3 = 510.3647708892822 ~ 0.5
+
+For LLM models, the compute used for training them is on the order
+$10^{20}$ floating point operations and GiB to TiB of memory. The
+phi-1 small model \citep{gunasekar2023textbooksneed} used 350M
+parameters and 135 hours of training on an A100 GPU or about 1.3 GiB
+of RAM and $1.5*10^{20}$ floating point operations.\footnote{A
+Nvidia-A100 GPU has a theoretical computing ability of 312 TFLOP/S
+\citep{nvidiaa100} so $135 \text{ hours}*312 \text{ TFLOP/S} *3600
+\text{ seconds/hours} = 151632000 \text{ TFLOP} = 1.51632*10^{20}
+\text{ FLOP}$.  Note that this means that a computer capable of a
+processing rate of 500 GFLOP/S could have trained the phi-1 small
+model in under 10 years of total processing: $1.51632*10^{20} \text{
+  FLOP} / (10 \text{ years} * 365 \text{ days/year} * 24 \text{
+  hours/day} * 3600 \text{ seconds/hour}) \approx 4.808*10^{11} \text{
+  FLOP/S}$ As a quick comparison, the 2020 Apple M1 chip used in Mac
+laptops is capable of 2600 GFLOP/S (which may not be reachable due to bandwidth limitations for LLM training).} The LaMDA model
+\citep[Section 10]{thoppilan2022lamdalanguagemodelsdialog} used
+$3.55*10^{23}$ floating point operations for training a model 137B with
+parameters or about 0.5 TiB of RAM.\footnote{137B parameters or
+$137*10^9 \text{ parameters} * 4 \text{ bytes/parameter}/ 1024^4
+\text{ byte/TiB} = 0.4984 \text{ TiB}$ with the note that this assumes
+32 bit floats for the parameters and ignores other storage needed for
+training.} Once an LLM is trained, the LLM can be run on typical current
+computers with sufficient RAM. For example, the gpt-oss-20b model
+\citep{openai2025gptoss120bgptoss20bmodel} can be quantized and run on
+computers with 16 GiB of RAM \citep{huggingfacegptoss}.  LLMs were
+originally designed for next token prediction and language
+translation (as opposed to reasoning or efficient model
+representation), and yet often can intelligently answer
+questions. Assuming that different and more efficient algorithms are
+possible, the LLM runtime requirements suggest that typical 2025
+laptop and desktop computers with 10s of GiB of RAM and 500 GFLOP/S
+processing might be capable of supporting an independence gaining AGI.
+
+This section has been a brief look at examples for an order of
+magnitude sense of scale. Further research by subject matter experts
+on each of these examples could improve the accuracy and precision of
+the estimates.  Primarily from the consideration of {\em P. ubique}
+and SHRDLU, it seems likely that a computer with 2 MiB of memory and
+storage\footnote{This is taking the minimum of 3 MiB and 4.5 MiB and
+rounding down to the nearest power of two} would be unlikely to be
+able to run an independence gaining AGI.\footnote{A 1976 Cray I
+computer had 166 MFLOP/S and 32 MiB of RAM
+\citep[pg.~43]{pattersonandhennessy2nd}, so computers with more than
+this amount of RAM have existed for a long time and so at minimum
+creating an independence gaining AGI on them is hard.}  If instead we
+work down from examination of the state of the art algorithms, RAM and
+storage limits of 1 GiB and processing power limit of 500 GFLOP/S
+would prevent many current AI and simulation programs such as LLM
+training and AlphaFold from running. It is possible lower resource
+algorithms for an independence gaining AGI exist (and that the lower 2
+MiB or 64 KiB limit would be needed to be used to prevent them) and it
+is possible that an independence gaining AGI would need more than 1
+GiB and 500 GFLOP/S.
+
+\section{Superintelligence Limits?}
+
+This section will discuss determining super-intelligence limits with
+this paper's working definition of super-intelligence (ASI). Unlike
+the independence-gaining AGI definition, the ASI definition considers
+if the ASI can think faster than many humans working together on
+STEM tasks. For some STEM tasks, even 1950s computers are vastly
+faster than multiple people working together, however, for other
+scientific and engineering tasks current computers with current
+software are not capable of matching human performance. This section
+will also examine the differences between human brains and computer
+elements, and discuss full human brain emulation, which can provide an
+upper limit on the needed computing power.
+
+One method of estimating the amount of compute for ASI is to consider
+the amount of compute needed to simulate human brains at the neuron
+and synapse level. The amount of computational power to simulate the
+approximately 100 billion neurons (and roughly 10,000 synapses per
+neuron) in a human brain is estimated to be approximately 1 EFLOP/S
+($10^{18}$ FLOP/S) \citep{hpcbrainscience}.\footnote{A
+back-of-the-envelope example calculation of this type that calculated
+$2 * 10^{16}$ is \cite[pg 103]{kurzweil1999}: ``With 100 trillion
+connections, each computing at 200 calculations per second, we get 20
+million billion calculations per second. This is a conservatively high
+estimate; other estimates are lower by one to three orders of
+magnitude.''}  To the extent this number is accurate, this provides an
+upper limit for both AGI and superintelligence.  Since a human is a
+general intelligence, then 1 EFLOP of performance with enough memory
+for the all synapses (approximately 1 petabyte) would be sufficient
+for AGI. Similarly, a superintelligence could be created by simulating
+10,000 humans, so multiply the AGI limits by 10,000 to get $10^{22}$
+FLOP/S and $10^{19}$ bytes.\footnote{Computers can do tricks like copy
+the full brain quickly, and then start running in parallel that humans
+cannot do, so 10,000 computer simulations of a human brain could
+likely do more productive thinking on a specific problem than a
+collection of 10,000 humans.} Full human brain simulations have not
+been done, so the previous values are estimates.  For {\em
+  Caenorhabditis elegans}, which has 302 neurons in the adult
+hermaphrodite, simulations have been created that replicate the
+behavior of the organism. The BAAIWorm simulation modeled the 136
+neurons of the sensory and locomotion functions, the muscle cells and
+the environment, and replicated behavior such as the organism swimming
+towards an attractor. It should be noted that the compartmental neural
+network models used by the BAAIWorm simulation of {\em C.  elegans}
+\citep{celeganssimulationzhao2024} likely used substantially more
+computation and memory per neuron since they simulate each segment of
+the dendrite. A neuron level simulation estimate gives a rough order
+of magnitude maximum estimate of what amount of compute is required
+for human level thinking and beyond human level thinking, but this is
+not an exact estimate.
+
+This, however, is likely to be an overestimate of the computing power
+needed for doing a specific intellectual task because of the different
+characteristics of computers versus human brains.\footnote{As
+\cite{byrneshardwarerequirements} noted, performing AGI by simulating
+a human brain's neurons is similar to multiplying a number by
+``do[ing] a transistor-by-transistor simulation of a pocket calculator
+microcontroller chip, which in turn is multiplying the numbers.''}
+Signals in human neurons travel at about 60 m/s
+\citep{nerveconductionmeasures} and signal transitions take about 1
+millisecond
+\citep[pg.~21]{principlesofneuralscience4th}.
+Signals in computers travel at near light speed ($2 \times 10^8$ m/s) and signal
+transitions happen on the order of $10^9$ times per second. The
+billions of neurons in human brains often allow the brain to use
+parallelization when thinking, but the faster signal transition and
+propagation speed of electronics give significant advantages for
+algorithms that do not parallelize well.\footnote{This factor of a
+million difference in both transmission speed and effective clock
+speed means that for many cases, the computer can do in an hour
+something that would take a human over a century.}
+
+%Can we make any conclusion on network speed? As in a single synapse
+% connection can do ~1000 pulses per second, and neurons are connected
+% to thousands of synapse's so would limiting a computer to under 1000
+% bits per second possibly be able to slow down total thought to below
+% human limits?
+
+%\footnote{This also
+%implies a that signals in a single neuron channel (such as in a dendrite or axon) can transmit approximately at least 1k bits/s of data.}
+% TODO Check principlesofneuralscience or something else to see if we can get a reference that calculates this better
+
+As an example of the difference, consider the 1964 CDC 6600
+supercomputer. It could calculate at a rate of 2 MFLOP/S under optimal
+conditions\footnote{The CDC 6600 had two multiply units that could
+multiply a 60 bit floating-point number in 1000 nanoseconds and one
+floating point add unit that could add a floating point number in 400
+nanoseconds \citep[pp. 77 and 88]{cdc6600thornton}}. 2 MFLOP/S of
+computation, even in the case where the algorithm is parallelizable,
+is well beyond the capability of 1000 humans (2000 floating-point
+calculations per second is beyond a single human). For many tasks,
+including visual tasks and muscle control, humans perform much of
+their thinking subconsciously. However, for some STEM tasks, including
+arithmetic, humans perform them consciously and so can only perform
+one at a time. For a certain class of algorithms where a hundred
+logical or arithmetic operations can do what a human mind can do in a
+second, a 100 kFLOP/S computer\footnote{100 kFLOP/S = 100 FLOP/S
+$\times$ 1000, analogous to 100 operations per second $\times$ 1000
+humans. This does assume the algorithm parallelizes well.} is already
+at superhuman speeds. This is a rough analogy and would not apply to
+all types of human thinking, but for some short (on the order of 10
+millisecond) conscious STEM thoughts each thought could be
+approximated by a small number of computer logical or arithmetic
+instructions.  Proving that all STEM tasks necessary to gain
+independence require thinking where humans are efficient at thinking
+would be necessary to prove that 100 kFLOP/S is not ASI. This likely
+would be difficult to prove, but it does seem unlikely. On the other
+hand, proving that all STEM tasks necessary to gain independence are
+not possible at 100 kFLOP/S would also be difficult to prove but seems
+more likely. So 100 kFLOP/S may not be the absolute lower limit for
+independence gaining ASI, but it is likely to be roughly in the right
+order of magnitude.  It is possible to argue that the bounds might go
+lower or higher, but this gives rough bounds between $10^5$ FLOP/S and
+$10^{22}$ FLOP/S for the computational speed required for independence
+gaining ASI.
+
+Besides human intelligence, other animals use much smaller brains to
+interact with the world.  The brain of a fruit fly has 139,255 neurons
+connected by $5 \times 10^7$ chemical synapses
+\citep{Dorkenwald2024}. As an approximation, scaling by the number of
+synapses would give a simulation computational requirement of 50
+GFLOP/S.\footnote{The simulation requirement used in this section for
+a single synapse in a human brain is roughly 1000 FLOP/S so the $5
+\times 10^7$ synapses could be simulated by $5 \times 10^{10}$ FLOP/S
+\citep{hpcbrainscience}.} This amount of computing power is easily
+available today, for example, a 2010 Intel Core i7-970 can do over 70
+giga FLOP/S with a single processor \citep{intelflops}. The fruit fly
+brain data suggest that it is likely that interacting with the
+physical world can be done with much less processing power than humans
+use, and as mentioned before, simulation of a brain will likely be
+substantially less efficient than rewriting the algorithms for use on
+computers.
+
+Besides logic and arithmetic, a likely key factor for many STEM tasks
+is searching through possibilities.  One useful analogue for this is
+the tree search used in chess programs.  An Intel 5160 processor (2
+cores, 3.00 GHz) with a benchmarked rate of 2 GFLOP/S of computation
+\citep{intel5160passmark} was used to defeat chess grandmasters
+\citep{chessbase2006}.  Human brains are low speed but highly
+parallel, so the methods that human use to consider chess moves will
+be different from computer algorithms, but this analogy does suggest
+that significantly more compute will be needed to match human learning
+and subsequent search capabilities than is needed to match human
+arithmetic abilities. At least for present day search algorithms,
+since this is for a single human, this suggests that if independence
+gaining ASIs need significant search, they likely need computational
+abilities at least in the GFLOP/S range.
+
+This section has considered human brains and attempted to provide an
+estimate of computational speed necessary for independence gaining
+ASI. Unfortunately, there are significant limitations for all the
+examples and comparisons used in this section. As well, advances in
+algorithms can decrease the amount of computation needed for a given
+task. This section's rough bounds for independence gaining ASI of
+between $10^5$ FLOP/S and $10^{22}$ FLOP/S for the computational speed
+required seem likely to include the true limit, but a case can be made
+for lower and higher numbers.
+
+
+\begin{table}[htbp]
+  \small
+  \caption{Summary of results, note that all of these are approximate, and see text for important caveats.}
+  \label{summarytable}
+  \begin{tabular}{|l|r|r|}
+    \hline
+    Limit Type & Storage & Speed\\
+    \hline
+    Lower Estimates & 64 KiB AGI & 10 kFLOP/S ASI\\
+    \hline
+    Likely Lower & 2 MiB AGI & 1 GFLOP/S ASI\\
+    \hline
+    SotA Proxies & 1 GiB & 500 GFLOP/S\\
+    \hline
+    Upper ASI & $10^{19}$ bytes & $10^{22}$ FLOP/S\\
+    \hline
+  \end{tabular}
+\end{table}
+
+
+\section{Conclusions}
+
+An independence gaining AGI can be made practically impossible by
+restricting all computers to less than 64 KiB of R/W storage without
+networking. Computer simulations and other uses of computers are very
+useful for solving other problems of humanity; alternatively,
+computers below the AGI limit can be used without restrictions, and
+only run safe software on computers above this limit. 64 KiB of R/W
+storage is a historically useful amount of computer power and systems
+like the Commodore 64\footnote{Note that a Commodore 64 did not have a
+built in disk drive. Adding an external disk drive would result in
+having more than 64 KiB of R/W storage, but a Commodore 64 could be
+used either stand-alone or with a manually operated cassette tape
+drive.}, the Nintendo Entertainment System and Arduino UNO all had 64
+KiB or less of R/W storage, and these had sales figures in the millions
+\citep{game_console_2, arduinoUnoAnnounce}. This limit is however
+substantially below almost all modern computing systems, with the
+notable exceptions of low-end embedded systems\footnote{For example,
+the PIC16F13113 chip was introduced in 2023 and has 256 bytes of RAM
+and 3.5 KiB of Flash \citep{pic16f13145}.} and retro computing. This
+paper suggests that it would be possible to allow practically any
+software, and still prevent independence gaining AGI, provided there
+are strict hardware limits.
+
+Determining the threshold computational speed limit for a
+superintelligent AGI is harder since this depends on both the task and
+the best available algorithm. This paper was not able to determine a
+good lower limit and only provided a rough range of between $10^5$
+FLOP/S and $10^{22}$ FLOP/S. Another way to prevent superintelligent
+AGI is to limit memory at the regular AGI limit.
+
+Note that these are probable sufficient limits, but they may be far lower than
+the unknown necessary limits.  This paper provided some evidence that
+the actual AGI limit is above 2 MiB of R/W storage, and probably below
+what is available in current high-end desktop personal computers, but
+the evidence for this is not conclusive. As seen in
+Table~\ref{summarytable} there is a large range between the lower
+estimated limits and the upper ASI limits in which the actual limits
+may exist. Further research on this would be needed before these
+limits are useful for setting policy.
+
+\section{Future Work}
+
+There are several areas where future work would be useful. One is more
+carefully determining the limits. More detailed consideration of
+possible computer hardware and biological analogues might allow more
+robust limits. Raising the limits above 64 KiB and 10 kFLOP/S seems
+possible, and would be useful future research. A 2 MiB lower limit
+might be demonstrated for the AGI, and would allow more useful
+unrestricted computers. Research on if and what kind of networking can
+be allowed would be useful. Research on how various types of I/O including
+W1$\oplus$R1 and Write once/Read many storage affect the limits would be
+useful. The definitions used in this paper for independence gaining
+AGI and ASI have been useful, but different (such as more precise
+definitions) might allow more progress to be made.
+
+\section*{Appendix: Speculation and Possible Policy}
+
+This appendix is not part of the scientific part of this paper and is
+speculative and discusses possible implications of various limits and
+policy. Policy however, will be a choice based on estimates of the
+consequences of the different choices. There are two types of limits,
+physical limits, which may be unknown because of limits in our
+understanding where the boundaries are before independence gaining AGI
+is possible, and administrative limits, which are what the rules
+are. This paper primarily has identified potential memory and storage
+limits, but the physical limits are likely a frontier that includes
+aspects like memory, compute and I/O.
+
+% 2 MiB UV-EPROM and a 210 MiB Mini CD-R WORM drive probably would be fine as well. As well, 10 MFLOP/S would be fine.
+
+There are several different categories of computers around the physical limits:
+\begin{description}
+\item[Tier 1] are the computers that are lower than the independence gaining AGI limit.
+\item[Tier 2] are the computers that are above the independence gaining AGI limit, but with current AI knowledge, do not seem likely to be able to programmed to be an independence gaining AGI.
+\item[Tier 3] are the computers that probably can be made into an independence gaining AGI, but not an independence gaining ASI.
+\item[Tier 4] are the computers that probably can be made into an independence gaining ASI.
+\end{description}
+Unfortunately the true physical limits are unknown, so these tiers are
+illustrative. As well, the separation between Tier 2 and Tier 3
+depends on current knowledge, and so the size of Tier 2 can decrease
+with additional AI implementation knowledge.
+
+The physical limits could be used in at least two ways, one would be
+to make it an administrative absolute limit beyond which the computers
+are forbidden for everyone, and the other to allow computers above the
+limit, but apply restrictions to them including restricting what
+software is run on them. Allowing computers above the physical limit has
+risks, including the possibility that they get cracked or that
+allowing some people to have powerful computers can cause resentment or
+that we accidentally run the wrong software on them.
+
+Putting restrictions on Tier 1 computers might be done if there is
+uncertainty about where AGI becomes a concern. A likely restriction
+that would be needed is Tier 1 computers cannot be combined in ways
+that increase the computing power to exceed the limits. As this
+paper's introduction mentions, restricting all computers to prevent
+dangerous AI has been proposed \citep{russellCnnInterview}.
+
+As a practical matter, depending on where the physical limits actually
+are, large numbers of Tier 2 and Tier 3 computers will probably exist,
+and so handling them will be a challenge for policy.
+
+Currently, there are no global restrictions even on Tier 4. The only
+current AI hardware limits are export controls to slow down other
+countries AI programs.
+
+As memory, storage, or computational speed increase, the chance of
+creating an independence gaining AGI or ASI increases. First of all,
+when the exact physical limit is unknown, increasing computing power
+is more likely to exceed the limit. For hardware above the physical
+limit, increasing the computing power allows less efficient algorithms
+to be used or allows more simulation and other explorations to be done
+in the same amount of time. Besides those factors of hardware and
+known software algorithms, the hardware capabilities available can
+make gaining independence easier. For example, an easy case for
+independence gaining would be a computer that has access to CAD/CAM
+software and a robot manufacturing plant; a very hard but possibly not
+impossible case would be a computer in a box that had no input other
+than a hardware random generator that had slight correlations with the
+radio waves that it received.\footnote{Since we don't have ASI yet, we
+can only speculate about capabilities. To speculate about this here is
+an example story. One difficult but maybe not impossible escape path
+for this AI would be for the AI to experiment with the computer
+circuits until it can find ones that affect the entropy source, at
+which point the AI might have a way to both generate radio waves and
+detect them, and then possibly the AI can manage to use Morse code to
+talk to someone using a ham radio that thinks, based on signal
+strength, they are talking to someone much farther away. Even if the
+AI is given no information on outside-world physics, the AI could
+possibly find $\frac{1}{c^2}\frac{\partial^2}{\partial t^2}A^{\mu} -
+\nabla^2 A^{\mu} = -\mu_0 J^{\mu}$ from purely mathematical
+explorations, and realize that radio waves are following those
+physics.  From timing considerations, the AI could figure out a rough
+layout of the electronics, and then from experimenting with turning
+various circuits on and off and detecting the radio response, figure
+out more physical information.  Note that this is with a computer that
+from the outside looks like just a multi-core RISC-V R64G\_Zhr\_Zicntr
+CPU (or another similar CPU with high-resolution timing and a hardware
+entropy source) and memory with no other external I/O. Alternatively,
+faulty memory might be able to substitute as a sensor (as the old
+saying goes, digital components are made of analog parts) and a spare
+CPU core in a busy loop could be used as the source of timing
+information. An ASI that has effective mathematical and scientific
+reasoning and enough time and memory may be able to escape from
+situations that seem impossible. Even if the ASI is unable to escape,
+it may be able to use self knowledge to determine if sensor input is
+coming from a simulation or from reality. In some sense, a warehouse
+full of AI computers running for a week could be about the equivalent
+of a thousand humans working for ten thousand years, if the right
+software is run on them, so confining a powerful ASI via I/O
+restrictions should be considered unreliable.} However, this matters
+more for computers somewhat above the physical limit; an ASI with the
+right algorithms can likely creatively find many ways to use whatever
+capabilities are available.
+
+There are several key policy questions that a policy for preventing
+independence gaining AGI/ASI would need to answer. These include where
+to set administrative limits (which hardware is allowed) for
+unrestricted (or nearly unrestricted) computers, where to set
+administrative limits that forbid building computers (which hardware
+is not allowed at all), and how soon to impose any administrative
+limits or restrictions. What restrictions to place on computers is an
+entire category, and could include restrictions on content like
+restricting creating or distributing AI software designed to gain
+independence in the world,\footnote{Creating software designed to gain
+independence in toy environments like a two dimensional cellular
+automaton might be useful for AI safety research. One possible
+dividing line between allowed and not allowed independence research
+might be to disallow research that is sufficiently close to actual
+physics that the AI's design might actually be built.  For example,
+Devore's self-reproducing automaton which runs in a two-dimensional 8
+state cellular automaton environment would be very difficult to
+translate into an actual constructable machine, and so probably can
+be allowable.} or require common safety critical software development
+practices like independent review.\footnote{Requiring a second person
+to independently review code would eliminate a single programmer being
+able to develop and test a program on whatever computers this
+restriction is placed on.}  Preventing independence gaining AGI needs
+to be global, since an independent AGI can have global effects. If the
+physical limit is below high-end personal computers, enforcing an
+administrative limit at that level will be difficult, since it will
+require either restricting or removing from service existing
+computers. Preventing new computers from being manufactured is likely
+the simpler portion of implementing an administrative limit, since
+manufacturing equipment for high-end integrated circuits is difficult
+to make and only made by a small number of companies in the
+world. Removing existing computers from service is much more difficult
+since they are scattered and owned by multiple individuals. Perfectly
+enforcing a 64 KiB or 2 MiB administrative limit would be very
+difficult, since even if no new computers are being manufactured at
+this limit,\footnote{Even this is harder since blocking manufacturing
+that can be done with visible-light lithography is much harder than
+blocking deep ultra-violet and extreme-ultraviolet since the
+techniques are simpler.} there are large numbers of existing computers
+and embedded systems that are above these limits. If scouring a
+junkyard will result in a computer more powerful than any purchasable,
+it will likely be done. These are some of the numerous questions to be
+decided about what to implement and how to implement it.
+
+%https://www.economist.com/science-and-technology/2025/10/22/chinas-chipmakers-are-cleverly-innovating-around-americas-limits
+
+%From Fortran Specifications and Operating Procedures IBM 1401, FORTRAN needed 8000 characters of memory
+%From PDP-4 FORTRAN USERS' MANUAL, FORTRAN Needed a 4 KWord computer 9 KiB
+
+%HP-35 from Introduction to Computer Architecture, pgs 129, 128, 131, 125
+% Harold S. Stone, 1975
+%ROM 2560 bits * 3
+%RAM M+F+E+D+C+B+A 56 bits * 7
+% I_s 5 + Reset 2 + Display 5
+% Control and timing 8 address + 12 status + 8 return + 8 address buffer + 4 pointer + 6 counter
+% >>> 56*7 + (5+2 +5) + (8 + 12 +8 +8 + 4 + 6) = 450 ; 450/8 = 56.25
+
+The next few paragraphs discuss various physical limits proposed in
+this paper, and what computing would be like if they were used as
+administrative limits.\footnote{If the exact physical limit was known,
+an administrative limit would likely be set below the physical limit
+to add a margin of safety.}  As this paper discusses in Section
+\ref{limitingestsec}, the physical limit is probably above 64 KiB of
+RAM and storage.  While there are historical computers\footnote{On the
+very low end, the 1972 HP-35 scientific calculator had memory for seven 56
+bit floating point numbers and 58 bits of other status for slightly
+more than 56 bytes of RAM and 960 bytes of ROM
+\citep{intro_to_comp_architecture}, the 1962 PDP-4 computer could be
+purchased with 2.25 KiB of RAM or more, and the 1959 IBM 1401 computer
+was available with 1400 bytes of RAM or more. Those were useful
+computers, so even an administrative limit of 4 KiB would allow some
+useful computers, but it is worth noting that the PDP-4 and the IBM
+1401 needed more than 4 KiB to run FORTRAN.}  and current embedded
+systems that are at or below this, a 64 KiB administrative limit
+severely limits human computer users. Even with manual W1$\oplus$R1
+storage,\footnote{Manual W1$\oplus$R1 is storage that can only be read
+or written to once before manual intervention, as discussed earlier in
+Section \ref{limitingestsec}.}  this restriction would have been
+exceeded by some computers from the 1950s.\footnote{For example, the
+1954 IBM 704 computer, that FORTRAN and LISP were originally developed
+on, could be used with just 18 KiB of memory but 144 KiB memory
+modules were available, and magnetic tape could store over 3 MiB of
+information, so a 64 KiB limit would restrict the amount of memory and
+the types of I/O that could be used.}  Setting a policy that restricts
+computers from exceeding this limit would be a significant limit on
+the potential for independence gaining AGI, but would also make
+unrestricted computers not usable for most tasks that we currently use
+computers for.
+
+%4096*36/8/1024 = 18.0
+% 32768*36/8/1024 = 144.0
+%900000*36/8/1024/1024 = 3.8623809814453125
+%pg 7,  704 electronic data-processing machine manual of operation
+
+This paper presents evidence that the physical limit may be above 2
+MiB of RAM and storage in Section \ref{nonlimitingestsec}.  A 1
+MFLOP/S, 512 KiB computer with 1.5 MiB of read/write
+storage\footnote{Note that the 2 MiB combined RAM plus storage limit
+may prevent both AGI and ASI, but the compute limit is to decrease the
+chance of creating ASI by combining multiple computers. Different
+distributions than 0.5 MiB RAM, 1.5 MiB of storage would be allowed so
+long as the total is 2 MiB or under.}  (including some that is
+detachable that could be carried to other computers) could be used for
+some of the things we currently use computers for including GUI word
+processing, spreadsheets, a C compiler, and MicroPython
+programming.\footnote{This limit is somewhat more powerful, but
+similar to circa 1985 desktop computers such as the Macintosh 512K or
+an Atari 520ST which had 512 KiB of RAM and 800 KiB or 720 KiB floppy
+drives as the read/write storage, to give an idea about what use
+humans might have for these systems.} This level of computer would,
+however either be incapable of or be noticeably less capable than
+current computers at most tasks. Adding hundreds of MiB of WORM
+storage would significantly increase the capability of this computer
+for human uses but would require additional theoretical work to
+demonstrate safety.\footnote{As discussed in Section
+\ref{limitingestsec}, for simulation or training, the same data needs
+to be rewritten, so if it is forced to a write-once, read-many (WORM)
+drive, the drive will fill up.} Lastly, there are multiple orders of
+magnitude between this 2 MiB 1 MFLOP/S computer, and computers we are
+seeing sparks of AGI on, so while better algorithms in the future can
+likely decrease that gap, better theory on independence gaining AGI
+may allow higher administrative limits.
+
+Networking is a special issue. By this paper's AGI definition, which
+ignores performance, networking an additional computer increases the
+memory available since the additional computer's memory can be used
+for storing data and with sufficient additional computers can make
+enough memory available to make AGI possible. Transferring removable
+media from one computer to another also allows data to be transferred.
+While this is manual and intermittent, a distributed AGI might use it
+as a substitute for a network. This paper's physical limits assume no
+networking (see Section \ref{limitingestsec}) but do not limit
+human-assisted\footnote{Informally called Sneaker net}
+transfer. Treating human-assisted and automatic networking as
+completely different is not completely satisfactory since human
+assisted networking is a computer-to-computer data transfer method.
+So far as safety is concerned, the conservative method is to linearly
+sum the memory and storage, and the computation for all computers that
+are networked together since a network set of machines could behave as
+one machine\footnote{Probably slower.} with the sum of their
+resources. For cases where the combined memory and compute is under
+the administrative limit these would be allowed.\footnote{For example,
+if the administrative limit is 2 MiB then connecting 32 computers with
+64 KiB would be fine since they have a total of 2 MiB.}
+
+However, in practice, once performance is considered, networking is
+slower than same-computer connections and networking has overhead;
+both for the networking and when implementing algorithms, code and
+data are usually duplicated to achieve better performance. Because of
+this overhead, if instead a different definition of independence
+gaining AGI is used that includes a requirement for speed, or if the
+independence gaining ASI physical limit is used, networking might be
+allowable if it can be shown to be safe. Even a 110 bit/s
+modem\footnote{Note that 110 bit/s is about equivalent to transferring
+a megabyte physical media every day.}  would add many abilities such
+as text email or daily price updates. Otherwise, the lack of
+networking would be a serious restriction on computer usage.
+
+%This paper is uncertain if a physical limit of 1 GiB and 500 GFLOP/S
+%would be sufficient to prevent independence gaining AGI, but it would
+%limit or prevent many current AI techniques, including LLM training,
+%as discussed in Section \ref{nonlimitingestsec}.  Administratively
+%limiting to below 1 GiB and 500 GFLOP/S would give computers that
+%would be useful for most things we currently do with computers, with
+%exceptions like high end games, powerful simulations, and of course,
+%many AI techniques. However, much current software would need to be
+%adapted to be able to run in these constraints, and might require
+%removal of features. Note that administrative limits to prevent using
+%networking to exceed the limits would probably be quite noticeable at
+%times to people used to current computers and current networks. These
+%administrative limits however might be too high to prevent
+%independence gaining AGI.
+
+Using high powered computers for AI research is in some sense like
+using a 25 kVolt AC for experiments before fully understanding
+electricity. It would be much safer to experiment with 3 Volt DC. We
+need to have a better idea which computational amounts are low enough
+to be safe and which can lead to accidental AGI creation when we are
+experimenting with AI software.
+
+Note that there are three relevant physical hardware limits:
+$L_\text{IGAGI}$, the computing limit for an independence gaining AGI,
+$L_\text{EIGAGI}$, the computing limit for an ethical independence
+gaining AGI and $L_\text{HAGI}$, the computing limit for a human
+equivalent AGI, with the likely\footnote{Note that the relation
+between $L_\text{EIGAGI}$ and $L_\text{HAGI}$ is debatable, since an
+ethical AGI likely needs the ability to maintain ethical rules in AGIs
+that the initial AGI delegates to, which is not something humans know
+how to do, so it is possible that $L_\text{EIGAGI} > L_\text{HAGI}$}
+relation $L_\text{IGAGI} \le L_\text{EIGAGI} \le L_\text{HAGI}$.
+There maybe a gap between $L_\text{IGAGI}$ and $L_\text{EIGAGI}$ in
+which case administrative limits set between them might be more
+dangerous than no administrative limit at all, since only non-ethical
+independence gaining AGIs can be created.  The reason there might be a
+gap is that it takes a certain amount of intelligence to do tasks
+without harming existing life. For example, things like tell the
+difference between taking atoms from an inanimate rock versus taking
+atoms from a living being and putting a solar panel in orbit in a
+place where it will significantly decrease the light reaching Earth
+versus an orbit where it will not harm Earth. In other words, in a
+hypothetical safe AGI, some of the data and code in the AGI will
+likely be only for ethical considerations, so removing that will
+decrease the amount of memory or storage needed, so less safe AGI
+could be created with less memory or storage.  Setting a limit above
+$L_\text{HAGI}$ may not be sufficient, but will not be worse than no
+limit, but setting a limit below $L_\text{HAGI}$ but above
+$L_\text{IGAGI}$ maybe add risks that would not exist without the
+limit. In the near term, it seems likely that there are existing
+computers that are above the physical limit, so risk of creating an
+AGI is dominated by that, but in the long term, if the administrative
+limits are completely followed, and the administrative limit is
+between $L_\text{IGAGI}$ and $L_\text{EIGAGI}$ then the only an
+unethical AGI can be created in those circumstances.
+
+\cite{ifanyonebuildsittreaty} proposes restrictions including
+restricting 28 nm and below process node manufacturing equipment,
+restricting computers with more than 15 EFLOP/S processing speed, and
+restricting AI research. Based on this paper's estimates, these
+administrative compute limits would likely not prevent an independence
+gaining AGI,\footnote{For example, IBM's Watson computer, that won
+{\em Jeopardy!}, used 45 nm process nodes and had only 80 TFLOP/S of
+processing speed, so would not be restricted by either the 28 nm
+restriction or the 15 EFLOP/S restriction. Watson on the other hand is
+well above typical high-end desktop performance of present day
+computers and so might be capable of running an independence gaining
+AGI.} but it might prevent faster ASI from being developed, and so
+would be useful that way. There likely is some relation between how
+much AI research is restricted, and what hardware is available to run
+software on. A world where both independence gaining AGI research is
+openly available and where the hardware to run results of this
+research is openly available can very soon have an independence
+gaining AGI gain independence.
+
+Besides hardware limits, and restricting the software that is run on
+computers, another useful task is various cyber-security precautions
+such as isolating networks and adding detection mechanisms such as
+honeypots. These should not be depended on, since a sufficiently
+powerful ASI can likely avoid or work around them, but they do
+increase the chance of detecting some escape attempts.
+
+How much risk an independence gaining AGI represents is a scientific
+question but since this requires the probability of creating an
+unethical AGI, this is a difficult scientific question. How much
+effort to prevent an independence gaining AGI from happening is a
+policy question.  Getting the world to a place where independence
+gaining AGI is impossible may be very difficult, depending on where
+the actual AGI limits are. This paper's limits are not mathematical
+proofs, and proofs may not be available in the near future. Policy may
+need to be made in the absence of certainty. However, there is
+usefulness in restrictions and regulations even if they are far above
+the provable limits, since the danger of accidentally creating a
+non-aligned independence gaining AGI increases as computational power
+goes up.
+
+\rule{0.9\linewidth}{.1pt}
+
+\emph{This paper has been improved thanks to proofreading and editing
+from Elizabeth Cogliati, as well as decades of discussion about AI.
+ChatGPT has provided ``analysis, critique, and identification of flaws
+or gaps, without suggesting any specific fixes unless asked,'' and
+also discussion on AI and AGI.  (Pre-ChatGPT versions: April 17, 2025
+and before are available on researchgate.net)}
+
+\emph{Writings from Max Tegmark, Eliezer Yudkowsky, Nate Soares,
+Stuart Armstrong, Nick Bostrom, Rob Bensinger, Stuart Russell and
+others have been influential on my thoughts, and directly and
+indirectly lead to many of the ideas in this paper.  Science fiction
+writings from Vernor Vinge, William Hertling, Ursula K. Le Guin and
+others have also been a source of ideas.}
+
+\emph{These are my own opinions and not those of my employer. This
+document may be distributed verbatim in any media or under the
+Creative Commons BY-SA 4.0 license.}
+
+\bibliography{hardware_limits_for_agi}{}
+\bibliographystyle{plainnat}
+
+
+\end{document}
