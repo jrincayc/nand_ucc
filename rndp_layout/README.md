@@ -39,3 +39,11 @@ stagnation widening with 5x5 rip-up. Pads block other nets. `edge` margin (defau
 * Area vs ROM bytes: tighter pitch -> smaller board, more path bytes (more turns). Huffman-coding the segments saves only ~1 bit of 8, not worth it.
 * Minimum routable pitch: R2 netlist 5 (4 fails), R3 netlist 6.
 * compare_gen: child wires extend up to 16 cells left of the child board, so the parent/child split uses a 24-cell margin (`CUTM`).
+
+## Virtual pins (`vp=S`, added for R6)
+`layout NL OUT.lay ... vp=3 [vpx=4]` does not place the ROM and RAM parts; their pins become virtual pin cells spaced S cells apart on the board edge
+(ROM pins in the top row, RAM pins in the bottom row, first pin at x=vpx) and the router connects to those cells. The `.lay` gets a `vp NAME S X0 ROW` line for each.
+`vp=0` (default) is the old behaviour: output is byte-identical to the previous tool for the same flags (checked 2026-11-13, seed 1, effort 3).
+R6's core layout `rndp_r6/r2c_vp_p5.lay` is reproduced exactly by: `layout data/work_r2.nl out.lay px=5 py=5 ml=16 mr=16 vp=3 effort=3 seed=1 iters=80`.
+`rndp_r6/layout_vp.patch` is this change as a diff against the old `main.rs`; it is already merged, so nothing needs to be patched.
+(`rndp_r6/lay2asm.py` is a slightly extended copy of `tools/lay2asm.py`: `CHILD_DX` from the environment and port start cells taken from the sink path; not merged yet.)
