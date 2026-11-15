@@ -1,4 +1,4 @@
-# Lower bounds on design cost: working notes (2026-11-01)
+# Lower bounds on design cost: working notes (2026-11-01; section 4.1 interpretation amended 2026-11-15)
 
 Status labels: [P] proved or standard result, [C] conditional on a stated assumption, [M] measured here, [E] estimate, [U] not measured.
 Companion data: `nandgen/RNDW_VON_NEUMANN_THRESHOLD.md` (tau_i, mutation audit), `nandgen/HANDOFF_RNDP_R1_R6.md`, `nandgen/rndp_r6/R6_DESIGN.md`.
@@ -31,7 +31,9 @@ xz -9e, comments and blank lines stripped, repo clone of `nand_ucc` (`measure.py
 | A+B+C+D jointly | 168 KB | 38.7 KB (309 kbit) |
 | + simulator as world model (G) | | +14 KB (53 KB jointly) |
 Excluded: the stored layout `r2c_vp_p5.lay` (an annealer output, regenerable from D plus a seed), the spec (the repo copy is v0.3, older than the Project's v0.4).
-Interpretation: this measures a *general* designer. R6's own image (16,006 B = 128 kbit) already regenerates R6, so K(R6|P) <= about 128 kbit plus fixed Hack-machine semantics; the extra roughly 180 kbit is a generality premium. The earlier claim "the sources are the measurable upper bound on K(R6|P)" was too loose.
+Interpretation: this measures a regeneration toolchain (assembler, image generators, layout tool: tiers C and D) together with the design it works on (builder source and hardware description: tiers A and B). It does not measure a general designer. The design is an input to these sources, not an output. R6's own image (16,006 B = 128 kbit) already regenerates R6, so K(R6|P) <= about 128 kbit plus fixed Hack-machine semantics; the extra roughly 180 kbit is the cost of tools that are general over layouts and programs, not a designer premium. The earlier claim "the sources are the measurable upper bound on K(R6|P)" was too loose.
+
+No general designer has been built or measured in this project [U]. R4 chooses where parts and PCB traces go and makes module-level rewrites; the Y improver rewrites small combinational library modules by exhaustive NAND search. Both start from a design a person supplied. Nothing here goes from the specification P ("replicate in this world") to a design, so whether such a designer is larger or smaller than the design it produces is open.
 
 ### 4.2 Essential fraction of an image [M, from existing mutation study]
 From RNDW_VON_NEUMANN_THRESHOLD.md sections 11-12: X has 174 free bytes of 4,096 (about 4%); tau_i(X) <= 31,376 bits of 32,768; Y (improver counted necessary) about 30% free, tau_i(Y) <= about 91,600 bits. About 4% of X's hardware-changing single-bit mutants still replicate. These are upper bounds on tau_i; lower bounds are unavailable (section 5.3 there).
@@ -59,6 +61,7 @@ Faults are invisible to circuits in RNDP, so an in-world designer cannot learn a
 3. A memory lower bound of the form "frontier width x log" holds only for a one-pass sweep designer. With random-access read-only input and write-only output, layout memory can be polylog; memory is not where design cost lives. The density bound (state costs at least 4 cells per bit; a RAM-based router cannot hold a map of the board) concerns RAM-based designers only.
 4. Toy-world enumeration cannot reach the crossover where rho falls to 2^-80..-90, because measuring such a fraction needs about 1/rho samples. Only a trend at small sizes can be fitted; extrapolation is an estimate, not a bound.
 5. Sources are not the tightest upper bound on K(R6|P); the 16 KB image is (section 4.1).
+6. Section 4.1 formerly said the A+B+C+D sources measure "a *general* designer" and called the extra 180 kbit "a generality premium". That was wrong (pointed out by Joshua, 2026-11-15): the sources are a layout and assembly toolchain plus the design itself. The ratio 309/128 = 2.4 must not be quoted as a designer-to-design ratio.
 
 ## 6. Open items, in suggested order
 1. Interpreted-versus-copy-only byte audit for R2c/R6 images (extend mutation/audit.py); turns image size into essential bits.
@@ -66,6 +69,7 @@ Faults are invisible to circuits in RNDP, so an in-world designer cannot learn a
 3. Exact rho(s) in a tiny enumerable world (E7 of the threshold document); expected form log2(1/rho) = s - c, so measure c against the interpreter's complexity.
 4. State P explicitly. With hardware fixed, the tau_i figures apply; with hardware free, add about 17 kbit (xz of the core description). The strength of any bound is the strength of P.
 5. Pebbling width of R6's network (live nets in a good topological order); gives the combinational-state term for R6 itself.
+6. A designer that starts from P and not from a supplied design: define what it must produce in RNDP (CPU, builder program, layout), then build or estimate one. Until then the designer side of the question has no data point.
 
 ## 7. Reproduction
 Clone https://github.com/jrincayc/nand_ucc. `measure.py` expects `repo/nand_ucc/` next to it; `ramactivity.py` and `romtouch.py` hard-code the clone path in `R=` (edit it); `netsizes.py BUILD PINS.json` takes the output of `rndp_r6/plane3_gen.py r2c/outc/rom.bin 0 plane3.build` and its `.pins.json`. Python needs numpy and scipy for netsizes.py. Run with `python3 -I`.
