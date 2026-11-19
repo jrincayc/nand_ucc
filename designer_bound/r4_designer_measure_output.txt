@@ -1,0 +1,36 @@
+== seed (cpu_mod.hd)
+  emulator: instructions 33415317 arm_writes 552115 pc 0x2d74 halted true
+  ROM bytes 28167 (nonzero 25027): designer code 15556, design input (hd_data.s) 12611
+    hd_data.s        12611
+    improve.s        4306
+    route3.s         2156
+    route1.s         2056
+    route2.s         1490
+    hdflat.s         1480
+    place_order.s    1256
+    build_graph.s    1210
+    chain.s          624
+    lpa_level.s      588
+    main.s           386
+    start.s          4
+  RAM bytes written 220137, touched (read or written) 246562
+  S = ROM + RAM written = 248304 bytes = 1986432 bits (1.99e+06); RAM share 88.7%
+  designer only (code + RAM written) = 235693 bytes = 1885544 bits
+== improved (cpu_mod_improved.hd)
+  emulator: instructions 32288147 arm_writes 552115 pc 0x2d74 halted true
+  ROM bytes 28167 (nonzero 24982): designer code 15556, design input (hd_data.s) 12611
+    hd_data.s        12611
+    improve.s        4306
+    route3.s         2156
+    route1.s         2056
+    route2.s         1490
+    hdflat.s         1480
+    place_order.s    1256
+    build_graph.s    1210
+    chain.s          624
+    lpa_level.s      588
+    main.s           386
+    start.s          4
+  RAM bytes written 220132, touched (read or written) 246558
+  S = ROM + RAM written = 248299 bytes = 1986392 bits (1.99e+06); RAM share 88.7%
+  designer only (code + RAM written) = 235688 bytes = 1885504 bits
